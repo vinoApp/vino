@@ -1,4 +1,4 @@
-vino
+![alt tag](https://cdn1.iconfinder.com/data/icons/nuvola2/128x128/mimetypes/exec_wine.png) vino
 ====
 
 current-version = 1.0
