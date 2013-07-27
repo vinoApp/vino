@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/vino-mobile/vino-mobile.iml" filepath="$PROJECT_DIR$/vino-mobile/vino-mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vino-srv/vino-srv.iml" filepath="$PROJECT_DIR$/vino-srv/vino-srv.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vino-web/vino-web.iml" filepath="$PROJECT_DIR$/vino-web/vino-web.iml" />
+    </modules>
+  </component>
+</project>
+
