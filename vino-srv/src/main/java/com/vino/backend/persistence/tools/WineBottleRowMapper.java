@@ -36,6 +36,17 @@ import java.sql.SQLException;
  */
 public class WineBottleRowMapper<T> implements RowMapper<T> {
 
+    public static final String REGION_ID = "regionID";
+    public static final String REGION_NAME = "regionName";
+    public static final String AOC_ID = "aocID";
+    public static final String AOC_NAME = "aocName";
+    public static final String DOMAIN_ID = "domainID";
+    public static final String DOMAIN_NAME = "domainName";
+    public static final String BOTTLE_ID = "bottleID";
+    public static final String VINTAGE = "vintage";
+    public static final String BARCODE = "barcode";
+    public static final String STICKER_IMAGE = "stickerImage";
+
     public WineBottleRowMapper() {
     }
 
@@ -43,27 +54,27 @@ public class WineBottleRowMapper<T> implements RowMapper<T> {
     public T mapRow(ResultSet resultSet, int i) throws SQLException {
 
         WineRegion region = new WineRegion();
-        region.setId(resultSet.getInt("regionID"));
-        region.setName(resultSet.getString("regionName"));
+        region.setId(resultSet.getInt(REGION_ID));
+        region.setName(resultSet.getString(REGION_NAME));
 
         WineAOC aoc = new WineAOC();
-        aoc.setId(resultSet.getInt("aocID"));
-        aoc.setName(resultSet.getString("aocName"));
+        aoc.setId(resultSet.getInt(AOC_ID));
+        aoc.setName(resultSet.getString(AOC_NAME));
         aoc.setRegion(region);
 
         WineDomain domain = new WineDomain();
-        domain.setId(resultSet.getInt("domainID"));
-        domain.setName(resultSet.getString("domainName"));
+        domain.setId(resultSet.getInt(DOMAIN_ID));
+        domain.setName(resultSet.getString(DOMAIN_NAME));
         domain.setOrigin(aoc);
 
         WineBottle bottle = new WineBottle();
-        bottle.setId(resultSet.getInt("bottleID"));
-        bottle.setVintage(resultSet.getInt("vintage"));
-        bottle.setBarcode(resultSet.getString("barcode"));
+        bottle.setId(resultSet.getInt(BOTTLE_ID));
+        bottle.setVintage(resultSet.getInt(VINTAGE));
+        bottle.setBarcode(resultSet.getString(BARCODE));
         bottle.setDomain(domain);
 
         try {
-            Blob stickerImage = resultSet.getBlob("stickerImage");
+            Blob stickerImage = resultSet.getBlob(STICKER_IMAGE);
             if (stickerImage != null) {
                 bottle.setBase64Image(new String(ByteStreams.toByteArray(
                         stickerImage.getBinaryStream())));
