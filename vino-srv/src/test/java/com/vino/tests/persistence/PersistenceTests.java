@@ -16,8 +16,14 @@
 
 package com.vino.tests.persistence;
 
+import com.vino.backend.model.WineBottle;
+import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.persistence.DataSourcesBundle;
+import org.junit.BeforeClass;
 import org.junit.Test;
+
+import static junit.framework.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 /**
  * User: walien
@@ -25,6 +31,11 @@ import org.junit.Test;
  * Time: 7:35 PM
  */
 public class PersistenceTests {
+
+    @BeforeClass
+    public static void resetDB() {
+        DataSourcesBundle.getInstance().getDefaultDataSource().resetDB();
+    }
 
     @Test
     public void testGetAllKnownWineBottles() {
@@ -42,12 +53,32 @@ public class PersistenceTests {
     }
 
     @Test
-    public void testGetAllAOCSWithRegionID() {
-        DataSourcesBundle.getInstance().getDefaultDataSource().getAllAOCs(2);
-    }
-
-    @Test
     public void testGetAllWineDomains() {
         DataSourcesBundle.getInstance().getDefaultDataSource().getAllWineDomains();
     }
+
+    @Test
+    public void testAddBottleToKnownOnes() {
+        WineDomain domain = DataSourcesBundle.getInstance().getDefaultDataSource().getDomainById(2);
+        assertTrue(DataSourcesBundle.getInstance().getDefaultDataSource().addWineBottleToKnown(new WineBottle("333", 2008, domain)));
+    }
+
+    @Test
+    public void testGetBottleByBarCode() {
+        assertNull(DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode("ddd"));
+    }
+
+    @Test
+    public void testLoadBottles() {
+        DataSourcesBundle.getInstance().getDefaultDataSource().loadBottleInCellar(2, 12);
+        DataSourcesBundle.getInstance().getDefaultDataSource().loadBottleInCellar(3, 6);
+    }
+
+    @Test
+    public void testUnloadBottles() {
+        DataSourcesBundle.getInstance().getDefaultDataSource().unloadBottleInCellar(2, 6);
+        DataSourcesBundle.getInstance().getDefaultDataSource().unloadBottleInCellar(3, 6);
+        DataSourcesBundle.getInstance().getDefaultDataSource().unloadBottleInCellar(1, 14);
+    }
+
 }

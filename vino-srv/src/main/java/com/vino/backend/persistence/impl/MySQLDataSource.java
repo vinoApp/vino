@@ -16,13 +16,16 @@
 
 package com.vino.backend.persistence.impl;
 
+import com.vino.backend.log.LoggerBundle;
 import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.persistence.IDataSource;
+import com.vino.backend.persistence.tools.MappingUtils;
 import com.vino.backend.persistence.tools.WineAOCRowMapper;
 import com.vino.backend.persistence.tools.WineBottleRowMapper;
 import com.vino.backend.persistence.tools.WineDomainRowMapper;
+import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -60,6 +63,21 @@ public class MySQLDataSource implements IDataSource {
         dataSource.setPassword(DB_PASS);
     }
 
+    ////////////////////
+    // RETRIEVING DATA
+    ////////////////////
+
+    /**
+     * /////////////////////////////////
+     * Use at your own risk !
+     * /////////////////////////////////
+     */
+
+    @Override
+    public void resetDB() {
+
+    }
+
     @Override
     public List<WineBottle> getAllKnownWineBottles() {
         return template.query("SELECT * FROM bottles, domains, regions, aocs " +
@@ -83,8 +101,30 @@ public class MySQLDataSource implements IDataSource {
     }
 
     @Override
-    public List<WineAOC> getAllAOCs(int regionID) {
-        return template.query("SELECT * FROM regions, aocs WHERE aocs.regionID = ?;", new Object[]{regionID}, new WineAOCRowMapper());
+    public WineBottle getBottleByBarCode(String barcode) {
+        try {
+            return template.queryForObject("SELECT * FROM bottles, domains, regions, aocs " +
+                    "WHERE bottles.domainID = domains.domainID " +
+                    "AND domains.aocID = aocs.aocID " +
+                    "AND aocs.regionID = regions.regionID " +
+                    "AND bottles.barcode = ?", new Object[]{barcode}, new WineBottleRowMapper());
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
+    public WineDomain getDomainById(int id) {
+        try {
+            return template.queryForObject("SELECT * FROM domains, aocs, regions " +
+                    "WHERE domains.domainID = ? " +
+                    "AND domains.aocID = aocs.aocID " +
+                    "AND aocs.regionID = regions.regionID",
+                    new Object[]{id},
+                    new WineDomainRowMapper());
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
     }
 
     @Override
@@ -92,24 +132,90 @@ public class MySQLDataSource implements IDataSource {
         return template.query("SELECT * FROM domains, regions, aocs;", new WineDomainRowMapper());
     }
 
+    //////////////////////////////////////////////////////////////
+    // REGISTERING/UNREGISTERING BOTTLES INTO KNOWN BOTTLES SET
+    //////////////////////////////////////////////////////////////
+
     @Override
-    public boolean registerWineDomain(WineDomain domain) {
-        return false;
+    public boolean addWineBottleToKnown(WineBottle bottle) {
+        if (!MappingUtils.validateWineBottleObject(bottle)) {
+            return false;
+        }
+        return template.update("INSERT INTO bottles (barcode, domainID, stickerImage, vintage) VALUES (?, ?, ?, ?)",
+                bottle.getBarcode(),
+                bottle.getDomain().getId(),
+                bottle.getBase64Image(),
+                bottle.getVintage()) != 0;
     }
 
     @Override
-    public boolean unregisterWineDomain(int id) {
-        return false;
+    public boolean removeWineBottleFromKnown(int id) {
+        if (id == 0) {
+            return false;
+        }
+        return template.update("DELETE FROM bottles WHERE bottleID = ?", id) != 0;
+    }
+
+
+    //////////////////////////////////////////////////////////////
+    // REGISTERING/UNREGISTERING DOMAINS
+    //////////////////////////////////////////////////////////////
+
+    @Override
+    public boolean addWineDomain(WineDomain domain) {
+        if (!MappingUtils.validateWineDomainObject(domain)) {
+            return false;
+        }
+        return template.update("INSERT INTO domains (domainName, aocID) VALUES (?, ?)", domain.getName(), domain.getOrigin().getId()) != 0;
     }
 
     @Override
-    public boolean registerWineBottle(WineBottle bottle, int qty) {
-        return false;
+    public boolean removeWineDomain(int id) {
+        if (id == 0) {
+            return false;
+        }
+        return template.update("DELETE FROM domains WHERE domainID = ?", id) != 0;
+    }
+
+    //////////////////////////////////////////////////
+    // REGISTERING/UNREGISTERING BOTTLES INTO CELLAR
+    //////////////////////////////////////////////////
+
+    @Override
+    public boolean loadBottleInCellar(int id, int qty) {
+        if (id == 0) {
+            return false;
+        }
+        try {
+            int currentQty = template.queryForObject("SELECT qty FROM cellar WHERE bottleID = ?;", new Object[]{id}, Integer.class);
+            if (currentQty <= 0) {
+                LoggerBundle.getDefaultLogger().error("The loaded quantity of the bottle '{}' is negative !", id);
+            }
+            return template.update("UPDATE cellar SET qty = ? WHERE bottleID = ?", currentQty + qty, id) != 0;
+        } catch (IncorrectResultSizeDataAccessException e) {
+            LoggerBundle.getDefaultLogger().info("The bottle '{}' was not loaded into the cellar, now it is.", id);
+            return template.update("INSERT INTO cellar (bottleID, qty) VALUES (?, ?);", id, qty) != 0;
+        }
     }
 
     @Override
-    public boolean unregisterWineBottle(int id, int qty) {
-        return false;
+    public boolean unloadBottleInCellar(int id, int qty) {
+        if (id == 0) {
+            return false;
+        }
+        try {
+            int currentQty = template.queryForObject("SELECT qty FROM cellar WHERE bottleID = ?;", new Object[]{id}, Integer.class);
+            if (currentQty - qty <= 0) {
+                LoggerBundle.getDefaultLogger().info("There is no bottle '{}' anymore (the qty is down to 0)", id);
+                return template.update("DELETE FROM cellar WHERE bottleID = ?", id) != 0;
+            } else {
+                LoggerBundle.getDefaultLogger().info("The new qty of bottle '{}' in the cellar is : {}", id, qty);
+                return template.update("UPDATE cellar SET qty = ? WHERE bottleID = ?", currentQty - qty, id) != 0;
+            }
+        } catch (IncorrectResultSizeDataAccessException e) {
+            LoggerBundle.getDefaultLogger().error("The bottle '{}' is not loaded into the cellar !", id);
+            return false;
+        }
     }
 }
 

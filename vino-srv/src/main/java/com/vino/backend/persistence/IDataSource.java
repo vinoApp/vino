@@ -29,6 +29,8 @@ import java.util.List;
  */
 public interface IDataSource {
 
+    void resetDB();
+
     /////////////////////////////
     // DATA RETRIEVING
     /////////////////////////////
@@ -39,21 +41,27 @@ public interface IDataSource {
 
     List<WineAOC> getAllAOCs();
 
-    List<WineAOC> getAllAOCs(int regionID);
-
     List<WineDomain> getAllWineDomains();
+
+    WineDomain getDomainById(int id);
+
+    WineBottle getBottleByBarCode(String barcode);
 
     /////////////////////////////
     // DATA PERSISTENCE
     /////////////////////////////
 
-    boolean registerWineDomain(WineDomain domain);
+    boolean addWineBottleToKnown(WineBottle bottle);
 
-    boolean unregisterWineDomain(int id);
+    boolean removeWineBottleFromKnown(int id);
 
-    boolean registerWineBottle(WineBottle bottle, int qty);
+    boolean addWineDomain(WineDomain domain);
 
-    boolean unregisterWineBottle(int id, int qty);
+    boolean removeWineDomain(int id);
+
+    boolean loadBottleInCellar(int id, int qty);
+
+    boolean unloadBottleInCellar(int id, int qty);
 
     /////////////////////////////
     /// STATS

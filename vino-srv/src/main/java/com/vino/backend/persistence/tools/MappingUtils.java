@@ -16,6 +16,7 @@
 
 package com.vino.backend.persistence.tools;
 
+import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.model.origins.WineRegion;
@@ -29,6 +30,31 @@ import java.sql.SQLException;
  * Time: 8:54 PM
  */
 public class MappingUtils {
+
+    public static boolean validateWineBottleObject(WineBottle bottle) {
+        return bottle != null
+                && bottle.getBarcode() != null
+                && !bottle.getBarcode().isEmpty()
+                && bottle.getVintage() > 0
+                && validateWineDomainObject(bottle.getDomain());
+    }
+
+    public static boolean validateWineDomainObject(WineDomain domain) {
+        return domain != null
+                && domain.getName() != null
+                && validateWineAOCObject(domain.getOrigin());
+    }
+
+    public static boolean validateWineAOCObject(WineAOC aoc) {
+        return aoc != null
+                && aoc.getName() != null
+                && validateWineRegionObject(aoc.getRegion());
+    }
+
+    public static boolean validateWineRegionObject(WineRegion region) {
+        return region != null
+                && region.getName() != null;
+    }
 
     public static WineAOC getOriginFromResultSet(ResultSet resultSet) throws SQLException {
 
