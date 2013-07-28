@@ -30,7 +30,7 @@ CREATE TABLE IF NOT EXISTS bottles (
   domainID     INT         NOT NULL,
   vintage      INT         NOT NULL,
   barcode      VARCHAR(30) NOT NULL UNIQUE,
-  stickerImage BLOB,
+  stickerImage LONGBLOB,
   FOREIGN KEY (domainID) REFERENCES domains (domainID)
 );
 

@@ -19,10 +19,15 @@ package com.vino.tests.persistence;
 import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.persistence.DataSourcesBundle;
+import com.vino.backend.tools.ImageUtils;
 import org.junit.BeforeClass;
 import org.junit.Test;
 
-import static junit.framework.Assert.assertNull;
+import javax.imageio.ImageIO;
+import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.IOException;
+
 import static org.junit.Assert.assertTrue;
 
 /**
@@ -60,12 +65,21 @@ public class PersistenceTests {
     @Test
     public void testAddBottleToKnownOnes() {
         WineDomain domain = DataSourcesBundle.getInstance().getDefaultDataSource().getDomainById(2);
-        assertTrue(DataSourcesBundle.getInstance().getDefaultDataSource().addWineBottleToKnown(new WineBottle("333", 2008, domain)));
+
+        WineBottle bottle = new WineBottle("3607345750309", 2008, domain);
+        try {
+            BufferedImage img = ImageIO.read(new File("/home/walien/Images/petrus.jpg"));
+            bottle.setBase64Image(ImageUtils.encodeToString(img, "jpg"));
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+        assertTrue(DataSourcesBundle.getInstance().getDefaultDataSource().addWineBottleToKnown(bottle));
     }
 
     @Test
     public void testGetBottleByBarCode() {
-        assertNull(DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode("ddd"));
+        DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode("3607345750309");
     }
 
     @Test

@@ -17,6 +17,7 @@
 package com.vino.backend.rest;
 
 import com.vino.backend.model.WineBottle;
+import com.vino.backend.model.rest.ResponseStatus;
 import com.vino.backend.model.rest.ResponseWrapper;
 import com.vino.backend.persistence.DataSourcesBundle;
 
@@ -43,22 +44,42 @@ public class CellarREST {
     public ResponseWrapper loadBottles(@FormParam("barcode") String barcode,
                                        @FormParam("qty") int qty) {
 
-        if(barcode == null || qty <= 0){
-            return new ResponseWrapper().setStatus(false);
+        if (barcode == null || qty <= 0) {
+            return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);
         }
 
         WineBottle bottle = DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode(barcode);
         if (bottle == null) {
-            // TODO
-            return new ResponseWrapper().setStatus(false);
+            return new ResponseWrapper().setStatus(ResponseStatus.BOTTLE_NOT_FOUND);
         }
+
         boolean status = DataSourcesBundle.getInstance().getDefaultDataSource().loadBottleInCellar(bottle.getId(), qty);
-        return new ResponseWrapper().setStatus(status);
+        if (status) {
+            return new ResponseWrapper().setStatus(ResponseStatus.OK).setDomain(bottle.getDomain());
+        } else {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
+        }
     }
 
     @DELETE
     @Produces("application/json")
-    public ResponseWrapper unloadBottles(String barcode, int qty) {
-        return null;
+    public ResponseWrapper unloadBottles(@FormParam("barcode") String barcode,
+                                         @FormParam("qty") int qty) {
+
+        if (barcode == null || qty <= 0) {
+            return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);
+        }
+
+        WineBottle bottle = DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode(barcode);
+        if (bottle == null) {
+            return new ResponseWrapper().setStatus(ResponseStatus.BOTTLE_NOT_FOUND);
+        }
+
+        boolean status = DataSourcesBundle.getInstance().getDefaultDataSource().unloadBottleInCellar(bottle.getId(), qty);
+        if (status) {
+            return new ResponseWrapper().setStatus(ResponseStatus.OK);
+        } else {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
+        }
     }
 }

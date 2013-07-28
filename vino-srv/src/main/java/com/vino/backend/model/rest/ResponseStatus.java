@@ -16,38 +16,16 @@
 
 package com.vino.backend.model.rest;
 
-import com.vino.backend.model.origins.WineDomain;
-
 /**
  * User: walien
- * Date: 7/27/13
- * Time: 4:40 PM
+ * Date: 7/28/13
+ * Time: 1:37 AM
  */
-public class ResponseWrapper {
+public enum ResponseStatus {
 
-    private ResponseStatus status;
+    OK,
+    DB_ERROR,
+    INVALID_PARAMS,
+    BOTTLE_NOT_FOUND
 
-    private WineDomain domain;
-
-    public ResponseWrapper() {
-
-    }
-
-    public ResponseStatus getStatus() {
-        return status;
-    }
-
-    public ResponseWrapper setStatus(ResponseStatus status) {
-        this.status = status;
-        return this;
-    }
-
-    public WineDomain getDomain() {
-        return domain;
-    }
-
-    public ResponseWrapper setDomain(WineDomain domain) {
-        this.domain = domain;
-        return this;
-    }
 }

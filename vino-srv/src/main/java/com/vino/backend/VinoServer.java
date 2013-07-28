@@ -27,7 +27,7 @@ public class VinoServer {
 
     private static final String WEB_XML_FILE = "vino-srv/src/main/webapp/WEB-INF/web.xml";
     private static final String WEBAPP_RESOURCES = "vino-web/app";
-    private static final String BIND_INTERFACE = "localhost";
+    private static final String BIND_INTERFACE = "192.168.1.101";
     private static final int BIND_PORT = 8080;
 
     public static void main(String[] args) throws Exception {

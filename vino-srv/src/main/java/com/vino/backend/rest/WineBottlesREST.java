@@ -17,10 +17,12 @@
 package com.vino.backend.rest;
 
 import com.vino.backend.model.WineBottle;
+import com.vino.backend.persistence.DataSourcesBundle;
 
-import javax.ws.rs.Consumes;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
 import java.util.List;
 
 /**
@@ -33,9 +35,43 @@ import java.util.List;
 public class WineBottlesREST {
 
     @GET
-    @Consumes("application/json")
+    @Produces("application/json")
     public List<WineBottle> getAllBottles() {
         return null;
     }
 
+    @GET
+    @Produces("application/json")
+    @Path("{barcode}")
+    public WineBottle getBottleByBarCode(@PathParam("barcode") String barcode) {
+        if (barcode == null || barcode.isEmpty()) {
+            return null;
+        }
+        return DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode(barcode);
+    }
+
+    /*@POST
+    @Consumes("application/json")
+    public List<WineBottle> addBottle() {
+
+        // Workflow global :
+        //
+        // L'utilisateur scan un code barre et un appel vers getBottleByBarCode est realise :
+        // - Case 1 : La bouteille est trouvee
+        //              -> Si l'etiquette de la bouteille n'est pas connue, l'app mobile propose a l'user de la prendre
+        //              -> L'utilisateur a la possibilite d'enregister ou de supprimer une bouteille de la cave (appel
+        //                 du WS 'cellar').
+        //
+        // - Case 2 : La bouteille n'est pas trouvee
+        //              -> L'utilisateur a la possibilite de prendre une photo de l'etiquette
+        //              -> Un appel a cette methode addBottle est realise et la bouteille est place en attente d'edition
+        //              -> Apres cela il est invite a rejoindre l'application web pour renseigner les informations
+        //                  relatives a la bouteille (+chateau, origine, ...)
+        //              -> Apres cela il peut a present ajouter la bouteille a la cave (par l'app web ou par l'appli
+        //                  mobile)
+
+
+        return null;
+    }
+*/
 }
