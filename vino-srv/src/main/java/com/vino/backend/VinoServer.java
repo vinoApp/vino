@@ -25,7 +25,6 @@ import com.vino.backend.servers.JettyWebServer;
  */
 public class VinoServer {
 
-
     private static final String WEB_XML_FILE = "vino-srv/src/main/webapp/WEB-INF/web.xml";
     private static final String WEBAPP_RESOURCES = "vino-web/app";
     private static final String BIND_INTERFACE = "localhost";
