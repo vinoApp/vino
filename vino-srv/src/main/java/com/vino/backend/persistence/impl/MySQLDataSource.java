@@ -68,7 +68,11 @@ public class MySQLDataSource implements IDataSource {
 
     @Override
     public List<WineBottle> getAllWineBottlesInCellar() {
-        return template.queryForList("SELECT * FROM bottles b WHERE exists (SELECT * FROM cellar c WHERE c.idBottle = b.idBottle);", WineBottle.class);
+        return template.query("SELECT * FROM bottles, aocs, regions, domains " +
+                "WHERE bottles.domainID = domains.domainID " +
+                "AND domains.aocID = aocs.aocID " +
+                "AND aocs.regionID = regions.regionID " +
+                "AND exists (SELECT * FROM cellar WHERE cellar.bottleID = bottles.bottleID)", new WineBottleRowMapper<WineBottle>());
     }
 
     @Override

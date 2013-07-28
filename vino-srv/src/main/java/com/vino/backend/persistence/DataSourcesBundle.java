@@ -14,26 +14,32 @@
  * limitations under the License.
  */
 
-package com.vino.tests.persistence;
+package com.vino.backend.persistence;
 
-import com.vino.backend.persistence.DataSourcesBundle;
-import org.junit.Test;
+import com.vino.backend.persistence.impl.MySQLDataSource;
 
 /**
  * User: walien
  * Date: 7/27/13
- * Time: 7:35 PM
+ * Time: 8:19 PM
  */
-public class PersistenceTests {
+public class DataSourcesBundle {
 
-    @Test
-    public void testAllKnownBottlesRetrieving() {
-        DataSourcesBundle.getInstance().getDefaultDataSource().getAllKnownWineBottles();
+    private static DataSourcesBundle INSTANCE;
+    private IDataSource datasource;
+
+    private DataSourcesBundle() {
+        datasource = new MySQLDataSource();
     }
 
-    @Test
-    public void testAllBottlesInCellarRetrieving() {
-        DataSourcesBundle.getInstance().getDefaultDataSource().getAllWineBottlesInCellar();
+    public static DataSourcesBundle getInstance() {
+        if (INSTANCE == null) {
+            INSTANCE = new DataSourcesBundle();
+        }
+        return INSTANCE;
     }
 
+    public IDataSource getDefaultDataSource() {
+        return datasource;
+    }
 }
