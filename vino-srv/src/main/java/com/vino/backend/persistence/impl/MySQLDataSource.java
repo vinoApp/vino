@@ -20,7 +20,9 @@ import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.persistence.IDataSource;
+import com.vino.backend.persistence.tools.WineAOCRowMapper;
 import com.vino.backend.persistence.tools.WineBottleRowMapper;
+import com.vino.backend.persistence.tools.WineDomainRowMapper;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
@@ -60,34 +62,34 @@ public class MySQLDataSource implements IDataSource {
 
     @Override
     public List<WineBottle> getAllKnownWineBottles() {
-        return template.query("SELECT * FROM bottles, aocs, regions, domains " +
+        return template.query("SELECT * FROM bottles, domains, regions, aocs " +
                 "WHERE bottles.domainID = domains.domainID " +
                 "AND domains.aocID = aocs.aocID " +
-                "AND aocs.regionID = regions.regionID", new WineBottleRowMapper<WineBottle>());
+                "AND aocs.regionID = regions.regionID", new WineBottleRowMapper());
     }
 
     @Override
     public List<WineBottle> getAllWineBottlesInCellar() {
-        return template.query("SELECT * FROM bottles, aocs, regions, domains " +
+        return template.query("SELECT * FROM bottles, domains, regions, aocs " +
                 "WHERE bottles.domainID = domains.domainID " +
                 "AND domains.aocID = aocs.aocID " +
                 "AND aocs.regionID = regions.regionID " +
-                "AND exists (SELECT * FROM cellar WHERE cellar.bottleID = bottles.bottleID)", new WineBottleRowMapper<WineBottle>());
+                "AND exists (SELECT * FROM cellar WHERE cellar.bottleID = bottles.bottleID)", new WineBottleRowMapper());
     }
 
     @Override
     public List<WineAOC> getAllAOCs() {
-        return template.queryForList("SELECT * FROM aocs;", WineAOC.class);
+        return template.query("SELECT * FROM regions, aocs;", new WineAOCRowMapper());
     }
 
     @Override
     public List<WineAOC> getAllAOCs(int regionID) {
-        return null;
+        return template.query("SELECT * FROM regions, aocs WHERE aocs.regionID = ?;", new Object[]{regionID}, new WineAOCRowMapper());
     }
 
     @Override
     public List<WineDomain> getAllWineDomains() {
-        return null;
+        return template.query("SELECT * FROM domains, regions, aocs;", new WineDomainRowMapper());
     }
 
     @Override

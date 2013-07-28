@@ -27,13 +27,27 @@ import org.junit.Test;
 public class PersistenceTests {
 
     @Test
-    public void testAllKnownBottlesRetrieving() {
+    public void testGetAllKnownWineBottles() {
         DataSourcesBundle.getInstance().getDefaultDataSource().getAllKnownWineBottles();
     }
 
     @Test
-    public void testAllBottlesInCellarRetrieving() {
+    public void testGetAllWineBottlesInCellar() {
         DataSourcesBundle.getInstance().getDefaultDataSource().getAllWineBottlesInCellar();
     }
 
+    @Test
+    public void testGetAllAOCS() {
+        DataSourcesBundle.getInstance().getDefaultDataSource().getAllAOCs();
+    }
+
+    @Test
+    public void testGetAllAOCSWithRegionID() {
+        DataSourcesBundle.getInstance().getDefaultDataSource().getAllAOCs(2);
+    }
+
+    @Test
+    public void testGetAllWineDomains() {
+        DataSourcesBundle.getInstance().getDefaultDataSource().getAllWineDomains();
+    }
 }

@@ -1,17 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="170feeb1-b465-42a0-947d-ad7ed329e42c" name="Default" comment="">
+    <list default="true" id="170feeb1-b465-42a0-947d-ad7ed329e42c" name="Default" comment="- Adding webapp bootstrap">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/DataRowsBundle.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/MappingUtils.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineAOCRowMapper.java" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineDomainRowMapper.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java" afterPath="$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vino.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374972544468" ignored="false" />
+    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374972560081" ignored="false" />
     <file path="/pom.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374957355938" ignored="false" />
     <file path="/MongoDBDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374961101762" ignored="false" />
     <file path="/WineOrigin.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960967624" ignored="false" />
     <file path="/WineDomain.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960996631" ignored="false" />
-    <file path="/fragment.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374971004087" ignored="false" />
+    <file path="/fragment.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374973138672" ignored="false" />
     <file path="/WineAOC.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960731814" ignored="false" />
     <file path="/WineBottle.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374968492946" ignored="false" />
     <file path="/WineBottlesREST.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374957544984" ignored="false" />
@@ -23,19 +30,22 @@
     <file path="/web.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374959494013" ignored="false" />
     <file path="/LoggerBundle.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960477330" ignored="false" />
     <file path="/IDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374963191732" ignored="false" />
-    <file path="/MySQLDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374971179542" ignored="false" />
+    <file path="/MySQLDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374973332180" ignored="false" />
     <file path="/initdb.sql" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374969229513" ignored="false" />
     <file path="/createdb.sql" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374963590295" ignored="false" />
     <file path="/a.sql" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374963809975" ignored="false" />
     <file path="/import_command.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374965994242" ignored="false" />
     <file path="/a.dummy" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374972419121" ignored="false" />
-    <file path="/PersistenceTests.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374971207346" ignored="false" />
-    <file path="/WineBottleRowMapper.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374970389445" ignored="false" />
+    <file path="/PersistenceTests.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374973274122" ignored="false" />
+    <file path="/WineBottleRowMapper.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374973088303" ignored="false" />
     <file path="/WineRegion.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374969090203" ignored="false" />
     <file path="/Vino Data Source" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374970683466" ignored="false" />
     <file path="/DataSourcesBundle.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374971057357" ignored="false" />
     <file path="/index.html" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374972055780" ignored="false" />
     <file path="/logback.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374972194285" ignored="false" />
+    <file path="/WineAOCRowMapper.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374972823669" ignored="false" />
+    <file path="/MappingUtils.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374973054884" ignored="false" />
+    <file path="/WineDomainRowMapper.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374973161487" ignored="false" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -116,22 +126,22 @@
   <component name="IdeDocumentHistory">
     <option name="changedFiles">
       <list>
-        <option value="$PROJECT_DIR$/vino-srv/db/import_command.txt" />
-        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/MappingUtils.java" />
-        <option value="$PROJECT_DIR$/vino-srv/pom.xml" />
-        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/WineBottle.java" />
         <option value="$PROJECT_DIR$/vino-srv/db/initdb.sql" />
         <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/origins/WineDomain.java" />
         <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/origins/WineRegion.java" />
         <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/origins/WineAOC.java" />
-        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" />
         <option value="db-console:/2768a3ed/922664b9-cf61-4978-9188-88ca60804c26/" />
         <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/DataSourcesBundle.java" />
-        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" />
-        <option value="$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java" />
         <option value="$PROJECT_DIR$/vino-web/app/index.html" />
         <option value="$PROJECT_DIR$/vino-srv/src/main/resources/logback.xml" />
         <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/VinoServer.java" />
+        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/DataRowsBundle.java" />
+        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineAOCRowMapper.java" />
+        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/MappingUtils.java" />
+        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" />
+        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineDomainRowMapper.java" />
+        <option value="$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java" />
+        <option value="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" />
       </list>
     </option>
   </component>
@@ -250,6 +260,228 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="test" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persistence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="rest" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persistence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persistence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="tools" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="main" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="java" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="backend" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="persistence" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="impl" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-srv" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="db" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
       <pane id="PackagesPane" />
@@ -279,11 +511,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyClassDialog.RECENTS_KEY">
+      <recent name="com.vino.backend.persistence.tools" />
       <recent name="com.vino.backend.persistence.impl" />
       <recent name="com.vino.backend.log" />
       <recent name="com.vino.backend.servers" />
       <recent name="com.vino.backend" />
-      <recent name="com.vino.model.cellar" />
     </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="$PROJECT_DIR$/vino-srv/src/main/resources" />
@@ -296,7 +528,7 @@
       <recent name="com.vino.backend.persistence.impl.MySQLDataSource" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.VinoServer">
+  <component name="RunManager" selected="JUnit.PersistenceTests">
     <configuration default="false" name="PersistenceTests.testAllKnownBottlesRetrieving" type="JUnit" factoryName="JUnit" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -535,8 +767,8 @@
     </list>
     <recent_temporary>
       <list size="3">
-        <item index="0" class="java.lang.String" itemvalue="Application.VinoServer" />
-        <item index="1" class="java.lang.String" itemvalue="JUnit.PersistenceTests" />
+        <item index="0" class="java.lang.String" itemvalue="JUnit.PersistenceTests" />
+        <item index="1" class="java.lang.String" itemvalue="Application.VinoServer" />
         <item index="2" class="java.lang.String" itemvalue="JUnit.PersistenceTests.testAllKnownBottlesRetrieving" />
       </list>
     </recent_temporary>
@@ -606,7 +838,11 @@
       <created>1374972547280</created>
       <updated>1374972547280</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="- Adding webapp bootstrap">
+      <created>1374972554771</created>
+      <updated>1374972554771</updated>
+    </task>
+    <option name="localTasksCounter" value="11" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -617,9 +853,9 @@
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16328709" sideWeight="0.67045456" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.16328709" sideWeight="0.6909091" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3090909" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3090909" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.4279616" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
@@ -633,7 +869,7 @@
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14461046" sideWeight="0.67045456" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19477054" sideWeight="0.67045456" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19477054" sideWeight="0.6909091" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.2977273" sideWeight="0.5683031" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3034091" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
@@ -709,74 +945,6 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="dbDummy://db-console:/2768a3ed/922664b9-cf61-4978-9188-88ca60804c26/">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="18" selection-start="0" selection-end="18" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/WineBottle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="0" selection-start="1078" selection-end="1078" vertical-scroll-proportion="0.3676815">
-          <folding>
-            <element signature="e#0#2107#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/DataSourcesBundle.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="26" column="0" selection-start="785" selection-end="785" vertical-scroll-proportion="0.31914893">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vino-srv/db/createdb.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="5" column="0" selection-start="180" selection-end="180" vertical-scroll-proportion="0.12886597">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vino-srv/db/import_command.txt">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="0" column="0" selection-start="0" selection-end="0" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vino-srv/db/initdb.sql">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="75" column="7" selection-start="2922" selection-end="2922" vertical-scroll-proportion="0.5618557">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="0" selection-start="1123" selection-end="1123" vertical-scroll-proportion="0.6443299">
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="69" column="57" selection-start="2386" selection-end="2386" vertical-scroll-proportion="0.77147764">
-          <folding>
-            <element signature="e#0#3516#0" expanded="true" />
-            <element signature="imports" expanded="true" />
-            <marker date="1374971191368" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..bottles..." />
-            <marker date="1374971191368" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..bottles..." />
-            <marker date="1374971191368" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..bottles..." />
-            <marker date="1374971191368" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..cellar..." />
-            <marker date="1374971191368" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..aocs..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/vino-web/app/scripts/app.js">
       <provider selected="true" editor-type-id="text-editor">
         <state line="6" column="36" selection-start="160" selection-end="160" vertical-scroll-proportion="0.15202703">
@@ -837,8 +1005,79 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/VinoServer.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="66" selection-start="913" selection-end="913" vertical-scroll-proportion="0.24590164">
+        <state line="35" column="58" selection-start="1189" selection-end="1189" vertical-scroll-proportion="0.36885247">
           <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/MappingUtils.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="50" column="69" selection-start="1717" selection-end="1717" vertical-scroll-proportion="0.6323185">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineAOCRowMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="35" column="5" selection-start="1075" selection-end="1075" vertical-scroll-proportion="0.29859486">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="39" column="73" selection-start="1267" selection-end="1267" vertical-scroll-proportion="0.43911007">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/DataRowsBundle.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="27" column="48" selection-start="892" selection-end="892" vertical-scroll-proportion="0.22833724">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/db/initdb.sql">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="47" column="0" selection-start="1386" selection-end="1386" vertical-scroll-proportion="0.30756015">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineDomainRowMapper.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="34" column="48" selection-start="1067" selection-end="1067" vertical-scroll-proportion="0.41237113">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="36" column="5" selection-start="1113" selection-end="1113" vertical-scroll-proportion="0.5670103">
+          <folding>
+            <element signature="imports" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="90" column="22" selection-start="3273" selection-end="3273" vertical-scroll-proportion="0.71993124">
+          <folding>
+            <element signature="e#0#3818#0" expanded="true" />
+            <element signature="imports" expanded="true" />
+            <marker date="1374973381300" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..bottles..." />
+            <marker date="1374973381300" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..bottles..." />
+            <marker date="1374973381300" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..cellar..." />
+            <marker date="1374973381300" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..regions..." />
+            <marker date="1374973381300" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..regions..." />
+            <marker date="1374973381300" expanded="true" signature="-1:-1" placeholder="SELECT * FRO..domains..." />
+          </folding>
         </state>
       </provider>
     </entry>
