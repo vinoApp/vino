@@ -23,9 +23,51 @@ package com.vino.backend.model.origins;
  */
 public class WineDomain {
 
+    private int id;
+
     private String name;
 
-    private WineAOC aoc;
+    private WineAOC origin;
 
+    public WineDomain() {
 
+    }
+
+    public WineDomain(String name, WineAOC origin) {
+        this.name = name;
+        this.origin = origin;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public WineAOC getOrigin() {
+        return origin;
+    }
+
+    public void setOrigin(WineAOC origin) {
+        this.origin = origin;
+    }
+
+    @Override
+    public String toString() {
+        return "WineDomain{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", origin=" + origin +
+                '}';
+    }
 }

@@ -23,6 +23,8 @@ package com.vino.backend.model.origins;
  */
 public class WineRegion {
 
+    private int id;
+
     private String name;
 
     public WineRegion() {
@@ -33,18 +35,28 @@ public class WineRegion {
         this.name = name;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public WineRegion setName(String name) {
         this.name = name;
+        return this;
     }
 
     @Override
     public String toString() {
         return "WineRegion{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 '}';
     }
 }

@@ -23,6 +23,8 @@ package com.vino.backend.model.origins;
  */
 public class WineAOC {
 
+    private int id;
+
     private String name;
 
     private WineRegion region;
@@ -35,26 +37,37 @@ public class WineAOC {
         this.region = region;
     }
 
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
+    }
+
     public String getName() {
         return name;
     }
 
-    public void setName(String name) {
+    public WineAOC setName(String name) {
         this.name = name;
+        return this;
     }
 
     public WineRegion getRegion() {
         return region;
     }
 
-    public void setRegion(WineRegion region) {
+    public WineAOC setRegion(WineRegion region) {
         this.region = region;
+        return this;
     }
 
     @Override
     public String toString() {
         return "WineAOC{" +
-                "name='" + name + '\'' +
+                "id=" + id +
+                ", name='" + name + '\'' +
                 ", region=" + region +
                 '}';
     }

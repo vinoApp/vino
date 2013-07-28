@@ -16,10 +16,51 @@
 
 package com.vino.backend.persistence;
 
+import com.vino.backend.model.WineBottle;
+import com.vino.backend.model.origins.WineAOC;
+import com.vino.backend.model.origins.WineDomain;
+
+import java.util.List;
+
 /**
  * User: walien
  * Date: 7/27/13
  * Time: 3:37 PM
  */
 public interface IDataSource {
+
+    /////////////////////////////
+    // DATA RETRIEVING
+    /////////////////////////////
+
+    List<WineBottle> getAllKnownWineBottles();
+
+    List<WineBottle> getAllWineBottlesInCellar();
+
+    List<WineAOC> getAllAOCs();
+
+    List<WineAOC> getAllAOCs(int regionID);
+
+    List<WineDomain> getAllWineDomains();
+
+    /////////////////////////////
+    // DATA PERSISTENCE
+    /////////////////////////////
+
+    boolean registerWineDomain(WineDomain domain);
+
+    boolean unregisterWineDomain(int id);
+
+    boolean registerWineBottle(WineBottle bottle, int qty);
+
+    boolean unregisterWineBottle(int id, int qty);
+
+    /////////////////////////////
+    /// STATS
+    /////////////////////////////
+
+    // TODO
+    // - get number of bottles per region and per aoc
+    // - get frequency of registering and unregistering (per week, per month, per year)
+
 }

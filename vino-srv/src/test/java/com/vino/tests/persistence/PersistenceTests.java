@@ -14,12 +14,21 @@
  * limitations under the License.
  */
 
-package com.vino.backend.persistence;
+package com.vino.tests.persistence;
+
+import com.vino.backend.persistence.impl.MySQLDataSource;
+import org.junit.Test;
 
 /**
  * User: walien
  * Date: 7/27/13
- * Time: 3:38 PM
+ * Time: 7:35 PM
  */
-public class MongoDBDataSource implements IDataSource {
+public class PersistenceTests {
+
+    @Test
+    public void testAllKnownBottlesRetrieving() {
+        new MySQLDataSource().getAllKnownWineBottles();
+    }
+
 }

@@ -17,8 +17,6 @@
 package com.vino.backend.model;
 
 import com.vino.backend.model.origins.WineDomain;
-import org.jongo.marshall.jackson.oid.Id;
-import org.jongo.marshall.jackson.oid.ObjectId;
 
 /**
  * User: walien
@@ -27,15 +25,15 @@ import org.jongo.marshall.jackson.oid.ObjectId;
  */
 public class WineBottle {
 
-    @ObjectId
-    @Id
-    private String id;
+    private int id;
 
     private String barcode;
 
     private int vintage;
 
     private WineDomain domain;
+
+    private String base64Image;
 
     public WineBottle(String barcode, int vintage, WineDomain domain) {
         this.barcode = barcode;
@@ -46,11 +44,11 @@ public class WineBottle {
     public WineBottle() {
     }
 
-    public String getId() {
+    public int getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(int id) {
         this.id = id;
     }
 
@@ -76,6 +74,14 @@ public class WineBottle {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
+    }
+
+    public String getBase64Image() {
+        return base64Image;
+    }
+
+    public void setBase64Image(String base64Image) {
+        this.base64Image = base64Image;
     }
 
     @Override
