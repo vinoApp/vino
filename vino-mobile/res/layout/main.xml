@@ -1,30 +1,61 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="fill_parent"
-              android:layout_height="fill_parent"
-        >
-    <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Hello World, VinoMainActivity"
-            />
-    <Button
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:text="Scan !"
-            android:id="@+id/scanButton"/>
-    <GridLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Scan Content"
-                  android:id="@+id/textView1" android:layout_row="0" android:layout_column="0"/>
-        <EditText android:layout_width="222dp" android:layout_height="wrap_content" android:id="@+id/scanContent"
-                  android:layout_row="0" android:layout_column="1"/>
-        <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Scan Format"
-                  android:id="@+id/textView" android:layout_row="1" android:layout_column="0"/>
-        <EditText android:layout_width="222dp" android:layout_height="wrap_content" android:id="@+id/scanFormat"
-                  android:layout_row="1" android:layout_column="1"/>
-    </GridLayout>
-</LinearLayout>
 
+<RelativeLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
+    <Button
+            android:layout_width="173dp"
+            android:layout_height="wrap_content"
+            android:text="Supprimer"
+            android:id="@+id/removeBtn" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true"
+            android:layout_alignParentRight="true" android:layout_alignParentLeft="true"
+            android:layout_marginLeft="67dp"/>
+    <Button android:layout_width="173dp" android:layout_height="wrap_content" android:text="Ajouter"
+            android:id="@+id/addBtn"
+            android:layout_centerHorizontal="true" android:layout_above="@+id/removeBtn"
+            android:layout_alignRight="@+id/removeBtn"
+            android:layout_alignParentLeft="true" android:layout_marginLeft="67dp"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Scan"
+            android:id="@+id/scanBtn" android:layout_centerHorizontal="true" android:layout_alignParentTop="true"
+            android:layout_alignRight="@+id/removeBtn" android:layout_alignLeft="@+id/qtyTxt"/>
+    <EditText
+            android:layout_width="69dp"
+            android:layout_height="wrap_content"
+            android:text="Qté"
+            android:id="@+id/qtyTxt"
+            android:layout_alignParentLeft="true" android:layout_above="@+id/removeBtn"
+            android:layout_alignBottom="@+id/removeBtn" android:layout_alignTop="@+id/addBtn"/>
+    <Button
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Photographier l'étiquette"
+            android:id="@+id/stickerPhotoBtn"
+            android:layout_alignRight="@+id/removeBtn" android:layout_above="@+id/space"
+            android:layout_alignLeft="@+id/scanBtn"/>
+    <Space
+            android:layout_width="20px"
+            android:layout_height="20px"
+            android:id="@+id/space"
+            android:layout_above="@+id/addBtn" android:layout_alignRight="@+id/removeBtn"
+            android:layout_alignLeft="@+id/scanBtn"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Chateau : "
+            android:id="@+id/domainLabel" android:layout_alignLeft="@+id/scanBtn" android:layout_below="@+id/scanBtn"/>
+    <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="23dp"
+            android:id="@+id/domainText"
+            android:layout_alignParentLeft="true" android:layout_marginLeft="70dp" android:layout_below="@+id/scanBtn"
+            android:layout_alignRight="@+id/removeBtn"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Millésime :"
+              android:id="@+id/vintageLabel"
+              android:layout_alignLeft="@+id/scanBtn" android:layout_below="@+id/domainLabel"/>
+    <TextView android:layout_width="wrap_content" android:layout_height="23dp" android:id="@+id/vintageText"
+              android:layout_toRightOf="@+id/domainLabel" android:layout_below="@+id/domainLabel"
+              android:layout_alignRight="@+id/removeBtn"/>
+</RelativeLayout>
