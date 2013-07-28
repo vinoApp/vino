@@ -18,6 +18,7 @@ package com.vino.backend.rest;
 
 import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.rest.ResponseWrapper;
+import com.vino.backend.persistence.DataSourcesBundle;
 
 import javax.ws.rs.*;
 import java.util.List;
@@ -32,20 +33,32 @@ import java.util.List;
 public class CellarREST {
 
     @GET
-    @Consumes("application/json")
+    @Produces("application/json")
     public List<WineBottle> getAllBottles() {
         return null;
     }
 
     @POST
-    @Consumes("application/json")
-    public ResponseWrapper registerBottles(String barcode, int qty) {
-        return null;
+    @Produces("application/json")
+    public ResponseWrapper loadBottles(@FormParam("barcode") String barcode,
+                                       @FormParam("qty") int qty) {
+
+        if(barcode == null || qty <= 0){
+            return new ResponseWrapper().setStatus(false);
+        }
+
+        WineBottle bottle = DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode(barcode);
+        if (bottle == null) {
+            // TODO
+            return new ResponseWrapper().setStatus(false);
+        }
+        boolean status = DataSourcesBundle.getInstance().getDefaultDataSource().loadBottleInCellar(bottle.getId(), qty);
+        return new ResponseWrapper().setStatus(status);
     }
 
     @DELETE
-    @Consumes("application/json")
-    public ResponseWrapper unregisterBottles(String barcode, int qty) {
+    @Produces("application/json")
+    public ResponseWrapper unloadBottles(String barcode, int qty) {
         return null;
     }
 }

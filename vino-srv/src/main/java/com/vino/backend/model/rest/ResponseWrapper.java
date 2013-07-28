@@ -29,6 +29,10 @@ public class ResponseWrapper {
 
     }
 
+    public boolean isStatus() {
+        return status;
+    }
+
     public ResponseWrapper setStatus(boolean status) {
         this.status = status;
         return this;
