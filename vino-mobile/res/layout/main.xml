@@ -1,61 +1,72 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<RelativeLayout
-        android:layout_width="fill_parent"
-        android:layout_height="fill_parent" xmlns:android="http://schemas.android.com/apk/res/android">
-    <Button
-            android:layout_width="173dp"
-            android:layout_height="wrap_content"
-            android:text="Supprimer"
-            android:id="@+id/removeBtn" android:layout_centerHorizontal="true" android:layout_alignParentBottom="true"
-            android:layout_alignParentRight="true" android:layout_alignParentLeft="true"
-            android:layout_marginLeft="67dp"/>
-    <Button android:layout_width="173dp" android:layout_height="wrap_content" android:text="Ajouter"
-            android:id="@+id/addBtn"
-            android:layout_centerHorizontal="true" android:layout_above="@+id/removeBtn"
-            android:layout_alignRight="@+id/removeBtn"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="67dp"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Scan"
-            android:id="@+id/scanBtn" android:layout_centerHorizontal="true" android:layout_alignParentTop="true"
-            android:layout_alignRight="@+id/removeBtn" android:layout_alignLeft="@+id/qtyTxt"/>
-    <EditText
-            android:layout_width="69dp"
-            android:layout_height="wrap_content"
-            android:text="Qté"
-            android:id="@+id/qtyTxt"
-            android:layout_alignParentLeft="true" android:layout_above="@+id/removeBtn"
-            android:layout_alignBottom="@+id/removeBtn" android:layout_alignTop="@+id/addBtn"/>
-    <Button
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Photographier l'étiquette"
-            android:id="@+id/stickerPhotoBtn"
-            android:layout_alignRight="@+id/removeBtn" android:layout_above="@+id/space"
-            android:layout_alignLeft="@+id/scanBtn"/>
-    <Space
-            android:layout_width="20px"
-            android:layout_height="20px"
-            android:id="@+id/space"
-            android:layout_above="@+id/addBtn" android:layout_alignRight="@+id/removeBtn"
-            android:layout_alignLeft="@+id/scanBtn"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Chateau : "
-            android:id="@+id/domainLabel" android:layout_alignLeft="@+id/scanBtn" android:layout_below="@+id/scanBtn"/>
-    <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="23dp"
-            android:id="@+id/domainText"
-            android:layout_alignParentLeft="true" android:layout_marginLeft="70dp" android:layout_below="@+id/scanBtn"
-            android:layout_alignRight="@+id/removeBtn"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="wrap_content" android:text="Millésime :"
-              android:id="@+id/vintageLabel"
-              android:layout_alignLeft="@+id/scanBtn" android:layout_below="@+id/domainLabel"/>
-    <TextView android:layout_width="wrap_content" android:layout_height="23dp" android:id="@+id/vintageText"
-              android:layout_toRightOf="@+id/domainLabel" android:layout_below="@+id/domainLabel"
-              android:layout_alignRight="@+id/removeBtn"/>
-</RelativeLayout>
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android" android:layout_height="fill_parent"
+            android:layout_width="fill_parent">
+    <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Scanner Code-Barres"
+                android:id="@+id/btn_scan" android:layout_centerHorizontal="true" android:layout_alignParentTop="true"
+                android:layout_alignParentRight="true" android:layout_alignParentLeft="true"/>
+        <ImageView
+                android:layout_width="wrap_content"
+                android:layout_height="325dp"
+                android:id="@+id/img_sticker" android:layout_centerHorizontal="true" android:layout_below="@id/btn_scan"
+                android:layout_alignRight="@id/btn_scan" android:layout_alignLeft="@id/btn_scan"
+                android:background="@drawable/add_picture"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Chateau : "
+                android:id="@+id/label_domain" android:layout_alignLeft="@id/img_sticker"
+                android:layout_below="@id/img_sticker"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_domain" android:layout_toRightOf="@id/label_domain"
+                android:layout_below="@id/img_sticker"
+                android:layout_alignRight="@id/img_sticker" android:layout_alignTop="@id/label_domain"
+                />
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Millésime : "
+                android:id="@+id/label_vintage" android:layout_alignLeft="@id/label_domain"
+                android:layout_below="@id/label_domain"/>
+        <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_vintage" android:layout_toRightOf="@id/label_vintage"
+                android:layout_below="@id/text_domain"
+                android:layout_alignRight="@id/text_domain" android:layout_alignTop="@id/label_vintage"
+                />
+        <EditText
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/text_qty"
+                android:layout_below="@id/label_vintage"
+                android:layout_alignRight="@id/label_vintage"
+                android:layout_alignLeft="@id/label_vintage"
+                android:editable="false" android:layout_alignParentEnd="false"
+                android:layout_alignParentBottom="true" android:inputType="number"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Ajouter"
+                android:id="@+id/btn_add"
+                android:layout_toRightOf="@id/text_qty"
+                android:layout_alignParentEnd="true"
+                android:layout_alignTop="@id/text_qty"
+                />
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Supprimer"
+                android:id="@+id/btn_remove"
+                android:layout_toRightOf="@id/text_qty"
+                android:layout_below="@id/btn_add"
+                android:layout_alignParentEnd="true"/>
+    </RelativeLayout>
+</ScrollView>
