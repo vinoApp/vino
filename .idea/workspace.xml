@@ -40,22 +40,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="170feeb1-b465-42a0-947d-ad7ed329e42c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/IDataSource.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/IDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/MappingUtils.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/MappingUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java" afterPath="$PROJECT_DIR$/vino-srv/src/test/java/com/vino/tests/persistence/PersistenceTests.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" afterPath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/WineBottle.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/WineBottle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/origins/WineDomain.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/origins/WineDomain.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/db/initdb.sql" afterPath="$PROJECT_DIR$/vino-srv/db/initdb.sql" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/db/vino_demo.dmp" afterPath="$PROJECT_DIR$/vino-srv/db/vino_demo.dmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vino.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375411531432" ignored="false" />
+    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375413763026" ignored="false" />
     <file path="/pom.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374957355938" ignored="false" />
     <file path="/MongoDBDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374961101762" ignored="false" />
     <file path="/WineOrigin.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960967624" ignored="false" />
@@ -902,7 +892,11 @@
       <created>1375410550666</created>
       <updated>1375410550666</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="[srv]&#10;Move sticker image to the domain object">
+      <created>1375413770331</created>
+      <updated>1375413770331</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -981,7 +975,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[mobile]&#10;- Enhance rotation handling&#10;" />
+    <option name="LAST_COMMIT_MESSAGE" value="[srv]&#10;Move sticker image to the domain object" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1011,6 +1005,7 @@
     <MESSAGE value="[mobile]&#10;- Enhance rotation handling" />
     <MESSAGE value="[mobile]&#10;- Support bottle sticker&#10;[srv]&#10;- Add DB Dump" />
     <MESSAGE value="[mobile]&#10;- Enhance rotation handling&#10;" />
+    <MESSAGE value="[srv]&#10;Move sticker image to the domain object" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

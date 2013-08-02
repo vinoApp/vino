@@ -59,8 +59,8 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
     protected void onDestroy() {
         super.onDestroy();
         SharedPreferences.Editor editor = prefs.edit();
-        editor.clear();
-        editor.commit();
+        // editor.clear();
+        // editor.commit();
     }
 
     @Override
@@ -123,7 +123,7 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
                                 // Update model about domain, vintage & sticker image
                                 VinoMainActivity.this.domain = jsonObject.getJSONObject("domain").getString("name");
                                 VinoMainActivity.this.vintage = jsonObject.getString("vintage");
-                                VinoMainActivity.this.sticker = jsonObject.getString("base64Image");
+                                VinoMainActivity.this.sticker = jsonObject.getJSONObject("domain").getString("sticker");
                                 // Update UI
                                 saveState();
                                 refreshUI();
