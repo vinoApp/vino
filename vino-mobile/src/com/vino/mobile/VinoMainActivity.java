@@ -37,7 +37,7 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
         Button scanBtn = (Button) findViewById(R.id.btn_scan);
         scanBtn.setOnClickListener(this);
 
-        prefs = getSharedPreferences("vino-preferences", MODE_WORLD_WRITEABLE);
+        prefs = getSharedPreferences("vino-preferences", MODE_PRIVATE);
 
         loadState();
         refreshUI();
@@ -75,9 +75,10 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
     }
 
     private void saveState() {
-        prefs.edit().putString(DOMAIN, this.domain);
-        prefs.edit().putString(VINTAGE, this.vintage);
-        prefs.edit().commit();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.putString(DOMAIN, this.domain);
+        editor.putString(VINTAGE, this.vintage);
+        editor.apply();
     }
 
     private void refreshUI() {

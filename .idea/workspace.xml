@@ -40,21 +40,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="170feeb1-b465-42a0-947d-ad7ed329e42c" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/res/drawable-hdpi/add_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/res/drawable-ldpi/add_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/res/drawable-mdpi/add_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/res/drawable-xhdpi/add_picture.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/res/drawable-ldpi/bottle_minus.png" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/res/drawable-ldpi/bottle_plus.png" />
-      <change type="DELETED" beforePath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/WineBottleRESTUnit.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/AndroidManifest.xml" afterPath="$PROJECT_DIR$/vino-mobile/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" afterPath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/res/layout/main.xml" afterPath="$PROJECT_DIR$/vino-mobile/res/layout/main.xml" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/vino-mobile.iml" afterPath="$PROJECT_DIR$/vino-mobile/vino-mobile.iml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vino.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375407747697" ignored="false" />
+    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375409499549" ignored="false" />
     <file path="/pom.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374957355938" ignored="false" />
     <file path="/MongoDBDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374961101762" ignored="false" />
     <file path="/WineOrigin.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960967624" ignored="false" />
@@ -88,7 +80,7 @@
     <file path="/MappingUtils.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374975771163" ignored="false" />
     <file path="/WineDomainRowMapper.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374973161487" ignored="false" />
     <file path="/RowMappers.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374974300227" ignored="false" />
-    <file path="/VinoMainActivity.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375407655909" ignored="false" />
+    <file path="/VinoMainActivity.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375409781087" ignored="false" />
     <file path="/strings.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374987295029" ignored="false" />
     <file path="/a.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374987330179" ignored="false" />
     <file path="/AndroidManifest.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375032715269" ignored="false" />
@@ -121,6 +113,40 @@
     <sortChildren value="false" />
   </component>
   <component name="DebuggerManager">
+    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+      <breakpoint>
+        <option name="NOTIFY_CAUGHT" value="true" />
+        <option name="NOTIFY_UNCAUGHT" value="true" />
+        <option name="ENABLED" value="false" />
+        <option name="LOG_ENABLED" value="false" />
+        <option name="LOG_EXPRESSION_ENABLED" value="false" />
+        <option name="SUSPEND_POLICY" value="SuspendAll" />
+        <option name="SUSPEND" value="true" />
+        <option name="COUNT_FILTER_ENABLED" value="false" />
+        <option name="COUNT_FILTER" value="0" />
+        <option name="CONDITION_ENABLED" value="true" />
+        <option name="CLASS_FILTERS_ENABLED" value="false" />
+        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
+        <option name="CONDITION" value="" />
+        <option name="LOG_MESSAGE" value="" />
+      </breakpoint>
+    </breakpoint_any>
     <line_breakpoints default_suspend_policy="SuspendAll" default_condition_enabled="true">
       <breakpoint url="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/tools/ImageUtils.java" line="71" class="com.vino.backend.tools.ImageUtils" package="com.vino.backend.tools">
         <option name="ENABLED" value="true" />
@@ -166,40 +192,6 @@
       </breakpoint>
     </line_breakpoints>
     <ui_properties default_suspend_policy="SuspendAll" default_condition_enabled="true" />
-    <breakpoint_any default_suspend_policy="SuspendAll" default_condition_enabled="true">
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-      <breakpoint>
-        <option name="NOTIFY_CAUGHT" value="true" />
-        <option name="NOTIFY_UNCAUGHT" value="true" />
-        <option name="ENABLED" value="false" />
-        <option name="LOG_ENABLED" value="false" />
-        <option name="LOG_EXPRESSION_ENABLED" value="false" />
-        <option name="SUSPEND_POLICY" value="SuspendAll" />
-        <option name="SUSPEND" value="true" />
-        <option name="COUNT_FILTER_ENABLED" value="false" />
-        <option name="COUNT_FILTER" value="0" />
-        <option name="CONDITION_ENABLED" value="true" />
-        <option name="CLASS_FILTERS_ENABLED" value="false" />
-        <option name="INSTANCE_FILTERS_ENABLED" value="false" />
-        <option name="CONDITION" value="" />
-        <option name="LOG_MESSAGE" value="" />
-      </breakpoint>
-    </breakpoint_any>
     <breakpoint_rules />
     <ui_properties />
   </component>
@@ -208,7 +200,17 @@
     <favorites_list name="vino" />
   </component>
   <component name="FileEditorManager">
-    <leaf />
+    <leaf>
+      <file leaf-file-name="VinoMainActivity.java" pinned="false" current="true" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state line="54" column="47" selection-start="1582" selection-end="1582" vertical-scroll-proportion="0.6168224">
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
   </component>
   <component name="FindManager">
     <FindUsagesManager>
@@ -352,6 +354,8 @@
       <sortByType />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -370,21 +374,59 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-mobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="mobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
+          <PATH>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.ProjectViewProjectNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="vino-mobile" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="src" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="com" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+          </PATH>
         </subPane>
       </pane>
-      <pane id="Scope" />
-      <pane id="PackagesPane" />
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="project.structure.last.edited" value="Modules" />
+    <property name="project.structure.last.edited" value="SDKs" />
     <property name="SHOW_ALL_PROCESSES" value="false" />
     <property name="OverrideImplement.combined" value="false" />
     <property name="project.structure.proportion" value="0.15" />
     <property name="options.splitter.main.proportions" value="0.3" />
     <property name="MemberChooser.sorted" value="false" />
     <property name="recentsLimit" value="5" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../libs/mysql" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../../../libs/android/sdk/sources/android-17" />
     <property name="DEBUGGABLE_DEVICE" value="016B7E950E012018" />
     <property name="GoToClass.includeJavaFiles" value="false" />
     <property name="DEBUGGABLE_PROCESS" value="com.vino.mobile" />
@@ -427,7 +469,7 @@
       <recent name="$PROJECT_DIR$/vino-mobile/res/drawable-hdpi" />
     </key>
   </component>
-  <component name="RunManager" selected="Android Application.vino-mobile">
+  <component name="RunManager" selected="Application.VinoServer">
     <configuration default="false" name="VinoServer" type="Application" factoryName="Application" temporary="true">
       <extension name="coverage" enabled="false" merge="false" sample_coverage="true" runner="idea">
         <pattern>
@@ -847,41 +889,46 @@
       <created>1375034961270</created>
       <updated>1375034961270</updated>
     </task>
-    <option name="localTasksCounter" value="17" />
+    <task id="LOCAL-00017" summary="[mobile]&#10;- Enhance ui">
+      <created>1375407787051</created>
+      <updated>1375407787051</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="ToolWindowManager">
     <frame x="-1" y="27" width="1922" height="1028" extended-state="6" />
     <editor active="false" />
     <layout>
-      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18623266" sideWeight="0.6375" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21611527" sideWeight="0.6375" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="Changes" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="JetGradle" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
-      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.7681818" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Palette" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Database" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16328709" sideWeight="0.67045456" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Ant Build" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
-      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3625" sideWeight="0.4850587" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Debug" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3625" sideWeight="0.4850587" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="IDEtalk Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3284091" sideWeight="0.5048026" order="7" side_tool="true" content_ui="tabs" />
+      <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879817" sideWeight="0.49839914" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Favorites" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="IDEtalk" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.3284091" sideWeight="0.4914621" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Messages" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3276644" sideWeight="0.4914621" order="7" side_tool="false" content_ui="tabs" />
+      <window_info id="Android" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32879817" sideWeight="0.49786553" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Web" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="1" side_tool="true" content_ui="tabs" />
       <window_info id="Commander" active="false" anchor="right" auto_hide="false" internal_type="SLIDING" type="SLIDING" visible="false" weight="0.4" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Maven Projects" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.14461046" sideWeight="0.67045456" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Application Servers" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19477054" sideWeight="0.6715909" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" weight="0.19477054" sideWeight="0.6375" order="0" side_tool="false" content_ui="combo" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.23068182" sideWeight="0.5576307" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Palette&#9;" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.18623266" sideWeight="0.6375" order="3" side_tool="false" content_ui="tabs" />
+      <window_info id="Documentation" active="false" anchor="right" auto_hide="true" internal_type="SLIDING" type="FLOATING" visible="false" weight="0.32977587" sideWeight="0.6723356" order="3" side_tool="false" content_ui="tabs" x="99" y="127" width="1722" height="828" />
       <window_info id="Coverage" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.16328709" sideWeight="0.29545453" order="3" side_tool="true" content_ui="tabs" />
       <window_info id="Hierarchy" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="2" side_tool="false" content_ui="combo" />
       <window_info id="Database Console" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.3034091" sideWeight="0.50426894" order="7" side_tool="false" content_ui="tabs" />
       <window_info id="Cvs" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.25" sideWeight="0.5" order="4" side_tool="false" content_ui="tabs" />
+      <window_info id="Designer" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.21611527" sideWeight="0.6375" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Preview" active="false" anchor="right" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32977587" sideWeight="0.7681818" order="3" side_tool="false" content_ui="tabs" />
       <window_info id="Message" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.33" sideWeight="0.5" order="0" side_tool="false" content_ui="tabs" />
       <window_info id="Find" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.32954547" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Inspection" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" weight="0.4" sideWeight="0.5" order="5" side_tool="false" content_ui="tabs" />
@@ -961,74 +1008,34 @@
     <option name="FILTER_TARGETS" value="false" />
   </component>
   <component name="editorHistoryManager">
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-http/8.1.8.v20121106/jetty-http-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/http/HttpParser.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="237" column="0" selection-start="8184" selection-end="8184" vertical-scroll-proportion="0.33271027">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/server/handler/ContextHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1044" column="28" selection-start="37012" selection-end="37012" vertical-scroll-proportion="0.48785046">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/server/session/SessionHandler.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="222" column="16" selection-start="7980" selection-end="7980" vertical-scroll-proportion="0.31962618">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/server/AbstractHttpConnection.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="1033" column="20" selection-start="36487" selection-end="36487" vertical-scroll-proportion="0.31962618">
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/server/Server.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="361" column="83" selection-start="11676" selection-end="11676" vertical-scroll-proportion="-0.01682243">
-          <folding />
-        </state>
+        <state line="361" column="83" selection-start="11676" selection-end="11676" vertical-scroll-proportion="-0.01682243" />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/server/handler/HandlerCollection.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="142" column="16" selection-start="4459" selection-end="4459" vertical-scroll-proportion="0.31962618">
-          <folding />
-        </state>
+        <state line="142" column="16" selection-start="4459" selection-end="4459" vertical-scroll-proportion="0.31962618" />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/server/handler/HandlerList.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="42" column="16" selection-start="1622" selection-end="1622" vertical-scroll-proportion="0.38317758">
-          <folding />
-        </state>
+        <state line="42" column="16" selection-start="1622" selection-end="1622" vertical-scroll-proportion="0.38317758" />
       </provider>
     </entry>
     <entry file="jar://$MAVEN_REPOSITORY$/org/eclipse/jetty/jetty-server/8.1.8.v20121106/jetty-server-8.1.8.v20121106-sources.jar!/org/eclipse/jetty/server/handler/ScopedHandler.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="175" column="22" selection-start="6141" selection-end="6141" vertical-scroll-proportion="0.3271028">
-          <folding />
-        </state>
+        <state line="175" column="22" selection-start="6141" selection-end="6141" vertical-scroll-proportion="0.3271028" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/vino-mobile/libs/volley.jar!/com/android/volley/ExecutorDelivery.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="28" column="1" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.7941176">
-          <folding />
-        </state>
+        <state line="28" column="1" selection-start="1365" selection-end="1365" vertical-scroll-proportion="0.7941176" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/vino-mobile/libs/volley.jar!/com/android/volley/toolbox/JsonRequest.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="19" column="19" selection-start="969" selection-end="969" vertical-scroll-proportion="0.35613683">
-          <folding />
-        </state>
+        <state line="19" column="19" selection-start="969" selection-end="969" vertical-scroll-proportion="0.35613683" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vino-mobile/AndroidManifest.xml">
@@ -1039,43 +1046,62 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vino-mobile/res/layout/main.xml">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="30" column="16" selection-start="1791" selection-end="1791" vertical-scroll-proportion="0.25773194">
-          <folding />
-        </state>
-      </provider>
       <provider editor-type-id="android-designer">
         <state />
+      </provider>
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="30" column="16" selection-start="1791" selection-end="1791" vertical-scroll-proportion="0.25773194" />
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/WineBottlesREST.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="56" column="0" selection-start="1548" selection-end="1548" vertical-scroll-proportion="0.0">
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="jar://$PROJECT_DIR$/../../../libs/android/sdk/platforms/android-17/android.jar!/android/app/Activity.class">
-      <provider selected="true" editor-type-id="text-editor">
-        <state line="53" column="19" selection-start="2223" selection-end="2223" vertical-scroll-proportion="0.33333334">
-          <folding />
-        </state>
+        <state line="56" column="0" selection-start="1548" selection-end="1548" vertical-scroll-proportion="0.0" />
       </provider>
     </entry>
     <entry file="jar://$PROJECT_DIR$/../../../libs/android/sdk/platforms/android-17/android.jar!/android/content/ContextWrapper.class">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="39" column="45" selection-start="1530" selection-end="1530" vertical-scroll-proportion="0.33333334">
+        <state line="39" column="45" selection-start="1530" selection-end="1530" vertical-scroll-proportion="0.33333334" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../libs/android/sdk/platforms/android-17/android.jar!/android/view/View.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1025" column="75" selection-start="45837" selection-end="45837" vertical-scroll-proportion="0.27797833" />
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../libs/android/sdk/platforms/android-17/android.jar!/android/app/Activity.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="101" column="42" selection-start="3884" selection-end="3884" vertical-scroll-proportion="1.3653618">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="jar://$PROJECT_DIR$/../../../libs/android/sdk/platforms/android-17/android.jar!/android/content/SharedPreferences.class">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1" column="0" selection-start="1" selection-end="1" vertical-scroll-proportion="0.017523365">
+          <folding>
+            <element signature="e#0#1999#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../libs/android/sdk/sources/android-17/android/app/Activity.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="1842" column="40" selection-start="81868" selection-end="81868" vertical-scroll-proportion="0.42056075">
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../../../libs/android/sdk/sources/android-17/android/content/SharedPreferences.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state line="349" column="11" selection-start="13994" selection-end="13994" vertical-scroll-proportion="0.5794392">
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state line="72" column="0" selection-start="2188" selection-end="2188" vertical-scroll-proportion="0.19252336">
-          <folding>
-            <element signature="e#3041#3945#0" expanded="true" />
-            <element signature="e#3922#3923#0" expanded="true" />
-          </folding>
+        <state line="54" column="47" selection-start="1582" selection-end="1582" vertical-scroll-proportion="0.6168224">
+          <folding />
         </state>
       </provider>
     </entry>
@@ -1145,7 +1171,7 @@
       </state>
       <state key="ModuleStructureConfigurable.UI">
         <settings>
-          <last-edited>vino-web</last-edited>
+          <last-edited>vino-mobile</last-edited>
           <splitter-proportions>
             <option name="proportions">
               <list>
