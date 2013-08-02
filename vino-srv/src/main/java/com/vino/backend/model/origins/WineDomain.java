@@ -29,6 +29,8 @@ public class WineDomain {
 
     private WineAOC origin;
 
+    private String sticker;
+
     public WineDomain() {
 
     }
@@ -60,6 +62,14 @@ public class WineDomain {
 
     public void setOrigin(WineAOC origin) {
         this.origin = origin;
+    }
+
+    public String getSticker() {
+        return sticker;
+    }
+
+    public void setSticker(String sticker) {
+        this.sticker = sticker;
     }
 
     @Override

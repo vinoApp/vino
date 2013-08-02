@@ -16,7 +16,6 @@
 
 package com.vino.tests.persistence;
 
-import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.persistence.DataSourcesBundle;
 import com.vino.backend.tools.ImageUtils;
@@ -27,8 +26,6 @@ import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
-
-import static org.junit.Assert.assertTrue;
 
 /**
  * User: walien
@@ -63,18 +60,15 @@ public class PersistenceTests {
     }
 
     @Test
-    public void testAddBottleToKnownOnes() {
-        WineDomain domain = DataSourcesBundle.getInstance().getDefaultDataSource().getDomainById(2);
-
-        WineBottle bottle = new WineBottle("3607345750309", 2008, domain);
+    public void testAddDomain() {
+        WineDomain domain = new WineDomain("Petrus", DataSourcesBundle.getInstance().getDefaultDataSource().getAOCByID(8));
         try {
             BufferedImage img = ImageIO.read(new File("/home/walien/Images/petrus.jpg"));
-            bottle.setBase64Image(ImageUtils.encodeToString(img, "jpg"));
+            domain.setSticker(ImageUtils.encodeToString(img, "jpg"));
         } catch (IOException e) {
             e.printStackTrace();
         }
-
-        assertTrue(DataSourcesBundle.getInstance().getDefaultDataSource().addWineBottleToKnown(bottle));
+        DataSourcesBundle.getInstance().getDefaultDataSource().addWineDomain(domain);
     }
 
     @Test

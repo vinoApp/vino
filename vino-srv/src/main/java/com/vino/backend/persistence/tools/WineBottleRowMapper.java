@@ -16,14 +16,10 @@
 
 package com.vino.backend.persistence.tools;
 
-import com.google.common.io.ByteStreams;
-import com.vino.backend.log.LoggerBundle;
 import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineDomain;
 import org.springframework.jdbc.core.RowMapper;
 
-import java.io.IOException;
-import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -44,16 +40,6 @@ public class WineBottleRowMapper implements RowMapper<WineBottle> {
         bottle.setVintage(resultSet.getInt(DataRowsBundle.VINTAGE));
         bottle.setBarcode(resultSet.getString(DataRowsBundle.BARCODE));
         bottle.setDomain(domain);
-
-        try {
-            Blob stickerImage = resultSet.getBlob(DataRowsBundle.STICKER_IMAGE);
-            if (stickerImage != null) {
-                bottle.setBase64Image(new String(ByteStreams.toByteArray(
-                        stickerImage.getBinaryStream())));
-            }
-        } catch (IOException e) {
-            LoggerBundle.getDefaultLogger().error("Error during base64 to byte[] conversion... : {}", e.getMessage());
-        }
 
         return bottle;
     }

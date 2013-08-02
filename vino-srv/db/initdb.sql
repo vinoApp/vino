@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS domains (
   domainID   INT PRIMARY KEY AUTO_INCREMENT,
   domainName TEXT NOT NULL,
   aocID      INT  NOT NULL,
+  stickerImage LONGBLOB,
   FOREIGN KEY (aocID) REFERENCES aocs (aocID)
 );
 
@@ -30,7 +31,6 @@ CREATE TABLE IF NOT EXISTS bottles (
   domainID     INT         NOT NULL,
   vintage      INT         NOT NULL,
   barcode      VARCHAR(30) NOT NULL UNIQUE,
-  stickerImage LONGBLOB,
   FOREIGN KEY (domainID) REFERENCES domains (domainID)
 );
 
@@ -77,10 +77,8 @@ INSERT INTO aocs (aocName, regionID) VALUES ('Cérons', 4);
 
 INSERT INTO domains (domainName, aocID) VALUES ('Haut-Brion', 22);
 INSERT INTO domains (domainName, aocID) VALUES ('Pape Clément', 22);
-INSERT INTO domains (domainName, aocID) VALUES ('Petrus', 8);
 
 INSERT INTO bottles (domainID, vintage, barcode) VALUES (1, 2008, '1');
-INSERT INTO bottles (domainID, vintage, barcode) VALUES (3, 2005, '2');
 INSERT INTO bottles (domainID, vintage, barcode) VALUES (2, 2003, '3');
 
 INSERT INTO cellar (bottleID, qty) VALUES (1, 12);

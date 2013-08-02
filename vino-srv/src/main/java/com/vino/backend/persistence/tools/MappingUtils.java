@@ -16,11 +16,15 @@
 
 package com.vino.backend.persistence.tools;
 
+import com.google.common.io.ByteStreams;
+import com.vino.backend.log.LoggerBundle;
 import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.model.origins.WineRegion;
 
+import java.io.IOException;
+import java.sql.Blob;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 
@@ -76,6 +80,16 @@ public class MappingUtils {
         domain.setId(resultSet.getInt(DataRowsBundle.DOMAIN_ID));
         domain.setName(resultSet.getString(DataRowsBundle.DOMAIN_NAME));
         domain.setOrigin(getOriginFromResultSet(resultSet));
+
+        try {
+            Blob stickerImage = resultSet.getBlob(DataRowsBundle.STICKER_IMAGE);
+            if (stickerImage != null) {
+                domain.setSticker(new String(ByteStreams.toByteArray(
+                        stickerImage.getBinaryStream())));
+            }
+        } catch (IOException e) {
+            LoggerBundle.getDefaultLogger().error("Error during base64 to byte[] conversion... : {}", e.getMessage());
+        }
 
         return domain;
     }

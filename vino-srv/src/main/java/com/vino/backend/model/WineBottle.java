@@ -33,8 +33,6 @@ public class WineBottle {
 
     private WineDomain domain;
 
-    private String base64Image;
-
     public WineBottle(String barcode, int vintage, WineDomain domain) {
         this.barcode = barcode;
         this.vintage = vintage;
@@ -74,14 +72,6 @@ public class WineBottle {
 
     public void setBarcode(String barcode) {
         this.barcode = barcode;
-    }
-
-    public String getBase64Image() {
-        return base64Image;
-    }
-
-    public void setBase64Image(String base64Image) {
-        this.base64Image = base64Image;
     }
 
     @Override

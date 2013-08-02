@@ -96,6 +96,17 @@ public class MySQLDataSource implements IDataSource {
     }
 
     @Override
+    public WineAOC getAOCByID(int id) {
+        try{
+            return template.queryForObject("SELECT * FROM regions, aocs where aocs.aocID = ? " +
+                    "and aocs.regionID = regions.regionID", new Object[]{id},
+                    new WineAOCRowMapper());
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
+    }
+
+    @Override
     public List<WineAOC> getAllAOCs() {
         return template.query("SELECT * FROM regions, aocs;", new WineAOCRowMapper());
     }
@@ -141,10 +152,9 @@ public class MySQLDataSource implements IDataSource {
         if (!MappingUtils.validateWineBottleObject(bottle)) {
             return false;
         }
-        return template.update("INSERT INTO bottles (barcode, domainID, stickerImage, vintage) VALUES (?, ?, ?, ?)",
+        return template.update("INSERT INTO bottles (barcode, domainID, vintage) VALUES (?, ?, ?, ?)",
                 bottle.getBarcode(),
                 bottle.getDomain().getId(),
-                bottle.getBase64Image(),
                 bottle.getVintage()) != 0;
     }
 
@@ -166,7 +176,8 @@ public class MySQLDataSource implements IDataSource {
         if (!MappingUtils.validateWineDomainObject(domain)) {
             return false;
         }
-        return template.update("INSERT INTO domains (domainName, aocID) VALUES (?, ?)", domain.getName(), domain.getOrigin().getId()) != 0;
+        return template.update("INSERT INTO domains (domainName, aocID, stickerImage) VALUES (?, ?, ?)", domain.getName(),
+                domain.getOrigin().getId(), domain.getSticker()) != 0;
     }
 
     @Override

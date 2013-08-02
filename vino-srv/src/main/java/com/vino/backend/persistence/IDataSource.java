@@ -41,6 +41,8 @@ public interface IDataSource {
 
     List<WineAOC> getAllAOCs();
 
+    WineAOC getAOCByID(int id);
+
     List<WineDomain> getAllWineDomains();
 
     WineDomain getDomainById(int id);
