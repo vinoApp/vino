@@ -3,10 +3,14 @@ package com.vino.mobile;
 import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.util.Base64;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 import com.android.volley.Request;
@@ -23,11 +27,13 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
 
     public static final String DOMAIN = "domain";
     public static final String VINTAGE = "vintage";
-    private String domain;
-
-    private String vintage;
+    public static final String STICKER = "sticker";
 
     private SharedPreferences prefs;
+
+    private String domain;
+    private String vintage;
+    private String sticker;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
@@ -78,6 +84,7 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
         SharedPreferences.Editor editor = prefs.edit();
         editor.putString(DOMAIN, this.domain);
         editor.putString(VINTAGE, this.vintage);
+        editor.putString(STICKER, this.sticker);
         editor.apply();
     }
 
@@ -87,6 +94,11 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
         }
         if (this.vintage != null) {
             ((TextView) findViewById(R.id.text_vintage)).setText(this.vintage);
+        }
+        if (this.sticker != null) {
+            byte[] decodedString = Base64.decode(sticker, Base64.DEFAULT);
+            Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+            ((ImageView) findViewById(R.id.img_sticker)).setImageBitmap(decodedByte);
         }
     }
 
@@ -102,6 +114,7 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
                                 // Update model about domain, vintage & sticker image
                                 VinoMainActivity.this.domain = jsonObject.getJSONObject("domain").getString("name");
                                 VinoMainActivity.this.vintage = jsonObject.getString("vintage");
+                                VinoMainActivity.this.sticker = jsonObject.getString("base64Image");
                                 // Update UI
                                 saveState();
                                 refreshUI();
