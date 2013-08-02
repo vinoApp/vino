@@ -56,6 +56,14 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        SharedPreferences.Editor editor = prefs.edit();
+        editor.clear();
+        editor.commit();
+    }
+
+    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_scan) {
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
@@ -78,6 +86,7 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
     private void loadState() {
         this.domain = prefs.getString(DOMAIN, null);
         this.vintage = prefs.getString(VINTAGE, null);
+        this.sticker = prefs.getString(STICKER, null);
     }
 
     private void saveState() {
@@ -85,7 +94,7 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
         editor.putString(DOMAIN, this.domain);
         editor.putString(VINTAGE, this.vintage);
         editor.putString(STICKER, this.sticker);
-        editor.apply();
+        editor.commit();
     }
 
     private void refreshUI() {
