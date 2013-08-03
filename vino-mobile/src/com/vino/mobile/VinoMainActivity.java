@@ -6,6 +6,7 @@ import android.content.SharedPreferences;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.util.Base64;
 import android.util.Log;
 import android.view.View;
@@ -23,25 +24,29 @@ import com.google.zxing.integration.android.IntentResult;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.io.ByteArrayOutputStream;
+
 public class VinoMainActivity extends Activity implements View.OnClickListener {
 
     public static final String DOMAIN = "domain";
     public static final String VINTAGE = "vintage";
     public static final String STICKER = "sticker";
+    private static final String IS_FOUND = "isFound";
+    public static final int PICTURE_TAKEN_REQUEST_CODE = 888;
 
     private SharedPreferences prefs;
 
     private String domain;
     private String vintage;
     private String sticker;
+    private boolean isFound = true;
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
         setContentView(R.layout.main);
-        Button scanBtn = (Button) findViewById(R.id.btn_scan);
-        scanBtn.setOnClickListener(this);
+        setListeners();
 
         prefs = getSharedPreferences("vino-preferences", MODE_PRIVATE);
 
@@ -56,23 +61,41 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
     }
 
     @Override
-    protected void onDestroy() {
-        super.onDestroy();
-        SharedPreferences.Editor editor = prefs.edit();
-        // editor.clear();
-        // editor.commit();
-    }
-
-    @Override
     public void onClick(View view) {
         if (view.getId() == R.id.btn_scan) {
             IntentIntegrator scanIntegrator = new IntentIntegrator(this);
             scanIntegrator.initiateScan();
         }
+        if (view.getId() == R.id.btn_take_picture) {
+            Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
+            startActivityForResult(takePictureIntent, PICTURE_TAKEN_REQUEST_CODE);
+        }
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent intent) {
+
+        if (requestCode == PICTURE_TAKEN_REQUEST_CODE && intent != null) {
+
+            // Retrieve taken picture
+            Bundle extras = intent.getExtras();
+            Bitmap takenSticker = (Bitmap) extras.get("data");
+
+            // Check image nullity
+            if (takenSticker == null) {
+                return;
+            }
+
+            // Encode bitmap in base64
+            ByteArrayOutputStream baos = new ByteArrayOutputStream();
+            takenSticker.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+            this.sticker = new String(Base64.encode(baos.toByteArray(), Base64.DEFAULT));
+
+            // Refresh UI
+            refreshUI();
+
+            return;
+        }
 
         IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
         if (scanningResult != null) {
@@ -83,10 +106,20 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
         }
     }
 
+    private void setListeners() {
+
+        Button scanBtn = (Button) findViewById(R.id.btn_scan);
+        scanBtn.setOnClickListener(this);
+
+        Button takePictureBtn = (Button) findViewById(R.id.btn_take_picture);
+        takePictureBtn.setOnClickListener(this);
+    }
+
     private void loadState() {
         this.domain = prefs.getString(DOMAIN, null);
         this.vintage = prefs.getString(VINTAGE, null);
         this.sticker = prefs.getString(STICKER, null);
+        this.isFound = prefs.getBoolean(IS_FOUND, false);
     }
 
     private void saveState() {
@@ -94,7 +127,14 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
         editor.putString(DOMAIN, this.domain);
         editor.putString(VINTAGE, this.vintage);
         editor.putString(STICKER, this.sticker);
+        editor.putBoolean(IS_FOUND, this.isFound);
         editor.commit();
+    }
+
+    private void resetState() {
+        this.domain = "Inconnu";
+        this.vintage = "Inconnu";
+        this.sticker = "";
     }
 
     private void refreshUI() {
@@ -109,6 +149,7 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
             Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
             ((ImageView) findViewById(R.id.img_sticker)).setImageBitmap(decodedByte);
         }
+        findViewById(R.id.btn_take_picture).setEnabled(!this.isFound);
     }
 
     public void retrieveWineBottle(String barcode) {
@@ -120,12 +161,27 @@ public class VinoMainActivity extends Activity implements View.OnClickListener {
                         @Override
                         public void onResponse(JSONObject jsonObject) {
                             try {
-                                // Update model about domain, vintage & sticker image
-                                VinoMainActivity.this.domain = jsonObject.getJSONObject("domain").getString("name");
-                                VinoMainActivity.this.vintage = jsonObject.getString("vintage");
-                                VinoMainActivity.this.sticker = jsonObject.getJSONObject("domain").getString("sticker");
-                                // Update UI
+                                // The response status
+                                String status = jsonObject.getString("status");
+
+                                // If the bottle has not been found
+                                if ("BOTTLE_NOT_FOUND".equalsIgnoreCase(status)) {
+                                    VinoMainActivity.this.isFound = false;
+                                    resetState();
+                                }
+
+                                if ("OK".equalsIgnoreCase(status)) {
+                                    // Update model about domain, vintage & sticker image
+                                    VinoMainActivity.this.isFound = true;
+                                    VinoMainActivity.this.domain = jsonObject.getJSONObject("bottle").getJSONObject("domain").getString("name");
+                                    VinoMainActivity.this.vintage = jsonObject.getJSONObject("bottle").getString("vintage");
+                                    VinoMainActivity.this.sticker = jsonObject.getJSONObject("bottle").getJSONObject("domain").getString("sticker");
+                                }
+
+                                // Save state
                                 saveState();
+
+                                // Refresh UI
                                 refreshUI();
                             } catch (JSONException e) {
                                 e.printStackTrace();

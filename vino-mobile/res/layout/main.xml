@@ -10,11 +10,18 @@
                 android:text="Scanner Code-Barres"
                 android:id="@+id/btn_scan" android:layout_centerHorizontal="true" android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true" android:layout_alignParentLeft="true"/>
+        <Button
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photographier Etiquette"
+                android:id="@+id/btn_take_picture" android:layout_centerHorizontal="true"
+                android:layout_alignParentRight="true" android:layout_alignParentLeft="true"
+                android:layout_below="@id/btn_scan" android:enabled="false"/>
         <ImageView
                 android:layout_width="wrap_content"
-                android:layout_height="325dp"
-                android:id="@+id/img_sticker" android:layout_centerHorizontal="true" android:layout_below="@id/btn_scan"
-                android:layout_alignRight="@id/btn_scan" android:layout_alignLeft="@id/btn_scan"/>
+                android:layout_height="280dp"
+                android:id="@+id/img_sticker" android:layout_centerHorizontal="true" android:layout_below="@id/btn_take_picture"
+                android:layout_alignRight="@id/btn_take_picture" android:layout_alignLeft="@id/btn_take_picture"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
