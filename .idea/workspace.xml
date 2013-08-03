@@ -40,16 +40,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="170feeb1-b465-42a0-947d-ad7ed329e42c" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/AndroidManifest.xml" afterPath="$PROJECT_DIR$/vino-mobile/AndroidManifest.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/rest/ResponseWrapper.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/rest/ResponseWrapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" afterPath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/WineBottlesREST.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/WineBottlesREST.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/res/layout/main.xml" afterPath="$PROJECT_DIR$/vino-mobile/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vino.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375569276542" ignored="false" />
+    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375572929952" ignored="false" />
     <file path="/pom.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374957355938" ignored="false" />
     <file path="/MongoDBDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374961101762" ignored="false" />
     <file path="/WineOrigin.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960967624" ignored="false" />
@@ -870,7 +867,11 @@
       <created>1375413804730</created>
       <updated>1375413804730</updated>
     </task>
-    <option name="localTasksCounter" value="23" />
+    <task id="LOCAL-00023" summary="[mobile] &#10;The mobile is able to retrieve a taken sticker picture">
+      <created>1375572932556</created>
+      <updated>1375572932556</updated>
+    </task>
+    <option name="localTasksCounter" value="24" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -949,7 +950,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[mobile] &#10;The sticker image is now retrieved from the domain" />
+    <option name="LAST_COMMIT_MESSAGE" value="[mobile] &#10;The mobile is able to retrieve a taken sticker picture" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -981,6 +982,7 @@
     <MESSAGE value="[mobile]&#10;- Enhance rotation handling&#10;" />
     <MESSAGE value="[srv]&#10;Move sticker image to the domain object" />
     <MESSAGE value="[mobile] &#10;The sticker image is now retrieved from the domain" />
+    <MESSAGE value="[mobile] &#10;The mobile is able to retrieve a taken sticker picture" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

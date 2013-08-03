@@ -16,6 +16,7 @@
 
 package com.vino.backend.model.rest;
 
+import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineDomain;
 
 /**
@@ -28,6 +29,8 @@ public class ResponseWrapper {
     private ResponseStatus status;
 
     private WineDomain domain;
+
+    private WineBottle bottle;
 
     public ResponseWrapper() {
 
@@ -48,6 +51,15 @@ public class ResponseWrapper {
 
     public ResponseWrapper setDomain(WineDomain domain) {
         this.domain = domain;
+        return this;
+    }
+
+    public WineBottle getBottle() {
+        return bottle;
+    }
+
+    public ResponseWrapper setBottle(WineBottle bottle) {
+        this.bottle = bottle;
         return this;
     }
 }

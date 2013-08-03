@@ -17,6 +17,8 @@
 package com.vino.backend.rest;
 
 import com.vino.backend.model.WineBottle;
+import com.vino.backend.model.rest.ResponseStatus;
+import com.vino.backend.model.rest.ResponseWrapper;
 import com.vino.backend.persistence.DataSourcesBundle;
 
 import javax.ws.rs.GET;
@@ -43,11 +45,15 @@ public class WineBottlesREST {
     @GET
     @Produces("application/json")
     @Path("{barcode}")
-    public WineBottle getBottleByBarCode(@PathParam("barcode") String barcode) {
+    public ResponseWrapper getBottleByBarCode(@PathParam("barcode") String barcode) {
         if (barcode == null || barcode.isEmpty()) {
             return null;
         }
-        return DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode(barcode);
+        WineBottle bottle = DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode(barcode);
+        if (bottle == null) {
+            return new ResponseWrapper().setStatus(ResponseStatus.BOTTLE_NOT_FOUND);
+        }
+        return new ResponseWrapper().setBottle(bottle).setStatus(ResponseStatus.OK);
     }
 
     /*@POST
