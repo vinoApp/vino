@@ -40,29 +40,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="170feeb1-b465-42a0-947d-ad7ed329e42c" name="Default" comment="[srv]&#10;Pending bottles">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/PendingWineBottle.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/PendingsBundle.java" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/PendingsREST.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoConstants.java" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoRESTClient.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/DataRowsBundle.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/DataRowsBundle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/IDataSource.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/IDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/rest/ResponseStatus.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/rest/ResponseStatus.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" afterPath="$PROJECT_DIR$/vino-mobile/src/com/vino/mobile/VinoMainActivity.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/WineBottle.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/WineBottle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/tools/WineBottleRowMapper.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/WineBottlesREST.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/WineBottlesREST.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/dataSources.xml" afterPath="$PROJECT_DIR$/.idea/dataSources.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/db/initdb.sql" afterPath="$PROJECT_DIR$/vino-srv/db/initdb.sql" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/res/layout/main.xml" afterPath="$PROJECT_DIR$/vino-mobile/res/layout/main.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-mobile/res/values/strings.xml" afterPath="$PROJECT_DIR$/vino-mobile/res/values/strings.xml" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/db/vino_demo.dmp" afterPath="$PROJECT_DIR$/vino-srv/db/vino_demo.dmp" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="vino.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375658461014" ignored="false" />
+    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1375658474912" ignored="false" />
     <file path="/pom.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374957355938" ignored="false" />
     <file path="/MongoDBDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374961101762" ignored="false" />
     <file path="/WineOrigin.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960967624" ignored="false" />
@@ -958,7 +945,11 @@
       <created>1375648144074</created>
       <updated>1375648144074</updated>
     </task>
-    <option name="localTasksCounter" value="26" />
+    <task id="LOCAL-00026" summary="[srv]&#10;Pending bottles">
+      <created>1375658484895</created>
+      <updated>1375658484895</updated>
+    </task>
+    <option name="localTasksCounter" value="27" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1004,8 +995,8 @@
   </component>
   <component name="VcsManagerConfiguration">
     <option name="OFFER_MOVE_TO_ANOTHER_CHANGELIST_ON_PARTIAL_COMMIT" value="false" />
-    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="true" />
-    <option name="CHECK_NEW_TODO" value="true" />
+    <option name="CHECK_CODE_SMELLS_BEFORE_PROJECT_COMMIT" value="false" />
+    <option name="CHECK_NEW_TODO" value="false" />
     <option name="myTodoPanelSettings">
       <value>
         <are-packages-shown value="false" />

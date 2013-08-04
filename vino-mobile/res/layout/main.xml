@@ -3,29 +3,31 @@
             android:layout_width="fill_parent">
     <RelativeLayout
             android:layout_width="fill_parent"
-            android:layout_height="fill_parent">
+            android:layout_height="wrap_content"
+            android:focusable="true" android:focusableInTouchMode="true">
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Scanner Code-Barres"
+                android:text="@string/btn_scan_text"
                 android:id="@+id/btn_scan" android:layout_centerHorizontal="true" android:layout_alignParentTop="true"
                 android:layout_alignParentRight="true" android:layout_alignParentLeft="true"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Photographier Etiquette"
+                android:text="@string/btn_take_picture_text"
                 android:id="@+id/btn_take_picture" android:layout_centerHorizontal="true"
                 android:layout_alignParentRight="true" android:layout_alignParentLeft="true"
                 android:layout_below="@id/btn_scan" android:enabled="false"/>
         <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="280dp"
+                android:contentDescription="@string/stickerImageDescription"
                 android:id="@+id/img_sticker" android:layout_centerHorizontal="true" android:layout_below="@id/btn_take_picture"
                 android:layout_alignRight="@id/btn_take_picture" android:layout_alignLeft="@id/btn_take_picture"/>
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Chateau : "
+                android:text="@string/domain_label_text"
                 android:id="@+id/label_domain" android:layout_alignLeft="@id/img_sticker"
                 android:layout_below="@id/img_sticker"/>
         <TextView
@@ -38,7 +40,7 @@
         <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Millésime : "
+                android:text="@string/vintage_label_text"
                 android:id="@+id/label_vintage" android:layout_alignLeft="@id/label_domain"
                 android:layout_below="@id/label_domain"/>
         <TextView
@@ -56,11 +58,12 @@
                 android:layout_alignRight="@id/label_vintage"
                 android:layout_alignLeft="@id/label_vintage"
                 android:editable="false" android:layout_alignParentEnd="false"
-                android:layout_alignParentBottom="true" android:inputType="number"/>
+                android:layout_alignParentBottom="true" android:inputType="number"
+                android:nextFocusUp="@id/text_qty" android:nextFocusLeft="@id/text_qty"/>
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ajouter"
+                android:text="@string/btn_add_text"
                 android:id="@+id/btn_add"
                 android:layout_toRightOf="@id/text_qty"
                 android:layout_alignParentEnd="true"
@@ -69,7 +72,7 @@
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Supprimer"
+                android:text="@string/btn_remove_text"
                 android:id="@+id/btn_remove"
                 android:layout_toRightOf="@id/text_qty"
                 android:layout_below="@id/btn_add"
