@@ -21,10 +21,8 @@ import com.vino.backend.model.rest.ResponseStatus;
 import com.vino.backend.model.rest.ResponseWrapper;
 import com.vino.backend.persistence.DataSourcesBundle;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -39,7 +37,11 @@ public class WineBottlesREST {
     @GET
     @Produces("application/json")
     public List<WineBottle> getAllBottles() {
-        return null;
+        List<WineBottle> bottles = DataSourcesBundle.getInstance().getDefaultDataSource().getAllKnownWineBottles();
+        if (bottles == null) {
+            return new ArrayList<WineBottle>();
+        }
+        return bottles;
     }
 
     @GET
@@ -47,7 +49,7 @@ public class WineBottlesREST {
     @Path("{barcode}")
     public ResponseWrapper getBottleByBarCode(@PathParam("barcode") String barcode) {
         if (barcode == null || barcode.isEmpty()) {
-            return null;
+            return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);
         }
         WineBottle bottle = DataSourcesBundle.getInstance().getDefaultDataSource().getBottleByBarCode(barcode);
         if (bottle == null) {
@@ -56,28 +58,32 @@ public class WineBottlesREST {
         return new ResponseWrapper().setBottle(bottle).setStatus(ResponseStatus.OK);
     }
 
-    /*@POST
+    @POST
     @Consumes("application/json")
-    public List<WineBottle> addBottle() {
+    @Produces("application/json")
+    public ResponseWrapper addBottle(WineBottle bottle) {
 
-        // Workflow global :
-        //
-        // L'utilisateur scan un code barre et un appel vers getBottleByBarCode est realise :
-        // - Case 1 : La bouteille est trouvee
-        //              -> Si l'etiquette de la bouteille n'est pas connue, l'app mobile propose a l'user de la prendre
-        //              -> L'utilisateur a la possibilite d'enregister ou de supprimer une bouteille de la cave (appel
-        //                 du WS 'cellar').
-        //
-        // - Case 2 : La bouteille n'est pas trouvee
-        //              -> L'utilisateur a la possibilite de prendre une photo de l'etiquette
-        //              -> Un appel a cette methode addBottle est realise et la bouteille est place en attente d'edition
-        //              -> Apres cela il est invite a rejoindre l'application web pour renseigner les informations
-        //                  relatives a la bouteille (+chateau, origine, ...)
-        //              -> Apres cela il peut a present ajouter la bouteille a la cave (par l'app web ou par l'appli
-        //                  mobile)
-
-
-        return null;
+        // Add the bottle to the DB
+        boolean status = DataSourcesBundle.getInstance().getDefaultDataSource().addWineBottleToKnown(bottle);
+        if (status) {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_INSERT_OK);
+        } else {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
+        }
     }
-*/
+
+    @PUT
+    @Consumes("application/json")
+    @Produces("application/json")
+    @Path("{bottle-id}")
+    public ResponseWrapper updateBottle(@PathParam("bottle-id") int bottleID,
+                                        WineBottle bottle) {
+        // Update the bottle
+        boolean status = DataSourcesBundle.getInstance().getDefaultDataSource().updateKnownWineBottle(bottleID, bottle);
+        if (status) {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_INSERT_OK);
+        } else {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
+        }
+    }
 }

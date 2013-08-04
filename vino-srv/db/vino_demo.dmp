@@ -51,9 +51,10 @@ DROP TABLE IF EXISTS `bottles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `bottles` (
   `bottleID` int(11) NOT NULL AUTO_INCREMENT,
-  `domainID` int(11) NOT NULL,
-  `vintage` int(11) NOT NULL,
+  `domainID` int(11) DEFAULT NULL,
+  `vintage` int(11) DEFAULT NULL,
   `barcode` varchar(30) NOT NULL,
+  `isValidated` tinyint(1) NOT NULL DEFAULT '0',
   PRIMARY KEY (`bottleID`),
   UNIQUE KEY `barcode` (`barcode`),
   KEY `domainID` (`domainID`),
@@ -67,7 +68,7 @@ CREATE TABLE `bottles` (
 
 LOCK TABLES `bottles` WRITE;
 /*!40000 ALTER TABLE `bottles` DISABLE KEYS */;
-INSERT INTO `bottles` VALUES (1,1,2008,'1'),(2,2,2003,'3'),(3,3,2003,'3607345750309');
+INSERT INTO `bottles` VALUES (1,1,2008,'1',0),(2,2,2003,'3',0),(3,3,2003,'3607345750309',0);
 /*!40000 ALTER TABLE `bottles` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -157,4 +158,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2013-08-01 23:22:06
+-- Dump completed on 2013-08-04 17:20:32

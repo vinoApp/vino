@@ -33,10 +33,13 @@ public class WineBottle {
 
     private WineDomain domain;
 
-    public WineBottle(String barcode, int vintage, WineDomain domain) {
+    private boolean isValidated;
+
+    public WineBottle(String barcode, int vintage, WineDomain domain, boolean isValidated) {
         this.barcode = barcode;
         this.vintage = vintage;
         this.domain = domain;
+        this.isValidated = isValidated;
     }
 
     public WineBottle() {
@@ -74,13 +77,22 @@ public class WineBottle {
         this.barcode = barcode;
     }
 
+    public boolean getIsValidated() {
+        return isValidated;
+    }
+
+    public void setValidated(boolean validated) {
+        isValidated = validated;
+    }
+
     @Override
     public String toString() {
         return "WineBottle{" +
-                "id='" + id + '\'' +
+                "id=" + id +
                 ", barcode='" + barcode + '\'' +
                 ", vintage=" + vintage +
                 ", domain=" + domain +
+                ", isValidated=" + isValidated +
                 '}';
     }
 }

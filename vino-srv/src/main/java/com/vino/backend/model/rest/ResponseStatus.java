@@ -24,6 +24,7 @@ package com.vino.backend.model.rest;
 public enum ResponseStatus {
 
     OK,
+    DB_INSERT_OK,
     DB_ERROR,
     INVALID_PARAMS,
     BOTTLE_NOT_FOUND

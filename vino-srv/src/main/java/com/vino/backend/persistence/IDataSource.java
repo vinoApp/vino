@@ -55,6 +55,8 @@ public interface IDataSource {
 
     boolean addWineBottleToKnown(WineBottle bottle);
 
+    boolean updateKnownWineBottle(int bottleID, WineBottle newBottle);
+
     boolean removeWineBottleFromKnown(int id);
 
     boolean addWineDomain(WineDomain domain);

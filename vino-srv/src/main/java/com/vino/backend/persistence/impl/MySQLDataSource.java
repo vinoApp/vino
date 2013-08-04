@@ -97,9 +97,9 @@ public class MySQLDataSource implements IDataSource {
 
     @Override
     public WineAOC getAOCByID(int id) {
-        try{
-            return template.queryForObject("SELECT * FROM regions, aocs where aocs.aocID = ? " +
-                    "and aocs.regionID = regions.regionID", new Object[]{id},
+        try {
+            return template.queryForObject("SELECT * FROM regions, aocs WHERE aocs.aocID = ? " +
+                    "AND aocs.regionID = regions.regionID", new Object[]{id},
                     new WineAOCRowMapper());
         } catch (IncorrectResultSizeDataAccessException e) {
             return null;
@@ -152,10 +152,28 @@ public class MySQLDataSource implements IDataSource {
         if (!MappingUtils.validateWineBottleObject(bottle)) {
             return false;
         }
-        return template.update("INSERT INTO bottles (barcode, domainID, vintage) VALUES (?, ?, ?, ?)",
+        return template.update("INSERT INTO bottles (barcode, domainID, vintage, isValidated) VALUES (?, ?, ?, ?, ?)",
                 bottle.getBarcode(),
                 bottle.getDomain().getId(),
-                bottle.getVintage()) != 0;
+                bottle.getVintage(),
+                bottle.getIsValidated()) != 0;
+    }
+
+    @Override
+    public boolean updateKnownWineBottle(int bottleID, WineBottle newBottle) {
+
+        int domainID = 0;
+        if (newBottle.getDomain() != null) {
+            domainID = newBottle.getDomain().getId();
+        }
+
+        return template.update("UPDATE bottles b " +
+                "SET b.vintage = CASE WHEN ? IS null THEN b.vintage ELSE ? END," +
+                "b.domainID = CASE WHEN ? = 0 THEN b.domainID ELSE ? END," +
+                "b.isValidated = ? " +
+                "WHERE b.bottleID = ?",
+                newBottle.getVintage(), newBottle.getVintage(), domainID, domainID,
+                newBottle.getIsValidated(), bottleID) != 0;
     }
 
     @Override
