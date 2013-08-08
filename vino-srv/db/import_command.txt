@@ -1,2 +1,0 @@
-mysql vino -u root -p[root_password] < createdb.sql
-mysql vino -u vino -pvino_pass < initdb.sql
