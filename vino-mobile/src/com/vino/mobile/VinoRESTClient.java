@@ -23,9 +23,13 @@ import com.android.volley.RequestQueue;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.JsonObjectRequest;
+import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import org.json.JSONException;
 import org.json.JSONObject;
+
+import java.util.HashMap;
+import java.util.Map;
 
 /**
  * User: walien
@@ -124,13 +128,57 @@ public class VinoRESTClient {
         }
     }
 
-    public static void addBottle(final VinoMainActivity activity, String barcode, int qty) {
-        // TODO
-        Toast.makeText(activity, qty + " bouteilles ajoutées dans la cave.", Toast.LENGTH_LONG).show();
+    public static void addBottle(final VinoMainActivity activity, final String barcode, final int qty) {
+
+        try {
+            final RequestQueue queue = Volley.newRequestQueue(activity);
+            queue.add(new StringRequest(Request.Method.POST, CELLAR_URL,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(activity, qty + " bouteilles ajoutées dans la cave.", Toast.LENGTH_LONG).show();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.e(VinoConstants.LOG_TAG, String.format("ConnectionError : %s", volleyError.getMessage()));
+                }
+            }
+            ) {
+                @Override
+                protected Map<String, String> getParams() throws com.android.volley.AuthFailureError {
+                    Map<String, String> params = new HashMap<String, String>();
+                    params.put("barcode", barcode);
+                    params.put("qty", String.valueOf(qty));
+                    return params;
+                }
+            });
+            queue.start();
+        } catch (Exception e) {
+            Log.e(VinoConstants.LOG_TAG, e.getLocalizedMessage());
+        }
     }
 
-    public static void removeBottle(final VinoMainActivity activity, String barcode, int qty) {
-        // TODO
-        Toast.makeText(activity, qty + " bouteilles retirées de la cave.", Toast.LENGTH_LONG).show();
+    public static void removeBottle(final VinoMainActivity activity, final String barcode, final int qty) {
+
+        try {
+            final RequestQueue queue = Volley.newRequestQueue(activity);
+            queue.add(new StringRequest(Request.Method.DELETE, CELLAR_URL + barcode + "?qty=" + qty,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(activity, qty + " bouteilles retirées de la cave.", Toast.LENGTH_LONG).show();
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError volleyError) {
+                    Log.e(VinoConstants.LOG_TAG, String.format("ConnectionError : %s", volleyError.getMessage()));
+                }
+            }
+            ));
+            queue.start();
+        } catch (Exception e) {
+            Log.e(VinoConstants.LOG_TAG, e.getLocalizedMessage());
+        }
     }
 }
