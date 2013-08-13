@@ -17,7 +17,7 @@
         <link rel="stylesheet" href="styles/main.css">
         <!-- endbuild -->
 </head>
-  <body ng-app="vinoWebApp">
+  <body ng-app="vino.ui">
     <!--[if lt IE 7]>
       <p class="chromeframe">You are using an outdated browser. <a href="http://browsehappy.com/">Upgrade your browser today</a> or <a href="http://www.google.com/chromeframe/?redirect=true">install Google Chrome Frame</a> to better experience this site.</p>
     <![endif]-->
@@ -34,11 +34,19 @@
     <script src="bower_components/jquery/jquery.js"></script>
     <script src="bower_components/angular/angular.js"></script>
     <script src="bower_components/angular-resource/angular-resource.js"></script>
-
     <script src="bower_components/bootstrap/docs/assets/js/bootstrap.min.js"></script>
 
     <!-- App -->
     <script src="scripts/app.js"></script>
+
+    <!-- Controllers -->
     <script src="scripts/controllers/main.js"></script>
-</body>
+    <script src="scripts/controllers/bottles.js"></script>
+    <script src="scripts/controllers/cellar.js"></script>
+
+    <!-- Services -->
+    <script src="scripts/services/business.objects.js"></script>
+    <script src="scripts/services/global.services.js"></script>
+
+  </body>
 </html>

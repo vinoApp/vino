@@ -1,0 +1,26 @@
+<div>
+
+    <h3>Cellar</h3>
+    <table class="table table-condensed">
+
+        <thead>
+        <tr>
+            <th>BarCode</th>
+            <th>Domain</th>
+            <th>Origin</th>
+            <th>Vintage</th>
+            <th>Qty</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="record in records">
+            <td>{{ record.bottle.barcode }}</td>
+            <td>{{ record.bottle.domain.name }}</td>
+            <td>{{ record.bottle.domain.origin.region.name }} / {{ record.bottle.domain.origin.name }}</td>
+            <td>{{ record.bottle.vintage }}</td>
+            <td>{{ record.quantity }}</td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

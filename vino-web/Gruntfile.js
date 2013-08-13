@@ -54,12 +54,19 @@ module.exports = function (grunt) {
       options: {
         port: 9000,
         // Change this to '0.0.0.0' to access the server from outside.
-        hostname: 'localhost'
+        hostname: '0.0.0.0'
       },
       proxies: [
+//          {
+//              context: '/rest',
+//              host: 'localhost',
+//              port: 8080,
+//              https: false,
+//              changeOrigin: true
+//          },
           {
               context: '/rest',
-              host: 'localhost',
+              host: '192.168.1.101',
               port: 8080,
               https: false,
               changeOrigin: true
