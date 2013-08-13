@@ -17,11 +17,15 @@
 package com.vino.backend.rest;
 
 import com.vino.backend.model.WineBottle;
+import com.vino.backend.model.cellar.WineCellarRecord;
 import com.vino.backend.model.rest.ResponseStatus;
 import com.vino.backend.model.rest.ResponseWrapper;
 import com.vino.backend.persistence.DataSourcesBundle;
 
 import javax.ws.rs.*;
+import javax.ws.rs.core.Context;
+import javax.ws.rs.core.UriInfo;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -35,8 +39,13 @@ public class CellarREST {
 
     @GET
     @Produces("application/json")
-    public List<WineBottle> getAllBottles() {
-        return null;
+    public List<WineCellarRecord> getAllBottles() {
+
+        List<WineCellarRecord> bottles = DataSourcesBundle.getInstance().getDefaultDataSource().getAllWineBottlesInCellar();
+        if (bottles == null) {
+            return new ArrayList<WineCellarRecord>();
+        }
+        return bottles;
     }
 
     @POST
@@ -62,9 +71,16 @@ public class CellarREST {
     }
 
     @DELETE
+    @Path("{barcode}")
     @Produces("application/json")
-    public ResponseWrapper unloadBottles(@FormParam("barcode") String barcode,
-                                         @FormParam("qty") int qty) {
+    public ResponseWrapper unloadBottles(@Context UriInfo uriInfo, @PathParam("barcode") String barcode) {
+
+
+        String qtyParam = uriInfo.getQueryParameters().getFirst("qty");
+        if (qtyParam == null) {
+            return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);
+        }
+        int qty = Integer.parseInt(qtyParam);
 
         if (barcode == null || qty <= 0) {
             return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);

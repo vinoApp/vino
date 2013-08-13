@@ -17,6 +17,7 @@
 package com.vino.backend.persistence;
 
 import com.vino.backend.model.WineBottle;
+import com.vino.backend.model.cellar.WineCellarRecord;
 import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 
@@ -37,7 +38,7 @@ public interface IDataSource {
 
     List<WineBottle> getAllKnownWineBottles();
 
-    List<WineBottle> getAllWineBottlesInCellar();
+    List<WineCellarRecord> getAllWineBottlesInCellar();
 
     List<WineAOC> getAllAOCs();
 

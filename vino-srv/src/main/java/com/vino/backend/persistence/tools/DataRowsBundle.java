@@ -34,5 +34,7 @@ public class DataRowsBundle {
     public static final String BARCODE = "barcode";
     public static final String STICKER_IMAGE = "stickerImage";
     public static final String IS_VALIDATED = "isValidated";
+    public static final String BOTTLE_QTY = "qty";
+
 
 }

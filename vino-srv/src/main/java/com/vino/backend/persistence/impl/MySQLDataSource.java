@@ -18,13 +18,11 @@ package com.vino.backend.persistence.impl;
 
 import com.vino.backend.log.LoggerBundle;
 import com.vino.backend.model.WineBottle;
+import com.vino.backend.model.cellar.WineCellarRecord;
 import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.persistence.IDataSource;
-import com.vino.backend.persistence.tools.MappingUtils;
-import com.vino.backend.persistence.tools.WineAOCRowMapper;
-import com.vino.backend.persistence.tools.WineBottleRowMapper;
-import com.vino.backend.persistence.tools.WineDomainRowMapper;
+import com.vino.backend.persistence.tools.*;
 import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
@@ -87,12 +85,12 @@ public class MySQLDataSource implements IDataSource {
     }
 
     @Override
-    public List<WineBottle> getAllWineBottlesInCellar() {
-        return template.query("SELECT * FROM bottles, domains, regions, aocs " +
+    public List<WineCellarRecord> getAllWineBottlesInCellar() {
+        return template.query("SELECT * FROM cellar, bottles, domains, regions, aocs " +
                 "WHERE bottles.domainID = domains.domainID " +
                 "AND domains.aocID = aocs.aocID " +
                 "AND aocs.regionID = regions.regionID " +
-                "AND exists (SELECT * FROM cellar WHERE cellar.bottleID = bottles.bottleID)", new WineBottleRowMapper());
+                "AND cellar.bottleID = bottles.bottleID", new CellarRecordRowMapper());
     }
 
     @Override
