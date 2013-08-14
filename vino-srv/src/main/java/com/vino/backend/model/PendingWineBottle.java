@@ -16,6 +16,8 @@
 
 package com.vino.backend.model;
 
+import java.util.Date;
+
 /**
  * User: walien
  * Date: 8/4/13
@@ -26,6 +28,8 @@ public class PendingWineBottle {
     private String barcode;
 
     private String stickerImage;
+
+    private Date addingDate;
 
     private int qty;
 
@@ -40,6 +44,14 @@ public class PendingWineBottle {
 
     public String getBarcode() {
         return barcode;
+    }
+
+    public Date getAddingDate() {
+        return addingDate;
+    }
+
+    public void setAddingDate(Date addingDate) {
+        this.addingDate = addingDate;
     }
 
     public void setBarcode(String barcode) {

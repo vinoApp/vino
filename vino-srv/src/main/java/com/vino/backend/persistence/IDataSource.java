@@ -50,6 +50,8 @@ public interface IDataSource {
 
     WineBottle getBottleByBarCode(String barcode);
 
+    WineBottle getBottleById(int id);
+
     /////////////////////////////
     // DATA PERSISTENCE
     /////////////////////////////

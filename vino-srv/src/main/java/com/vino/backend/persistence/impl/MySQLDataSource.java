@@ -67,7 +67,7 @@ public class MySQLDataSource implements IDataSource {
 
     /**
      * /////////////////////////////////
-     * Use at your own risk !
+     * Use at your own risks !
      * /////////////////////////////////
      */
 
@@ -107,6 +107,19 @@ public class MySQLDataSource implements IDataSource {
     @Override
     public List<WineAOC> getAllAOCs() {
         return template.query("SELECT * FROM regions, aocs;", new WineAOCRowMapper());
+    }
+
+    @Override
+    public WineBottle getBottleById(int id) {
+        try {
+            return template.queryForObject("SELECT * FROM bottles, domains, regions, aocs " +
+                    "WHERE bottles.domainID = domains.domainID " +
+                    "AND domains.aocID = aocs.aocID " +
+                    "AND aocs.regionID = regions.regionID " +
+                    "AND bottles.bottleID = ?", new Object[]{id}, new WineBottleRowMapper());
+        } catch (IncorrectResultSizeDataAccessException e) {
+            return null;
+        }
     }
 
     @Override

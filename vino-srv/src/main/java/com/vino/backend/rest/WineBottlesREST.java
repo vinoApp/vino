@@ -46,7 +46,21 @@ public class WineBottlesREST {
 
     @GET
     @Produces("application/json")
-    @Path("{barcode}")
+    @Path("/id/{id}")
+    public ResponseWrapper getBottle(@PathParam("id") int id) {
+        if (id <= 0) {
+            return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);
+        }
+        WineBottle bottle = DataSourcesBundle.getInstance().getDefaultDataSource().getBottleById(id);
+        if (bottle == null) {
+            return new ResponseWrapper().setStatus(ResponseStatus.BOTTLE_NOT_FOUND);
+        }
+        return new ResponseWrapper().setBottle(bottle).setStatus(ResponseStatus.OK);
+    }
+
+    @GET
+    @Produces("application/json")
+    @Path("/barcode/{barcode}")
     public ResponseWrapper getBottleByBarCode(@PathParam("barcode") String barcode) {
         if (barcode == null || barcode.isEmpty()) {
             return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);

@@ -23,6 +23,7 @@ import com.vino.backend.persistence.PendingsBundle;
 
 import javax.ws.rs.*;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -49,6 +50,9 @@ public class PendingsREST {
         if (pending == null || pending.getBarcode() == null) {
             return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);
         }
+
+        // Set the adding date
+        pending.setAddingDate(new Date());
 
         // Add the pending wine bottle to the in-memory data bundle
         PendingsBundle.getInstance().getPendings().put(pending.getBarcode(), pending);
