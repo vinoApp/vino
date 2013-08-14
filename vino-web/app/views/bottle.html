@@ -1,0 +1,17 @@
+<div>
+
+    <div>
+        <h3>Bottle</h3>
+        Vintage : {{ bottle.vintage }}<br>
+    </div>
+
+    <div>
+        <h3>Domain</h3>
+        Name : {{ bottle.domain.name }}<br>
+        Region : {{ bottle.domain.origin.region.name }}<br>
+        AOC : {{ bottle.domain.origin.name }}<br>
+    </div>
+
+    <img alt='300x200' style='width:300px; float:right;' ng-src='data:image/png;base64,{{bottle.domain.sticker}}'>
+
+</div>

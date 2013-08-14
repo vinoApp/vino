@@ -43,11 +43,6 @@
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-web/app/views/bottle.html" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-web/app/scripts/controllers/bottle.js" />
       <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/vino-web/app/scripts/controllers/global.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/IDataSource.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/IDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/persistence/impl/MySQLDataSource.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/PendingWineBottle.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/model/PendingWineBottle.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/PendingsREST.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/PendingsREST.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/WineBottlesREST.java" afterPath="$PROJECT_DIR$/vino-srv/src/main/java/com/vino/backend/rest/WineBottlesREST.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-web/app/scripts/app.js" afterPath="$PROJECT_DIR$/vino-web/app/scripts/app.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-web/app/views/bottles.html" afterPath="$PROJECT_DIR$/vino-web/app/views/bottles.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/vino-web/app/scripts/controllers/bottles.js" afterPath="$PROJECT_DIR$/vino-web/app/scripts/controllers/bottles.js" />
@@ -58,7 +53,7 @@
     </list>
     <ignored path="vino.iws" />
     <ignored path=".idea/workspace.xml" />
-    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1376444976905" ignored="false" />
+    <file path="/Dummy.txt" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1376449883683" ignored="false" />
     <file path="/pom.xml" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374957355938" ignored="false" />
     <file path="/MongoDBDataSource.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374961101762" ignored="false" />
     <file path="/WineOrigin.java" changelist="170feeb1-b465-42a0-947d-ad7ed329e42c" time="1374960967624" ignored="false" />
@@ -1304,7 +1299,11 @@
       <created>1376363303319</created>
       <updated>1376363303319</updated>
     </task>
-    <option name="localTasksCounter" value="33" />
+    <task id="LOCAL-00033" summary="[srv] Refactoring on persistence support">
+      <created>1376449885925</created>
+      <updated>1376449885925</updated>
+    </task>
+    <option name="localTasksCounter" value="34" />
     <servers />
   </component>
   <component name="ToolWindowManager">
@@ -1384,7 +1383,7 @@
     <option name="MAXIMUM_HISTORY_ROWS" value="1000" />
     <option name="FORCE_NON_EMPTY_COMMENT" value="false" />
     <option name="CLEAR_INITIAL_COMMIT_MESSAGE" value="false" />
-    <option name="LAST_COMMIT_MESSAGE" value="[mobile] Handling add and remove bottles to cellar into the REST client" />
+    <option name="LAST_COMMIT_MESSAGE" value="[srv] Refactoring on persistence support" />
     <option name="MAKE_NEW_CHANGELIST_ACTIVE" value="false" />
     <option name="OPTIMIZE_IMPORTS_BEFORE_PROJECT_COMMIT" value="false" />
     <option name="CHECK_FILES_UP_TO_DATE_BEFORE_COMMIT" value="false" />
@@ -1397,7 +1396,6 @@
     <option name="UPDATE_GROUP_BY_CHANGELIST" value="false" />
     <option name="SHOW_FILE_HISTORY_AS_TREE" value="false" />
     <option name="FILE_HISTORY_SPLITTER_PROPORTION" value="0.6" />
-    <MESSAGE value="- Enhance row mapping&#10;" />
     <MESSAGE value="- Enhance persistence support&#10;- Add some tests&#10;" />
     <MESSAGE value="- Adding webapp bootstrap" />
     <MESSAGE value="- Enhance persistence support" />
@@ -1422,6 +1420,7 @@
     <MESSAGE value="[srv] Cellar rest interface enhancement" />
     <MESSAGE value="[web] Adding bottles and cellar list views" />
     <MESSAGE value="[mobile] Handling add and remove bottles to cellar into the REST client" />
+    <MESSAGE value="[srv] Refactoring on persistence support" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager />

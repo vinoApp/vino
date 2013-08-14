@@ -11,6 +11,10 @@ angular.module('vino.ui', ['vino.services'])
                 templateUrl: 'views/bottles.html',
                 controller: 'BottlesCtrl'
             })
+            .when('/bottle/:bottleID', {
+                templateUrl: 'views/bottle.html',
+                controller: 'BottleCtrl'
+            })
             .when('/cellar', {
                 templateUrl: 'views/cellar.html',
                 controller: 'CellarCtrl'
