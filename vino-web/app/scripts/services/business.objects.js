@@ -17,6 +17,13 @@ angular.module('vino.services').factory('Pendings', function ($resource) {
     });
 });
 
+angular.module('vino.services').factory('Domains', function ($resource) {
+
+    var Domains = $resource('/rest/domains/:id', {id: "@id"}, {});
+    return angular.extend(Domains, {
+    });
+});
+
 angular.module('vino.services').factory('Cellar', function ($resource) {
 
     var Cellar = $resource('/rest/cellar', {}, {

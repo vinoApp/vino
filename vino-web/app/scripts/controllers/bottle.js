@@ -1,28 +1,18 @@
 'use strict';
 
 angular.module('vino.ui')
-    .controller('BottleCtrl', function ($scope, $routeParams, Bottles) {
-
-        //
-        var MODES = {
-            VIEW: 1,
-            EDIT: 2
-        };
+    .controller('BottleCtrl', function ($scope, $routeParams, Common, Bottles) {
 
         // Init model
         $scope.bottle = {};
 
         // Set the mode
-        var mode;
         if (!$routeParams['bottleID']) {
-            mode = MODES.EDIT;
+            $scope.mode = Common.EDITOR_MODES.VIEW;
         } else {
-            mode = MODES.VIEW;
+            $scope.mode = Common.EDITOR_MODES.EDIT;
             Bottles.getById({id: $routeParams['bottleID']}, function (response) {
                 $scope.bottle = response.bottle;
-                console.log($scope.bottle);
             });
         }
-
-
     });
