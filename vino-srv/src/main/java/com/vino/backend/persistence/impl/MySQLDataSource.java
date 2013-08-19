@@ -151,7 +151,9 @@ public class MySQLDataSource implements IDataSource {
 
     @Override
     public List<WineDomain> getAllWineDomains() {
-        return template.query("SELECT * FROM domains, regions, aocs;", new WineDomainRowMapper());
+        return template.query("SELECT * FROM domains, regions, aocs "+
+                "WHERE domains.aocID = aocs.aocID " +
+                "AND aocs.regionID = regions.regionID", new WineDomainRowMapper());
     }
 
     //////////////////////////////////////////////////////////////

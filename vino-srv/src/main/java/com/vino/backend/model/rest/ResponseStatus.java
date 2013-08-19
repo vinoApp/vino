@@ -27,6 +27,7 @@ public enum ResponseStatus {
     DB_INSERT_OK,
     DB_ERROR,
     INVALID_PARAMS,
-    BOTTLE_NOT_FOUND
+    BOTTLE_NOT_FOUND,
+    DOMAIN_NOT_FOUND
 
 }
