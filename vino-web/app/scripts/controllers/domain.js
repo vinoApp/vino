@@ -7,27 +7,20 @@ angular.module('vino.ui')
         $scope.domain = {};
 
         // Set the mode
-        if ($routeParams['mode'] == "new") {
+        if ($routeParams['mode'] == "view") {
+            $scope.mode = Common.EDITOR_MODES.VIEW;
+        }
+        else if ($routeParams['mode'] == "edit") {
+            $scope.mode = Common.EDITOR_MODES.EDIT;
+        }
+        else {
             $scope.mode = Common.EDITOR_MODES.CREATE;
         }
-        else if ($routeParams['mode'] == "view" || $routeParams['mode'] == "edit") {
 
-            if ($routeParams['mode'] == "view") {
-                $scope.mode = Common.EDITOR_MODES.VIEW;
-            }
-            if ($routeParams['mode'] == "edit") {
-                $scope.mode = Common.EDITOR_MODES.EDIT;
-            }
-            if (!$routeParams['domainID']) {
-                return;
-            }
-
+        if ($routeParams['domainID']) {
             Domains.get({id: $routeParams['domainID']}, function (response) {
                 $scope.domain = response.domain;
             });
-        }
-        else {
-            // Nothing to do
         }
 
     });
