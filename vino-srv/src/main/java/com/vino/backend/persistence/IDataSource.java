@@ -22,6 +22,7 @@ import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: walien
@@ -40,7 +41,7 @@ public interface IDataSource {
 
     List<WineCellarRecord> getAllWineBottlesInCellar();
 
-    List<WineAOC> getAllAOCs();
+    Map<String, List<String>> getAllOrigins();
 
     WineAOC getAOCByID(int id);
 
@@ -51,6 +52,8 @@ public interface IDataSource {
     WineBottle getBottleByBarCode(String barcode);
 
     WineBottle getBottleById(int id);
+
+    List<WineBottle> getBottlesByDomain(int domainId);
 
     /////////////////////////////
     // DATA PERSISTENCE

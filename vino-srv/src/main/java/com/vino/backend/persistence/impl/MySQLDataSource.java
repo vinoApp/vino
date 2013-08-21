@@ -27,7 +27,10 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * User: walien
@@ -94,6 +97,15 @@ public class MySQLDataSource implements IDataSource {
     }
 
     @Override
+    public List<WineBottle> getBottlesByDomain(int domainID) {
+        return template.query("SELECT * FROM bottles, domains, regions, aocs " +
+                "WHERE bottles.domainID = domains.domainID " +
+                "AND domains.aocID = aocs.aocID " +
+                "AND aocs.regionID = regions.regionID " +
+                "AND bottles.domainID = ?", new Object[]{domainID}, new WineBottleRowMapper());
+    }
+
+    @Override
     public WineAOC getAOCByID(int id) {
         try {
             return template.queryForObject("SELECT * FROM regions, aocs WHERE aocs.aocID = ? " +
@@ -105,8 +117,19 @@ public class MySQLDataSource implements IDataSource {
     }
 
     @Override
-    public List<WineAOC> getAllAOCs() {
-        return template.query("SELECT * FROM regions, aocs;", new WineAOCRowMapper());
+    public Map<String, List<String>> getAllOrigins() {
+
+        Map<String, List<String>> origins = new HashMap<String, List<String>>();
+        List<WineAOC> aocs = template.query("SELECT * FROM aocs, regions WHERE regions.regionID = aocs.regionID;",
+                new WineAOCRowMapper());
+        for (WineAOC aoc : aocs) {
+            List<String> aocList = origins.get(aoc.getRegion().getName());
+            if (aocList == null) {
+                origins.put(aoc.getRegion().getName(), aocList = new ArrayList<String>());
+            }
+            aocList.add(aoc.getName());
+        }
+        return origins;
     }
 
     @Override
@@ -151,7 +174,7 @@ public class MySQLDataSource implements IDataSource {
 
     @Override
     public List<WineDomain> getAllWineDomains() {
-        return template.query("SELECT * FROM domains, regions, aocs "+
+        return template.query("SELECT * FROM domains, regions, aocs " +
                 "WHERE domains.aocID = aocs.aocID " +
                 "AND aocs.regionID = regions.regionID", new WineDomainRowMapper());
     }

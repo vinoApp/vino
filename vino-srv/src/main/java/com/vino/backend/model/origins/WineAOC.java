@@ -16,14 +16,14 @@
 
 package com.vino.backend.model.origins;
 
+import com.vino.backend.model.PersistentEntity;
+
 /**
  * User: walien
  * Date: 7/27/13
  * Time: 4:24 PM
  */
-public class WineAOC {
-
-    private int id;
+public class WineAOC extends PersistentEntity {
 
     private String name;
 
@@ -35,14 +35,6 @@ public class WineAOC {
     public WineAOC(String name, WineRegion region) {
         this.name = name;
         this.region = region;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public String getName() {

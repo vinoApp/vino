@@ -14,41 +14,39 @@
  * limitations under the License.
  */
 
-package com.vino.backend.model.origins;
-
-import com.vino.backend.model.PersistentEntity;
+package com.vino.backend.model;
 
 /**
  * User: walien
- * Date: 7/27/13
- * Time: 4:24 PM
+ * Date: 8/20/13
+ * Time: 10:15 PM
  */
-public class WineRegion extends PersistentEntity {
+public class PersistentEntity {
 
-    private String name;
+    protected int id;
 
-    public WineRegion() {
-
+    public int getId() {
+        return id;
     }
 
-    public WineRegion(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public WineRegion setName(String name) {
-        this.name = name;
-        return this;
+    public void setId(int id) {
+        this.id = id;
     }
 
     @Override
-    public String toString() {
-        return "WineRegion{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+
+        PersistentEntity that = (PersistentEntity) o;
+
+        if (id != that.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }

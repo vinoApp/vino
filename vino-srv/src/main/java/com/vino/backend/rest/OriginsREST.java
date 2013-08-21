@@ -14,41 +14,34 @@
  * limitations under the License.
  */
 
-package com.vino.backend.model.origins;
+package com.vino.backend.rest;
 
-import com.vino.backend.model.PersistentEntity;
+import com.vino.backend.persistence.DataSourcesBundle;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.Produces;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * User: walien
  * Date: 7/27/13
- * Time: 4:24 PM
+ * Time: 4:39 PM
  */
-public class WineRegion extends PersistentEntity {
 
-    private String name;
+@Path("/origins")
+public class OriginsREST {
 
-    public WineRegion() {
+    @GET
+    @Produces("application/json")
+    public Map<String, List<String>> getAllOrigins() {
 
-    }
-
-    public WineRegion(String name) {
-        this.name = name;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public WineRegion setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    @Override
-    public String toString() {
-        return "WineRegion{" +
-                "id=" + id +
-                ", name='" + name + '\'' +
-                '}';
+        Map<String, List<String>> allOrigins = DataSourcesBundle.getInstance().getDefaultDataSource().getAllOrigins();
+        if (allOrigins == null) {
+            return new HashMap<String, List<String>>();
+        }
+        return allOrigins;
     }
 }

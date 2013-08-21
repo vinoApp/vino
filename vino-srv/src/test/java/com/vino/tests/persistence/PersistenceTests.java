@@ -50,11 +50,6 @@ public class PersistenceTests {
     }
 
     @Test
-    public void testGetAllAOCS() {
-        DataSourcesBundle.getInstance().getDefaultDataSource().getAllAOCs();
-    }
-
-    @Test
     public void testGetAllWineDomains() {
         DataSourcesBundle.getInstance().getDefaultDataSource().getAllWineDomains();
     }

@@ -16,6 +16,7 @@
 
 package com.vino.backend.rest;
 
+import com.vino.backend.model.WineBottle;
 import com.vino.backend.model.origins.WineDomain;
 import com.vino.backend.model.rest.ResponseStatus;
 import com.vino.backend.model.rest.ResponseWrapper;
@@ -58,5 +59,17 @@ public class DomainsREST {
             return new ResponseWrapper().setStatus(ResponseStatus.DOMAIN_NOT_FOUND);
         }
         return new ResponseWrapper().setStatus(ResponseStatus.OK).setDomain(wineDomain);
+    }
+
+    @GET
+    @Path("{id}/bottles")
+    @Produces("application/json")
+    public List<WineBottle> getBottlesByDomain(@PathParam("id") int id) {
+
+        List<WineBottle> wineBottles = DataSourcesBundle.getInstance().getDefaultDataSource().getBottlesByDomain(id);
+        if (wineBottles == null) {
+            return new ArrayList<WineBottle>();
+        }
+        return wineBottles;
     }
 }

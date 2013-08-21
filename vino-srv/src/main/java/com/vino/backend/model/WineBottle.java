@@ -23,9 +23,7 @@ import com.vino.backend.model.origins.WineDomain;
  * Date: 7/27/13
  * Time: 3:33 PM
  */
-public class WineBottle {
-
-    private int id;
+public class WineBottle extends PersistentEntity {
 
     private String barcode;
 
@@ -43,14 +41,6 @@ public class WineBottle {
     }
 
     public WineBottle() {
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 
     public int getVintage() {
