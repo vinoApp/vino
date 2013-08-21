@@ -1,21 +1,31 @@
 <div id="vino-content">
 
-
     <form class="form-horizontal">
-
         <fieldset>
             <legend>Global</legend>
             <div class="control-group">
                 <label class="control-label" for="domainName">Name : </label>
 
                 <div class="controls">
-                    <input id="domainName" ng-model="domain.name"/>
+                    <input type="text" id="domainName" ng-model="domain.name" placeholder="Domain name"/>
                 </div>
             </div>
 
+            <div class="control-group">
+                <label class="control-label" for="domainOrigin">Origin : </label>
+
+                <div class="controls">
+                    <select id="domainOrigin" ng-model="domain.selectedOrigin">
+                        <optgroup ng-repeat="(region, aocs) in origins" label="{{ region }}">
+                            <option ng-repeat="aoc in aocs">{{ aoc }}</option>
+                        </optgroup>
+                    </select>
+                </div>
+            </div>
         </fieldset>
-
-
-
     </form>
+
+    <button class="btn btn-success"><i class="icon-white icon-check"></i> Save</button>
+    <button class="btn btn-danger"><i class="icon-white icon-hand-left"></i> Cancel</button>
+
 </div>

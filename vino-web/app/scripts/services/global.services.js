@@ -4,13 +4,6 @@
 angular.module('vino.services').factory('Common', function () {
 
     return {
-
-        // Editor modes
-        EDITOR_MODES: {
-            VIEW: 1,
-            EDIT: 2,
-            CREATE: 3
-        }
     };
 
 });

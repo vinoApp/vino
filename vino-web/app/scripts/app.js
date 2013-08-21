@@ -16,10 +16,14 @@ angular.module('vino.ui', ['vino.services'])
                 controller: 'DomainsCtrl'
             })
             .when('/domains/new', {
-                templateUrl: 'views/domain.html',
-                controller: 'DomainCtrl'
+                templateUrl: 'views/domain.editor.html',
+                controller: 'DomainEditorCtrl'
             })
-            .when('/domains/:mode/:domainID', {
+            .when('/domains/:domainID/edit', {
+                templateUrl: 'views/domain.editor.html',
+                controller: 'DomainEditorCtrl'
+            })
+            .when('/domains/:domainID/view', {
                 templateUrl: 'views/domain.html',
                 controller: 'DomainCtrl'
             })

@@ -12,8 +12,10 @@ angular.module('vino.services').factory('Bottles', function ($resource) {
 
 angular.module('vino.services').factory('Origins', function ($resource) {
 
-    var Bottles = $resource('/rest/origins', {});
-    return angular.extend(Bottles, {
+    var Origins = $resource('/rest/origins', {}, {
+        'getAll' : {method: 'GET', isArray: false}
+    });
+    return angular.extend(Origins, {
     });
 });
 

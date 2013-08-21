@@ -1,10 +1,5 @@
 <div id="vino-content">
 
     <h3>Domain {{ domain.name }}</h3>
-
-    <div ng-switch="mode">
-        <div ng-switch-when="1" ng-include="'partials/domain.tmpl.html'"></div>
-        <div ng-switch-when="2" ng-include="'partials/domain.edit.tmpl.html'"></div>
-        <div ng-switch-when="3" ng-include="'partials/domain.edit.tmpl.html'"></div>
-    </div>
+    <div ng-include="'partials/domain.tmpl.html'"></div>
 </div>

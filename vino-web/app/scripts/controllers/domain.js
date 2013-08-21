@@ -7,17 +7,7 @@ angular.module('vino.ui')
         $scope.domain = {};
         $scope.bottles = [];
 
-        // Set the mode
-        if ($routeParams['mode'] == "view") {
-            $scope.mode = Common.EDITOR_MODES.VIEW;
-        }
-        else if ($routeParams['mode'] == "edit") {
-            $scope.mode = Common.EDITOR_MODES.EDIT;
-        }
-        else {
-            $scope.mode = Common.EDITOR_MODES.CREATE;
-        }
-
+        // The domain id must be provided
         if ($routeParams['domainID']) {
             Domains.get({id: $routeParams['domainID']}, function (response) {
                 $scope.domain = response.domain;
