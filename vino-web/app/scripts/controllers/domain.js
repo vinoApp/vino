@@ -1,10 +1,11 @@
 'use strict';
 
 angular.module('vino.ui')
-    .controller('DomainCtrl', function ($scope, $routeParams, Common, Domains) {
+    .controller('DomainCtrl', function ($scope, $routeParams, Common, Domains, DomainBottles) {
 
         // Init model
         $scope.domain = {};
+        $scope.bottles = [];
 
         // Set the mode
         if ($routeParams['mode'] == "view") {
@@ -20,7 +21,10 @@ angular.module('vino.ui')
         if ($routeParams['domainID']) {
             Domains.get({id: $routeParams['domainID']}, function (response) {
                 $scope.domain = response.domain;
+
+                DomainBottles.query({id: $scope.domain.id}, function (bottles) {
+                    $scope.bottles = bottles;
+                });
             });
         }
-
     });

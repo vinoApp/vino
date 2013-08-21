@@ -10,6 +10,13 @@ angular.module('vino.services').factory('Bottles', function ($resource) {
     });
 });
 
+angular.module('vino.services').factory('Origins', function ($resource) {
+
+    var Bottles = $resource('/rest/origins', {});
+    return angular.extend(Bottles, {
+    });
+});
+
 angular.module('vino.services').factory('Pendings', function ($resource) {
 
     var Pendings = $resource('/rest/pendings', {});
@@ -21,6 +28,13 @@ angular.module('vino.services').factory('Domains', function ($resource) {
 
     var Domains = $resource('/rest/domains/:id', {id: "@id"}, {});
     return angular.extend(Domains, {
+    });
+});
+
+angular.module('vino.services').factory('DomainBottles', function ($resource) {
+
+    var DomainBottles = $resource('/rest/domains/:id/bottles', {id: "@id"}, {});
+    return angular.extend(DomainBottles, {
     });
 });
 

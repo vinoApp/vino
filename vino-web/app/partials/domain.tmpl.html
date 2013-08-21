@@ -41,7 +41,28 @@
                 </div>
             </div>
         </fieldset>
-
-
     </form>
+
+
+    <h3 style="padding-top: 15px">Bottles</h3>
+    <table class="table table-condensed">
+
+        <thead>
+        <tr>
+            <th>BarCode</th>
+            <th>Vintage</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="bottle in bottles">
+            <td><b>{{ bottle.barcode }}</b></td>
+            <td><b>{{ bottle.vintage }}</b></td>
+            <td>
+                <button class="btn btn-small btn-warning"><i class="icon-white icon-edit"></i> Edit</button>
+                <button class="btn btn-small btn-danger"><i class="icon-white icon-remove"></i> Remove</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>

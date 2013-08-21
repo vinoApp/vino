@@ -1,7 +1,10 @@
 <div id="vino-content">
 
     <h3>Cellar</h3>
-    <table class="table table-condensed">
+    <button class="btn btn-small btn-success"><i class="icon-white icon-plus"></i> Add</button>
+    <button class="btn btn-small btn-danger"><i class="icon-white icon-remove"></i> Remove</button>
+
+    <table class="table table-condensed" style="margin-top: 15px">
 
         <thead>
         <tr>
@@ -21,7 +24,7 @@
             <td>{{ record.bottle.vintage }}</td>
             <td>{{ record.quantity }}</td>
             <td>
-                <button class="btn btn-small btn-info" ng-click="redirect('/bottle/' + record.bottle.id)"><i class="icon-white icon-eye-open"></i> View</button>
+                <button class="btn btn-small btn-info" ng-click="redirect('/domains/view/' + record.bottle.domain.id)"><i class="icon-white icon-eye-open"></i> Domain</button>
             </td>
         </tr>
         </tbody>

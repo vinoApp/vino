@@ -1,0 +1,26 @@
+<div id="vino-content">
+
+    <h3>Pendings bottles</h3>
+    <table class="table table-condensed">
+
+        <thead>
+        <tr>
+            <th>BarCode</th>
+            <th>Adding Date</th>
+            <th>Qty</th>
+            <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr ng-repeat="pending in pendings">
+            <td>{{ pending.barcode }}</td>
+            <td>{{ pending.addingDate | date:'medium'}}</td>
+            <td>{{ pending.qty}}</td>
+            <td>
+                <button class="btn btn-small btn-success"><i class="icon-white icon-check"></i> Validate</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+
+</div>

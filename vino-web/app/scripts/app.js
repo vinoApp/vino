@@ -7,13 +7,9 @@ angular.module('vino.ui', ['vino.services'])
                 templateUrl: 'views/main.html',
                 controller: 'MainCtrl'
             })
-            .when('/bottles', {
-                templateUrl: 'views/bottles.html',
-                controller: 'BottlesCtrl'
-            })
-            .when('/bottle/:bottleID', {
-                templateUrl: 'views/bottle.html',
-                controller: 'BottleCtrl'
+            .when('/pendings', {
+                templateUrl: 'views/pendings.html',
+                controller: 'PendingsCtrl'
             })
             .when('/domains', {
                 templateUrl: 'views/domains.html',
