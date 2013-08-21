@@ -2,7 +2,6 @@
 
     <h3>Pendings bottles</h3>
     <table class="table table-condensed">
-
         <thead>
         <tr>
             <th>BarCode</th>
@@ -12,6 +11,7 @@
         </tr>
         </thead>
         <tbody>
+        <tr ng-show="pendings.length == 0"><td colspan="4">No pending bottles</td></tr>
         <tr ng-repeat="pending in pendings">
             <td>{{ pending.barcode }}</td>
             <td>{{ pending.addingDate | date:'medium'}}</td>
