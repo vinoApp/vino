@@ -58,7 +58,7 @@ public class DomainsREST {
         if (wineDomain == null) {
             return new ResponseWrapper().setStatus(ResponseStatus.DOMAIN_NOT_FOUND);
         }
-        return new ResponseWrapper().setStatus(ResponseStatus.OK).setDomain(wineDomain);
+        return new ResponseWrapper().setData(wineDomain).setStatus(ResponseStatus.OK);
     }
 
     @GET

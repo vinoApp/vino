@@ -64,7 +64,7 @@ public class CellarREST {
 
         boolean status = DataSourcesBundle.getInstance().getDefaultDataSource().loadBottleInCellar(bottle.getId(), qty);
         if (status) {
-            return new ResponseWrapper().setStatus(ResponseStatus.OK).setDomain(bottle.getDomain());
+            return new ResponseWrapper().setStatus(ResponseStatus.OK);
         } else {
             return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
         }

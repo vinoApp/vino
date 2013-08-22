@@ -55,7 +55,7 @@ public class WineBottlesREST {
         if (bottle == null) {
             return new ResponseWrapper().setStatus(ResponseStatus.BOTTLE_NOT_FOUND);
         }
-        return new ResponseWrapper().setBottle(bottle).setStatus(ResponseStatus.OK);
+        return new ResponseWrapper().setData(bottle).setStatus(ResponseStatus.OK);
     }
 
     @GET
@@ -69,7 +69,7 @@ public class WineBottlesREST {
         if (bottle == null) {
             return new ResponseWrapper().setStatus(ResponseStatus.BOTTLE_NOT_FOUND);
         }
-        return new ResponseWrapper().setBottle(bottle).setStatus(ResponseStatus.OK);
+        return new ResponseWrapper().setData(bottle).setStatus(ResponseStatus.OK);
     }
 
     @POST
