@@ -10,7 +10,7 @@ angular.module('vino.ui')
         // The domain id must be provided
         if ($routeParams['domainID']) {
             Domains.get({id: $routeParams['domainID']}, function (response) {
-                $scope.domain = response.domain;
+                $scope.domain = response.data;
 
                 DomainBottles.query({id: $scope.domain.id}, function (bottles) {
                     $scope.bottles = bottles;

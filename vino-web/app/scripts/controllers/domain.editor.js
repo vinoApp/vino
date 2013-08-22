@@ -10,7 +10,7 @@ angular.module('vino.ui')
         // Retrieve the domain (editor mode)
         if ($routeParams['domainID']) {
             Domains.get({id: $routeParams['domainID']}, function (response) {
-                $scope.domain = response.domain;
+                $scope.domain = response.data;
             });
             $scope.origins = Origins.getAll();
         }
