@@ -22,7 +22,6 @@ import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.model.origins.WineDomain;
 
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: walien
@@ -41,7 +40,7 @@ public interface IDataSource {
 
     List<WineCellarRecord> getAllWineBottlesInCellar();
 
-    Map<String, List<String>> getAllOrigins();
+    List<WineAOC> getAllOrigins();
 
     WineAOC getAOCByID(int id);
 
@@ -68,6 +67,8 @@ public interface IDataSource {
     boolean addWineDomain(WineDomain domain);
 
     boolean removeWineDomain(int id);
+
+    boolean updateWineDomain(int id, WineDomain domain);
 
     boolean loadBottleInCellar(int id, int qty);
 

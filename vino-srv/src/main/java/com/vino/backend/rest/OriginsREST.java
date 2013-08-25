@@ -16,14 +16,14 @@
 
 package com.vino.backend.rest;
 
+import com.vino.backend.model.origins.WineAOC;
 import com.vino.backend.persistence.DataSourcesBundle;
 
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
-import java.util.HashMap;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: walien
@@ -36,11 +36,11 @@ public class OriginsREST {
 
     @GET
     @Produces("application/json")
-    public Map<String, List<String>> getAllOrigins() {
+    public List<WineAOC> getAllOrigins() {
 
-        Map<String, List<String>> allOrigins = DataSourcesBundle.getInstance().getDefaultDataSource().getAllOrigins();
+        List<WineAOC> allOrigins = DataSourcesBundle.getInstance().getDefaultDataSource().getAllOrigins();
         if (allOrigins == null) {
-            return new HashMap<String, List<String>>();
+            return new ArrayList<WineAOC>();
         }
         return allOrigins;
     }

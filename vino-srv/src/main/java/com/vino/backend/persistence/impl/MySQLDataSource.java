@@ -27,10 +27,7 @@ import org.springframework.dao.IncorrectResultSizeDataAccessException;
 import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.jdbc.datasource.DriverManagerDataSource;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
 
 /**
  * User: walien
@@ -117,19 +114,11 @@ public class MySQLDataSource implements IDataSource {
     }
 
     @Override
-    public Map<String, List<String>> getAllOrigins() {
+    public List<WineAOC> getAllOrigins() {
 
-        Map<String, List<String>> origins = new HashMap<String, List<String>>();
         List<WineAOC> aocs = template.query("SELECT * FROM aocs, regions WHERE regions.regionID = aocs.regionID;",
                 new WineAOCRowMapper());
-        for (WineAOC aoc : aocs) {
-            List<String> aocList = origins.get(aoc.getRegion().getName());
-            if (aocList == null) {
-                origins.put(aoc.getRegion().getName(), aocList = new ArrayList<String>());
-            }
-            aocList.add(aoc.getName());
-        }
-        return origins;
+        return aocs;
     }
 
     @Override
@@ -214,10 +203,7 @@ public class MySQLDataSource implements IDataSource {
 
     @Override
     public boolean removeWineBottleFromKnown(int id) {
-        if (id == 0) {
-            return false;
-        }
-        return template.update("DELETE FROM bottles WHERE bottleID = ?", id) != 0;
+        return id != 0 && template.update("DELETE FROM bottles WHERE bottleID = ?", id) != 0;
     }
 
 
@@ -227,19 +213,34 @@ public class MySQLDataSource implements IDataSource {
 
     @Override
     public boolean addWineDomain(WineDomain domain) {
-        if (!MappingUtils.validateWineDomainObject(domain)) {
+
+        if (domain.getOrigin() == null || domain.getName() == null) {
             return false;
         }
-        return template.update("INSERT INTO domains (domainName, aocID, stickerImage) VALUES (?, ?, ?)", domain.getName(),
-                domain.getOrigin().getId(), domain.getSticker()) != 0;
+
+        return template.update("INSERT INTO domains (domainName, aocID, stickerImage) VALUES (?, ?, ?)",
+                domain.getName(), domain.getOrigin().getId(), domain.getSticker()) != 0;
     }
 
     @Override
     public boolean removeWineDomain(int id) {
-        if (id == 0) {
+        return id != 0 && template.update("DELETE FROM domains WHERE domainID = ?", id) != 0;
+    }
+
+    @Override
+    public boolean updateWineDomain(int id, WineDomain domain) {
+        if (!MappingUtils.validateWineDomainObject(domain)) {
             return false;
         }
-        return template.update("DELETE FROM domains WHERE domainID = ?", id) != 0;
+        return template.update("UPDATE domains d " +
+                "SET d.aocID = CASE WHEN ? = 0 THEN d.aocID ELSE ? END," +
+                "d.domainName = CASE WHEN ? IS null THEN d.domainName ELSE ? END," +
+                "d.stickerImage = CASE WHEN ? IS null THEN d.stickerImage ELSE ? END" +
+                " WHERE d.domainID = ?",
+                domain.getOrigin().getId(), domain.getOrigin().getId(),
+                domain.getName(), domain.getName(),
+                domain.getSticker(), domain.getSticker(),
+                id) != 0;
     }
 
     //////////////////////////////////////////////////

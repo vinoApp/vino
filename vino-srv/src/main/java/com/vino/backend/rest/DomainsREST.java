@@ -22,10 +22,7 @@ import com.vino.backend.model.rest.ResponseStatus;
 import com.vino.backend.model.rest.ResponseWrapper;
 import com.vino.backend.persistence.DataSourcesBundle;
 
-import javax.ws.rs.GET;
-import javax.ws.rs.Path;
-import javax.ws.rs.PathParam;
-import javax.ws.rs.Produces;
+import javax.ws.rs.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -61,6 +58,42 @@ public class DomainsREST {
         return new ResponseWrapper().setData(wineDomain).setStatus(ResponseStatus.OK);
     }
 
+
+    @POST
+    @Produces("application/json")
+    public ResponseWrapper createDomain(WineDomain domain) {
+
+        boolean result = DataSourcesBundle.getInstance().getDefaultDataSource().addWineDomain(domain);
+        if (!result) {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
+        }
+        return new ResponseWrapper().setStatus(ResponseStatus.OK);
+    }
+
+    @POST
+    @Path("{id}")
+    @Produces("application/json")
+    public ResponseWrapper saveDomain(@PathParam("id") int id, WineDomain domain) {
+
+        boolean result = DataSourcesBundle.getInstance().getDefaultDataSource().updateWineDomain(id, domain);
+        if (!result) {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
+        }
+        return new ResponseWrapper().setStatus(ResponseStatus.OK);
+    }
+
+    @DELETE
+    @Path("{id}")
+    @Produces("application/json")
+    public ResponseWrapper removeDomain(@PathParam("id") int id) {
+
+        boolean result = DataSourcesBundle.getInstance().getDefaultDataSource().removeWineDomain(id);
+        if (!result) {
+            return new ResponseWrapper().setStatus(ResponseStatus.DB_ERROR);
+        }
+        return new ResponseWrapper().setStatus(ResponseStatus.OK);
+    }
+
     @GET
     @Path("{id}/bottles")
     @Produces("application/json")
@@ -72,4 +105,5 @@ public class DomainsREST {
         }
         return wineBottles;
     }
+
 }
