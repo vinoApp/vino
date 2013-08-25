@@ -5,7 +5,10 @@ angular.module('vino.ui')
 
         $scope.domains = Domains.query();
 
-        $scope.removeDomain = function (domainID) {
-            // TODO
+        $scope.removeDomain = function (domain) {
+            domain.$remove(function (response) {
+                console.log(response);
+                $scope.domains = Domains.query();
+            });
         };
     });

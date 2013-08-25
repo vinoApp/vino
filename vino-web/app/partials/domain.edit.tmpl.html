@@ -15,17 +15,33 @@
                 <label class="control-label" for="domainOrigin">Origin : </label>
 
                 <div class="controls">
-                    <select id="domainOrigin" ng-model="domain.selectedOrigin">
-                        <optgroup ng-repeat="(region, aocs) in origins" label="{{ region }}">
-                            <option ng-repeat="aoc in aocs">{{ aoc }}</option>
-                        </optgroup>
-                    </select>
+                    <select id="domainOrigin" required ng-model="domain.origin" ng-options="origin.name group by origin.region.name for origin in origins"></select>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Visual</legend>
+            <div class="control-group">
+                <label class="control-label" for="domainSticker">Sticker : </label>
+
+                <div class="controls">
+                    <input id="domainSticker" type="file" data-file="current.file"/>
+                </div>
+            </div>
+            <div class="control-group">
+                <label class="control-label" for="domainStickerPreview">Preview : </label>
+
+                <div class="controls" ng-switch="domain.sticker">
+                    <p ng-switch-when="null">No sticker.</p>
+                    <p ng-switch-when="undefined">No sticker.</p>
+                    <img id="domainStickerPreview" alt='300x200' style='width:150px;' ng-show="domain.sticker" ng-src='data:image/png;base64,{{domain.sticker}}' ng-switch-default="">
                 </div>
             </div>
         </fieldset>
     </form>
 
-    <button class="btn btn-success"><i class="icon-white icon-check"></i> Save</button>
-    <button class="btn btn-danger"><i class="icon-white icon-hand-left"></i> Cancel</button>
+    <button class="btn btn-success" ng-click="save()"><i class="icon-white icon-check"></i> Save</button>
+    <button class="btn btn-danger" ng-click="cancel()"><i class="icon-white icon-hand-left"></i> Cancel</button>
 
 </div>
