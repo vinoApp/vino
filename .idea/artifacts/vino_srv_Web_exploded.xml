@@ -6,6 +6,7 @@
       <element id="directory" name="WEB-INF">
         <element id="directory" name="classes">
           <element id="module-output" name="vino-srv" />
+          <element id="module-output" name="vino-common" />
         </element>
       </element>
     </root>

@@ -14,18 +14,15 @@
  * limitations under the License.
  */
 
-package com.vino.mobile;
+package model;
 
 /**
  * User: walien
- * Date: 8/4/13
- * Time: 12:48 AM
+ * Date: 7/27/13
+ * Time: 4:45 PM
  */
-public class VinoRESTClient {
+public class WineCellar {
 
-    public static final String GET_BOTTLE_BY_BARCODE_URL = "http://192.168.1.101:8080/rest/bottles/";
-    public static final String ADD_PENDING_BOTTLE_URL = "http://192.168.1.101:8080/rest/pendings/";
-    public static final String CELLAR_URL = "http://192.168.1.101:8080/rest/cellar/";
-
+    //private Map<String, WineCellarRecord> records;
 
 }

@@ -7,7 +7,7 @@
                 <label class="control-label" for="domainName">Name : </label>
 
                 <div class="controls">
-                    <input type="text" id="domainName" ng-model="domain.name" placeholder="Domain name"/>
+                    <input type="text" id="domainName" ng-model="model.name" placeholder="Domain name"/>
                 </div>
             </div>
 
@@ -15,7 +15,7 @@
                 <label class="control-label" for="domainOrigin">Origin : </label>
 
                 <div class="controls">
-                    <select id="domainOrigin" required ng-model="domain.origin" ng-options="origin.name group by origin.region.name for origin in origins"></select>
+                    <select id="domainOrigin" required ng-model="model.origin" ng-options="origin.name group by origin.region.name for origin in origins"></select>
                 </div>
             </div>
         </fieldset>
@@ -32,10 +32,10 @@
             <div class="control-group">
                 <label class="control-label" for="domainStickerPreview">Preview : </label>
 
-                <div class="controls" ng-switch="domain.sticker">
+                <div class="controls" ng-switch="model.sticker">
                     <p ng-switch-when="null">No sticker.</p>
                     <p ng-switch-when="undefined">No sticker.</p>
-                    <img id="domainStickerPreview" alt='300x200' style='width:150px;' ng-show="domain.sticker" ng-src='data:image/png;base64,{{domain.sticker}}' ng-switch-default="">
+                    <img id="domainStickerPreview" alt='300x200' style='width:150px;' ng-show="model.sticker" ng-src='data:image/png;base64,{{model.sticker}}' ng-switch-default="">
                 </div>
             </div>
         </fieldset>

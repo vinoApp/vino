@@ -16,6 +16,7 @@
 
 package com.vino.backend;
 
+import com.google.common.base.Optional;
 import com.vino.backend.servers.JettyWebServer;
 
 /**
@@ -27,15 +28,16 @@ public class VinoServer {
 
     private static final String WEB_XML_FILE = "vino-srv/src/main/webapp/WEB-INF/web.xml";
     private static final String WEBAPP_RESOURCES = "vino-web/app";
-    //    private static final String BIND_INTERFACE = "127.0.0.1";
-    private static final String BIND_INTERFACE = "192.168.0.10";
-    private static final int BIND_PORT = 8080;
+
+    private static final String BIND_INTERFACE = "0.0.0.0";
 
     public static void main(String[] args) throws Exception {
 
+        // Retrieve binding interface and port
+        int port = Integer.valueOf(Optional.fromNullable(System.getenv("PORT")).or("8080"));
+
         // Instantiate the Jetty Web Server
-        new JettyWebServer(WEB_XML_FILE, WEBAPP_RESOURCES,
-                BIND_PORT, BIND_INTERFACE).startAndAwait();
+        new JettyWebServer(WEB_XML_FILE, WEBAPP_RESOURCES, port, BIND_INTERFACE).startAndAwait();
 
     }
 }

@@ -75,12 +75,12 @@ public class VinoMainActivity extends Activity {
         if (requestCode == IntentIntegrator.REQUEST_CODE) {
 
             IntentResult scanningResult = IntentIntegrator.parseActivityResult(requestCode, resultCode, intent);
-            if (scanningResult != null) {
-                this.barcode = scanningResult.getContents();
-                VinoRESTClient.retrieveWineBottle(this, this.barcode);
-            } else {
-                Toast.makeText(getApplicationContext(), "No scan data received!", Toast.LENGTH_SHORT).show();
-            }
+//            if (scanningResult != null) {
+//                this.barcode = scanningResult.getContents();
+//                VinoRESTClient.retrieveWineBottle(this, this.barcode);
+//            } else {
+//                Toast.makeText(getApplicationContext(), "No scan data received!", Toast.LENGTH_SHORT).show();
+//            }
         }
     }
 
@@ -112,13 +112,13 @@ public class VinoMainActivity extends Activity {
                         if (qty.isEmpty()) {
                             return;
                         }
-                        if (!isFound) {
-                            VinoRESTClient.addPendingBottle(VinoMainActivity.this, VinoMainActivity.this.barcode,
-                                    VinoMainActivity.this.sticker, Integer.parseInt(qty));
-                        } else {
-                            VinoRESTClient.addBottle(VinoMainActivity.this, VinoMainActivity.this.barcode,
-                                    Integer.parseInt(qty));
-                        }
+//                        if (!isFound) {
+//                            VinoRESTClient.addPendingBottle(VinoMainActivity.this, VinoMainActivity.this.barcode,
+//                                    VinoMainActivity.this.sticker, Integer.parseInt(qty));
+//                        } else {
+//                            VinoRESTClient.addBottle(VinoMainActivity.this, VinoMainActivity.this.barcode,
+//                                    Integer.parseInt(qty));
+//                        }
                         ((EditText) findViewById(R.id.text_qty)).setText("");
                         resetState();
                         saveState();
@@ -133,7 +133,7 @@ public class VinoMainActivity extends Activity {
                         if (qty.isEmpty()) {
                             return;
                         }
-                        VinoRESTClient.removeBottle(VinoMainActivity.this, VinoMainActivity.this.barcode, Integer.parseInt(qty));
+//                        VinoRESTClient.removeBottle(VinoMainActivity.this, VinoMainActivity.this.barcode, Integer.parseInt(qty));
                         ((EditText) findViewById(R.id.text_qty)).setText("");
                         resetState();
                         saveState();

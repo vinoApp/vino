@@ -3,6 +3,9 @@
   <component name="EntryPointsManager">
     <entry_points version="2.0" />
   </component>
+  <component name="FrameworkDetectionExcludesConfiguration">
+    <file type="android" url="file://$PROJECT_DIR$/vino-mobile" />
+  </component>
   <component name="IdProvider" IDEtalkID="0B4C767A1ABBABC53327DECF93C87ADF" />
   <component name="MavenProjectsManager">
     <option name="originalFiles">

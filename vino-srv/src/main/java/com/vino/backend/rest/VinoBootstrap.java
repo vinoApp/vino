@@ -14,18 +14,16 @@
  * limitations under the License.
  */
 
-package com.vino.mobile;
+package com.vino.backend.rest;
 
 /**
  * User: walien
- * Date: 8/4/13
- * Time: 12:48 AM
+ * Date: 7/16/13
+ * Time: 7:30 PM
  */
-public class VinoRESTClient {
+public class VinoBootstrap {
 
-    public static final String GET_BOTTLE_BY_BARCODE_URL = "http://192.168.1.101:8080/rest/bottles/";
-    public static final String ADD_PENDING_BOTTLE_URL = "http://192.168.1.101:8080/rest/pendings/";
-    public static final String CELLAR_URL = "http://192.168.1.101:8080/rest/cellar/";
+    public static void doBootstrap() {
 
-
+    }
 }

@@ -19,12 +19,12 @@
         <tbody>
         <tr ng-repeat="record in records">
             <td>{{ record.bottle.barcode }}</td>
-            <td>{{ record.bottle.domain.name }}</td>
-            <td>{{ record.bottle.domain.origin.region.name }} / {{ record.bottle.domain.origin.name }}</td>
+            <td>{{ record.bottle.model.name }}</td>
+            <td>{{ record.bottle.model.origin.region.name }} / {{ record.bottle.model.origin.name }}</td>
             <td>{{ record.bottle.vintage }}</td>
             <td>{{ record.quantity }}</td>
             <td>
-                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + record.bottle.domain.id + '/view')"><i class="icon-white icon-eye-open"></i> Domain</button>
+                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + record.bottle.model.id + '/view')"><i class="icon-white icon-eye-open"></i> Domain</button>
             </td>
         </tr>
         </tbody>

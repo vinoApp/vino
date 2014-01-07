@@ -14,18 +14,23 @@
  * limitations under the License.
  */
 
-package com.vino.mobile;
+package com.vino.backend;
+
+import com.sun.jersey.spi.container.servlet.ServletContainer;
+import com.vino.backend.rest.VinoBootstrap;
+
+import javax.servlet.ServletException;
 
 /**
  * User: walien
- * Date: 8/4/13
- * Time: 12:48 AM
+ * Date: 7/16/13
+ * Time: 8:07 PM
  */
-public class VinoRESTClient {
+public class MainRESTServlet extends ServletContainer {
 
-    public static final String GET_BOTTLE_BY_BARCODE_URL = "http://192.168.1.101:8080/rest/bottles/";
-    public static final String ADD_PENDING_BOTTLE_URL = "http://192.168.1.101:8080/rest/pendings/";
-    public static final String CELLAR_URL = "http://192.168.1.101:8080/rest/cellar/";
-
-
+    @Override
+    public void init() throws ServletException {
+        super.init();
+        VinoBootstrap.doBootstrap();
+    }
 }

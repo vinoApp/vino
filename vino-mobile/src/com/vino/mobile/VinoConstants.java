@@ -26,12 +26,6 @@ import java.lang.String;
 public class VinoConstants {
 
     /////////////////////////
-    // LOG
-    /////////////////////////
-
-    public static final String LOG_TAG = "vino";
-
-    /////////////////////////
     // CODES
     /////////////////////////
 

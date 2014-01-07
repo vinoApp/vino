@@ -14,18 +14,20 @@
  * limitations under the License.
  */
 
-package com.vino.mobile;
+package rest;
 
 /**
  * User: walien
- * Date: 8/4/13
- * Time: 12:48 AM
+ * Date: 7/28/13
+ * Time: 1:37 AM
  */
-public class VinoRESTClient {
+public enum ResponseStatus {
 
-    public static final String GET_BOTTLE_BY_BARCODE_URL = "http://192.168.1.101:8080/rest/bottles/";
-    public static final String ADD_PENDING_BOTTLE_URL = "http://192.168.1.101:8080/rest/pendings/";
-    public static final String CELLAR_URL = "http://192.168.1.101:8080/rest/cellar/";
-
+    OK,
+    DB_INSERT_OK,
+    DB_ERROR,
+    INVALID_PARAMS,
+    BOTTLE_NOT_FOUND,
+    DOMAIN_NOT_FOUND
 
 }

@@ -23,7 +23,7 @@
 
     <servlet>
         <servlet-name>MainRESTService</servlet-name>
-        <servlet-class>com.vino.backend.bootstrap.MainRESTServlet</servlet-class>
+        <servlet-class>com.vino.backend.MainRESTServlet</servlet-class>
         <init-param>
             <param-name>com.sun.jersey.config.property.packages</param-name>
             <param-value>com.vino.backend.rest</param-value>
