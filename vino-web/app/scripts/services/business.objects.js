@@ -19,7 +19,7 @@ angular.module('vino.services').factory('Origins', function ($resource) {
 
 angular.module('vino.services').factory('Pendings', function ($resource) {
 
-    var Pendings = $resource('/rest/pendings', {});
+    var Pendings = $resource('/rest/pendings/:barcode', {id: '@barcode'});
     return angular.extend(Pendings, {
     });
 });

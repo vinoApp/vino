@@ -31,13 +31,10 @@ public class WineBottle extends PersistentEntity {
 
     private WineDomain domain;
 
-    private boolean isValidated;
-
-    public WineBottle(String barcode, int vintage, WineDomain domain, boolean isValidated) {
+    public WineBottle(String barcode, int vintage, WineDomain domain) {
         this.barcode = barcode;
         this.vintage = vintage;
         this.domain = domain;
-        this.isValidated = isValidated;
     }
 
     public WineBottle() {
@@ -67,22 +64,12 @@ public class WineBottle extends PersistentEntity {
         this.barcode = barcode;
     }
 
-    public boolean getIsValidated() {
-        return isValidated;
-    }
-
-    public void setValidated(boolean validated) {
-        isValidated = validated;
-    }
-
     @Override
     public String toString() {
         return "WineBottle{" +
-                "id=" + id +
-                ", barcode='" + barcode + '\'' +
+                "barcode='" + barcode + '\'' +
                 ", vintage=" + vintage +
                 ", domain=" + domain +
-                ", isValidated=" + isValidated +
                 '}';
     }
 }

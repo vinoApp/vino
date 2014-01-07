@@ -107,6 +107,13 @@
             <version>${jetty.version}</version>
         </dependency>
 
+        <!-- HTTP Facilities -->
+        <dependency>
+            <groupId>com.github.kevinsawicki</groupId>
+            <artifactId>http-request</artifactId>
+            <version>4.1</version>
+        </dependency>
+
     </dependencies>
 
 </project>

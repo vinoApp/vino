@@ -60,5 +60,20 @@ public class PendingsREST {
         return new ResponseWrapper().setStatus(ResponseStatus.OK);
     }
 
+    @DELETE
+    @Path("{barcode}")
+    @Produces("application/json")
+    public ResponseWrapper removePendingBottle(@PathParam("barcode") String barcode) {
+
+        // Check the provided object
+        if (barcode == null) {
+            return new ResponseWrapper().setStatus(ResponseStatus.INVALID_PARAMS);
+        }
+
+        PendingsBundle.getInstance().getPendings().remove(barcode);
+
+        return new ResponseWrapper().setStatus(ResponseStatus.OK);
+    }
+
 
 }

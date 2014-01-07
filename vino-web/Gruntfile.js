@@ -57,19 +57,19 @@ module.exports = function (grunt) {
         hostname: '0.0.0.0'
       },
       proxies: [
-//          {
-//              context: '/rest',
-//              host: 'localhost',
-//              port: 8080,
-//              https: false,
-//              changeOrigin: true
-//          },
+//         {
+//             context: '/rest',
+//             host: 'localhost',
+//             port: 8080,
+//             https: false,
+//             changeOrigin: true
+//         }
           {
-              context: '/rest',
-              host: '192.168.1.101',
-              port: 8080,
-              https: false,
-              changeOrigin: true
+               context: '/rest',
+               host: '192.168.0.10',
+               port: 8080,
+               https: false,
+               changeOrigin: true
           }
       ],
       livereload: {

@@ -24,28 +24,34 @@ angular.module('vino.ui')
             if (!$scope.currentPending) {
                 return;
             }
-            // Build cellar record and add it (rolled after bottle adding)
-            defer.then(function () {
-                var cellarRecord = {
-                    bottle: bottle,
-                    quantity: $scope.currentPending.qty
-                };
-                Cellar.save(cellarRecord, function (response) {
-                    console.log(response);
-                })
-            });
 
             // Build bottle object and add it
             var bottle = {
                 barcode: $scope.currentPending.barcode,
                 vintage: $scope.currentPending.vintage,
-                domain: $scope.currentPending.domain,
-                isValidated: true
+                domain: $scope.currentPending.domain
             };
+
+            // Build cellar record and add it (rolled after bottle adding)
+            defer.promise.then(function () {
+                var params = $.param({
+                    bottle: bottle,
+                    quantity: $scope.currentPending.qty
+                });
+                Cellar.save(params, function (response) {
+                    console.log(response);
+                });
+            }).then(function () {
+
+                    Pendings.remove({barcode: $scope.currentPending.barcode}, function (response) {
+                        console.log(response);
+                    });
+                });
 
             Bottles.save(bottle, function (response) {
                 console.log(response);
                 defer.resolve();
             });
         };
-    });
+    })
+;

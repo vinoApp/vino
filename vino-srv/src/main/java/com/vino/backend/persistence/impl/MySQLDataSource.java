@@ -68,7 +68,7 @@ public class MySQLDataSource implements IDataSource {
     /**
      * /////////////////////////////////
      * Use at your own risks !
-     * /////////////////////////////////
+     * //////////////d///////////////////
      */
 
     @Override
@@ -177,11 +177,10 @@ public class MySQLDataSource implements IDataSource {
         if (!MappingUtils.validateWineBottleObject(bottle)) {
             return false;
         }
-        return template.update("INSERT INTO bottles (barcode, domainID, vintage, isValidated) VALUES (?, ?, ?, ?, ?)",
+        return template.update("INSERT INTO bottles (barcode, domainID, vintage) VALUES (?, ?, ?)",
                 bottle.getBarcode(),
                 bottle.getDomain().getId(),
-                bottle.getVintage(),
-                bottle.getIsValidated()) != 0;
+                bottle.getVintage()) != 0;
     }
 
     @Override
@@ -194,11 +193,10 @@ public class MySQLDataSource implements IDataSource {
 
         return template.update("UPDATE bottles b " +
                 "SET b.vintage = CASE WHEN ? IS null THEN b.vintage ELSE ? END," +
-                "b.domainID = CASE WHEN ? = 0 THEN b.domainID ELSE ? END," +
-                "b.isValidated = ? " +
+                "b.domainID = CASE WHEN ? = 0 THEN b.domainID ELSE ? END " +
                 "WHERE b.bottleID = ?",
                 newBottle.getVintage(), newBottle.getVintage(), domainID, domainID,
-                newBottle.getIsValidated(), bottleID) != 0;
+                bottleID) != 0;
     }
 
     @Override

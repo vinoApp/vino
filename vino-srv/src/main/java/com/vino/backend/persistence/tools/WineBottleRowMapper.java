@@ -39,7 +39,6 @@ public class WineBottleRowMapper implements RowMapper<WineBottle> {
         bottle.setId(resultSet.getInt(DataRowsBundle.BOTTLE_ID));
         bottle.setVintage(resultSet.getInt(DataRowsBundle.VINTAGE));
         bottle.setBarcode(resultSet.getString(DataRowsBundle.BARCODE));
-        bottle.setValidated(resultSet.getBoolean(DataRowsBundle.IS_VALIDATED));
         bottle.setDomain(domain);
 
         return bottle;
