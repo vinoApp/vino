@@ -16,10 +16,51 @@
 
 package com.vino.backend.persistence;
 
+import com.google.common.collect.ImmutableList;
+import model.EntityKey;
+import model.WineAOC;
+import org.jongo.MongoCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import restx.factory.Component;
+
 /**
  * User: walien
  * Date: 1/7/14
  * Time: 9:46 PM
  */
-public class MongoPersistor {
+
+@Component
+public class MongoPersistor implements Persistor {
+
+    private Logger logger = LoggerFactory.getLogger(getClass());
+
+    private MongoCollection keys;
+    private MongoCollection aocs;
+    private MongoCollection regions;
+    private MongoCollection domains;
+    private MongoCollection bottles;
+
+    public MongoPersistor(MongoCollection keys,
+                          MongoCollection aocs,
+                          MongoCollection regions,
+                          MongoCollection domains,
+                          MongoCollection bottles) {
+        this.keys = keys;
+        this.aocs = aocs;
+        this.regions = regions;
+        this.domains = domains;
+        this.bottles = bottles;
+    }
+
+
+    @Override
+    public ImmutableList<EntityKey> getAllKeys() {
+        return null;
+    }
+
+    @Override
+    public ImmutableList<WineAOC> getAllAOCS() {
+        return ImmutableList.copyOf(this.aocs.find().as(WineAOC.class));
+    }
 }

@@ -16,6 +16,10 @@
 
 package com.vino.backend.persistence;
 
+import com.google.common.collect.ImmutableList;
+import model.EntityKey;
+import model.WineAOC;
+
 /**
  * User: walien
  * Date: 7/27/13
@@ -23,56 +27,9 @@ package com.vino.backend.persistence;
  */
 public interface Persistor {
 
-    void resetDB();
+    ImmutableList<EntityKey> getAllKeys();
 
-    /////////////////////////////
-    // DATA RETRIEVING
-    /////////////////////////////
+    ImmutableList<WineAOC> getAllAOCS();
 
-//    List<WineBottle> getAllKnownWineBottles();
-//
-//    List<WineCellarRecord> getAllWineBottlesInCellar();
-//
-//    List<WineAOC> getAllOrigins();
-//
-//    WineAOC getAOCByID(int id);
-//
-//    List<WineDomain> getAllWineDomains();
-//
-//    WineDomain getDomainById(int id);
-//
-//    WineBottle getBottleByBarCode(String barcode);
-//
-//    WineBottle getBottleById(int id);
-//
-//    List<WineBottle> getBottlesByDomain(int domainId);
-//
-//    /////////////////////////////
-//    // DATA PERSISTENCE
-//    /////////////////////////////
-//
-//    boolean addWineBottleToKnown(WineBottle bottle);
-//
-//    boolean updateKnownWineBottle(int bottleID, WineBottle newBottle);
-//
-//    boolean removeWineBottleFromKnown(int id);
-//
-//    boolean addWineDomain(WineDomain domain);
-//
-//    boolean removeWineDomain(int id);
-//
-//    boolean updateWineDomain(int id, WineDomain domain);
-//
-//    boolean loadBottleInCellar(int id, int qty);
-//
-//    boolean unloadBottleInCellar(int id, int qty);
-//
-//    /////////////////////////////
-//    /// STATS
-//    /////////////////////////////
-//
-//    // TODO
-//    // - get number of bottles per region and per aoc
-//    // - get frequency of registering and unregistering (per week, per month, per year)
 
 }

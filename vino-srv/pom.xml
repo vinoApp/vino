@@ -15,7 +15,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <jetty.version>8.1.8.v20121106</jetty.version>
+        <restx.version>0.30</restx.version>
     </properties>
 
     <dependencies>
@@ -33,6 +33,11 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
+        <dependency>
+            <groupId>com.google.inject</groupId>
+            <artifactId>guice</artifactId>
+            <version>4.0-beta</version>
+        </dependency>
 
         <!-- DB Support -->
         <dependency>
@@ -40,54 +45,74 @@
             <artifactId>mongo-java-driver</artifactId>
             <version>2.11.1</version>
         </dependency>
-
-        <!-- Jersey -->
         <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-server</artifactId>
-            <version>1.8</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-servlet</artifactId>
-            <version>1.17</version>
-        </dependency>
-        <dependency>
-            <groupId>com.sun.jersey</groupId>
-            <artifactId>jersey-json</artifactId>
-            <version>1.8</version>
+            <groupId>org.jongo</groupId>
+            <artifactId>jongo</artifactId>
+            <version>0.4</version>
         </dependency>
 
-        <!-- Jetty WebServer Dependencies -->
+        <!-- Restx -->
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-server</artifactId>
-            <version>${jetty.version}</version>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-core</artifactId>
+            <version>${restx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlet</artifactId>
-            <version>${jetty.version}</version>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-security-basic</artifactId>
+            <version>${restx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-security</artifactId>
-            <version>${jetty.version}</version>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-core-annotation-processor</artifactId>
+            <version>${restx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-util</artifactId>
-            <version>${jetty.version}</version>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-factory</artifactId>
+            <version>${restx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-webapp</artifactId>
-            <version>${jetty.version}</version>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-factory-admin</artifactId>
+            <version>${restx.version}</version>
         </dependency>
         <dependency>
-            <groupId>org.eclipse.jetty</groupId>
-            <artifactId>jetty-servlets</artifactId>
-            <version>${jetty.version}</version>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-monitor-admin</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-server-jetty</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-apidocs</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-specs-admin</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-admin</artifactId>
+            <version>${restx.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-specs-tests</artifactId>
+            <version>${restx.version}</version>
+            <scope>test</scope>
+        </dependency>
+        <dependency>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-jongo-specs-tests</artifactId>
+            <version>${restx.version}</version>
+            <scope>test</scope>
         </dependency>
 
     </dependencies>

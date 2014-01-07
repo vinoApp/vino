@@ -14,23 +14,35 @@
  * limitations under the License.
  */
 
-package com.vino.backend;
+package com.vino.backend.rest;
 
-import com.sun.jersey.spi.container.servlet.ServletContainer;
-import com.vino.backend.rest.VinoBootstrap;
+import com.vino.backend.persistence.Persistor;
+import model.WineAOC;
+import restx.annotations.GET;
+import restx.annotations.RestxResource;
+import restx.factory.Component;
 
-import javax.servlet.ServletException;
+import java.util.List;
 
 /**
  * User: walien
- * Date: 7/16/13
- * Time: 8:07 PM
+ * Date: 1/7/14
+ * Time: 11:32 PM
  */
-public class MainRESTServlet extends ServletContainer {
 
-    @Override
-    public void init() throws ServletException {
-        super.init();
-        VinoBootstrap.doBootstrap();
+@Component
+@RestxResource
+public class OriginsResource {
+
+    private Persistor persistor;
+
+    public OriginsResource(Persistor persistor) {
+        this.persistor = persistor;
     }
+
+    @GET("/origins/aocs")
+    public List<WineAOC> getAllAOCS() {
+        return persistor.getAllAOCS();
+    }
+
 }

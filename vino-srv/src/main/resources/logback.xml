@@ -2,14 +2,21 @@
 
     <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
         <encoder>
-            <pattern>%d{HH:mm:ss.SSS} %-5level %logger{36} - %msg%n</pattern>
+            <pattern>%d [%-16thread] [%-10X{principal}] %-5level %logger{36} - %msg%n</pattern>
         </encoder>
     </appender>
 
     <logger name="org.eclipse.jetty.server.AbstractConnector" level="WARN" />
     <logger name="org.eclipse.jetty.server.handler.ContextHandler" level="WARN" />
+    <logger name="org.eclipse.jetty.webapp.StandardDescriptorProcessor" level="WARN" />
 
-    <logger name="vino-srv" level="DEBUG" />
+    <logger name="org.hibernate.validator.internal.engine.ConfigurationImpl" level="WARN" />
+    <logger name="org.reflections.Reflections" level="WARN" />
+
+    <logger name="restx.factory.Factory" level="WARN" />
+
+    <!-- app logs -->
+    <logger name="vino" level="DEBUG" />
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

@@ -32,27 +32,49 @@
     <orderEntry type="library" name="Maven: com.github.kevinsawicki:http-request:4.1" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.9" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.9" level="project" />
-    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.2" level="project" />
+    <orderEntry type="library" name="Maven: org.slf4j:slf4j-api:1.7.5" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-lgpl:1.9.12" level="project" />
     <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-lgpl:1.9.12" level="project" />
     <orderEntry type="library" name="Maven: junit:junit:4.11" level="project" />
     <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
+    <orderEntry type="library" name="Maven: com.google.inject:guice:4.0-beta" level="project" />
+    <orderEntry type="library" name="Maven: javax.inject:javax.inject:1" level="project" />
+    <orderEntry type="library" name="Maven: aopalliance:aopalliance:1.0" level="project" />
     <orderEntry type="library" name="Maven: org.mongodb:mongo-java-driver:2.11.1" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-server:1.8" level="project" />
-    <orderEntry type="library" name="Maven: asm:asm:3.1" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-core:1.8" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-servlet:1.17" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.jersey:jersey-json:1.8" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jettison:jettison:1.1" level="project" />
-    <orderEntry type="library" name="Maven: stax:stax-api:1.0.1" level="project" />
-    <orderEntry type="library" name="Maven: com.sun.xml.bind:jaxb-impl:2.2.3-1" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.bind:jaxb-api:2.2.2" level="project" />
-    <orderEntry type="library" name="Maven: javax.xml.stream:stax-api:1.0-2" level="project" />
-    <orderEntry type="library" name="Maven: javax.activation:activation:1.1" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-core-asl:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-mapper-asl:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-jaxrs:1.7.1" level="project" />
-    <orderEntry type="library" name="Maven: org.codehaus.jackson:jackson-xc:1.7.1" level="project" />
+    <orderEntry type="library" name="Maven: org.jongo:jongo:0.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.1.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-databind:2.1.4" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.1.4" level="project" />
+    <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:2.1.1" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-core:0.30" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-joda:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: joda-time:joda-time:2.3" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml.jackson.datatype:jackson-datatype-guava:2.1.2" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-factory:0.30" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-common:0.30" level="project" />
+    <orderEntry type="library" name="Maven: org.reflections:reflections:0.9.9-RC1" level="project" />
+    <orderEntry type="library" name="Maven: org.javassist:javassist:3.16.1-GA" level="project" />
+    <orderEntry type="library" name="Maven: dom4j:dom4j:1.6.1" level="project" />
+    <orderEntry type="library" name="Maven: xml-apis:xml-apis:1.0.b2" level="project" />
+    <orderEntry type="library" name="Maven: com.github.spullara.mustache.java:compiler:0.8.13" level="project" />
+    <orderEntry type="library" name="Maven: com.google.code.maven-play-plugin.com.jamonapi:jamon:2.7" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-classloader:0.30" level="project" />
+    <orderEntry type="library" name="Maven: org.hibernate:hibernate-validator:5.0.1.Final" level="project" />
+    <orderEntry type="library" name="Maven: javax.validation:validation-api:1.1.0.Final" level="project" />
+    <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.1.GA" level="project" />
+    <orderEntry type="library" name="Maven: com.fasterxml:classmate:0.8.0" level="project" />
+    <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.13" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-security-basic:0.30" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-core-annotation-processor:0.30" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-factory-admin:0.30" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-admin:0.30" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-monitor-admin:0.30" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-server-jetty:0.30" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:javax.servlet-api:3.0.1" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-servlet:0.30" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.janino:janino:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: org.codehaus.janino:commons-compiler:2.6.1" level="project" />
+    <orderEntry type="library" name="Maven: javax.servlet:servlet-api:2.5" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-server:8.1.8.v20121106" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty.orbit:javax.servlet:3.0.0.v201112011016" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-continuation:8.1.8.v20121106" level="project" />
@@ -65,6 +87,17 @@
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-xml:8.1.8.v20121106" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-servlets:8.1.8.v20121106" level="project" />
     <orderEntry type="library" name="Maven: org.eclipse.jetty:jetty-client:8.1.8.v20121106" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-apidocs:0.30" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-specs-admin:0.30" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.restx:restx-specs-tests:0.30" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.hamcrest:hamcrest-library:1.3" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: uk.co.datumedge:hamcrest-json:0.2" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.skyscreamer:jsonassert:1.1.1" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.json:json:20090211" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: commons-collections:commons-collections:3.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:1.5.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.restx:restx-jongo-specs-tests:0.30" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: io.restx:restx-jongo:0.30" level="project" />
   </component>
 </module>
 

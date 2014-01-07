@@ -22,21 +22,13 @@
          version="2.5">
 
     <servlet>
-        <servlet-name>MainRESTService</servlet-name>
-        <servlet-class>com.vino.backend.MainRESTServlet</servlet-class>
-        <init-param>
-            <param-name>com.sun.jersey.config.property.packages</param-name>
-            <param-value>com.vino.backend.rest</param-value>
-        </init-param>
-        <init-param>
-            <param-name>com.sun.jersey.api.json.POJOMappingFeature</param-name>
-            <param-value>true</param-value>
-        </init-param>
+        <servlet-name>restx</servlet-name>
+        <servlet-class>restx.servlet.RestxMainRouterServlet</servlet-class>
         <load-on-startup>1</load-on-startup>
     </servlet>
     <servlet-mapping>
-        <servlet-name>MainRESTService</servlet-name>
-        <url-pattern>/rest/*</url-pattern>
+        <servlet-name>restx</servlet-name>
+        <url-pattern>/api/*</url-pattern>
     </servlet-mapping>
 
 </web-app>
