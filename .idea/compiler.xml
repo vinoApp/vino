@@ -19,7 +19,7 @@
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="false">
+      <profile default="true" name="Default" enabled="true">
         <processorPath useClasspath="true" />
       </profile>
       <profile default="false" name="Maven default annotation processors profile" enabled="true">
@@ -29,7 +29,6 @@
         <processorPath useClasspath="true" />
         <module name="vino-common" />
         <module name="vino-mobile" />
-        <module name="vino-srv" />
       </profile>
     </annotationProcessing>
   </component>

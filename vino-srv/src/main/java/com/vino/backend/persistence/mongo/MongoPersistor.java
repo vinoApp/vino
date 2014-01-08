@@ -14,9 +14,10 @@
  * limitations under the License.
  */
 
-package com.vino.backend.persistence;
+package com.vino.backend.persistence.mongo;
 
 import com.google.common.collect.ImmutableList;
+import com.vino.backend.persistence.Persistor;
 import model.EntityKey;
 import model.WineAOC;
 import org.jongo.MongoCollection;

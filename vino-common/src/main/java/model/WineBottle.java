@@ -42,24 +42,27 @@ public class WineBottle extends Entity {
         return vintage;
     }
 
-    public void setVintage(int vintage) {
+    public WineBottle setVintage(int vintage) {
         this.vintage = vintage;
+        return this;
     }
 
     public WineDomain getDomain() {
         return domain;
     }
 
-    public void setDomain(WineDomain domain) {
+    public WineBottle setDomain(WineDomain domain) {
         this.domain = domain;
+        return this;
     }
 
     public String getBarcode() {
         return barcode;
     }
 
-    public void setBarcode(String barcode) {
+    public WineBottle setBarcode(String barcode) {
         this.barcode = barcode;
+        return this;
     }
 
     @Override

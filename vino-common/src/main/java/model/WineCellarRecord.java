@@ -16,33 +16,40 @@
 
 package model;
 
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
-
-import java.util.List;
-
 /**
  * User: walien
- * Date: 7/27/13
- * Time: 4:45 PM
+ * Date: 1/8/14
+ * Time: 12:52 AM
  */
-public class WineCellar {
+public class WineCellarRecord {
 
-    private List<WineCellarRecord> records;
+    private WineBottle bottle;
 
-    @JsonCreator
-    public WineCellar(@JsonProperty("records") List<WineCellarRecord> records) {
-        this.records = records;
+    private int quantity;
+
+    public WineBottle getBottle() {
+        return bottle;
     }
 
-    public List<WineCellarRecord> getRecords() {
-        return records;
+    public WineCellarRecord bottle(final WineBottle bottle) {
+        this.bottle = bottle;
+        return this;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public WineCellarRecord quantity(final int quantity) {
+        this.quantity = quantity;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "WineCellar{" +
-                "records=" + records +
+        return "WineCellarRecord{" +
+                "bottle=" + bottle +
+                ", quantity=" + quantity +
                 '}';
     }
 }

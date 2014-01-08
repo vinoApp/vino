@@ -14,35 +14,18 @@
  * limitations under the License.
  */
 
-package model;
-
-import org.codehaus.jackson.annotate.JsonCreator;
-import org.codehaus.jackson.annotate.JsonProperty;
-
-import java.util.List;
+package com.vino.backend.persistence.mongo;
 
 /**
  * User: walien
- * Date: 7/27/13
- * Time: 4:45 PM
+ * Date: 1/8/14
+ * Time: 12:51 AM
  */
-public class WineCellar {
+public enum MongoCollections {
 
-    private List<WineCellarRecord> records;
+    KEYS, AOCS, REGIONS, DOMAINS, BOTTLES, CELLAR;
 
-    @JsonCreator
-    public WineCellar(@JsonProperty("records") List<WineCellarRecord> records) {
-        this.records = records;
-    }
-
-    public List<WineCellarRecord> getRecords() {
-        return records;
-    }
-
-    @Override
-    public String toString() {
-        return "WineCellar{" +
-                "records=" + records +
-                '}';
+    public String get() {
+        return name().toLowerCase();
     }
 }

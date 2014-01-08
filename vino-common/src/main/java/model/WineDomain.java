@@ -42,24 +42,27 @@ public class WineDomain extends Entity {
         return name;
     }
 
-    public void setName(String name) {
+    public WineDomain setName(String name) {
         this.name = name;
+        return this;
     }
 
     public WineAOC getOrigin() {
         return origin;
     }
 
-    public void setOrigin(WineAOC origin) {
+    public WineDomain setOrigin(WineAOC origin) {
         this.origin = origin;
+        return this;
     }
 
     public String getSticker() {
         return sticker;
     }
 
-    public void setSticker(String sticker) {
+    public WineDomain setSticker(String sticker) {
         this.sticker = sticker;
+        return this;
     }
 
     @Override

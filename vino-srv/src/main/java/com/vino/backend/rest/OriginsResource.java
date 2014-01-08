@@ -45,4 +45,9 @@ public class OriginsResource {
         return persistor.getAllAOCS();
     }
 
+    @GET("/origins/regions")
+    public List<WineAOC> getAllRegions() {
+        return persistor.getAllAOCS();
+    }
+
 }

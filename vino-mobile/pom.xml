@@ -11,6 +11,7 @@
     <packaging>apk</packaging>
 
     <properties>
+        <!-- This path is for development only -->
         <android.sdk.path>/home/walien/dev/libs/android/sdk</android.sdk.path>
     </properties>
 
