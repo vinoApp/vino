@@ -18,6 +18,7 @@ package com.vino.backend.rest;
 
 import com.vino.backend.persistence.Persistor;
 import model.WineAOC;
+import model.WineRegion;
 import restx.annotations.GET;
 import restx.annotations.RestxResource;
 import restx.factory.Component;
@@ -46,8 +47,8 @@ public class OriginsResource {
     }
 
     @GET("/origins/regions")
-    public List<WineAOC> getAllRegions() {
-        return persistor.getAllAOCS();
+    public List<WineRegion> getAllRegions() {
+        return persistor.getAllRegions();
     }
 
 }

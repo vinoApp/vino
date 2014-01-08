@@ -17,8 +17,7 @@
 package com.vino.backend.persistence;
 
 import com.google.common.collect.ImmutableList;
-import model.EntityKey;
-import model.WineAOC;
+import model.*;
 
 /**
  * User: walien
@@ -31,5 +30,10 @@ public interface Persistor {
 
     ImmutableList<WineAOC> getAllAOCS();
 
+    ImmutableList<WineRegion> getAllRegions();
+
+    ImmutableList<WineDomain> getAllDomains();
+
+    ImmutableList<WineBottle> getAllBottles();
 
 }

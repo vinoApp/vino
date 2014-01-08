@@ -18,12 +18,11 @@ package com.vino.backend.persistence.mongo;
 
 import com.google.common.collect.ImmutableList;
 import com.vino.backend.persistence.Persistor;
-import model.EntityKey;
-import model.WineAOC;
-import org.jongo.MongoCollection;
+import model.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import restx.factory.Component;
+import restx.jongo.JongoCollection;
 
 /**
  * User: walien
@@ -36,17 +35,17 @@ public class MongoPersistor implements Persistor {
 
     private Logger logger = LoggerFactory.getLogger(getClass());
 
-    private MongoCollection keys;
-    private MongoCollection aocs;
-    private MongoCollection regions;
-    private MongoCollection domains;
-    private MongoCollection bottles;
+    private JongoCollection keys;
+    private JongoCollection aocs;
+    private JongoCollection regions;
+    private JongoCollection domains;
+    private JongoCollection bottles;
 
-    public MongoPersistor(MongoCollection keys,
-                          MongoCollection aocs,
-                          MongoCollection regions,
-                          MongoCollection domains,
-                          MongoCollection bottles) {
+    public MongoPersistor(JongoCollection keys,
+                          JongoCollection aocs,
+                          JongoCollection regions,
+                          JongoCollection domains,
+                          JongoCollection bottles) {
         this.keys = keys;
         this.aocs = aocs;
         this.regions = regions;
@@ -54,14 +53,32 @@ public class MongoPersistor implements Persistor {
         this.bottles = bottles;
     }
 
+    ///////////////////////////////////
+    // DATA ACCESS
+    ///////////////////////////////////
 
     @Override
     public ImmutableList<EntityKey> getAllKeys() {
-        return null;
+        return ImmutableList.copyOf(this.keys.get().find().as(EntityKey.class));
+    }
+
+    @Override
+    public ImmutableList<WineRegion> getAllRegions() {
+        return ImmutableList.copyOf(this.regions.get().find().as(WineRegion.class));
     }
 
     @Override
     public ImmutableList<WineAOC> getAllAOCS() {
-        return ImmutableList.copyOf(this.aocs.find().as(WineAOC.class));
+        return ImmutableList.copyOf(this.aocs.get().find().as(WineAOC.class));
+    }
+
+    @Override
+    public ImmutableList<WineDomain> getAllDomains() {
+        return ImmutableList.copyOf(this.domains.get().find().as(WineDomain.class));
+    }
+
+    @Override
+    public ImmutableList<WineBottle> getAllBottles() {
+        return ImmutableList.copyOf(this.bottles.get().find().as(WineBottle.class));
     }
 }

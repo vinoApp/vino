@@ -19,9 +19,9 @@
 
         <!-- Common -->
         <dependency>
-            <groupId>com.google.guava</groupId>
-            <artifactId>guava</artifactId>
-            <version>14.0.1</version>
+            <groupId>io.restx</groupId>
+            <artifactId>restx-core</artifactId>
+            <version>${restx.version}</version>
         </dependency>
 
         <!-- HTTP Facilities -->
@@ -29,20 +29,6 @@
             <groupId>com.github.kevinsawicki</groupId>
             <artifactId>http-request</artifactId>
             <version>4.1</version>
-        </dependency>
-
-        <!-- Logging -->
-        <dependency>
-            <groupId>ch.qos.logback</groupId>
-            <artifactId>logback-classic</artifactId>
-            <version>${slf4j.version}</version>
-        </dependency>
-
-        <!-- JSON -->
-        <dependency>
-            <groupId>org.codehaus.jackson</groupId>
-            <artifactId>jackson-mapper-lgpl</artifactId>
-            <version>1.9.12</version>
         </dependency>
 
     </dependencies>
