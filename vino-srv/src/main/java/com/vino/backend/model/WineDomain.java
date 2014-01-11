@@ -27,7 +27,7 @@ public class WineDomain extends Entity {
 
     private WineAOC origin;
 
-    private String sticker;
+    private byte[] sticker;
 
     public WineDomain(String name, WineAOC origin) {
         super();
@@ -53,11 +53,11 @@ public class WineDomain extends Entity {
         return this;
     }
 
-    public String getSticker() {
+    public byte[] getSticker() {
         return sticker;
     }
 
-    public WineDomain setSticker(String sticker) {
+    public WineDomain setSticker(byte[] sticker) {
         this.sticker = sticker;
         return this;
     }
@@ -67,7 +67,6 @@ public class WineDomain extends Entity {
         return "WineDomain{" +
                 "name='" + name + '\'' +
                 ", origin=" + origin +
-                ", sticker='" + sticker + '\'' +
                 '}';
     }
 }

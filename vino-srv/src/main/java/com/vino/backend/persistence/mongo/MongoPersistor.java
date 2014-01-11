@@ -86,6 +86,7 @@ public class MongoPersistor implements Persistor {
     public boolean persist(WineAOC aoc) {
         collections.get(MongoCollections.AOCS).save(aoc);
         collections.get(MongoCollections.KEYS).save(new EntityKey(aoc.getKey(), MongoCollections.AOCS));
+        logger.debug("AOC {} persisted", aoc.getKey());
         return true;
     }
 
@@ -93,6 +94,7 @@ public class MongoPersistor implements Persistor {
     public boolean persist(WineRegion region) {
         collections.get(MongoCollections.REGIONS).save(region);
         collections.get(MongoCollections.KEYS).save(new EntityKey(region.getKey(), MongoCollections.REGIONS));
+        logger.debug("Region {} persisted", region.getKey());
         return true;
     }
 
@@ -100,6 +102,7 @@ public class MongoPersistor implements Persistor {
     public boolean persist(WineDomain domain) {
         collections.get(MongoCollections.DOMAINS).save(domain);
         collections.get(MongoCollections.KEYS).save(new EntityKey(domain.getKey(), MongoCollections.DOMAINS));
+        logger.debug("Domain {} persisted", domain.getKey());
         return true;
     }
 

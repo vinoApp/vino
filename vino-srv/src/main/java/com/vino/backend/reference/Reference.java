@@ -42,6 +42,10 @@ public class Reference<T extends Entity> {
         this.key = key;
     }
 
+    public static <T extends Entity> Reference<T> of(T entity) {
+        return new Reference<>(entity.getKey());
+    }
+
     public String getKey() {
         return key;
     }

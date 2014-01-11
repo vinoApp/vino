@@ -23,17 +23,17 @@ package com.vino.backend.model;
  */
 public class WineBottle extends Entity {
 
-    private String barcode;
-
-    private int vintage;
+    private Barcode barcode;
 
     private WineDomain domain;
 
-    public WineBottle(String barcode, int vintage, WineDomain domain) {
+    private int vintage;
+
+    public WineBottle(Barcode barcode, WineDomain domain, int vintage) {
         super();
         this.barcode = barcode;
-        this.vintage = vintage;
         this.domain = domain;
+        this.vintage = vintage;
     }
 
     public WineBottle() {
@@ -57,11 +57,11 @@ public class WineBottle extends Entity {
         return this;
     }
 
-    public String getBarcode() {
+    public Barcode getBarcode() {
         return barcode;
     }
 
-    public WineBottle setBarcode(String barcode) {
+    public WineBottle setBarcode(Barcode barcode) {
         this.barcode = barcode;
         return this;
     }
@@ -69,9 +69,9 @@ public class WineBottle extends Entity {
     @Override
     public String toString() {
         return "WineBottle{" +
-                "barcode='" + barcode + '\'' +
-                ", vintage=" + vintage +
+                "barcode=" + barcode +
                 ", domain=" + domain +
+                ", vintage=" + vintage +
                 '}';
     }
 }

@@ -20,7 +20,12 @@ import com.fasterxml.jackson.core.JsonGenerator;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.JsonSerializer;
 import com.fasterxml.jackson.databind.SerializerProvider;
+import com.vino.backend.persistence.Persistor;
+import com.vino.backend.persistence.mongo.MongoPersistor;
 import com.vino.backend.reference.Reference;
+import restx.factory.Factory;
+import restx.factory.Name;
+import restx.jackson.Views;
 
 import java.io.IOException;
 
@@ -31,8 +36,20 @@ import java.io.IOException;
  */
 public class ReferenceSerializer extends JsonSerializer<Reference> {
 
+    private static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
+    private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
+
     @Override
     public void serialize(Reference reference, JsonGenerator jsonGenerator, SerializerProvider serializerProvider) throws IOException, JsonProcessingException {
-        jsonGenerator.writeString(reference.getKey());
+        Class<?> activeView = serializerProvider.getConfig().getActiveView();
+
+        // If the reference is serialized to mongodb
+        if (activeView == Views.Private.class) {
+            jsonGenerator.writeString(reference.getKey());
+        }
+        // If the reference is serialized to client
+        else {
+            jsonGenerator.writeObject(reference.get(PERSISTOR));
+        }
     }
 }

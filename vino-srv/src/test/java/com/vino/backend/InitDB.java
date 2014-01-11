@@ -48,22 +48,54 @@ public class InitDB {
         // Regions
         WineRegion medoc = new WineRegion().setName("Médoc");
         PERSISTOR.persist(medoc);
+        Reference<WineRegion> medocRef = Reference.of(medoc);
 
         WineRegion libournais = new WineRegion().setName("Libournais");
         PERSISTOR.persist(libournais);
+        Reference<WineRegion> libournaisRef = Reference.of(libournais);
 
         WineRegion blayais = new WineRegion().setName("Blayais");
         PERSISTOR.persist(blayais);
+        Reference<WineRegion> blayaisRef = Reference.of(blayais);
 
         WineRegion graves = new WineRegion().setName("Graves");
         PERSISTOR.persist(graves);
+        Reference<WineRegion> gravesRef = Reference.of(graves);
+
 
         // AOCS
-        WineAOC pessacLeognan = new WineAOC()
-                .setName("Pessac-Léognan")
-                .setRegion(new Reference<WineRegion>(graves.getKey()));
-        PERSISTOR.persist(pessacLeognan);
+        addAOC("Margaux", medocRef);
+        addAOC("Moulis", medocRef);
+        addAOC("Listrac", medocRef);
+        addAOC("Saint-Julien", medocRef);
+        addAOC("Pauillac", medocRef);
+        addAOC("Saint-Estèphe", medocRef);
 
+        addAOC("Fronsac", libournaisRef);
+        addAOC("Pomerol", libournaisRef);
+        addAOC("Lalande de Pomerol", libournaisRef);
+        addAOC("Saint-Emilion", libournaisRef);
+        addAOC("Montagne Saint-Emilion", libournaisRef);
+        addAOC("Lussac Saint-Emilion", libournaisRef);
+        addAOC("Puisseguin Saint-Emilion", libournaisRef);
+        addAOC("Cotes-de-Castillon", libournaisRef);
+        addAOC("Bordeaux Cotes-de-Francs", libournaisRef);
+
+        addAOC("Blaye", blayaisRef);
+        addAOC("Cotes-de-Blaye", blayaisRef);
+        addAOC("Blaye-Cotes-de-Bordeaux", blayaisRef);
+        addAOC("Cotes-de-Bourg", blayaisRef);
+
+        addAOC("Graves", gravesRef);
+        addAOC("Graves Superieurs", gravesRef);
+        addAOC("Pessac-Léognan", gravesRef);
+        addAOC("Cérons", gravesRef);
     }
 
+    private void addAOC(String name, Reference<WineRegion> regionRef) {
+        WineAOC aoc = new WineAOC()
+                .setName(name)
+                .setRegion(regionRef);
+        PERSISTOR.persist(aoc);
+    }
 }
