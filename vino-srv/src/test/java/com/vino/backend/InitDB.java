@@ -14,16 +14,18 @@
  * limitations under the License.
  */
 
-package db;
+package com.vino.backend;
 
-import com.vino.backend.persistence.mongo.MongoCollections;
-import model.WineRegion;
+import com.vino.backend.model.WineAOC;
+import com.vino.backend.model.WineRegion;
+import com.vino.backend.persistence.Persistor;
+import com.vino.backend.persistence.mongo.MongoPersistor;
+import com.vino.backend.reference.Reference;
 import org.jongo.Jongo;
 import org.junit.BeforeClass;
 import org.junit.Test;
 import restx.factory.Factory;
 import restx.factory.Name;
-import restx.jongo.JongoCollection;
 
 /**
  * User: walien
@@ -33,6 +35,7 @@ import restx.jongo.JongoCollection;
 public class InitDB {
 
     private static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
+    private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
 
     @BeforeClass
     public static void init() throws Exception {
@@ -40,14 +43,27 @@ public class InitDB {
     }
 
     @Test
-    public void populateWithRegions() {
+    public void populateWithOrigins() {
 
-        JongoCollection regions = FACTORY.queryByName(Name.of(JongoCollection.class, MongoCollections.REGIONS.get())).findOneAsComponent().get();
+        // Regions
+        WineRegion medoc = new WineRegion().setName("Médoc");
+        PERSISTOR.persist(medoc);
 
-        regions.get().insert(new WineRegion().setName("Médoc"));
-        regions.get().insert(new WineRegion().setName("Libournais"));
-        regions.get().insert(new WineRegion().setName("Blayais"));
-        regions.get().insert(new WineRegion().setName("Graves"));
+        WineRegion libournais = new WineRegion().setName("Libournais");
+        PERSISTOR.persist(libournais);
+
+        WineRegion blayais = new WineRegion().setName("Blayais");
+        PERSISTOR.persist(blayais);
+
+        WineRegion graves = new WineRegion().setName("Graves");
+        PERSISTOR.persist(graves);
+
+        // AOCS
+        WineAOC pessacLeognan = new WineAOC()
+                .setName("Pessac-Léognan")
+                .setRegion(new Reference<WineRegion>(graves.getKey()));
+        PERSISTOR.persist(pessacLeognan);
+
     }
 
 }
