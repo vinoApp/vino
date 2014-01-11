@@ -42,7 +42,7 @@ public class VinoServer {
          */
         String mode = System.getProperty("restx.mode", "dev");
         System.setProperty("restx.mode", mode);
-        System.setProperty("restx.app.package", "infoport");
+        System.setProperty("restx.app.package", "com.vino.backend");
 
         int port = Integer.valueOf(Optional.fromNullable(System.getenv("PORT")).or("8080"));
         WebServer server = new JettyWebServer(WEB_INF_LOCATION, WEB_APP_LOCATION, port, "0.0.0.0");

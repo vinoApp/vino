@@ -16,7 +16,8 @@
     <logger name="restx.factory.Factory" level="WARN" />
 
     <!-- app logs -->
-    <logger name="vino" level="DEBUG" />
+    <logger name="vino-srv" level="DEBUG" />
+    <logger name="vino-common" level="DEBUG" />
 
     <root level="info">
         <appender-ref ref="STDOUT"/>

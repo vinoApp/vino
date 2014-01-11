@@ -18,9 +18,9 @@ package com.vino.backend.persistence.mongo;
 
 import com.google.common.collect.ImmutableList;
 import com.vino.backend.persistence.Persistor;
+import logging.Loggers;
 import model.*;
 import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
 
@@ -35,7 +35,7 @@ import javax.inject.Named;
 @Component
 public class MongoPersistor implements Persistor {
 
-    private Logger logger = LoggerFactory.getLogger(getClass());
+    private Logger logger = Loggers.SRV;
 
     private JongoCollection keys;
     private JongoCollection aocs;
@@ -67,21 +67,25 @@ public class MongoPersistor implements Persistor {
 
     @Override
     public ImmutableList<WineRegion> getAllRegions() {
+        logger.debug("Retrieving all regions");
         return ImmutableList.copyOf(this.regions.get().find().as(WineRegion.class));
     }
 
     @Override
     public ImmutableList<WineAOC> getAllAOCS() {
+        logger.debug("Retrieving all aocs");
         return ImmutableList.copyOf(this.aocs.get().find().as(WineAOC.class));
     }
 
     @Override
     public ImmutableList<WineDomain> getAllDomains() {
+        logger.debug("Retrieving all domains");
         return ImmutableList.copyOf(this.domains.get().find().as(WineDomain.class));
     }
 
     @Override
     public ImmutableList<WineBottle> getAllBottles() {
+        logger.debug("Retrieving all bottles");
         return ImmutableList.copyOf(this.bottles.get().find().as(WineBottle.class));
     }
 }
