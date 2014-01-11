@@ -14,63 +14,48 @@
  * limitations under the License.
  */
 
-package model;
+package com.vino.backend.model;
+
+import com.vino.backend.reference.Reference;
 
 /**
  * User: walien
  * Date: 7/27/13
- * Time: 3:37 PM
+ * Time: 4:24 PM
  */
-public class WineDomain extends Entity {
+public class WineAOC extends Entity {
 
     private String name;
 
-    private WineAOC origin;
+    private Reference<WineRegion> region;
 
-    private String sticker;
-
-    public WineDomain() {
-
-    }
-
-    public WineDomain(String name, WineAOC origin) {
-        this.name = name;
-        this.origin = origin;
+    public WineAOC() {
+        super();
     }
 
     public String getName() {
         return name;
     }
 
-    public WineDomain setName(String name) {
+    public WineAOC setName(String name) {
         this.name = name;
         return this;
     }
 
-    public WineAOC getOrigin() {
-        return origin;
+    public Reference<WineRegion> getRegion() {
+        return region;
     }
 
-    public WineDomain setOrigin(WineAOC origin) {
-        this.origin = origin;
-        return this;
-    }
-
-    public String getSticker() {
-        return sticker;
-    }
-
-    public WineDomain setSticker(String sticker) {
-        this.sticker = sticker;
+    public WineAOC setRegion(Reference<WineRegion> region) {
+        this.region = region;
         return this;
     }
 
     @Override
     public String toString() {
-        return "WineDomain{" +
+        return "WineAOC{" +
                 "name='" + name + '\'' +
-                ", origin=" + origin +
-                ", sticker='" + sticker + '\'' +
+                ", region=" + region +
                 '}';
     }
 }

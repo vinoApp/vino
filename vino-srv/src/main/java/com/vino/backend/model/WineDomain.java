@@ -14,38 +14,60 @@
  * limitations under the License.
  */
 
-package model;
+package com.vino.backend.model;
 
 /**
  * User: walien
  * Date: 7/27/13
- * Time: 4:24 PM
+ * Time: 3:37 PM
  */
-public class WineRegion extends Entity {
+public class WineDomain extends Entity {
 
     private String name;
 
-    public WineRegion() {
+    private WineAOC origin;
 
-    }
+    private String sticker;
 
-    public WineRegion(String name) {
+    public WineDomain(String name, WineAOC origin) {
+        super();
         this.name = name;
+        this.origin = origin;
     }
 
     public String getName() {
         return name;
     }
 
-    public WineRegion setName(String name) {
+    public WineDomain setName(String name) {
         this.name = name;
+        return this;
+    }
+
+    public WineAOC getOrigin() {
+        return origin;
+    }
+
+    public WineDomain setOrigin(WineAOC origin) {
+        this.origin = origin;
+        return this;
+    }
+
+    public String getSticker() {
+        return sticker;
+    }
+
+    public WineDomain setSticker(String sticker) {
+        this.sticker = sticker;
         return this;
     }
 
     @Override
     public String toString() {
-        return "WineRegion{" +
+        return "WineDomain{" +
                 "name='" + name + '\'' +
+                ", origin=" + origin +
+                ", sticker='" + sticker + '\'' +
                 '}';
     }
 }

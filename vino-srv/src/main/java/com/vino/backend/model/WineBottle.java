@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package model;
+package com.vino.backend.model;
 
 /**
  * User: walien
@@ -30,6 +30,7 @@ public class WineBottle extends Entity {
     private WineDomain domain;
 
     public WineBottle(String barcode, int vintage, WineDomain domain) {
+        super();
         this.barcode = barcode;
         this.vintage = vintage;
         this.domain = domain;

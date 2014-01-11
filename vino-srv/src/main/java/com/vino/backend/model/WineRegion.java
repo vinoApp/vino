@@ -14,42 +14,39 @@
  * limitations under the License.
  */
 
-package model;
+package com.vino.backend.model;
 
 /**
  * User: walien
- * Date: 1/8/14
- * Time: 12:52 AM
+ * Date: 7/27/13
+ * Time: 4:24 PM
  */
-public class WineCellarRecord {
+public class WineRegion extends Entity {
 
-    private WineBottle bottle;
+    private String name;
 
-    private int quantity;
-
-    public WineBottle getBottle() {
-        return bottle;
+    public WineRegion() {
+        super();
     }
 
-    public WineCellarRecord bottle(final WineBottle bottle) {
-        this.bottle = bottle;
-        return this;
+    public WineRegion(String name) {
+        super();
+        this.name = name;
     }
 
-    public int getQuantity() {
-        return quantity;
+    public String getName() {
+        return name;
     }
 
-    public WineCellarRecord quantity(final int quantity) {
-        this.quantity = quantity;
+    public WineRegion setName(String name) {
+        this.name = name;
         return this;
     }
 
     @Override
     public String toString() {
-        return "WineCellarRecord{" +
-                "bottle=" + bottle +
-                ", quantity=" + quantity +
+        return "WineRegion{" +
+                "name='" + name + '\'' +
                 '}';
     }
 }

@@ -14,18 +14,22 @@
  * limitations under the License.
  */
 
-package model;
+package com.vino.backend.model;
 
 import com.fasterxml.jackson.annotation.JsonCreator;
 import com.fasterxml.jackson.annotation.JsonProperty;
+import org.jongo.marshall.jackson.oid.Id;
+import org.jongo.marshall.jackson.oid.ObjectId;
 
 /**
  * User: walien
  * Date: 1/7/14
  * Time: 9:41 PM
  */
-public class EntityKey extends Entity {
+public class EntityKey {
 
+    @Id
+    @ObjectId
     private String key;
 
     private String collection;

@@ -17,8 +17,8 @@
 package com.vino.backend.rest;
 
 import com.vino.backend.persistence.Persistor;
-import model.WineAOC;
-import model.WineRegion;
+import com.vino.backend.model.WineAOC;
+import com.vino.backend.model.WineRegion;
 import restx.annotations.GET;
 import restx.annotations.RestxResource;
 import restx.factory.Component;

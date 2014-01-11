@@ -16,16 +16,59 @@
 
 package com.vino.backend.persistence.mongo;
 
+import org.jongo.MongoCollection;
+import restx.factory.Component;
+import restx.jongo.JongoCollection;
+
+import javax.inject.Named;
+
 /**
  * User: walien
  * Date: 1/8/14
  * Time: 12:51 AM
  */
-public enum MongoCollections {
 
-    KEYS, AOCS, REGIONS, DOMAINS, BOTTLES, CELLAR;
+@Component
+public class MongoCollections {
 
-    public String get() {
-        return name().toLowerCase();
+    public static final String KEYS = "keys";
+    public static final String AOCS = "aocs";
+    public static final String REGIONS = "regions";
+    public static final String DOMAINS = "domains";
+    public static final String BOTTLES = "bottles";
+
+    private final JongoCollection keys;
+    private final JongoCollection aocs;
+    private final JongoCollection regions;
+    private final JongoCollection domains;
+    private final JongoCollection bottles;
+
+    public MongoCollections(@Named(KEYS) JongoCollection keys,
+                            @Named(AOCS) JongoCollection aocs,
+                            @Named(REGIONS) JongoCollection regions,
+                            @Named(DOMAINS) JongoCollection domains,
+                            @Named(BOTTLES) JongoCollection bottles) {
+        this.keys = keys;
+        this.aocs = aocs;
+        this.regions = regions;
+        this.domains = domains;
+        this.bottles = bottles;
     }
+
+    public MongoCollection get(String name) {
+        switch (name) {
+            case KEYS:
+                return keys.get();
+            case AOCS:
+                return aocs.get();
+            case REGIONS:
+                return regions.get();
+            case DOMAINS:
+                return domains.get();
+            case BOTTLES:
+                return bottles.get();
+        }
+        return null;
+    }
+
 }

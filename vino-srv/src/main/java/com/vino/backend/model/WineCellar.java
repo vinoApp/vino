@@ -14,50 +14,36 @@
  * limitations under the License.
  */
 
-package model;
+package com.vino.backend.model;
+
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+import java.util.List;
 
 /**
  * User: walien
  * Date: 7/27/13
- * Time: 4:24 PM
+ * Time: 4:45 PM
  */
-public class WineAOC extends Entity {
+public class WineCellar {
 
-    private String name;
+    private List<WineCellarRecord> records;
 
-    private WineRegion region;
-
-    public WineAOC() {
+    @JsonCreator
+    public WineCellar(@JsonProperty("records") List<WineCellarRecord> records) {
+        super();
+        this.records = records;
     }
 
-    public WineAOC(String name, WineRegion region) {
-        this.name = name;
-        this.region = region;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public WineAOC setName(String name) {
-        this.name = name;
-        return this;
-    }
-
-    public WineRegion getRegion() {
-        return region;
-    }
-
-    public WineAOC setRegion(WineRegion region) {
-        this.region = region;
-        return this;
+    public List<WineCellarRecord> getRecords() {
+        return records;
     }
 
     @Override
     public String toString() {
-        return "WineAOC{" +
-                "name='" + name + '\'' +
-                ", region=" + region +
+        return "WineCellar{" +
+                "records=" + records +
                 '}';
     }
 }

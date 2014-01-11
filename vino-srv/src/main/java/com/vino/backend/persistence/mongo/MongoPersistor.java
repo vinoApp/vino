@@ -16,15 +16,14 @@
 
 package com.vino.backend.persistence.mongo;
 
+import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.vino.backend.model.*;
 import com.vino.backend.persistence.Persistor;
 import logging.Loggers;
-import model.*;
+import org.bson.types.ObjectId;
 import org.slf4j.Logger;
 import restx.factory.Component;
-import restx.jongo.JongoCollection;
-
-import javax.inject.Named;
 
 /**
  * User: walien
@@ -36,23 +35,10 @@ import javax.inject.Named;
 public class MongoPersistor implements Persistor {
 
     private Logger logger = Loggers.SRV;
+    private MongoCollections collections;
 
-    private JongoCollection keys;
-    private JongoCollection aocs;
-    private JongoCollection regions;
-    private JongoCollection domains;
-    private JongoCollection bottles;
-
-    public MongoPersistor(@Named("keys") JongoCollection keys,
-                          @Named("aocs") JongoCollection aocs,
-                          @Named("regions") JongoCollection regions,
-                          @Named("domains") JongoCollection domains,
-                          @Named("bottles") JongoCollection bottles) {
-        this.keys = keys;
-        this.aocs = aocs;
-        this.regions = regions;
-        this.domains = domains;
-        this.bottles = bottles;
+    public MongoPersistor(MongoCollections collections) {
+        this.collections = collections;
     }
 
     ///////////////////////////////////
@@ -60,32 +46,62 @@ public class MongoPersistor implements Persistor {
     ///////////////////////////////////
 
     @Override
-    public ImmutableList<EntityKey> getAllKeys() {
-        logger.debug("Retrieving all keys");
-        return ImmutableList.copyOf(this.keys.get().find().as(EntityKey.class));
+    public <T extends Entity> Optional<T> getEntity(String key) {
+        EntityKey entityKey = collections.get(MongoCollections.KEYS).findOne(new ObjectId(key)).as(EntityKey.class);
+        logger.debug("Retrieving entity by key : {} from {}", entityKey.getKey(), entityKey.getCollection());
+        return Optional.fromNullable(
+                (T) collections.get(entityKey.getCollection()).findOne(new ObjectId(entityKey.getKey())).as(Entity.class)
+        );
     }
 
     @Override
     public ImmutableList<WineRegion> getAllRegions() {
         logger.debug("Retrieving all regions");
-        return ImmutableList.copyOf(this.regions.get().find().as(WineRegion.class));
+        return ImmutableList.copyOf(collections.get(MongoCollections.REGIONS).find().as(WineRegion.class));
     }
 
     @Override
     public ImmutableList<WineAOC> getAllAOCS() {
         logger.debug("Retrieving all aocs");
-        return ImmutableList.copyOf(this.aocs.get().find().as(WineAOC.class));
+        return ImmutableList.copyOf(collections.get(MongoCollections.AOCS).find().as(WineAOC.class));
     }
 
     @Override
     public ImmutableList<WineDomain> getAllDomains() {
         logger.debug("Retrieving all domains");
-        return ImmutableList.copyOf(this.domains.get().find().as(WineDomain.class));
+        return ImmutableList.copyOf(collections.get(MongoCollections.DOMAINS).find().as(WineDomain.class));
     }
 
     @Override
     public ImmutableList<WineBottle> getAllBottles() {
         logger.debug("Retrieving all bottles");
-        return ImmutableList.copyOf(this.bottles.get().find().as(WineBottle.class));
+        return ImmutableList.copyOf(collections.get(MongoCollections.BOTTLES).find().as(WineBottle.class));
     }
+
+    ///////////////////////////////////
+    // DATA PERSISTENCE
+    ///////////////////////////////////
+
+    @Override
+    public boolean persist(WineAOC aoc) {
+        collections.get(MongoCollections.AOCS).save(aoc);
+        collections.get(MongoCollections.KEYS).save(new EntityKey(aoc.getKey(), MongoCollections.AOCS));
+        return true;
+    }
+
+    @Override
+    public boolean persist(WineRegion region) {
+        collections.get(MongoCollections.REGIONS).save(region);
+        collections.get(MongoCollections.KEYS).save(new EntityKey(region.getKey(), MongoCollections.REGIONS));
+        return true;
+    }
+
+    @Override
+    public boolean persist(WineDomain domain) {
+        collections.get(MongoCollections.DOMAINS).save(domain);
+        collections.get(MongoCollections.KEYS).save(new EntityKey(domain.getKey(), MongoCollections.DOMAINS));
+        return true;
+    }
+
+
 }
