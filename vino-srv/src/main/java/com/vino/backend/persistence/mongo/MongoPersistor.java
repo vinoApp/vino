@@ -24,6 +24,8 @@ import org.slf4j.LoggerFactory;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
 
+import javax.inject.Named;
+
 /**
  * User: walien
  * Date: 1/7/14
@@ -41,11 +43,11 @@ public class MongoPersistor implements Persistor {
     private JongoCollection domains;
     private JongoCollection bottles;
 
-    public MongoPersistor(JongoCollection keys,
-                          JongoCollection aocs,
-                          JongoCollection regions,
-                          JongoCollection domains,
-                          JongoCollection bottles) {
+    public MongoPersistor(@Named("keys") JongoCollection keys,
+                          @Named("aocs") JongoCollection aocs,
+                          @Named("regions") JongoCollection regions,
+                          @Named("domains") JongoCollection domains,
+                          @Named("bottles") JongoCollection bottles) {
         this.keys = keys;
         this.aocs = aocs;
         this.regions = regions;
@@ -59,6 +61,7 @@ public class MongoPersistor implements Persistor {
 
     @Override
     public ImmutableList<EntityKey> getAllKeys() {
+        logger.debug("Retrieving all keys");
         return ImmutableList.copyOf(this.keys.get().find().as(EntityKey.class));
     }
 
