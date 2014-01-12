@@ -50,8 +50,11 @@ public class DomainsResource {
 
     @POST("/domains")
     public Response addDomain(WineDomain domain) {
+        boolean result = persistor.persist(domain);
+        Response.TechnicalStatus technical = result ? Response.TechnicalStatus.DB_INSERT_OK : Response.TechnicalStatus.DB_ERROR;
         return Response
-                .withStatuses(Optional.of(Response.TechnicalStatus.OK), Optional.<Response.BusinessStatus>absent())
+                .withStatuses(Optional.of(technical), Optional.<Response.BusinessStatus>absent())
+                .withMessage("The domain '%s' was properly persisted.", domain.getName())
                 .build();
     }
 }

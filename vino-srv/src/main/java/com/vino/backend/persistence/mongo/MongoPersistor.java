@@ -84,27 +84,46 @@ public class MongoPersistor implements Persistor {
 
     @Override
     public boolean persist(WineAOC aoc) {
+        // Check if the entity already exists
+        if (collections.get(MongoCollections.AOCS)
+                .count(" { name : #, region : # } ", aoc.getName(), aoc.getRegion().getKey()) > 0) {
+            logger.debug("AOC '{}' already exists", aoc.getKey());
+            return false;
+        }
+        // Persist
         collections.get(MongoCollections.AOCS).save(aoc);
         collections.get(MongoCollections.KEYS).save(new EntityKey(aoc.getKey(), MongoCollections.AOCS));
-        logger.debug("AOC {} persisted", aoc.getKey());
+        logger.debug("AOC '{}' persisted", aoc.getKey());
         return true;
     }
 
     @Override
     public boolean persist(WineRegion region) {
+        // Check if the entity already exists
+        if (collections.get(MongoCollections.REGIONS)
+                .count(" { name : # } ", region.getName()) > 0) {
+            logger.debug("Region '{}' already exists", region.getName());
+            return false;
+        }
+        // Persist
         collections.get(MongoCollections.REGIONS).save(region);
         collections.get(MongoCollections.KEYS).save(new EntityKey(region.getKey(), MongoCollections.REGIONS));
-        logger.debug("Region {} persisted", region.getKey());
+        logger.debug("Region '{}' persisted", region.getKey());
         return true;
     }
 
     @Override
     public boolean persist(WineDomain domain) {
+        // Check if the entity already exists
+        if (collections.get(MongoCollections.DOMAINS)
+                .count(" { name : #, origin : # } ", domain.getName(), domain.getOrigin().getKey()) > 0) {
+            logger.debug("Domain '{}' already exists", domain.getName());
+            return false;
+        }
+        // Persist
         collections.get(MongoCollections.DOMAINS).save(domain);
         collections.get(MongoCollections.KEYS).save(new EntityKey(domain.getKey(), MongoCollections.DOMAINS));
-        logger.debug("Domain {} persisted", domain.getKey());
+        logger.debug("Domain '{}' persisted", domain.getKey());
         return true;
     }
-
-
 }

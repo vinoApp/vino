@@ -63,8 +63,8 @@ public class Response {
             response.businessStatus = business;
         }
 
-        public ResponseBuilder withMessage(String message) {
-            response.message = message;
+        public ResponseBuilder withMessage(String message, Object... params) {
+            response.message = String.format(message, params);
             return this;
         }
 
