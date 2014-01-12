@@ -46,11 +46,20 @@ public class MongoPersistor implements Persistor {
     ///////////////////////////////////
 
     @Override
+    public Optional<EntityKey> getEntityKey(String key) {
+        return Optional.fromNullable(collections.get(MongoCollections.KEYS).findOne(new ObjectId(key)).as(EntityKey.class));
+    }
+
+    @Override
     public <T extends Entity> Optional<T> getEntity(String key) {
-        EntityKey entityKey = collections.get(MongoCollections.KEYS).findOne(new ObjectId(key)).as(EntityKey.class);
-        logger.debug("Retrieving entity by key : {} from {}", entityKey.getKey(), entityKey.getCollection());
+        Optional<EntityKey> entityKey = getEntityKey(key);
+        if (!entityKey.isPresent()) {
+            logger.warn("Entity not found '{}'", key);
+            return Optional.absent();
+        }
+        logger.debug("Retrieving entity by key : {} from {}", entityKey.get().getKey(), entityKey.get().getCollection());
         return Optional.fromNullable(
-                (T) collections.get(entityKey.getCollection()).findOne(new ObjectId(entityKey.getKey())).as(Entity.class)
+                (T) collections.get(entityKey.get().getCollection()).findOne(new ObjectId(entityKey.get().getKey())).as(Entity.class)
         );
     }
 
@@ -87,7 +96,7 @@ public class MongoPersistor implements Persistor {
         // Check if the entity already exists
         if (collections.get(MongoCollections.AOCS)
                 .count(" { name : #, region : # } ", aoc.getName(), aoc.getRegion().getKey()) > 0) {
-            logger.debug("AOC '{}' already exists", aoc.getKey());
+            logger.warn("AOC '{}' already exists", aoc.getKey());
             return false;
         }
         // Persist
@@ -102,7 +111,7 @@ public class MongoPersistor implements Persistor {
         // Check if the entity already exists
         if (collections.get(MongoCollections.REGIONS)
                 .count(" { name : # } ", region.getName()) > 0) {
-            logger.debug("Region '{}' already exists", region.getName());
+            logger.warn("Region '{}' already exists", region.getName());
             return false;
         }
         // Persist
@@ -117,13 +126,32 @@ public class MongoPersistor implements Persistor {
         // Check if the entity already exists
         if (collections.get(MongoCollections.DOMAINS)
                 .count(" { name : #, origin : # } ", domain.getName(), domain.getOrigin().getKey()) > 0) {
-            logger.debug("Domain '{}' already exists", domain.getName());
+            logger.warn("Domain '{}' already exists", domain.getName());
             return false;
         }
         // Persist
         collections.get(MongoCollections.DOMAINS).save(domain);
         collections.get(MongoCollections.KEYS).save(new EntityKey(domain.getKey(), MongoCollections.DOMAINS));
         logger.debug("Domain '{}' persisted", domain.getKey());
+        return true;
+    }
+
+    ///////////////////////////////////
+    // DATA DELETION
+    ///////////////////////////////////
+
+    @Override
+    public boolean delete(String key) {
+        Optional<EntityKey> entityKey = getEntityKey(key);
+        if (!entityKey.isPresent()) {
+            logger.warn("Entity not found '{}'", key);
+            return false;
+        }
+        // Remove from keys
+        collections.get(MongoCollections.KEYS).remove(new ObjectId(entityKey.get().getKey()));
+        // Remove from entity collection
+        collections.get(entityKey.get().getCollection()).remove(new ObjectId(entityKey.get().getKey()));
+        logger.debug("Entity '{}' is deleted from '{}'", key, entityKey.get().getCollection());
         return true;
     }
 }

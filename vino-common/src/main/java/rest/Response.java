@@ -29,6 +29,7 @@ public class Response {
 
         OK,
         DB_INSERT_OK,
+        DB_REMOVE_OK,
         DB_ERROR,
         INVALID_PARAMS,
     }

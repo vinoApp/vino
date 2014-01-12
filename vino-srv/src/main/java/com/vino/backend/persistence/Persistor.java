@@ -31,6 +31,8 @@ public interface Persistor {
     // DATA ACCESS
     ///////////////////////////////////
 
+    Optional<EntityKey> getEntityKey(String key);
+
     <T extends Entity> Optional<T> getEntity(String key);
 
     ImmutableList<WineAOC> getAllAOCS();
@@ -50,4 +52,10 @@ public interface Persistor {
     boolean persist(WineRegion region);
 
     boolean persist(WineDomain domain);
+
+    ///////////////////////////////////
+    // DATA DELETION
+    ///////////////////////////////////
+
+    boolean delete(String key);
 }

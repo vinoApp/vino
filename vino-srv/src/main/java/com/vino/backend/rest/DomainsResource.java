@@ -20,6 +20,7 @@ import com.google.common.base.Optional;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.persistence.Persistor;
 import rest.Response;
+import restx.annotations.DELETE;
 import restx.annotations.GET;
 import restx.annotations.POST;
 import restx.annotations.RestxResource;
@@ -55,6 +56,16 @@ public class DomainsResource {
         return Response
                 .withStatuses(Optional.of(technical), Optional.<Response.BusinessStatus>absent())
                 .withMessage("The domain '%s' was properly persisted.", domain.getName())
+                .build();
+    }
+
+    @DELETE("/domains/{key}")
+    public Response deleteDomain(String key) {
+        boolean result = persistor.delete(key);
+        Response.TechnicalStatus technical = result ? Response.TechnicalStatus.DB_REMOVE_OK : Response.TechnicalStatus.DB_ERROR;
+        return Response
+                .withStatuses(Optional.of(technical), Optional.<Response.BusinessStatus>absent())
+                .withMessage("The domain '%s' was properly deleted.", key)
                 .build();
     }
 }
