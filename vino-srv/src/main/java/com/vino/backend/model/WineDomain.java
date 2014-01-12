@@ -16,6 +16,8 @@
 
 package com.vino.backend.model;
 
+import com.vino.backend.reference.Reference;
+
 /**
  * User: walien
  * Date: 7/27/13
@@ -25,14 +27,12 @@ public class WineDomain extends Entity {
 
     private String name;
 
-    private WineAOC origin;
+    private Reference<WineAOC> origin;
 
     private byte[] sticker;
 
-    public WineDomain(String name, WineAOC origin) {
-        super();
-        this.name = name;
-        this.origin = origin;
+    public WineDomain() {
+
     }
 
     public String getName() {
@@ -44,11 +44,11 @@ public class WineDomain extends Entity {
         return this;
     }
 
-    public WineAOC getOrigin() {
+    public Reference<WineAOC> getOrigin() {
         return origin;
     }
 
-    public WineDomain setOrigin(WineAOC origin) {
+    public WineDomain setOrigin(Reference<WineAOC> origin) {
         this.origin = origin;
         return this;
     }
