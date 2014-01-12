@@ -16,6 +16,8 @@
 
 package com.vino.backend.model;
 
+import com.vino.backend.reference.Reference;
+
 /**
  * User: walien
  * Date: 7/27/13
@@ -25,11 +27,11 @@ public class WineBottle extends Entity {
 
     private Barcode barcode;
 
-    private WineDomain domain;
+    private Reference<WineDomain> domain;
 
     private int vintage;
 
-    public WineBottle(Barcode barcode, WineDomain domain, int vintage) {
+    public WineBottle(Barcode barcode, Reference<WineDomain> domain, int vintage) {
         super();
         this.barcode = barcode;
         this.domain = domain;
@@ -48,11 +50,11 @@ public class WineBottle extends Entity {
         return this;
     }
 
-    public WineDomain getDomain() {
+    public Reference<WineDomain> getDomain() {
         return domain;
     }
 
-    public WineBottle setDomain(WineDomain domain) {
+    public WineBottle setDomain(Reference<WineDomain> domain) {
         this.domain = domain;
         return this;
     }
