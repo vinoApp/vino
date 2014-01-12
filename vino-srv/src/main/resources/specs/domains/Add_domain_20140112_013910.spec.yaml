@@ -1,0 +1,48 @@
+title: Add domain 20140112 013910
+given:
+  - time: 2014-01-12T01:39:10.831+01:00
+  - collection: domains
+    data: |
+
+    sequence: 52d1e42e44ae9735dd093e2a
+  - collection: keys
+    data: |
+        { "_id" : { "$oid" : "52d1d87344ae2b229c3f7d60"} , "collection" : "regions"}
+        { "_id" : { "$oid" : "52d1d87344ae2b229c3f7d61"} , "collection" : "regions"}
+        { "_id" : { "$oid" : "52d1d87344ae2b229c3f7d62"} , "collection" : "regions"}
+        { "_id" : { "$oid" : "52d1d87344ae2b229c3f7d63"} , "collection" : "regions"}
+        { "_id" : { "$oid" : "52d1d87344ae2b229c3f7d64"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d65"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d66"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d67"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d68"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d69"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d6a"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d6b"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d6c"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d6d"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d6e"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d6f"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d70"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d71"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d72"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d73"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d74"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d75"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d76"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d77"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d78"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d79"} , "collection" : "aocs"}
+        { "_id" : { "$oid" : "52d1d87444ae2b229c3f7d7a"} , "collection" : "aocs"}
+wts:
+  - when: |
+       POST domains
+       Cookie: RestxSession-vino={"_expires":"2014-02-11T01:39:10.831+01:00","principal":"admin","sessionKey":"4246c8c9-eb17-4958-bc4e-86949bc2c840"}; RestxSessionSignature-vino=Vpt5p1IDqzSPUkhan8RnjtsuDl4=
+
+        {
+          "@class": "com.vino.backend.model.WineDomain",
+          "name": "Chateau Pétrus",
+          "origin": "52d1d87444ae2b229c3f7d77"
+        }
+    then: |
+        {"technicalStatus":"DB_INSERT_OK","businessStatus":null,"message":"The domain 'Chateau Pétrus' was properly persisted."}
