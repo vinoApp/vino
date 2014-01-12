@@ -17,5 +17,5 @@ register/unregister a stored bottle reading the bar code on the bottle.
 The solution is built on the following technical stack (excluding standard tools) :
 - WebUI : AngularJS & Twitter Bootstrap
 - Mobile : Android SDK
-- Server (Java) : Jersey (JAX-RS) that exposes a set of REST WebServices. 
+- Server (Java) : [restx.io](http://restx.io/) that exposes a set of REST WebServices.
 
