@@ -2,3 +2,6 @@ out
 build
 target
 .idea/workspace.xml
+.idea/libraries
+.idea/artifacts
+vino-srv/tmp
