@@ -28,15 +28,15 @@ import java.util.List;
  */
 public class WineCellar {
 
-    private List<WineCellarRecord> records;
+    private List<Record> records;
 
     @JsonCreator
-    public WineCellar(@JsonProperty("records") List<WineCellarRecord> records) {
+    public WineCellar(@JsonProperty("records") List<Record> records) {
         super();
         this.records = records;
     }
 
-    public List<WineCellarRecord> getRecords() {
+    public List<Record> getRecords() {
         return records;
     }
 
@@ -46,4 +46,43 @@ public class WineCellar {
                 "records=" + records +
                 '}';
     }
+
+    public class Record {
+
+        private WineBottle bottle;
+
+        private int quantity;
+
+        public Record(WineBottle bottle, int quantity) {
+            this.bottle = bottle;
+            this.quantity = quantity;
+        }
+
+        public WineBottle getBottle() {
+            return bottle;
+        }
+
+        public int getQuantity() {
+            return quantity;
+        }
+
+        public Record setBottle(final WineBottle bottle) {
+            this.bottle = bottle;
+            return this;
+        }
+
+        public Record setQuantity(final int quantity) {
+            this.quantity = quantity;
+            return this;
+        }
+
+        @Override
+        public String toString() {
+            return "Record{" +
+                    "bottle=" + bottle +
+                    ", quantity=" + quantity +
+                    '}';
+        }
+    }
+
 }
