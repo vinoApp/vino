@@ -126,9 +126,14 @@ public class InitDB {
         Reference<WineDomain> petrusRef = addDomain("Chateau Pétrus", pomerolRef, null);
 
         // Cellar records
-        addCellarRecord(hbRef, 2008, 30);
-        addCellarRecord(hbRef, 2008, 30);
-        addCellarRecord(hbRef, 2008, 30);
-        addCellarRecord(hbRef, 2008, 30);
+        addCellarRecord(hbRef, 2008, 10);
+        addCellarRecord(hbRef, 2009, 5);
+        addCellarRecord(hbRef, 2011, 8);
+
+        addCellarRecord(beychevellRef, 2008, 30);
+
+        addCellarRecord(cbRef, 2008, 30);
+        addCellarRecord(cbRef, 2008, 30);
+        addCellarRecord(cbRef, 2010, 10);
     }
 }
