@@ -23,6 +23,7 @@ import com.vino.backend.persistence.Persistor;
 import com.vino.backend.reference.Reference;
 import logging.Loggers;
 import org.bson.types.ObjectId;
+import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import restx.factory.Component;
 
@@ -83,6 +84,12 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
+    public ImmutableList<WineBottle> getAllBottles() {
+        logger.debug("Retrieving all bottles");
+        return ImmutableList.copyOf(collections.get(MongoCollections.BOTTLES).find().as(WineBottle.class));
+    }
+
+    @Override
     public WineCellar getCellar() {
         Iterable<WineCellar.Record> records = collections.get(MongoCollections.CELLAR)
                 .find()
@@ -99,9 +106,9 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public Optional<WineCellar.Record> getRecord(String domainKey, int vintage) {
+    public Optional<WineCellar.Record> getRecord(String bottleKey) {
         WineCellar.Record record = collections.get(MongoCollections.CELLAR)
-                .findOne("{ domain : #, vintage : # }", domainKey, vintage)
+                .findOne("{ bottle : # }", bottleKey)
                 .as(WineCellar.Record.class);
         return Optional.fromNullable(record);
     }
@@ -149,6 +156,25 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
+    public boolean persist(WineBottle bottle) {
+
+        // Check if the entity already exists
+        if (collections.get(MongoCollections.BOTTLES)
+                .count(" { domain : #, vintage : # } ", bottle.getDomain().getKey(), bottle.getVintage()) > 0) {
+            logger.warn("Bottle '{}' (of domain : '{}') already exists",
+                    bottle.getCode(),
+                    bottle.getDomain().get(this).get().getName()
+            );
+            return false;
+        }
+
+        persistEntity(bottle, MongoCollections.BOTTLES);
+
+        return true;
+    }
+
+
+    @Override
     public boolean persist(WineDomain domain) {
 
         // Check if the entity already exists
@@ -164,18 +190,43 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public boolean addInCellar(WineCellar.Record record) {
+    public boolean addInCellar(Reference<WineBottle> bottle, int quantity) {
 
-        Optional<WineCellar.Record> foundRecord = getRecord(record.getDomain().getKey(), record.getVintage());
+        Optional<WineCellar.Record> foundRecord = getRecord(bottle.getKey());
 
         if (foundRecord.isPresent()) {
-            foundRecord.get().setQuantity(foundRecord.get().getQuantity() + record.getQuantity());
+            foundRecord.get().setQuantity(foundRecord.get().getQuantity() + quantity);
             collections.get(MongoCollections.CELLAR).save(foundRecord.get());
         } else {
-            if (!getEntity(record.getDomain().getKey()).isPresent()) {
+            if (!getEntity(bottle.getKey()).isPresent()) {
                 return false;
             }
-            collections.get(MongoCollections.CELLAR).save(record);
+            collections.get(MongoCollections.CELLAR).save(
+                    new WineCellar.Record()
+                            .setBottle(bottle)
+                            .setQuantity(quantity)
+            );
+        }
+
+        return true;
+    }
+
+    @Override
+    public boolean removeFromCellar(Reference<WineBottle> bottle, int quantity) {
+
+        Optional<WineCellar.Record> foundRecord = getRecord(bottle.getKey());
+
+        if (!foundRecord.isPresent()) {
+            return false;
+        }
+
+        MongoCollection collection = collections.get(MongoCollections.CELLAR);
+
+        if (foundRecord.get().getQuantity() - quantity <= 0) {
+            collection.remove(foundRecord.get().getKey());
+        } else {
+            foundRecord.get().setQuantity(foundRecord.get().getQuantity() - quantity);
+            collection.save(foundRecord.get());
         }
 
         return true;

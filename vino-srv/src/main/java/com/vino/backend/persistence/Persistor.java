@@ -19,6 +19,7 @@ package com.vino.backend.persistence;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.vino.backend.model.*;
+import com.vino.backend.reference.Reference;
 
 /**
  * User: walien
@@ -41,11 +42,13 @@ public interface Persistor {
 
     ImmutableList<WineDomain> getAllDomains();
 
+    ImmutableList<WineBottle> getAllBottles();
+
     WineCellar getCellar();
 
     ImmutableList<WineCellar.Record> getRecordsByDomain(String domainKey);
 
-    Optional<WineCellar.Record> getRecord(String domainKey, int vintage);
+    Optional<WineCellar.Record> getRecord(String bottleKey);
 
     ///////////////////////////////////
     // DATA PERSISTENCE
@@ -57,11 +60,16 @@ public interface Persistor {
 
     boolean persist(WineDomain domain);
 
-    boolean addInCellar(WineCellar.Record record);
+    boolean persist(WineBottle bottle);
+
+    boolean addInCellar(Reference<WineBottle> bottle, int quantity);
+
+    boolean removeFromCellar(Reference<WineBottle> bottle, int quantity);
 
     ///////////////////////////////////
     // DATA DELETION
     ///////////////////////////////////
 
     boolean delete(String key);
+
 }

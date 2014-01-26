@@ -19,9 +19,7 @@ package com.vino.backend.rest;
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.vino.backend.model.WineBottle;
-import com.vino.backend.model.WineCellar;
 import com.vino.backend.persistence.Persistor;
-import com.vino.backend.reference.Reference;
 import rest.Response;
 import restx.annotations.DELETE;
 import restx.annotations.GET;
@@ -37,52 +35,47 @@ import restx.factory.Component;
 
 @Component
 @RestxResource
-public class CellarResource {
+public class BottlesResource {
 
     private Persistor persistor;
 
-    public CellarResource(Persistor persistor) {
+    public BottlesResource(Persistor persistor) {
         this.persistor = persistor;
     }
 
-    @GET("/cellar")
-    public WineCellar getCellar() {
-        return persistor.getCellar();
+    @GET("/bottles")
+    public ImmutableList<WineBottle> getBottles() {
+        return persistor.getAllBottles();
     }
 
-    @GET("/cellar/byDomain/{domainKey}")
-    public ImmutableList<WineCellar.Record> getRecordsByDomain(String domainKey) {
-        return persistor.getRecordsByDomain(domainKey);
+    @GET("/bottles/{bottleKey}")
+    public Optional<WineBottle> getBottle(String bottleKey) {
+        return persistor.getEntity(bottleKey);
     }
 
-    @GET("/cellar/byBottle/{bottleKey}")
-    public Optional<WineCellar.Record> getRecord(String bottleKey) {
-        return persistor.getRecord(bottleKey);
-    }
+    @POST("/bottles")
+    public Response addBottle(WineBottle bottle) {
 
-    @POST("/cellar/{bottleKey}/{qty}")
-    public Response addInCelar(String bottleKey, int qty) {
-
-        boolean result = persistor.addInCellar(new Reference<WineBottle>(bottleKey), qty);
+        boolean result = persistor.persist(bottle);
         Optional<Response.TechnicalStatus> status = result
                 ? Optional.of(Response.TechnicalStatus.OK)
                 : Optional.of(Response.TechnicalStatus.DB_ERROR);
         return Response
                 .withStatuses(status, Optional.<Response.BusinessStatus>absent())
-                .withMessage("Record added in cellar.")
+                .withMessage("Bottle persisted successfuly !")
                 .build();
     }
 
-    @DELETE("/cellar/{bottleKey}/{qty}")
-    public Response removeFromCellar(String bottleKey, int qty) {
+    @DELETE("/bottles/{bottleKey}")
+    public Response removeBottle(String bottleKey) {
 
-        boolean result = persistor.removeFromCellar(new Reference<WineBottle>(bottleKey), qty);
+        boolean result = persistor.delete(bottleKey);
         Optional<Response.TechnicalStatus> status = result
                 ? Optional.of(Response.TechnicalStatus.OK)
                 : Optional.of(Response.TechnicalStatus.DB_ERROR);
         return Response
                 .withStatuses(status, Optional.<Response.BusinessStatus>absent())
-                .withMessage("Record updated in cellar.")
+                .withMessage("Bottle removed successfuly !")
                 .build();
     }
 }

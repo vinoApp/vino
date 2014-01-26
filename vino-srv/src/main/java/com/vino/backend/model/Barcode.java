@@ -16,6 +16,9 @@
 
 package com.vino.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonCreator;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 /**
  * User: walien
  * Date: 1/12/14
@@ -31,7 +34,9 @@ public class Barcode {
 
     private String value;
 
-    private Barcode(Type type, String value) {
+    @JsonCreator
+    public Barcode(@JsonProperty("type") Type type,
+                   @JsonProperty("value") String value) {
         this.type = type;
         this.value = value;
     }
@@ -45,6 +50,9 @@ public class Barcode {
     }
 
     public static Barcode ean13(String value) {
+        if (value.length() != 13) {
+            throw new IllegalArgumentException("Invalid ean13 barcode : " + value);
+        }
         return new Barcode(Type.EAN_13, value);
     }
 

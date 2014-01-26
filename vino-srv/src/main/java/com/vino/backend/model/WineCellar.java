@@ -47,35 +47,25 @@ public class WineCellar {
 
     public static class Record extends Entity {
 
-        private Reference<WineDomain> domain;
-
-        private int vintage;
+        private Reference<WineBottle> bottle;
 
         private int quantity;
 
         public Record() {
+
         }
 
-        public Reference<WineDomain> getDomain() {
-            return domain;
+        public Reference<WineBottle> getBottle() {
+            return bottle;
         }
 
-        public int getVintage() {
-            return vintage;
+        public Record setBottle(final Reference<WineBottle> bottle) {
+            this.bottle = bottle;
+            return this;
         }
 
         public int getQuantity() {
             return quantity;
-        }
-
-        public Record setDomain(final Reference<WineDomain> domain) {
-            this.domain = domain;
-            return this;
-        }
-
-        public Record setVintage(final int vintage) {
-            this.vintage = vintage;
-            return this;
         }
 
         public Record setQuantity(final int quantity) {
@@ -86,8 +76,7 @@ public class WineCellar {
         @Override
         public String toString() {
             return "Record{" +
-                    "domain=" + domain +
-                    ", vintage=" + vintage +
+                    "bottle=" + bottle +
                     ", quantity=" + quantity +
                     '}';
         }
