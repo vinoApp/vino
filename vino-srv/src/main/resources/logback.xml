@@ -6,6 +6,7 @@
         </encoder>
     </appender>
 
+    <!-- clean up container logs -->
     <logger name="org.eclipse.jetty.server.AbstractConnector" level="WARN" />
     <logger name="org.eclipse.jetty.server.handler.ContextHandler" level="WARN" />
     <logger name="org.eclipse.jetty.webapp.StandardDescriptorProcessor" level="WARN" />

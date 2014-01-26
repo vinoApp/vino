@@ -17,6 +17,7 @@
 package com.vino.backend;
 
 import com.vino.backend.model.WineAOC;
+import com.vino.backend.model.WineCellar;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.model.WineRegion;
 import com.vino.backend.persistence.Persistor;
@@ -58,6 +59,14 @@ public class InitDB {
                 .setSticker(sticker);
         PERSISTOR.persist(domain);
         return Reference.of(domain);
+    }
+
+    private void addCellarRecord(Reference<WineDomain> domain, int vintage, int qty) {
+        WineCellar.Record record = new WineCellar.Record()
+                .setDomain(domain)
+                .setVintage(vintage)
+                .setQuantity(qty);
+        PERSISTOR.addInCellar(record);
     }
 
     @Test
@@ -110,10 +119,16 @@ public class InitDB {
         addAOC("Cérons", gravesRef);
 
         // Domains
-        addDomain("Mission Haut-Brion", pessacLeoganRef, null);
-        addDomain("Chateau Margaux", margauxRef, null);
-        addDomain("Chateau Beychevelle", saintJulienRef, null);
-        addDomain("Chateau Cheval Blanc", saintEmilionRef, null);
-        addDomain("Chateau Pétrus", pomerolRef, null);
+        Reference<WineDomain> hbRef = addDomain("Mission Haut-Brion", pessacLeoganRef, null);
+        Reference<WineDomain> mrgRef = addDomain("Chateau Margaux", margauxRef, null);
+        Reference<WineDomain> beychevellRef = addDomain("Chateau Beychevelle", saintJulienRef, null);
+        Reference<WineDomain> cbRef = addDomain("Chateau Cheval Blanc", saintEmilionRef, null);
+        Reference<WineDomain> petrusRef = addDomain("Chateau Pétrus", pomerolRef, null);
+
+        // Cellar records
+        addCellarRecord(hbRef, 2008, 30);
+        addCellarRecord(hbRef, 2008, 30);
+        addCellarRecord(hbRef, 2008, 30);
+        addCellarRecord(hbRef, 2008, 30);
     }
 }

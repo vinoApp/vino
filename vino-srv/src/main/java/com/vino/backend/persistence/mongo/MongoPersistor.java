@@ -168,8 +168,8 @@ public class MongoPersistor implements Persistor {
         Optional<WineCellar.Record> foundRecord = getRecord(record.getDomain().getKey(), record.getVintage());
 
         if (foundRecord.isPresent()) {
-            foundRecord.get().setQuantity(record.getQuantity());
-            collections.get(MongoCollections.CELLAR).save(foundRecord);
+            foundRecord.get().setQuantity(foundRecord.get().getQuantity() + record.getQuantity());
+            collections.get(MongoCollections.CELLAR).save(foundRecord.get());
         } else {
             collections.get(MongoCollections.CELLAR).save(record);
         }

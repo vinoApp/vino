@@ -45,7 +45,7 @@ public class WineCellar {
                 '}';
     }
 
-    public class Record {
+    public static class Record extends Entity {
 
         private Reference<WineDomain> domain;
 
