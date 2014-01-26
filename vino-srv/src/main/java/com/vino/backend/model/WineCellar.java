@@ -16,8 +16,7 @@
 
 package com.vino.backend.model;
 
-import com.fasterxml.jackson.annotation.JsonCreator;
-import com.fasterxml.jackson.annotation.JsonProperty;
+import com.vino.backend.reference.Reference;
 
 import java.util.List;
 
@@ -30,8 +29,7 @@ public class WineCellar {
 
     private List<Record> records;
 
-    @JsonCreator
-    public WineCellar(@JsonProperty("records") List<Record> records) {
+    public WineCellar(List<Record> records) {
         super();
         this.records = records;
     }
@@ -49,25 +47,34 @@ public class WineCellar {
 
     public class Record {
 
-        private WineBottle bottle;
+        private Reference<WineDomain> domain;
+
+        private int vintage;
 
         private int quantity;
 
-        public Record(WineBottle bottle, int quantity) {
-            this.bottle = bottle;
-            this.quantity = quantity;
+        public Record() {
         }
 
-        public WineBottle getBottle() {
-            return bottle;
+        public Reference<WineDomain> getDomain() {
+            return domain;
+        }
+
+        public int getVintage() {
+            return vintage;
         }
 
         public int getQuantity() {
             return quantity;
         }
 
-        public Record setBottle(final WineBottle bottle) {
-            this.bottle = bottle;
+        public Record setDomain(final Reference<WineDomain> domain) {
+            this.domain = domain;
+            return this;
+        }
+
+        public Record setVintage(final int vintage) {
+            this.vintage = vintage;
             return this;
         }
 
@@ -79,7 +86,8 @@ public class WineCellar {
         @Override
         public String toString() {
             return "Record{" +
-                    "bottle=" + bottle +
+                    "domain=" + domain +
+                    ", vintage=" + vintage +
                     ", quantity=" + quantity +
                     '}';
         }

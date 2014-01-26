@@ -25,15 +25,6 @@ public class WineRegion extends Entity {
 
     private String name;
 
-    public WineRegion() {
-        super();
-    }
-
-    public WineRegion(String name) {
-        super();
-        this.name = name;
-    }
-
     public String getName() {
         return name;
     }

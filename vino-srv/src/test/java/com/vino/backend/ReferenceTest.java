@@ -18,6 +18,7 @@ package com.vino.backend;
 
 import com.google.common.base.Optional;
 import com.vino.backend.model.WineAOC;
+import com.vino.backend.model.WineDomain;
 import com.vino.backend.model.WineRegion;
 import com.vino.backend.persistence.Persistor;
 import com.vino.backend.persistence.mongo.MongoCollections;
@@ -52,6 +53,26 @@ public class ReferenceTest {
         assertThat(wineRegion).isNotNull();
         assertThat(wineRegion.isPresent()).isTrue();
         assertThat(wineRegion.get().getName()).isEqualTo("Graves");
+    }
+
+    @Test
+    public void should_properly_retrieve_linked_origins() {
+
+        JongoCollection aocs = FACTORY.queryByName(Name.of(JongoCollection.class, MongoCollections.DOMAINS)).findOneAsComponent().get();
+
+        WineDomain domain = aocs.get().findOne(" { name : # } ", "Mission Haut-Brion").as(WineDomain.class);
+
+        Optional<WineAOC> wineAOC = domain.getOrigin().get(persistor);
+
+        assertThat(wineAOC).isNotNull();
+        assertThat(wineAOC.isPresent()).isTrue();
+        assertThat(wineAOC.get().getName()).isEqualTo("Pessac-Léognan");
+
+        Optional<WineRegion> wineRegion = wineAOC.get().getRegion().get(persistor);
+
+        assertThat(wineRegion).isNotNull();
+        assertThat(wineRegion.isPresent()).isTrue();
+        assertThat(wineRegion .get().getName()).isEqualTo("Graves");
     }
 
 }

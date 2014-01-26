@@ -36,7 +36,7 @@ public class Response {
 
     public enum BusinessStatus {
 
-        BOTTLE_NOT_FOUND,
+        NO_RECORD_FOUND,
         DOMAIN_NOT_FOUND
     }
 

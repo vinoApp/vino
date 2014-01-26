@@ -17,6 +17,7 @@
 package com.vino.backend;
 
 import com.vino.backend.model.WineAOC;
+import com.vino.backend.model.WineDomain;
 import com.vino.backend.model.WineRegion;
 import com.vino.backend.persistence.Persistor;
 import com.vino.backend.persistence.mongo.MongoPersistor;
@@ -42,8 +43,25 @@ public class InitDB {
         FACTORY.getComponent(Name.of(Jongo.class)).getDatabase().dropDatabase();
     }
 
+    private Reference<WineAOC> addAOC(String name, Reference<WineRegion> regionRef) {
+        WineAOC aoc = new WineAOC()
+                .setName(name)
+                .setRegion(regionRef);
+        PERSISTOR.persist(aoc);
+        return Reference.of(aoc);
+    }
+
+    private Reference<WineDomain> addDomain(String name, Reference<WineAOC> aoc, byte[] sticker) {
+        WineDomain domain = new WineDomain()
+                .setName(name)
+                .setOrigin(aoc)
+                .setSticker(sticker);
+        PERSISTOR.persist(domain);
+        return Reference.of(domain);
+    }
+
     @Test
-    public void populateWithOrigins() {
+    public void populate() {
 
         // Regions
         WineRegion medoc = new WineRegion().setName("Médoc");
@@ -64,17 +82,17 @@ public class InitDB {
 
 
         // AOCS
-        addAOC("Margaux", medocRef);
+        Reference<WineAOC> margauxRef = addAOC("Margaux", medocRef);
         addAOC("Moulis", medocRef);
         addAOC("Listrac", medocRef);
-        addAOC("Saint-Julien", medocRef);
+        Reference<WineAOC> saintJulienRef = addAOC("Saint-Julien", medocRef);
         addAOC("Pauillac", medocRef);
         addAOC("Saint-Estèphe", medocRef);
 
         addAOC("Fronsac", libournaisRef);
-        addAOC("Pomerol", libournaisRef);
+        Reference<WineAOC> pomerolRef = addAOC("Pomerol", libournaisRef);
         addAOC("Lalande de Pomerol", libournaisRef);
-        addAOC("Saint-Emilion", libournaisRef);
+        Reference<WineAOC> saintEmilionRef = addAOC("Saint-Emilion", libournaisRef);
         addAOC("Montagne Saint-Emilion", libournaisRef);
         addAOC("Lussac Saint-Emilion", libournaisRef);
         addAOC("Puisseguin Saint-Emilion", libournaisRef);
@@ -88,14 +106,14 @@ public class InitDB {
 
         addAOC("Graves", gravesRef);
         addAOC("Graves Superieurs", gravesRef);
-        addAOC("Pessac-Léognan", gravesRef);
+        Reference<WineAOC> pessacLeoganRef = addAOC("Pessac-Léognan", gravesRef);
         addAOC("Cérons", gravesRef);
-    }
 
-    private void addAOC(String name, Reference<WineRegion> regionRef) {
-        WineAOC aoc = new WineAOC()
-                .setName(name)
-                .setRegion(regionRef);
-        PERSISTOR.persist(aoc);
+        // Domains
+        addDomain("Mission Haut-Brion", pessacLeoganRef, null);
+        addDomain("Chateau Margaux", margauxRef, null);
+        addDomain("Chateau Beychevelle", saintJulienRef, null);
+        addDomain("Chateau Cheval Blanc", saintEmilionRef, null);
+        addDomain("Chateau Pétrus", pomerolRef, null);
     }
 }

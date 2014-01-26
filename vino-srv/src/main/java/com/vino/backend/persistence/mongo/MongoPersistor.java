@@ -82,9 +82,27 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public ImmutableList<WineBottle> getAllBottles() {
-        logger.debug("Retrieving all bottles");
-        return ImmutableList.copyOf(collections.get(MongoCollections.BOTTLES).find().as(WineBottle.class));
+    public WineCellar getCellar() {
+        Iterable<WineCellar.Record> records = collections.get(MongoCollections.CELLAR)
+                .find()
+                .as(WineCellar.Record.class);
+        return new WineCellar(ImmutableList.copyOf(records));
+    }
+
+    @Override
+    public ImmutableList<WineCellar.Record> getRecordsByDomain(String domainKey) {
+        Iterable<WineCellar.Record> records = collections.get(MongoCollections.CELLAR)
+                .find("{ domain : # }", domainKey)
+                .as(WineCellar.Record.class);
+        return ImmutableList.copyOf(records);
+    }
+
+    @Override
+    public Optional<WineCellar.Record> getRecord(String domainKey, int vintage) {
+        WineCellar.Record record = collections.get(MongoCollections.CELLAR)
+                .findOne("{ domain : #, vintage : # }", domainKey, vintage)
+                .as(WineCellar.Record.class);
+        return Optional.fromNullable(record);
     }
 
     ///////////////////////////////////
@@ -140,6 +158,21 @@ public class MongoPersistor implements Persistor {
         }
 
         persistEntity(domain, MongoCollections.DOMAINS);
+
+        return true;
+    }
+
+    @Override
+    public boolean addInCellar(WineCellar.Record record) {
+
+        Optional<WineCellar.Record> foundRecord = getRecord(record.getDomain().getKey(), record.getVintage());
+
+        if (foundRecord.isPresent()) {
+            foundRecord.get().setQuantity(record.getQuantity());
+            collections.get(MongoCollections.CELLAR).save(foundRecord);
+        } else {
+            collections.get(MongoCollections.CELLAR).save(record);
+        }
 
         return true;
     }
