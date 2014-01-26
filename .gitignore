@@ -1,6 +1,7 @@
 out
 build
 target
+logs*
 .idea/workspace.xml
 .idea/libraries
 .idea/artifacts
