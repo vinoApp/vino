@@ -21,7 +21,7 @@ import com.google.common.collect.ImmutableList;
 import com.vino.backend.model.*;
 import com.vino.backend.persistence.Persistor;
 import com.vino.backend.reference.Reference;
-import logging.Loggers;
+import com.vino.backend.logging.Loggers;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;

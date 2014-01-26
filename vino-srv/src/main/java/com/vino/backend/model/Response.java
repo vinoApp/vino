@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package rest;
+package com.vino.backend.model;
 
 import com.google.common.base.Optional;
 

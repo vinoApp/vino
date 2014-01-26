@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package logging;
+package com.vino.backend.logging;
 
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;

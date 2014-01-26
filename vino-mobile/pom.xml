@@ -22,10 +22,12 @@
             <version>2.2.1</version>
             <scope>provided</scope>
         </dependency>
+
+        <!-- Tools -->
         <dependency>
-            <groupId>com.vino</groupId>
-            <artifactId>vino-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
+            <groupId>com.github.kevinsawicki</groupId>
+            <artifactId>http-request</artifactId>
+            <version>4.1</version>
         </dependency>
     </dependencies>
     <build>

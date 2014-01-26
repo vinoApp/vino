@@ -20,7 +20,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.vino.backend.model.WineBottle;
 import com.vino.backend.persistence.Persistor;
-import rest.Response;
+import com.vino.backend.model.Response;
 import restx.annotations.DELETE;
 import restx.annotations.GET;
 import restx.annotations.POST;
