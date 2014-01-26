@@ -14,18 +14,27 @@
  * limitations under the License.
  */
 
-package com.vino.mobile;
+package com.vino.mobile.fragments;
+
+import android.os.Bundle;
+import android.support.v4.app.Fragment;
+import android.view.LayoutInflater;
+import android.view.View;
+import android.view.ViewGroup;
+import com.vino.mobile.R;
 
 /**
  * User: walien
- * Date: 8/4/13
- * Time: 12:48 AM
+ * Date: 1/26/14
+ * Time: 4:49 PM
  */
-public class VinoRESTClient {
+public class DomainsManagementFragment extends Fragment {
 
-    public static final String GET_BOTTLE_BY_BARCODE_URL = "http://192.168.1.101:8080/rest/bottles/";
-    public static final String ADD_PENDING_BOTTLE_URL = "http://192.168.1.101:8080/rest/pendings/";
-    public static final String CELLAR_URL = "http://192.168.1.101:8080/rest/cellar/";
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
+        View rootView = inflater.inflate(R.layout.domains_fragment, container, false);
 
+        return rootView;
+    }
 }
