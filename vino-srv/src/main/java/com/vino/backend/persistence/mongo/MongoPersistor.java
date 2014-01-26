@@ -20,6 +20,7 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.vino.backend.model.*;
 import com.vino.backend.persistence.Persistor;
+import com.vino.backend.reference.Reference;
 import logging.Loggers;
 import org.bson.types.ObjectId;
 import org.slf4j.Logger;
@@ -171,6 +172,9 @@ public class MongoPersistor implements Persistor {
             foundRecord.get().setQuantity(foundRecord.get().getQuantity() + record.getQuantity());
             collections.get(MongoCollections.CELLAR).save(foundRecord.get());
         } else {
+            if (!getEntity(record.getDomain().getKey()).isPresent()) {
+                return false;
+            }
             collections.get(MongoCollections.CELLAR).save(record);
         }
 

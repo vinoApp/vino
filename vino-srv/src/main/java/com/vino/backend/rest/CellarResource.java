@@ -20,7 +20,9 @@ import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
 import com.vino.backend.model.WineCellar;
 import com.vino.backend.persistence.Persistor;
+import rest.Response;
 import restx.annotations.GET;
+import restx.annotations.POST;
 import restx.annotations.RestxResource;
 import restx.factory.Component;
 
@@ -55,5 +57,16 @@ public class CellarResource {
         return persistor.getRecord(domainKey, vintage);
     }
 
+    @POST("/cellar")
+    public Response addInCelar(WineCellar.Record record) {
 
+        boolean result = persistor.addInCellar(record);
+        Optional<Response.TechnicalStatus> status = result
+                ? Optional.of(Response.TechnicalStatus.OK)
+                : Optional.of(Response.TechnicalStatus.DB_ERROR);
+        return Response
+                .withStatuses(status, Optional.<Response.BusinessStatus>absent())
+                .withMessage("Record added in cellar.")
+                .build();
+    }
 }
