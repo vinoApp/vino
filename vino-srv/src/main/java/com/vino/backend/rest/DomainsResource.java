@@ -25,6 +25,7 @@ import restx.annotations.GET;
 import restx.annotations.POST;
 import restx.annotations.RestxResource;
 import restx.factory.Component;
+import restx.security.PermitAll;
 
 import java.util.List;
 
@@ -45,6 +46,7 @@ public class DomainsResource {
     }
 
     @GET("/domains")
+    @PermitAll
     public List<WineDomain> getAllDomains() {
         return persistor.getAllDomains();
     }

@@ -14,19 +14,33 @@
  * limitations under the License.
  */
 
-package com.vino.backend.logging;
+package com.vino.mobile.model;
 
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 /**
  * User: walien
- * Date: 1/11/14
- * Time: 5:00 PM
+ * Date: 7/27/13
+ * Time: 4:24 PM
  */
-public class Loggers {
+@JsonIgnoreProperties(ignoreUnknown = true)
+public class WineRegion {
 
-    public static final String VINO_SRV = "vino-srv";
+    private String name;
 
-    public static final Logger SRV = LoggerFactory.getLogger(VINO_SRV);
+    public String getName() {
+        return name;
+    }
+
+    public WineRegion setName(String name) {
+        this.name = name;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "WineRegion{" +
+                "name='" + name + '\'' +
+                '}';
+    }
 }

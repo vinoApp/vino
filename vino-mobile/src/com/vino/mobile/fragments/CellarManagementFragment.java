@@ -38,4 +38,7 @@ public class CellarManagementFragment extends Fragment {
 
         return rootView;
     }
+
+
 }
+

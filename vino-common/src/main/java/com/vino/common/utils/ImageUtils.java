@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vino.backend.utils;
+package com.vino.common.utils;
 
 import sun.misc.BASE64Decoder;
 import sun.misc.BASE64Encoder;

@@ -27,6 +27,7 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
+        <module name="vino-common" />
         <module name="vino-mobile" />
         <module name="vino-srv" />
       </profile>

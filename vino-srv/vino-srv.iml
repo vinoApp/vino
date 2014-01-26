@@ -26,11 +26,15 @@
       <sourceFolder url="file://$MODULE_DIR$/target/generated-sources/annotations" isTestSource="false" />
       <excludeFolder url="file://$MODULE_DIR$/target/classes" />
       <excludeFolder url="file://$MODULE_DIR$/target/maven-archiver" />
+      <excludeFolder url="file://$MODULE_DIR$/target/restx" />
+      <excludeFolder url="file://$MODULE_DIR$/target/surefire-reports" />
       <excludeFolder url="file://$MODULE_DIR$/target/test-classes" />
     </content>
     <orderEntry type="jdk" jdkName="1.7" jdkType="JavaSDK" />
     <orderEntry type="sourceFolder" forTests="false" />
-    <orderEntry type="library" name="Maven: com.vino:vino-common:1.0-SNAPSHOT" level="project" />
+    <orderEntry type="module" module-name="vino-common" />
+    <orderEntry type="library" name="Maven: junit:junit:4.11" level="project" />
+    <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: io.restx:restx-core:0.31" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-core:2.3.0" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml.jackson.core:jackson-annotations:2.3.0" level="project" />
@@ -56,11 +60,6 @@
     <orderEntry type="library" name="Maven: org.jboss.logging:jboss-logging:3.1.1.GA" level="project" />
     <orderEntry type="library" name="Maven: com.fasterxml:classmate:0.8.0" level="project" />
     <orderEntry type="library" name="Maven: org.yaml:snakeyaml:1.13" level="project" />
-    <orderEntry type="library" name="Maven: com.github.kevinsawicki:http-request:4.1" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.9" level="project" />
-    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.9" level="project" />
-    <orderEntry type="library" name="Maven: junit:junit:4.11" level="project" />
-    <orderEntry type="library" name="Maven: org.hamcrest:hamcrest-core:1.3" level="project" />
     <orderEntry type="library" name="Maven: io.restx:restx-security-basic:0.31" level="project" />
     <orderEntry type="library" name="Maven: io.restx:restx-core-annotation-processor:0.31" level="project" />
     <orderEntry type="library" name="Maven: org.mindrot:jbcrypt:0.3m" level="project" />
@@ -97,6 +96,7 @@
     <orderEntry type="library" scope="TEST" name="Maven: org.json:json:20090211" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: commons-collections:commons-collections:3.0" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: org.assertj:assertj-core:1.5.0" level="project" />
+    <orderEntry type="library" scope="TEST" name="Maven: com.github.kevinsawicki:http-request:5.5" level="project" />
     <orderEntry type="library" scope="TEST" name="Maven: io.restx:restx-jongo-specs-tests:0.31" level="project" />
     <orderEntry type="library" name="Maven: io.restx:restx-jongo:0.31" level="project" />
     <orderEntry type="library" name="Maven: de.undercouch:bson4jackson:2.3.0" level="project" />
@@ -104,6 +104,8 @@
     <orderEntry type="library" name="Maven: org.jongo:jongo:1.0" level="project" />
     <orderEntry type="library" name="Maven: io.restx:restx-barbarywatch:0.31" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:3.2.7" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.13" level="project" />
+    <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.13" level="project" />
   </component>
 </module>
 

@@ -13,6 +13,7 @@
     <properties>
         <!-- This path is for development only -->
         <android.sdk.path>/home/walien/dev/libs/android/sdk</android.sdk.path>
+        <jackson.version>2.3.0</jackson.version>
     </properties>
 
     <dependencies>
@@ -29,12 +30,46 @@
             <version>r7</version>
         </dependency>
 
+        <!-- Vino -->
+        <dependency>
+            <groupId>com.vino</groupId>
+            <artifactId>vino-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+
         <!-- Tools -->
         <dependency>
             <groupId>com.github.kevinsawicki</groupId>
             <artifactId>http-request</artifactId>
-            <version>4.1</version>
+            <version>5.5</version>
         </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-annotations</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-core</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.core</groupId>
+            <artifactId>jackson-databind</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-guava</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+        <dependency>
+            <groupId>com.fasterxml.jackson.datatype</groupId>
+            <artifactId>jackson-datatype-joda</artifactId>
+            <version>${jackson.version}</version>
+        </dependency>
+
+
     </dependencies>
     <build>
         <finalName>${project.artifactId}</finalName>

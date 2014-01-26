@@ -3,9 +3,15 @@ package com.vino.mobile;
 import android.app.ActionBar;
 import android.app.FragmentTransaction;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
+import com.vino.mobile.model.WineDomain;
+import com.vino.mobile.rest.RestClient;
+
+import java.util.List;
 
 public class VinoMainActivity extends FragmentActivity implements
         ActionBar.TabListener {
@@ -54,6 +60,18 @@ public class VinoMainActivity extends FragmentActivity implements
             public void onPageScrollStateChanged(int arg0) {
             }
         });
+
+        // Load all domains
+        new AsyncTask<String, Void, List<WineDomain>>() {
+
+            @Override
+            protected List<WineDomain> doInBackground(String... params) {
+                List<WineDomain> allDomains = RestClient.getInstance().getAllDomains();
+                Log.d("vino", allDomains.toString());
+                return allDomains;
+            }
+        }.execute();
+
     }
 
     @Override
