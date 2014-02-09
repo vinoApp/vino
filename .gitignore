@@ -5,4 +5,7 @@ logs*
 .idea/workspace.xml
 .idea/libraries
 .idea/artifacts
+.idea/misc.xml
+.idea/dataSources.xml
+.idea/ant.xml
 vino-srv/tmp
