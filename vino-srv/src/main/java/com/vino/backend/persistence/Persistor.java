@@ -46,6 +46,8 @@ public interface Persistor {
 
     WineCellar getCellar();
 
+    Optional<WineBottle> getBottleByBarCode(Barcode barCode);
+
     ImmutableList<WineCellar.Record> getRecordsByDomain(String domainKey);
 
     Optional<WineCellar.Record> getRecord(String bottleKey);

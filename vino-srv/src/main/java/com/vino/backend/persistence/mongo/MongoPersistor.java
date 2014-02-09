@@ -18,10 +18,10 @@ package com.vino.backend.persistence.mongo;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.vino.backend.logging.Loggers;
 import com.vino.backend.model.*;
 import com.vino.backend.persistence.Persistor;
 import com.vino.backend.reference.Reference;
-import com.vino.backend.logging.Loggers;
 import org.bson.types.ObjectId;
 import org.jongo.MongoCollection;
 import org.slf4j.Logger;
@@ -95,6 +95,13 @@ public class MongoPersistor implements Persistor {
                 .find()
                 .as(WineCellar.Record.class);
         return new WineCellar(ImmutableList.copyOf(records));
+    }
+
+    @Override
+    public Optional<WineBottle> getBottleByBarCode(Barcode barCode) {
+        return Optional.fromNullable(collections.get(MongoCollections.BOTTLES)
+                .findOne("{ code.value : #, code.type : # }", barCode.getValue(), barCode.getType())
+                .as(WineBottle.class));
     }
 
     @Override

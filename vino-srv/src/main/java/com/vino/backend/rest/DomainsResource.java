@@ -51,9 +51,9 @@ public class DomainsResource {
         return persistor.getAllDomains();
     }
 
-    @GET("/domains/{domainKey}")
-    public Optional<WineDomain> getDomain(String domainKey) {
-        return persistor.getEntity(domainKey);
+    @GET("/domains/{key}")
+    public Optional<WineDomain> getDomain(String key) {
+        return persistor.getEntity(key);
     }
 
     @POST("/domains")

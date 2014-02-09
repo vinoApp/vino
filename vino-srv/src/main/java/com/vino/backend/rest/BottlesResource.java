@@ -18,9 +18,10 @@ package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.vino.backend.model.Barcode;
+import com.vino.backend.model.Response;
 import com.vino.backend.model.WineBottle;
 import com.vino.backend.persistence.Persistor;
-import com.vino.backend.model.Response;
 import restx.annotations.DELETE;
 import restx.annotations.GET;
 import restx.annotations.POST;
@@ -48,9 +49,13 @@ public class BottlesResource {
         return persistor.getAllBottles();
     }
 
-    @GET("/bottles/{bottleKey}")
-    public Optional<WineBottle> getBottle(String bottleKey) {
-        return persistor.getEntity(bottleKey);
+    @GET("/bottles/{key}")
+    public Optional<WineBottle> getBottle(String key, boolean isBarCode) {
+        if (isBarCode) {
+            return persistor.getBottleByBarCode(Barcode.ean13(key));
+        } else {
+            return persistor.getEntity(key);
+        }
     }
 
     @POST("/bottles")
@@ -66,10 +71,10 @@ public class BottlesResource {
                 .build();
     }
 
-    @DELETE("/bottles/{bottleKey}")
-    public Response removeBottle(String bottleKey) {
+    @DELETE("/bottles/{key}")
+    public Response removeBottle(String key) {
 
-        boolean result = persistor.delete(bottleKey);
+        boolean result = persistor.delete(key);
         Optional<Response.TechnicalStatus> status = result
                 ? Optional.of(Response.TechnicalStatus.OK)
                 : Optional.of(Response.TechnicalStatus.DB_ERROR);
