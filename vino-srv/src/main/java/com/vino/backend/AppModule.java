@@ -17,9 +17,12 @@
 package com.vino.backend;
 
 import com.google.common.base.Charsets;
+import restx.RestxRequest;
 import restx.factory.Module;
 import restx.factory.Provides;
+import restx.security.Permission;
 import restx.security.SignatureKey;
+import restx.security.StdRestxSecurityManager;
 
 import javax.inject.Named;
 
@@ -29,7 +32,7 @@ import javax.inject.Named;
  * Time: 11:16 PM
  */
 
-@Module
+@Module(priority = -100)
 public class AppModule {
 
     @Provides
@@ -55,5 +58,16 @@ public class AppModule {
     @Named("restx.admin.password")
     public String restxAdminPassword() {
         return "vino";
+    }
+
+    @Provides
+    @Named("StdRestxSecurityManager")
+    public StdRestxSecurityManager permitsAllAlways() {
+        return new StdRestxSecurityManager() {
+            @Override
+            public void check(RestxRequest request, Permission permission) {
+                // Permit all
+            }
+        };
     }
 }

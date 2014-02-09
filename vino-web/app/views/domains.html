@@ -1,7 +1,12 @@
-<div id="vino-content">
+<div id="vino-content" ng-controller="DomainsCtrl">
 
     <h3>Domains</h3>
     <button class="btn btn-small btn-success" ng-click="redirect('/domains/new')"><i class="icon-white icon-plus"></i> Add</button>
+
+    <form class="form-search" style="float:right; margin-bottom:10px;">
+        <label for="search">Search : </label>
+        <input id="search" type="text" class="input-medium search-query" ng-model="query">
+    </form>
 
     <table class="table table-condensed" style="margin-top: 15px">
 
@@ -14,13 +19,13 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="domain in domains">
+        <tr ng-repeat="domain in domains | filter : query">
             <td>{{ domain.name}}</td>
             <td>{{ domain.origin.region.name }}</td>
             <td>{{ domain.origin.name }}</td>
             <td>
-                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + domain.id + '/view')"><i class="icon-white icon-eye-open"></i> View</button>
-                <button class="btn btn-small btn-warning" ng-click="redirect('/domains/' + domain.id + '/edit')"><i class="icon-white icon-edit"></i> Edit</button>
+                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + domain._id + '/view')"><i class="icon-white icon-eye-open"></i> View</button>
+                <button class="btn btn-small btn-warning" ng-click="redirect('/domains/' + domain._id + '/edit')"><i class="icon-white icon-edit"></i> Edit</button>
                 <button class="btn btn-small btn-danger" ng-click="removeDomain(domain)"><i class="icon-white icon-remove"></i> Remove</button>
             </td>
         </tr>

@@ -1,4 +1,4 @@
-angular.module('vino.business').factory("Origin",
+angular.module('vino.business').factory('Origin',
     function ($resource) {
 
         // Backend

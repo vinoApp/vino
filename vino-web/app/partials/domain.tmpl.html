@@ -1,7 +1,7 @@
 <div id="vino-content">
 
     <div id="header">
-        <img alt='300x200' style='width:300px; float:right;' ng-show="model.sticker" ng-src='data:image/png;base64,{{model.sticker}}' style="float: left">
+        <img alt='300x200' style='width:300px; float:right;' ng-show="domain.sticker" ng-src='data:image/png;base64,{{domain.sticker}}' style="float: left">
     </div>
 
     <form class="form-horizontal">
@@ -12,21 +12,21 @@
                 <label class="control-label" for="domainName">Name : </label>
 
                 <div class="controls">
-                    <label id="domainName">{{ model.name }}</label>
+                    <label id="domainName">{{ domain.name }}</label>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="domainRegion">Region : </label>
 
                 <div class="controls">
-                    <label id="domainRegion">{{ model.origin.region.name }}</label>
+                    <label id="domainRegion">{{ domain.origin.region.name }}</label>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="domainAOC">AOC : </label>
 
                 <div class="controls">
-                    <label id="domainAOC">{{ model.origin.name }}</label>
+                    <label id="domainAOC">{{ domain.origin.name }}</label>
                 </div>
             </div>
         </fieldset>
