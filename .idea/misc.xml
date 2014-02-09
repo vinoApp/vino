@@ -7,6 +7,14 @@
     <file type="android" url="file://$PROJECT_DIR$/vino-mobile" />
   </component>
   <component name="IdProvider" IDEtalkID="0B4C767A1ABBABC53327DECF93C87ADF" />
+  <component name="IvyIDEA.ProjectSettings">
+    <option name="artifactTypeSettings">
+      <ArtifactTypeSettings />
+    </option>
+    <option name="propertiesSettings">
+      <PropertiesSettings />
+    </option>
+  </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">
       <list>
