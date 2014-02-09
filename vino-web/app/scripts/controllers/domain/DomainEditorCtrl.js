@@ -19,6 +19,7 @@ angular.module('vino.ui').controller("DomainEditorCtrl", function ($scope, $rout
         Domain.saveOrUpdate($scope.domain, {
             success: function () {
                 Notification.notify.success('Domain successfuly updated');
+                $scope.cancel();
             },
             error: function () {
                 Notification.notify.error('Error during domain update');
