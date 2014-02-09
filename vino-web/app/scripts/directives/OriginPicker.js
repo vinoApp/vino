@@ -12,7 +12,7 @@ angular.module("vino.ui").directive("originPicker", function () {
         controller: function ($scope, Origin) {
 
 
-            $scope.$watch("aocs.length", function () {
+            $scope.$watchCollection("aocs", function () {
                 if (!$scope.aocs) {
                     return;
                 }
