@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vino.ui', ['ngRoute', 'vino.business'])
+angular.module('vino.ui', ['ngRoute', 'vino.business', 'vino.services'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -22,3 +22,4 @@ angular.module('vino.ui', ['ngRoute', 'vino.business'])
 
 
 angular.module('vino.business', ['ngResource']);
+angular.module('vino.services', []);

@@ -1,4 +1,4 @@
-angular.module('vino.ui').controller("DomainEditorCtrl", function ($scope, $routeParams, Domain) {
+angular.module('vino.ui').controller("DomainEditorCtrl", function ($scope, $routeParams, Notification, Domain) {
 
     // Provided domain ID
     var domainId = $routeParams.id;
@@ -14,7 +14,19 @@ angular.module('vino.ui').controller("DomainEditorCtrl", function ($scope, $rout
         $scope.domain = new Domain();
     }
 
-    $scope.edit = function (domain) {
+    $scope.save = function () {
 
+        Domain.saveOrUpdate($scope.domain, {
+            success: function () {
+                Notification.notify.success('Domain successfuly updated');
+            },
+            error: function () {
+                Notification.notify.error('Error during domain update');
+            }
+        });
+    };
+
+    $scope.cancel = function () {
+        $scope.redirect('/domains');
     };
 });
