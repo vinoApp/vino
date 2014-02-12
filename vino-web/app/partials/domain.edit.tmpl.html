@@ -23,19 +23,19 @@
         <fieldset>
             <legend>Visual</legend>
             <div class="control-group">
-                <label class="control-label" for="domainSticker">Sticker : </label>
+                <label class="control-label">Sticker : </label>
 
                 <div class="controls">
-                    <input id="domainSticker" type="file" data-file="current.file"/>
+                    <file-picker ng-model="domain.sticker"></file-picker>
                 </div>
             </div>
             <div class="control-group">
                 <label class="control-label" for="domainStickerPreview">Preview : </label>
 
-                <div class="controls" ng-switch="domain.sticker">
-                    <p ng-switch-when="null">No sticker.</p>
-                    <p ng-switch-when="undefined">No sticker.</p>
-                    <img id="domainStickerPreview" alt='300x200' style='width:150px;' ng-show="domain.sticker" ng-src='data:image/png;base64,{{domain.sticker}}' ng-switch-default="">
+                <div class="controls">
+                    <p ng-if="!domain.sticker">No sticker.</p>
+                    <img ng-if="domain.sticker" id="domainStickerPreview" alt='300x200' style='width:150px;'
+                         ng-src='data:image/png;base64,{{domain.sticker}}'>
                 </div>
             </div>
         </fieldset>

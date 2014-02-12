@@ -134,65 +134,25 @@ public class MongoPersistor implements Persistor {
 
     @Override
     public boolean persist(WineAOC aoc) {
-
-        // Check if the entity already exists
-        if (collections.get(MongoCollections.AOCS)
-                .count(" { name : #, region : # } ", aoc.getName(), aoc.getRegion().getKey()) > 0) {
-            logger.warn("AOC '{}' already exists", aoc.getKey());
-            return false;
-        }
-
         persistEntity(aoc, MongoCollections.AOCS);
-
         return true;
     }
 
     @Override
     public boolean persist(WineRegion region) {
-
-        // Check if the entity already exists
-        if (collections.get(MongoCollections.REGIONS)
-                .count(" { name : # } ", region.getName()) > 0) {
-            logger.warn("Region '{}' already exists", region.getName());
-            return false;
-        }
-
         persistEntity(region, MongoCollections.REGIONS);
-
         return true;
     }
 
     @Override
     public boolean persist(WineBottle bottle) {
-
-        // Check if the entity already exists
-        if (collections.get(MongoCollections.BOTTLES)
-                .count(" { domain : #, vintage : # } ", bottle.getDomain().getKey(), bottle.getVintage()) > 0) {
-            logger.warn("Bottle '{}' (of domain : '{}') already exists",
-                    bottle.getCode(),
-                    bottle.getDomain().get(this).get().getName()
-            );
-            return false;
-        }
-
         persistEntity(bottle, MongoCollections.BOTTLES);
-
         return true;
     }
 
-
     @Override
     public boolean persist(WineDomain domain) {
-
-        // Check if the entity already exists
-        if (collections.get(MongoCollections.DOMAINS)
-                .count(" { name : #, origin : # } ", domain.getName(), domain.getOrigin().getKey()) > 0) {
-            logger.warn("Domain '{}' already exists", domain.getName());
-            return false;
-        }
-
         persistEntity(domain, MongoCollections.DOMAINS);
-
         return true;
     }
 

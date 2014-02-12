@@ -16,6 +16,7 @@
 
 package com.vino.backend;
 
+import com.google.common.io.Resources;
 import com.vino.backend.model.*;
 import com.vino.backend.persistence.Persistor;
 import com.vino.backend.persistence.mongo.MongoPersistor;
@@ -26,6 +27,11 @@ import org.junit.Test;
 import restx.factory.Factory;
 import restx.factory.Name;
 
+import java.io.IOException;
+import java.net.URISyntaxException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+
 /**
  * User: walien
  * Date: 1/8/14
@@ -35,6 +41,7 @@ public class InitDB {
 
     private static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
     private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
+    private static final String MARGAUX_DEFAULT_IMAGE = "margaux1.png";
 
     private int nextBarCode = 100000;
 
@@ -123,11 +130,12 @@ public class InitDB {
         addAOC("Cérons", gravesRef);
 
         // Domains
-        Reference<WineDomain> hbRef = addDomain("Mission Haut-Brion", pessacLeoganRef, null);
-        Reference<WineDomain> mrgRef = addDomain("Chateau Margaux", margauxRef, null);
-        Reference<WineDomain> beychevellRef = addDomain("Chateau Beychevelle", saintJulienRef, null);
-        Reference<WineDomain> cbRef = addDomain("Chateau Cheval Blanc", saintEmilionRef, null);
-        Reference<WineDomain> petrusRef = addDomain("Chateau Pétrus", pomerolRef, null);
+        byte[] sticker = sampleImg();
+        Reference<WineDomain> hbRef = addDomain("Mission Haut-Brion", pessacLeoganRef, sticker);
+        Reference<WineDomain> mrgRef = addDomain("Chateau Margaux", margauxRef, sticker);
+        Reference<WineDomain> beychevellRef = addDomain("Chateau Beychevelle", saintJulienRef, sticker);
+        Reference<WineDomain> cbRef = addDomain("Chateau Cheval Blanc", saintEmilionRef, sticker);
+        Reference<WineDomain> petrusRef = addDomain("Chateau Pétrus", pomerolRef, sticker);
 
         // Bottles
         Reference<WineBottle> hb2008Ref = addBottle(hbRef, 2008);
@@ -150,5 +158,14 @@ public class InitDB {
 
         addCellarRecord(mrg2008Ref, 5);
         addCellarRecord(mrg2011Ref, 10);
+    }
+
+    private byte[] sampleImg() {
+
+        try {
+            return Files.readAllBytes(Paths.get(Resources.getResource(MARGAUX_DEFAULT_IMAGE).toURI()));
+        } catch (IOException | URISyntaxException e) {
+            throw new RuntimeException(e);
+        }
     }
 }
