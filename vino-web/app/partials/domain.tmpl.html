@@ -1,7 +1,7 @@
 <div id="vino-content">
 
     <div id="header">
-        <img alt='300x200' style='width:300px; float:right;' ng-if="domain.sticker" ng-src='data:image/png;base64,{{domain.sticker}}' style="float: left">
+        <img alt='300x200' style='width:300px; float:right;' ng-if="domain.sticker" ng-src='data:image/jpeg;base64,{{ domain.sticker }}' style="float: left">
     </div>
 
     <form class="form-horizontal">
@@ -32,12 +32,67 @@
         </fieldset>
 
         <fieldset>
+            <legend>Wine</legend>
+            <div class="control-group">
+                <label class="control-label" for="wineComment">Comment : </label>
+                <div class="controls">
+                    <label id="wineComment">{{ domain.tasting.comment }}</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="wineGarde">Garde : </label>
+                <div class="controls">
+                    <label id="wineGarde">{{ domain.tasting.garde }}</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="wineTemperatures">Temperature(s) : </label>
+                <div class="controls">
+                    <label id="wineTemperatures">{{ domain.tasting.temperature }}</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>Tasting</legend>
+            <div class="control-group">
+                <label class="control-label" for="wineFloor">Floor : </label>
+                <div class="controls">
+                    <label id="wineFloor">{{ domain.wineDescription.floor }}</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="wineGrape">Grape : </label>
+                <div class="controls">
+                    <label id="wineGrape">{{ domain.wineDescription.grape }}</label>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label" for="wineMedal">Medal : </label>
+                <div class="controls">
+                    <label id="wineMedal">{{ domain.wineDescription.medal}}</label>
+                </div>
+            </div>
+        </fieldset>
+
+        <fieldset>
+            <legend>History</legend>
+            <p>
+                {{ domain.history.description }}
+            </p>
+        </fieldset>
+
+        <fieldset>
             <legend>Location</legend>
             <div class="control-group">
                 <label class="control-label" for="domainLoacation">Location : </label>
 
                 <div class="controls">
-                    <a id="domainLoacation" href="">Location here...</a>
+                    <a id="domainLoacation" href="{{domain.localization}}" target="_blank">Location here...</a>
                 </div>
             </div>
         </fieldset>
