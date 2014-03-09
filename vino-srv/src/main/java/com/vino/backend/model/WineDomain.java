@@ -18,6 +18,8 @@ package com.vino.backend.model;
 
 import com.vino.backend.reference.Reference;
 
+import java.util.Arrays;
+
 /**
  * User: walien
  * Date: 7/27/13
@@ -30,6 +32,14 @@ public class WineDomain extends Entity {
     private Reference<WineAOC> origin;
 
     private byte[] sticker;
+
+    private String localization;
+
+    private WineDomain.Wine wineDescription;
+
+    private WineDomain.Tasting tasting;
+
+    private WineDomain.History history;
 
     public WineDomain() {
 
@@ -57,8 +67,44 @@ public class WineDomain extends Entity {
         return sticker;
     }
 
+    public String getLocalization() {
+        return localization;
+    }
+
+    public WineDomain setLocalization(final String localization) {
+        this.localization = localization;
+        return this;
+    }
+
     public WineDomain setSticker(byte[] sticker) {
         this.sticker = sticker;
+        return this;
+    }
+
+    public Wine getWineDescription() {
+        return wineDescription;
+    }
+
+    public WineDomain setWineDescription(final Wine wineDescription) {
+        this.wineDescription = wineDescription;
+        return this;
+    }
+
+    public Tasting getTasting() {
+        return tasting;
+    }
+
+    public WineDomain setTasting(final Tasting tasting) {
+        this.tasting = tasting;
+        return this;
+    }
+
+    public History getHistory() {
+        return history;
+    }
+
+    public WineDomain setHistory(final History history) {
+        this.history = history;
         return this;
     }
 
@@ -67,6 +113,36 @@ public class WineDomain extends Entity {
         return "WineDomain{" +
                 "name='" + name + '\'' +
                 ", origin=" + origin +
+                ", sticker=" + Arrays.toString(sticker) +
+                ", wineDescription=" + wineDescription +
+                ", tasting=" + tasting +
+                ", history=" + history +
                 '}';
+    }
+
+    public static class Wine {
+
+        public String floor;
+
+        public String grape;
+
+        public String medal;
+
+    }
+
+    public static class Tasting {
+
+        public String comment;
+
+        public String garde;
+
+        public String temperature;
+
+    }
+
+    public static class History {
+
+        public String description;
+
     }
 }
