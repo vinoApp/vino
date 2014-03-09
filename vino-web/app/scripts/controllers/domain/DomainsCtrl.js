@@ -17,4 +17,8 @@ angular.module('vino.ui').controller("DomainsCtrl", function ($scope, Domain, No
             });
     };
 
+    $scope.create = function (domain) {
+        $scope.redirect('/domains/new');
+    };
+
 });

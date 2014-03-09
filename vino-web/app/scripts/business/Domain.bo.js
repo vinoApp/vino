@@ -4,12 +4,20 @@ angular.module('vino.business').factory("Domain",
         // Backend
         var Domain = $resource("/api/domains/:id");
 
+        var updateObjectWithRefs = function(domain) {
+            var cloned = angular.extend(new Domain(), _.cloneDeep(domain));
+            cloned.origin = cloned.origin._id;
+            if(!cloned['@class']) {
+                cloned['@class'] = 'com.vino.backend.model.WineDomain';
+            }
+            return cloned;
+        };
+
         // BO
         return angular.extend(Domain, {
-            saveOrUpdate: function (domain, callbacks) {
-                var cloned = angular.extend(new Domain(), _.cloneDeep(domain));
-                cloned.origin = cloned.origin._id;
-                cloned.$save(callbacks.success, callbacks.error);
+            createOrUpdate: function (domain, callbacks) {
+                var _domain = updateObjectWithRefs(domain);
+                _domain.$save(callbacks.success, callbacks.error);
             }
         });
     });

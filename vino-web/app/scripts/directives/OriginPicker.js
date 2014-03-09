@@ -11,7 +11,6 @@ angular.module("vino.ui").directive("originPicker", function () {
             '</select>',
         controller: function ($scope, Origin) {
 
-
             $scope.$watchCollection("aocs", function () {
                 if (!$scope.aocs) {
                     return;

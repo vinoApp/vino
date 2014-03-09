@@ -9,6 +9,9 @@ angular.module('vino.ui', ['ngRoute', 'vino.business', 'vino.services'])
             .when('/domains', {
                 templateUrl: 'views/Domains.html'
             })
+            .when('/domains/new', {
+                templateUrl: 'views/DomainEditor.html'
+            })
             .when('/domains/:id/view', {
                 templateUrl: 'views/Domain.html'
             })
