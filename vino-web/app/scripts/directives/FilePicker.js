@@ -5,7 +5,7 @@ angular.module("vino.ui").directive("filePicker", function () {
         scope: {
             ngModel: '='
         },
-        template: '<input id="domainSticker" type="file" accept="image/png"/>',
+        template: '<input id="domainSticker" type="file" accept="image/jpeg"/>',
         link: function ($scope, elt) {
 
             var BASE_64_PREFIX = "base64,";
