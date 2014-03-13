@@ -89,7 +89,7 @@ public class WineDBBuilder {
         }
 
         HttpRequest get = HttpRequest.get(record.getUrlpicture());
-        domain.setSticker(HttpRequest.Base64.encode(get.body()).getBytes());
+        domain.setSticker(get.bytes());
     }
 
     private static void populateWithDetails(WineDBRecord record, WineDomain domain) throws IOException {
@@ -99,7 +99,9 @@ public class WineDBBuilder {
 
         WineDBRecord rcvdRecord = MAPPER.readValue(get.body(), WineDBRecord.class);
         String html = rcvdRecord.getHtml();
-
+        if (html == null) {
+            return;
+        }
         Document doc = Jsoup.parse(html);
 
         // Wine
