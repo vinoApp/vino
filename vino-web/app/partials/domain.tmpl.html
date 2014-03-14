@@ -6,7 +6,7 @@
 
     <div>
 
-        <a class="btn btn-info" ng-disabled="!domain.localization" href="{{domain.localization}}" target="_blank">
+        <a class="btn btn-info" ng-if="domain.localization" href="{{domain.localization}}" target="_blank">
             <i class="icon-white icon-globe"></i>
         </a>
 
