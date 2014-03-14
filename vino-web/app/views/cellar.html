@@ -1,8 +1,8 @@
 <div id="vino-content">
 
     <h3>Cellar</h3>
-    <button class="btn btn-small btn-success"><i class="icon-white icon-plus"></i> Add</button>
-    <button class="btn btn-small btn-danger"><i class="icon-white icon-remove"></i> Remove</button>
+    <button class="btn btn-small btn-success"><i class="icon-white icon-plus"></i> Add (+)</button>
+    <button class="btn btn-small btn-danger"><i class="icon-white icon-remove"></i> Remove (-)</button>
 
     <table class="table table-condensed" style="margin-top: 15px">
 
@@ -18,13 +18,13 @@
         </thead>
         <tbody>
         <tr ng-repeat="record in records">
-            <td>{{ record.bottle.barcode }}</td>
-            <td>{{ record.bottle.domain.name }}</td>
-            <td>{{ record.bottle.domain.origin.region.name }} / {{ record.bottle.domain.origin.name }}</td>
-            <td>{{ record.bottle.vintage }}</td>
+            <td>{{ record.barcode }}</td>
+            <td>{{ record.domain.name }}</td>
+            <td>{{ record.domain.origin.region.name }} / {{ record.domain.origin.name }}</td>
+            <td>{{ record.vintage }}</td>
             <td>{{ record.quantity }}</td>
             <td>
-                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + record.bottle.domain.id + '/view')"><i class="icon-white icon-eye-open"></i> Domain</button>
+                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + record.domain.id + '/view')"><i class="icon-white icon-eye-open"></i> Domain</button>
             </td>
         </tr>
         </tbody>
