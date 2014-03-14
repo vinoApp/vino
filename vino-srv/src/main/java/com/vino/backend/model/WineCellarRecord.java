@@ -25,11 +25,11 @@ import java.util.List;
  * Date: 7/27/13
  * Time: 4:45 PM
  */
-public class WineCellar {
+public class WineCellarRecord {
 
     private List<Record> records;
 
-    public WineCellar(List<Record> records) {
+    public WineCellarRecord(List<Record> records) {
         super();
         this.records = records;
     }
