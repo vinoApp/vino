@@ -18,16 +18,17 @@ package com.vino.backend.db;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.kevinsawicki.http.HttpRequest;
+import com.google.common.collect.ImmutableList;
 import com.google.common.io.Resources;
 import com.vino.backend.model.WineAOC;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.persistence.Persistor;
-import com.vino.backend.persistence.mongo.MongoCollections;
 import com.vino.backend.persistence.mongo.MongoPersistor;
 import com.vino.backend.reference.Reference;
-import org.jongo.MongoCollection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import restx.factory.Factory;
 import restx.factory.Name;
 import restx.jongo.JongoCollection;
@@ -51,26 +52,70 @@ public class WineDBBuilder {
             .getComponent(Name.of(JongoCollection.class, "aocs"));
     private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
 
-    private static final String FILE_NAME = "saint_emilion.json";
-    private static final String AOC_NAME = "Saint-Emilion";
+    static Logger logger = LoggerFactory.getLogger("DBBuilder");
+
+    private static final ImmutableList<AocDB> AOCS_DB = ImmutableList.of(
+            AocDB.of("blaye.json", "Blaye"),
+            AocDB.of("blaye_cote_de_bordeaux.json", "Blaye-Cotes-de-Bordeaux"),
+            AocDB.of("castillon_cotes_de_bordeaux.json", "Cotes-de-Castillon"),
+            AocDB.of("cotes_de_blaye.json", "Cotes-de-Blaye"),
+            AocDB.of("cotes_de_bourg.json", "Cotes-de-Bourg"),
+            AocDB.of("francs_cotes_de_bordeaux.json", "Bordeaux Cotes-de-Francs"),
+            AocDB.of("fronsac.json", "Fronsac"),
+            AocDB.of("graves.json", "Graves"),
+            AocDB.of("lalande_de_pomerol.json", "Lalande de Pomerol"),
+            AocDB.of("listrac.json", "Listrac"),
+            AocDB.of("lussac_saint_emilion.json", "Lussac Saint-Emilion"),
+            AocDB.of("margaux.json", "Margaux"),
+            AocDB.of("montagne_saint_emilion.json", "Montagne Saint-Emilion"),
+            AocDB.of("moulis.json", "Moulis"),
+            AocDB.of("pauillac.json", "Pauillac"),
+            AocDB.of("pessac_leognan.json", "Pessac-Léognan"),
+            AocDB.of("pomerol.json", "Pomerol"),
+            AocDB.of("puisseguin_saint_emilion.json", "Puisseguin Saint-Emilion"),
+            AocDB.of("saint_emilion.json", "Saint-Emilion"),
+            AocDB.of("saint_estephe.json", "Saint-Estèphe"),
+            AocDB.of("saint_julien.json", "Saint-Julien")
+    );
 
     public static void main(String[] args) throws URISyntaxException, IOException {
+
 
         FACTORY.getComponent(Name.of(JongoCollection.class, "domains")).get().drop();
         FACTORY.getComponent(Name.of(JongoCollection.class, "cellar")).get().drop();
 
-        WineAOC aoc = AOCS.get().findOne("{ name : # }", AOC_NAME).as(WineAOC.class);
+        int i = 0;
+
+        for (AocDB aocDB : AOCS_DB) {
+
+            try {
+
+                computeAOC(aocDB);
+
+                System.out.println("==============================================");
+                System.out.println(String.format("AOC '%s' : done (%d / %d) !", aocDB.name, ++i, AOCS_DB.size()));
+                System.out.println("==============================================");
+
+            } catch (Exception e) {
+                logger.error("Error during building domain : ", e);
+            }
+        }
+    }
+
+    private static void computeAOC(AocDB aocDB) throws URISyntaxException, IOException {
+
+        WineAOC aoc = AOCS.get().findOne("{ name : # }", aocDB.name).as(WineAOC.class);
         if (aoc == null) {
-            throw new IllegalStateException("AOC not found : " + AOC_NAME);
+            throw new IllegalStateException("AOC not found : " + aocDB.name);
         }
 
-        URL fromResource = Resources.getResource("domains/fromSrv/" + FILE_NAME);
+        URL fromResource = Resources.getResource("domains/fromSrv/" + aocDB.file);
         File srcFile = new File(fromResource.toURI());
 
         List<WineDBRecord> records = MAPPER.readValue(srcFile,
                 MAPPER.getTypeFactory().constructCollectionType(List.class, WineDBRecord.class));
 
-        int i = 0;
+        int j = 0;
 
         for (WineDBRecord record : records) {
 
@@ -83,7 +128,7 @@ public class WineDBBuilder {
 
             PERSISTOR.persist(domain);
 
-            System.out.println(String.format("Computed : %s (%d / %d)", record.getId(), ++i, records.size()));
+            System.out.println(String.format("Computed (%s) : %s (%d / %d)", aocDB.name, record.getId(), ++j, records.size()));
         }
     }
 
@@ -132,6 +177,21 @@ public class WineDBBuilder {
         domain.setWineDescription(wine);
         domain.setHistory(history);
         domain.setTasting(tasting);
+    }
+
+    private static class AocDB {
+
+        public String file;
+
+        public String name;
+
+        public static AocDB of(String file, String name) {
+            AocDB aocDB = new AocDB();
+            aocDB.file = file;
+            aocDB.name = name;
+            return aocDB;
+        }
+
     }
 
 }
