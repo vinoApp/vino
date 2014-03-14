@@ -18,15 +18,10 @@ package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
-import com.vino.backend.model.WineBottle;
-import com.vino.backend.model.WineCellar;
-import com.vino.backend.persistence.Persistor;
-import com.vino.backend.reference.Reference;
 import com.vino.backend.model.Response;
-import restx.annotations.DELETE;
-import restx.annotations.GET;
-import restx.annotations.POST;
-import restx.annotations.RestxResource;
+import com.vino.backend.model.WineCellarRecord;
+import com.vino.backend.persistence.Persistor;
+import restx.annotations.*;
 import restx.factory.Component;
 
 /**
@@ -46,24 +41,25 @@ public class CellarResource {
     }
 
     @GET("/cellar")
-    public WineCellar getCellar() {
-        return persistor.getCellar();
+    public ImmutableList<WineCellarRecord> getRecords() {
+        return persistor.getAllRecords();
     }
 
-    @GET("/cellar/byDomain/{domainKey}")
-    public ImmutableList<WineCellar.Record> getRecordsByDomain(String domainKey) {
-        return persistor.getRecordsByDomain(domainKey);
+    @GET("/cellar/{key}")
+    @Produces("application/json;view=com.vino.backend.persistence.mongo.Views$Details")
+    public Optional<WineCellarRecord> getRecord(String key) {
+        return persistor.getRecord(key);
     }
 
-    @GET("/cellar/byBottle/{bottleKey}")
-    public Optional<WineCellar.Record> getRecord(String bottleKey) {
-        return persistor.getRecord(bottleKey);
-    }
+    @POST("/cellar")
+    public Response addInCellar(WineCellarRecord record) {
 
-    @POST("/cellar/{bottleKey}/{qty}")
-    public Response addInCelar(String bottleKey, int qty) {
-
-        boolean result = persistor.addInCellar(new Reference<WineBottle>(bottleKey), qty);
+        boolean result = persistor.addInCellar(
+                record.getCode(),
+                record.getDomain(),
+                record.getVintage(),
+                record.getQuantity()
+        );
         Optional<Response.TechnicalStatus> status = result
                 ? Optional.of(Response.TechnicalStatus.OK)
                 : Optional.of(Response.TechnicalStatus.DB_ERROR);
@@ -73,10 +69,23 @@ public class CellarResource {
                 .build();
     }
 
-    @DELETE("/cellar/{bottleKey}/{qty}")
-    public Response removeFromCellar(String bottleKey, int qty) {
+    @PUT("/cellar/{key}/{qty}")
+    public Response addInCellar(String key, String qty) {
 
-        boolean result = persistor.removeFromCellar(new Reference<WineBottle>(bottleKey), qty);
+        boolean result = persistor.addInCellar(key, Integer.parseInt(qty));
+        Optional<Response.TechnicalStatus> status = result
+                ? Optional.of(Response.TechnicalStatus.OK)
+                : Optional.of(Response.TechnicalStatus.DB_ERROR);
+        return Response
+                .withStatuses(status, Optional.<Response.BusinessStatus>absent())
+                .withMessage("Record added in cellar.")
+                .build();
+    }
+
+    @DELETE("/cellar/{key}/{qty}")
+    public Response removeFromCellar(String key, String qty) {
+
+        boolean result = persistor.removeFromCellar(key, Integer.parseInt(qty));
         Optional<Response.TechnicalStatus> status = result
                 ? Optional.of(Response.TechnicalStatus.OK)
                 : Optional.of(Response.TechnicalStatus.DB_ERROR);

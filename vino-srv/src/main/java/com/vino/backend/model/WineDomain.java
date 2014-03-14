@@ -16,6 +16,8 @@
 
 package com.vino.backend.model;
 
+import com.fasterxml.jackson.annotation.JsonView;
+import com.vino.backend.persistence.mongo.Views;
 import com.vino.backend.reference.Reference;
 
 import java.util.Arrays;
@@ -31,6 +33,7 @@ public class WineDomain extends Entity {
 
     private Reference<WineAOC> origin;
 
+    @JsonView({restx.jackson.Views.Private.class, Views.Details.class})
     private byte[] sticker;
 
     private String localization;

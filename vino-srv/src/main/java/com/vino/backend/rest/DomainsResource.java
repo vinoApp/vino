@@ -17,13 +17,12 @@
 package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.ImmutableList;
+import com.vino.backend.model.Response;
+import com.vino.backend.model.WineCellarRecord;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.persistence.Persistor;
-import com.vino.backend.model.Response;
-import restx.annotations.DELETE;
-import restx.annotations.GET;
-import restx.annotations.POST;
-import restx.annotations.RestxResource;
+import restx.annotations.*;
 import restx.factory.Component;
 import restx.security.PermitAll;
 
@@ -52,8 +51,14 @@ public class DomainsResource {
     }
 
     @GET("/domains/{key}")
+    @Produces("application/json;view=com.vino.backend.persistence.mongo.Views$Details")
     public Optional<WineDomain> getDomain(String key) {
         return persistor.getEntity(key);
+    }
+
+    @GET("/domains/{key}/records")
+    public ImmutableList<WineCellarRecord> getRecordsLinkedToDomain(String key) {
+        return persistor.getRecordsByDomain(key);
     }
 
     @POST("/domains")

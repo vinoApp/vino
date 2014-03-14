@@ -42,15 +42,13 @@ public interface Persistor {
 
     ImmutableList<WineDomain> getAllDomains();
 
-    ImmutableList<WineBottle> getAllBottles();
+    ImmutableList<WineCellarRecord> getAllRecords();
 
-    WineCellar getCellar();
+    ImmutableList<WineCellarRecord> getRecordsByDomain(String domainKey);
 
-    Optional<WineBottle> getBottleByBarCode(Barcode barCode);
+    Optional<WineCellarRecord> getRecord(String key);
 
-    ImmutableList<WineCellar.Record> getRecordsByDomain(String domainKey);
-
-    Optional<WineCellar.Record> getRecord(String bottleKey);
+    Optional<WineCellarRecord> getRecord(Reference<WineDomain> domain, int vintage);
 
     ///////////////////////////////////
     // DATA PERSISTENCE
@@ -62,11 +60,13 @@ public interface Persistor {
 
     boolean persist(WineDomain domain);
 
-    boolean persist(WineBottle bottle);
+    boolean persist(WineCellarRecord record);
 
-    boolean addInCellar(Reference<WineBottle> bottle, int quantity);
+    boolean addInCellar(Barcode code, Reference<WineDomain> domain, int vintage, int quantity);
 
-    boolean removeFromCellar(Reference<WineBottle> bottle, int quantity);
+    boolean addInCellar(String id, int quantity);
+
+    boolean removeFromCellar(String id, int quantity);
 
     ///////////////////////////////////
     // DATA DELETION

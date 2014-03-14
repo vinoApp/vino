@@ -18,68 +18,64 @@ package com.vino.backend.model;
 
 import com.vino.backend.reference.Reference;
 
-import java.util.List;
-
 /**
  * User: walien
  * Date: 7/27/13
  * Time: 4:45 PM
  */
-public class WineCellarRecord {
+public class WineCellarRecord extends Entity {
 
-    private List<Record> records;
+    private Barcode code;
 
-    public WineCellarRecord(List<Record> records) {
-        super();
-        this.records = records;
+    private Reference<WineDomain> domain;
+
+    private int vintage;
+
+    private int quantity;
+
+    public Barcode getCode() {
+        return code;
     }
 
-    public List<Record> getRecords() {
-        return records;
+    public WineCellarRecord setCode(final Barcode code) {
+        this.code = code;
+        return this;
+    }
+
+    public Reference<WineDomain> getDomain() {
+        return domain;
+    }
+
+    public WineCellarRecord setDomain(final Reference<WineDomain> domain) {
+        this.domain = domain;
+        return this;
+    }
+
+    public int getQuantity() {
+        return quantity;
+    }
+
+    public WineCellarRecord setQuantity(final int quantity) {
+        this.quantity = quantity;
+        return this;
+    }
+
+    public int getVintage() {
+        return vintage;
+    }
+
+    public WineCellarRecord setVintage(final int vintage) {
+        this.vintage = vintage;
+        return this;
     }
 
     @Override
     public String toString() {
-        return "WineCellar{" +
-                "records=" + records +
+        return "WineCellarRecord{" +
+                "code=" + code +
+                ", domain=" + domain +
+                ", vintage=" + vintage +
+                ", quantity=" + quantity +
                 '}';
     }
-
-    public static class Record extends Entity {
-
-        private Reference<WineBottle> bottle;
-
-        private int quantity;
-
-        public Record() {
-
-        }
-
-        public Reference<WineBottle> getBottle() {
-            return bottle;
-        }
-
-        public Record setBottle(final Reference<WineBottle> bottle) {
-            this.bottle = bottle;
-            return this;
-        }
-
-        public int getQuantity() {
-            return quantity;
-        }
-
-        public Record setQuantity(final int quantity) {
-            this.quantity = quantity;
-            return this;
-        }
-
-        @Override
-        public String toString() {
-            return "Record{" +
-                    "bottle=" + bottle +
-                    ", quantity=" + quantity +
-                    '}';
-        }
-    }
-
 }

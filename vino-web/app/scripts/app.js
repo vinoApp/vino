@@ -18,6 +18,9 @@ angular.module('vino.ui', ['ngRoute', 'vino.business', 'vino.services'])
             .when('/domains/:id/edit', {
                 templateUrl: 'views/DomainEditor.html'
             })
+            .when('/cellar', {
+                templateUrl: 'views/Cellar.html'
+            })
             .otherwise({
                 redirectTo: '/'
             });

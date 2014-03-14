@@ -1,0 +1,51 @@
+<div class="modal hide fade" id="{{ modalId }}">
+
+    <div class="modal-header">
+        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+        <h3>Add record</h3>
+    </div>
+
+    <div class="modal-body">
+        <form class="form-horizontal">
+
+            <div class="control-group">
+                <label class="control-label">Domain : </label>
+
+                <div class="controls">
+                    <domain-picker ng-model="record.domain"></domain-picker>
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Code : </label>
+
+                <div class="controls">
+                    <input type="text" ng-model="record.code.value">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Vintage : </label>
+
+                <div class="controls">
+                    <input type="number" ng-model="record.vintage">
+                </div>
+            </div>
+
+            <div class="control-group">
+                <label class="control-label">Quantity : </label>
+
+                <div class="controls">
+                    <input type="number" ng-model="record.quantity">
+                </div>
+            </div>
+
+        </form>
+    </div>
+    <div class="modal-footer">
+        <a class="btn" data-dismiss="modal" aria-hidden="true">Close</a>
+        <a class="btn btn-primary" data-dismiss="modal" aria-hidden="true" ng-click="save(record)">Save</a>
+    </div>
+</div>
+
+

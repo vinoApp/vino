@@ -2,7 +2,7 @@ angular.module('vino.business').factory("Domain",
     function ($resource) {
 
         // Backend
-        var Domain = $resource("/api/domains/:id");
+        var Domain = $resource("/api/domains/:id/:action");
 
         var updateObjectWithRefs = function(domain) {
             var cloned = angular.extend(new Domain(), _.cloneDeep(domain));

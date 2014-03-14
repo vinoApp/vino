@@ -22,8 +22,10 @@ import com.google.common.io.Resources;
 import com.vino.backend.model.WineAOC;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.persistence.Persistor;
+import com.vino.backend.persistence.mongo.MongoCollections;
 import com.vino.backend.persistence.mongo.MongoPersistor;
 import com.vino.backend.reference.Reference;
+import org.jongo.MongoCollection;
 import org.jsoup.Jsoup;
 import org.jsoup.nodes.Document;
 import restx.factory.Factory;
@@ -53,6 +55,9 @@ public class WineDBBuilder {
     private static final String AOC_NAME = "Saint-Emilion";
 
     public static void main(String[] args) throws URISyntaxException, IOException {
+
+        FACTORY.getComponent(Name.of(JongoCollection.class, "domains")).get().drop();
+        FACTORY.getComponent(Name.of(JongoCollection.class, "cellar")).get().drop();
 
         WineAOC aoc = AOCS.get().findOne("{ name : # }", AOC_NAME).as(WineAOC.class);
         if (aoc == null) {

@@ -17,15 +17,24 @@
 package com.vino.backend;
 
 import com.google.common.io.Resources;
-import com.vino.backend.model.*;
+import com.vino.backend.model.Barcode;
+import com.vino.backend.model.WineAOC;
+import com.vino.backend.model.WineDomain;
+import com.vino.backend.model.WineRegion;
 import com.vino.backend.persistence.Persistor;
+import com.vino.backend.persistence.mongo.MongoCollections;
 import com.vino.backend.persistence.mongo.MongoPersistor;
 import com.vino.backend.reference.Reference;
 import org.jongo.Jongo;
+import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
+import org.junit.FixMethodOrder;
 import org.junit.Test;
+import org.junit.runners.MethodSorters;
+import org.slf4j.Logger;
 import restx.factory.Factory;
 import restx.factory.Name;
+import restx.jongo.JongoCollection;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -67,17 +76,8 @@ public class InitDB {
         return Reference.of(domain);
     }
 
-    private Reference<WineBottle> addBottle(Reference<WineDomain> domainRef, int vintage) {
-        WineBottle bottle = new WineBottle()
-                .setCode(Barcode.ean13("0000000" + (++nextBarCode)))
-                .setDomain(domainRef)
-                .setVintage(vintage);
-        PERSISTOR.persist(bottle);
-        return Reference.of(bottle);
-    }
-
-    private void addCellarRecord(Reference<WineBottle> bottleRef, int qty) {
-        PERSISTOR.addInCellar(bottleRef, qty);
+    private void addCellarRecord(Reference<WineDomain> domain, int vintage, int qty) {
+        PERSISTOR.addInCellar(Barcode.ean13("0000000" + (++nextBarCode)), domain, vintage, qty);
     }
 
     @Test
@@ -99,7 +99,6 @@ public class InitDB {
         WineRegion graves = new WineRegion().setName("Graves");
         PERSISTOR.persist(graves);
         Reference<WineRegion> gravesRef = Reference.of(graves);
-
 
         // AOCS
         Reference<WineAOC> margauxRef = addAOC("Margaux", medocRef);
@@ -137,27 +136,21 @@ public class InitDB {
         Reference<WineDomain> cbRef = addDomain("Chateau Cheval Blanc", saintEmilionRef, sticker);
         Reference<WineDomain> petrusRef = addDomain("Chateau Pétrus", pomerolRef, sticker);
 
-        // Bottles
-        Reference<WineBottle> hb2008Ref = addBottle(hbRef, 2008);
-        Reference<WineBottle> hb2009Ref = addBottle(hbRef, 2009);
-        Reference<WineBottle> hb2010Ref = addBottle(hbRef, 2010);
-
-        Reference<WineBottle> mrg2008Ref = addBottle(mrgRef, 2008);
-        Reference<WineBottle> mrg2010Ref = addBottle(mrgRef, 2010);
-        Reference<WineBottle> mrg2011Ref = addBottle(mrgRef, 2011);
-
-        Reference<WineBottle> petrus2000Ref = addBottle(petrusRef, 2000);
-        Reference<WineBottle> petrus2005Ref = addBottle(petrusRef, 2005);
-
         // Cellar records
-        addCellarRecord(hb2008Ref, 10);
-        addCellarRecord(hb2008Ref, 10);
+        addCellarRecord(hbRef, 2008, 10);
+        addCellarRecord(hbRef, 2008, 10);
 
-        addCellarRecord(petrus2005Ref, 10);
-        addCellarRecord(petrus2005Ref, 10);
+        addCellarRecord(beychevellRef, 2001, 10);
+        addCellarRecord(beychevellRef, 2011, 5);
 
-        addCellarRecord(mrg2008Ref, 5);
-        addCellarRecord(mrg2011Ref, 10);
+        addCellarRecord(petrusRef, 2005, 10);
+        addCellarRecord(petrusRef, 2005, 10);
+
+        addCellarRecord(cbRef, 2005, 10);
+        addCellarRecord(cbRef, 2009, 25);
+
+        addCellarRecord(mrgRef, 2008, 5);
+        addCellarRecord(mrgRef, 2011, 10);
     }
 
     private byte[] sampleImg() {

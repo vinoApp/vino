@@ -84,40 +84,32 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public ImmutableList<WineBottle> getAllBottles() {
-        logger.debug("Retrieving all bottles");
-        return ImmutableList.copyOf(collections.get(MongoCollections.BOTTLES).find().as(WineBottle.class));
-    }
-
-    @Override
-    public WineCellar getCellar() {
-        Iterable<WineCellar.Record> records = collections.get(MongoCollections.CELLAR)
+    public ImmutableList<WineCellarRecord> getAllRecords() {
+        return ImmutableList.copyOf(collections.get(MongoCollections.CELLAR)
                 .find()
-                .as(WineCellar.Record.class);
-        return new WineCellar(ImmutableList.copyOf(records));
+                .as(WineCellarRecord.class));
     }
 
     @Override
-    public Optional<WineBottle> getBottleByBarCode(Barcode barCode) {
-        return Optional.fromNullable(collections.get(MongoCollections.BOTTLES)
-                .findOne("{ code.value : #, code.type : # }", barCode.getValue(), barCode.getType())
-                .as(WineBottle.class));
-    }
-
-    @Override
-    public ImmutableList<WineCellar.Record> getRecordsByDomain(String domainKey) {
-        Iterable<WineCellar.Record> records = collections.get(MongoCollections.CELLAR)
+    public ImmutableList<WineCellarRecord> getRecordsByDomain(String domainKey) {
+        Iterable<WineCellarRecord> records = collections.get(MongoCollections.CELLAR)
                 .find("{ domain : # }", domainKey)
-                .as(WineCellar.Record.class);
+                .as(WineCellarRecord.class);
         return ImmutableList.copyOf(records);
     }
 
     @Override
-    public Optional<WineCellar.Record> getRecord(String bottleKey) {
-        WineCellar.Record record = collections.get(MongoCollections.CELLAR)
-                .findOne("{ bottle : # }", bottleKey)
-                .as(WineCellar.Record.class);
-        return Optional.fromNullable(record);
+    public Optional<WineCellarRecord> getRecord(String key) {
+        return Optional.fromNullable(collections.get(MongoCollections.CELLAR)
+                .findOne(new ObjectId(key))
+                .as(WineCellarRecord.class));
+    }
+
+    @Override
+    public Optional<WineCellarRecord> getRecord(Reference<WineDomain> domain, int vintage) {
+        return Optional.fromNullable(collections.get(MongoCollections.CELLAR)
+                .findOne("{ domain: #, vintage: # }", domain.getKey(), vintage)
+                .as(WineCellarRecord.class));
     }
 
     ///////////////////////////////////
@@ -145,55 +137,67 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public boolean persist(WineBottle bottle) {
-        persistEntity(bottle, MongoCollections.BOTTLES);
-        return true;
-    }
-
-    @Override
     public boolean persist(WineDomain domain) {
         persistEntity(domain, MongoCollections.DOMAINS);
         return true;
     }
 
     @Override
-    public boolean addInCellar(Reference<WineBottle> bottle, int quantity) {
+    public boolean persist(WineCellarRecord record) {
+        persistEntity(record, MongoCollections.CELLAR);
+        return true;
+    }
 
-        Optional<WineCellar.Record> foundRecord = getRecord(bottle.getKey());
+    @Override
+    public boolean addInCellar(Barcode code, Reference<WineDomain> domain, int vintage, int quantity) {
+
+        Optional<WineCellarRecord> foundRecord = getRecord(domain, vintage);
 
         if (foundRecord.isPresent()) {
             foundRecord.get().setQuantity(foundRecord.get().getQuantity() + quantity);
             collections.get(MongoCollections.CELLAR).save(foundRecord.get());
         } else {
-            if (!getEntity(bottle.getKey()).isPresent()) {
-                return false;
-            }
-            collections.get(MongoCollections.CELLAR).save(
-                    new WineCellar.Record()
-                            .setBottle(bottle)
-                            .setQuantity(quantity)
-            );
+            persist(new WineCellarRecord()
+                    .setCode(code)
+                    .setDomain(domain)
+                    .setVintage(vintage)
+                    .setQuantity(quantity));
         }
 
         return true;
     }
 
     @Override
-    public boolean removeFromCellar(Reference<WineBottle> bottle, int quantity) {
+    public boolean addInCellar(String id, int quantity) {
 
-        Optional<WineCellar.Record> foundRecord = getRecord(bottle.getKey());
+        Optional<WineCellarRecord> foundRecord = getRecord(id);
 
         if (!foundRecord.isPresent()) {
             return false;
         }
 
+        foundRecord.get().setQuantity(foundRecord.get().getQuantity() + quantity);
+        persist(foundRecord.get());
+
+        return true;
+    }
+
+    @Override
+    public boolean removeFromCellar(String key, int quantity) {
+
+        Optional<WineCellarRecord> record = getEntity(key);
+
+        if (!record.isPresent()) {
+            return false;
+        }
+
         MongoCollection collection = collections.get(MongoCollections.CELLAR);
 
-        if (foundRecord.get().getQuantity() - quantity <= 0) {
-            collection.remove(foundRecord.get().getKey());
+        if (record.get().getQuantity() - quantity <= 0) {
+            delete(record.get().getKey());
         } else {
-            foundRecord.get().setQuantity(foundRecord.get().getQuantity() - quantity);
-            collection.save(foundRecord.get());
+            record.get().setQuantity(record.get().getQuantity() - quantity);
+            collection.save(record.get());
         }
 
         return true;

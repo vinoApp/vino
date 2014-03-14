@@ -1,8 +1,15 @@
-<div id="vino-content">
+<div id="vino-content" ng-controller="CellarCtrl">
 
     <h3>Cellar</h3>
-    <button class="btn btn-small btn-success"><i class="icon-white icon-plus"></i> Add (+)</button>
-    <button class="btn btn-small btn-danger"><i class="icon-white icon-remove"></i> Remove (-)</button>
+
+    <form class="form-search" style="float:right; margin-bottom:10px;">
+        <label for="search">Search : </label>
+        <input id="search" type="text" class="input-medium search-query" ng-model="query">
+    </form>
+
+    <button class="btn btn-small btn-success" href="#addRecordModal" data-toggle="modal">
+        <i class="icon-white icon-plus"></i> Add (+)
+    </button>
 
     <table class="table table-condensed" style="margin-top: 15px">
 
@@ -17,17 +24,25 @@
         </tr>
         </thead>
         <tbody>
-        <tr ng-repeat="record in records">
-            <td>{{ record.barcode }}</td>
-            <td>{{ record.domain.name }}</td>
+        <tr ng-repeat="record in records | filter:query">
+            <td>{{ record.code.value }}</td>
+            <td>
+                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + record.domain._id + '/view')">
+                    <i class="icon-white icon-eye-open"></i>
+                </button>
+                {{ record.domain.name }}
+            </td>
             <td>{{ record.domain.origin.region.name }} / {{ record.domain.origin.name }}</td>
             <td>{{ record.vintage }}</td>
             <td>{{ record.quantity }}</td>
             <td>
-                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + record.domain.id + '/view')"><i class="icon-white icon-eye-open"></i> Domain</button>
+                <button class="btn btn-small btn-success" ng-click="in(record, 1)"><i class="icon-white icon-plus"></i></button>
+                <button class="btn btn-small btn-danger" ng-click="out(record, 1)"><i class="icon-white icon-minus"></i></button>
             </td>
         </tr>
         </tbody>
     </table>
+
+    <record-manager modal-id="addRecordModal"></record-manager>
 
 </div>

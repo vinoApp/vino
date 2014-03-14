@@ -11,4 +11,9 @@ angular.module('vino.ui').controller("DomainCtrl", function ($scope, $routeParam
         id: domainId
     });
 
+    $scope.records = Domain.query({
+        id: domainId,
+        action: 'records'
+    });
+
 });
