@@ -1,8 +1,12 @@
-angular.module('vino.ui').controller("CellarCtrl", function ($scope, $routeParams, Cellar, Notification) {
+angular.module('vino.ui').controller("CellarCtrl", function ($scope, $routeParams, Common, Cellar, Notification) {
 
     var loadData = function () {
         $scope.records = Cellar.query();
     };
+
+    $scope.$on(Common.events.cellar.update, function () {
+        loadData();
+    });
 
     loadData();
 

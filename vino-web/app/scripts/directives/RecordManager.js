@@ -1,4 +1,4 @@
-angular.module("vino.ui").directive("recordManager", function (Cellar, Notification) {
+angular.module("vino.ui").directive("recordManager", function (Common, Cellar, Notification) {
 
     return {
         restrict: 'E',
@@ -11,7 +11,7 @@ angular.module("vino.ui").directive("recordManager", function (Cellar, Notificat
                 $(elt).modal('hide');
             };
         },
-        controller: function ($scope) {
+        controller: function ($scope, $rootScope) {
 
             $scope.record = {
                 code: {
@@ -24,6 +24,7 @@ angular.module("vino.ui").directive("recordManager", function (Cellar, Notificat
                 Cellar.add(record, {
                     success: function () {
                         Notification.notify.success('Save record : success');
+                        $rootScope.$broadcast(Common.events.cellar.update);
                         $scope.close();
                     },
                     error: function () {
