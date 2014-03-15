@@ -8,7 +8,7 @@ mobile-current-version = 1.0
 
 
 ### About the solution
-Wine cellar manager (web &amp; mobile clients).
+Wine cellar manager (web + mobile clients).
 This solution is functionnaly able to manage a wine cellar. On the one hand, the web client is able to expose data 
 (stored bottles, all bottles, bottles sticks, statistics, ...), on the other hand, the mobile client is able to 
 register/unregister a stored bottle reading the bar code on the bottle.

@@ -26,8 +26,6 @@ import restx.annotations.*;
 import restx.factory.Component;
 import restx.security.PermitAll;
 
-import java.util.List;
-
 /**
  * User: walien
  * Date: 1/7/14
