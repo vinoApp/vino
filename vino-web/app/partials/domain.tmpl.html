@@ -1,107 +1,104 @@
 <div id="vino-content">
 
-    <div id="header">
-        <img alt='300x200' style='width:300px; float:right;' ng-if="domain.sticker" ng-src='data:image/jpeg;base64,{{ domain.sticker }}' style="float: left">
+    <div style="padding-bottom: 20px"></div>
+
+    <a class="btn btn-info" ng-if="domain.localization" href="{{domain.localization}}" target="_blank">
+        <i class="glyphicon glyphicon-globe"></i>
+    </a>
+
+    <div style="padding-bottom: 20px"></div>
+
+    <div class="row">
+        <div class="col-md-8">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Global</b></div>
+                <div class="panel-body">
+                    <form role="form-horizontal">
+                        <div class="form-group">
+                            <label for="_name">Name : </label>
+                            <input type="text" class="form-control" id="_name" ng-model="domain.name" ng-disabled="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="_region">Region : </label>
+                            <input type="text" class="form-control" id="_region" ng-model="domain.origin.region.name" ng-disabled="true">
+                        </div>
+                        <div class="form-group">
+                            <label for="_aoc">AOC : </label>
+                            <input type="text" class="form-control" id="_aoc" ng-model="domain.origin.name" ng-disabled="true">
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4">
+            <div class="panel-body">
+                <img alt='300x200' style='width:300px; float:right;' ng-if="domain.sticker" ng-src='data:image/jpeg;base64,{{ domain.sticker }}'>
+            </div>
+        </div>
     </div>
 
-    <div>
-
-        <a class="btn btn-info" ng-if="domain.localization" href="{{domain.localization}}" target="_blank">
-            <i class="icon-white icon-globe"></i>
-        </a>
-
+    <div class="row">
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Wine</b></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="_comment">Comment : </label>
+                        <input type="text" class="form-control" id="_comment" ng-model="domain.tasting.comment"
+                               ng-disabled="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="_garde">Garde : </label>
+                        <input type="text" class="form-control" id="_garde" ng-model="domain.tasting.garde"
+                               ng-disabled="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="_temperatures">Temperatures : </label>
+                        <input type="text" class="form-control" id="_temperatures" ng-model="domain.tasting.temperature"
+                               ng-disabled="true">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="panel panel-default">
+                <div class="panel-heading"><b>Tasting</b></div>
+                <div class="panel-body">
+                    <div class="form-group">
+                        <label for="_floor">Floor : </label>
+                        <input type="text" class="form-control" id="_floor" ng-model="domain.wineDescription.floor"
+                               ng-disabled="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="_grape">Grape : </label>
+                        <input type="text" class="form-control" id="_grape" ng-model="domain.wineDescription.grape"
+                               ng-disabled="true">
+                    </div>
+                    <div class="form-group">
+                        <label for="_medal">Medals : </label>
+                        <input type="text" class="form-control" id="_medal" ng-model="domain.wineDescription.medal"
+                               ng-disabled="true">
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
 
-    <form class="form-horizontal">
-
-        <fieldset>
-            <legend>Global</legend>
-            <div class="control-group">
-                <label class="control-label" for="domainName">Name : </label>
-
-                <div class="controls">
-                    <label id="domainName">{{ domain.name }}</label>
-                </div>
+    <div class="panel panel-default">
+        <div class="panel-heading"><b>History</b></div>
+        <div class="panel-body">
+            <div class="form-group">
+                <label for="_description">Description : </label>
+                <textarea class="form-control" id="_description" ng-model="domain.history.description"
+                          ng-disabled="true" style="height:250px"></textarea>
             </div>
-            <div class="control-group">
-                <label class="control-label" for="domainRegion">Region : </label>
+        </div>
+    </div>
 
-                <div class="controls">
-                    <label id="domainRegion">{{ domain.origin.region.name }}</label>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="domainAOC">AOC : </label>
-
-                <div class="controls">
-                    <label id="domainAOC">{{ domain.origin.name }}</label>
-                </div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Wine</legend>
-            <div class="control-group">
-                <label class="control-label" for="wineComment">Comment : </label>
-                <div class="controls">
-                    <label id="wineComment">{{ domain.tasting.comment }}</label>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="wineGarde">Garde : </label>
-                <div class="controls">
-                    <label id="wineGarde">{{ domain.tasting.garde }}</label>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="wineTemperatures">Temperature(s) : </label>
-                <div class="controls">
-                    <label id="wineTemperatures">{{ domain.tasting.temperature }}</label>
-                </div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>Tasting</legend>
-            <div class="control-group">
-                <label class="control-label" for="wineFloor">Floor : </label>
-                <div class="controls">
-                    <label id="wineFloor">{{ domain.wineDescription.floor }}</label>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="wineGrape">Grape : </label>
-                <div class="controls">
-                    <label id="wineGrape">{{ domain.wineDescription.grape }}</label>
-                </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label" for="wineMedal">Medal : </label>
-                <div class="controls">
-                    <label id="wineMedal">{{ domain.wineDescription.medal}}</label>
-                </div>
-            </div>
-        </fieldset>
-
-        <fieldset>
-            <legend>History</legend>
-            <p>
-                {{ domain.history.description }}
-            </p>
-        </fieldset>
-
-    </form>
-
-
-    <div ng-if="records.length > 0">
-        <fieldset>
-            <legend>Known Bottles</legend>
+    <div class="panel panel-default" ng-if="records.length > 0">
+        <div class="panel-heading"><b>Known Bottles</b></div>
+        <div class="panel-body">
             <table class="table table-condensed">
-
                 <thead>
                 <tr>
                     <th>BarCode</th>
@@ -117,9 +114,9 @@
                 </tr>
                 </tbody>
             </table>
-            </fieldset>
+        </div>
     </div>
 
-    <div style="padding-bottom: 250px"></div>
+    <div style="padding-bottom: 200px"></div>
 
 </div>

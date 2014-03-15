@@ -1,6 +1,11 @@
 angular.module('vino.ui').controller("DomainsCtrl", function ($scope, Domain, Notification) {
 
-    $scope.domains = Domain.query();
+    $scope.$watch("selectedAOC", function (aoc) {
+        if (!aoc) {
+            return;
+        }
+        $scope.domains = Domain.query({aoc: aoc._id});
+    });
 
     $scope.remove = function (domain) {
 

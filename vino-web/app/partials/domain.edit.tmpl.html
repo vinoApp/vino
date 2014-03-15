@@ -1,47 +1,42 @@
 <div id="vino-content">
 
-    <form class="form-horizontal">
-        <fieldset>
-            <legend>Global</legend>
-            <div class="control-group">
-                <label class="control-label" for="domainName">Name : </label>
+    <div style="padding-bottom: 20px"></div>
 
-                <div class="controls">
-                    <input type="text" id="domainName" ng-model="domain.name" placeholder="Domain name"/>
+    <a class="btn btn-info" ng-if="domain.localization" href="{{domain.localization}}" target="_blank">
+        <i class="glyphicon glyphicon-globe"></i>
+    </a>
+
+    <div class="panel panel-default">
+        <div class="panel-heading"><b>Global</b></div>
+        <div class="panel-body">
+            <form role="form-horizontal">
+                <div class="form-group">
+                    <label for="_name">Name : </label>
+                    <input type="text" class="form-control" id="_name" ng-model="domain.name">
                 </div>
-            </div>
-
-            <div class="control-group">
-                <label class="control-label">Origin : </label>
-
-                <div class="controls">
-                    <origin-picker ng-required="true" ng-model="domain.origin"></origin-picker>
+                <div class="form-group">
+                    <label for="_aoc">AOC : </label>
+                    <div id="_aoc">
+                        <origin-picker id="_aoc" ng-model="domain.origin"></origin-picker>
+                    </div>
                 </div>
-            </div>
-        </fieldset>
+            </form>
+        </div>
+    </div>
 
-        <fieldset>
-            <legend>Visual</legend>
-            <div class="control-group">
-                <label class="control-label">Sticker : </label>
-
-                <div class="controls">
-                    <file-picker ng-model="domain.sticker"></file-picker>
-                </div>
-            </div>
-            <div class="control-group">
-                <label class="control-label" for="domainStickerPreview">Preview : </label>
-
-                <div class="controls">
-                    <p ng-if="!domain.sticker">No sticker.</p>
-                    <img ng-if="domain.sticker" id="domainStickerPreview" alt='300x200' style='width:150px;'
+    <div class="panel panel-default">
+        <div class="panel-heading"><b>Visual</b></div>
+        <div class="panel-body">
+            <file-picker ng-model="domain.sticker"></file-picker>
+            <img ng-if="domain.sticker" id="domainStickerPreview" alt='300x200' style='width:150px;'
                          ng-src='data:image/jpeg;base64,{{domain.sticker}}'>
-                </div>
-            </div>
-        </fieldset>
-    </form>
+        </div>
+    </div>
 
     <button class="btn btn-success" ng-click="save()"><i class="icon-white icon-check"></i> Save</button>
     <button class="btn btn-danger" ng-click="cancel()"><i class="icon-white icon-hand-left"></i> Cancel</button>
 
+    <div style="padding-bottom: 200px"></div>
+
 </div>
+

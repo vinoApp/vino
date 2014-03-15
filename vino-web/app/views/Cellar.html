@@ -2,13 +2,14 @@
 
     <h3>Cellar</h3>
 
-    <form class="form-search" style="float:right; margin-bottom:10px;">
-        <label for="search">Search : </label>
-        <input id="search" type="text" class="input-medium search-query" ng-model="query">
+    <form class="navbar-form navbar-right" role="search">
+        <div class="form-group">
+            <input type="text" class="form-control" placeholder="Search" ng-model="query">
+        </div>
     </form>
 
-    <button class="btn btn-small btn-success" href="#addRecordModal" data-toggle="modal">
-        <i class="icon-white icon-plus"></i> Add
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addRecordModal">
+        <i class="glyphicon glyphicon-plus"></i> Add
     </button>
 
     <table class="table table-condensed" style="margin-top: 15px">
@@ -27,8 +28,8 @@
         <tr ng-repeat="record in records | filter:query">
             <td>{{ record.code.value }}</td>
             <td>
-                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + record.domain._id + '/view')">
-                    <i class="icon-white icon-eye-open"></i>
+                <button class="btn btn-sm btn-info" ng-click="redirect('/domains/' + record.domain._id + '/view')">
+                    <i class="glyphicon glyphicon-eye-open"></i>
                 </button>
                 {{ record.domain.name }}
             </td>
@@ -36,8 +37,8 @@
             <td>{{ record.vintage }}</td>
             <td>{{ record.quantity }}</td>
             <td>
-                <button class="btn btn-small btn-success" ng-click="in(record, 1)"><i class="icon-white icon-plus"></i></button>
-                <button class="btn btn-small btn-danger" ng-click="out(record, 1)"><i class="icon-white icon-minus"></i></button>
+                <button class="btn btn-sm btn-success" ng-click="in(record, 1)"><i class="glyphicon glyphicon-plus"></i></button>
+                <button class="btn btn-sm btn-danger" ng-click="out(record, 1)"><i class="glyphicon glyphicon-minus"></i></button>
             </td>
         </tr>
         </tbody>
