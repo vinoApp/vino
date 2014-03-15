@@ -42,6 +42,8 @@ public interface Persistor {
 
     ImmutableList<WineDomain> getAllDomains();
 
+    ImmutableList<WineDomain> getDomainsByAOC(String aocKey);
+
     ImmutableList<WineCellarRecord> getAllRecords();
 
     ImmutableList<WineCellarRecord> getRecordsByDomain(String domainKey);

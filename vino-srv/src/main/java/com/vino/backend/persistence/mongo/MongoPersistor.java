@@ -84,6 +84,13 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
+    public ImmutableList<WineDomain> getDomainsByAOC(String aocKey) {
+        return ImmutableList.copyOf(
+                collections.get(MongoCollections.DOMAINS).find("{ origin: # }", aocKey).as(WineDomain.class)
+        );
+    }
+
+    @Override
     public ImmutableList<WineCellarRecord> getAllRecords() {
         return ImmutableList.copyOf(collections.get(MongoCollections.CELLAR)
                 .find()
