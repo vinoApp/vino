@@ -4,10 +4,11 @@ angular.module("vino.ui").directive("domainPicker", function (Domain) {
         restrict: 'E',
         scope: {
             "ngModel": "=",
-            "ngDisabled": "="
+            "ngDisabled": "=",
+            "aoc": "="
         },
         template: "<select ng-options='domain._id for domain in domains'></select>",
-        link: function ($scope, elt) {
+        link: function ($scope, elt, attrs) {
 
             var format = function (domain) {
                 return domain.name + ' (' + domain.origin.name + ')';
@@ -66,7 +67,17 @@ angular.module("vino.ui").directive("domainPicker", function (Domain) {
                 render();
             });
 
-            $scope.domains = Domain.query();
+            if (attrs.aoc) {
+                $scope.$watch('aoc', function (aoc) {
+                    $scope.domains = [];
+                    if (!aoc) {
+                        return;
+                    }
+                    $scope.domains = Domain.query({ aoc: aoc._id });
+                });
+            } else {
+                $scope.domains = Domain.query();
+            }
         }
     };
 
