@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vino.ui', ['ngRoute', 'vino.business', 'vino.services'])
+angular.module('vino.ui', ['ngRoute', 'ngProgress', 'vino.business', 'vino.services'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {

@@ -1,4 +1,4 @@
-angular.module('vino.ui').controller("DomainsCtrl", function ($scope, $filter, Domain, Notification) {
+angular.module('vino.ui').controller("DomainsCtrl", function ($scope, $filter, Domain, Notification, ngProgress) {
 
     $scope.$watch("selectedAOC", function (aoc) {
         if (!aoc) {
@@ -16,10 +16,17 @@ angular.module('vino.ui').controller("DomainsCtrl", function ($scope, $filter, D
 
         var aoc = $scope.selectedAOC;
 
+        ngProgress.start();
         if (!aoc) {
-            $scope.domains = Domain.query();
+            $scope.domains = Domain.query({}, function() {
+                ngProgress.complete();
+                ngProgress.stop();
+            });
         } else {
-            $scope.domains = Domain.query({aoc: aoc._id});
+            $scope.domains = Domain.query({aoc: aoc._id}, function(){
+                ngProgress.complete();
+                ngProgress.stop();
+            });
         }
     };
 

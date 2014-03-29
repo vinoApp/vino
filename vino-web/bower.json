@@ -12,7 +12,8 @@
     "alertify": "0.3.10",
     "lodash": "2.4.1",
     "angular-route": "1.2.11",
-    "select2": "3.4.5"
+    "select2": "3.4.5",
+    "ngprogress": "1.0.4"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
