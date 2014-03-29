@@ -63,7 +63,8 @@ public class DomainsResource {
     }
 
     @POST("/domains")
-    public Response addDomain(WineDomain domain) {
+    @Consumes("application/json;view=com.vino.backend.persistence.mongo.Views$Edit")
+    public Response addOrUpdateDomain(WineDomain domain) {
         boolean result = persistor.persist(domain);
         Response.TechnicalStatus technical = result ? Response.TechnicalStatus.DB_INSERT_OK : Response.TechnicalStatus.DB_ERROR;
         return Response

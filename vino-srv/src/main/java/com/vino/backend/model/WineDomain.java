@@ -33,15 +33,19 @@ public class WineDomain extends Entity {
 
     private Reference<WineAOC> origin;
 
-    @JsonView({restx.jackson.Views.Private.class, Views.Details.class})
+    @JsonView({ restx.jackson.Views.Private.class, Views.Details.class, Views.Edit.class })
     private byte[] sticker;
 
+    @JsonView({ restx.jackson.Views.Private.class, Views.Details.class, Views.Edit.class })
     private String localization;
 
+    @JsonView({ restx.jackson.Views.Private.class, Views.Details.class, Views.Edit.class })
     private WineDomain.Wine wineDescription;
 
+    @JsonView({ restx.jackson.Views.Private.class, Views.Details.class, Views.Edit.class })
     private WineDomain.Tasting tasting;
 
+    @JsonView({ restx.jackson.Views.Private.class, Views.Details.class, Views.Edit.class })
     private WineDomain.History history;
 
     public WineDomain() {
