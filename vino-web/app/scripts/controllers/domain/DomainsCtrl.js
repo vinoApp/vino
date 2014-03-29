@@ -17,6 +17,7 @@ angular.module('vino.ui').controller("DomainsCtrl", function ($scope, $filter, D
         var aoc = $scope.selectedAOC;
 
         ngProgress.start();
+        ngProgress.color('white');
         if (!aoc) {
             $scope.domains = Domain.query({}, function() {
                 ngProgress.complete();
