@@ -1,4 +1,4 @@
-angular.module('vino.ui').controller("DomainCtrl", function ($scope, $routeParams, Notification, Domain) {
+angular.module('vino.ui').controller("DomainCtrl", function ($scope, $routeParams, $filter, Notification, Domain) {
 
     var mode = $routeParams.mode;
     if (!mode) {
@@ -28,14 +28,19 @@ angular.module('vino.ui').controller("DomainCtrl", function ($scope, $routeParam
             Domain.createOrUpdate($scope.domain, {
                 success: function () {
                     if ($routeParams.id) {
-                        Notification.notify.success('Domain successfuly updated');
+                        Notification.notify.success($filter('i18n')('domain.update.success'));
                     } else {
-                        Notification.notify.success('Domain successfuly created');
+                        Notification.notify.success($filter('i18n')('domain.create.success'));
                     }
                     $scope.cancel();
                 },
                 error: function () {
-                    Notification.notify.error('Error during domain update');
+                    if ($routeParams.id) {
+                        Notification.notify.error($filter('i18n')('domain.update.error'));
+                    } else {
+                        Notification.notify.error($filter('i18n')('domain.create.error'));
+
+                    }
                 }
             });
         },

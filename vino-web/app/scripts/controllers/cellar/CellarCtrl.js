@@ -1,4 +1,4 @@
-angular.module('vino.ui').controller("CellarCtrl", function ($scope, $routeParams, Common, Cellar, Notification) {
+angular.module('vino.ui').controller("CellarCtrl", function ($scope, $routeParams, $filter, Common, Cellar, Notification) {
 
     var loadData = function () {
         $scope.records = Cellar.query();
@@ -17,11 +17,11 @@ angular.module('vino.ui').controller("CellarCtrl", function ($scope, $routeParam
         in: function (record, qty) {
             Cellar.in(record, qty, {
                 success: function () {
-                    Notification.notify.success('In : success');
+                    Notification.notify.success($filter('i18n')('cellar.in.success'));
                     loadData();
                 },
                 error: function () {
-                    Notification.notify.error('In : error');
+                    Notification.notify.error($filter('i18n')('cellar.in.error'));
                 }
             });
         },
@@ -29,11 +29,11 @@ angular.module('vino.ui').controller("CellarCtrl", function ($scope, $routeParam
         out: function (record, qty) {
             Cellar.out(record, qty, {
                 success: function () {
-                    Notification.notify.success('Out : success');
+                    Notification.notify.success($filter('i18n')('cellar.out.success'));
                     loadData();
                 },
                 error: function () {
-                    Notification.notify.error('Out : error');
+                    Notification.notify.error($filter('i18n')('cellar.out.error'));
                 }
             });
         }

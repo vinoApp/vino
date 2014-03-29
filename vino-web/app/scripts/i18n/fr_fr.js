@@ -34,6 +34,21 @@ angular.module('vino.ui').constant('LocalDictionary', {
     'action.displayAllDomains': 'Afficher tous',
     'action.add.bottle': 'Ajouter une bouteille dans la cave',
 
+    // DIALOG
+    'action.delete.domain.confirm': 'Confirmez-vous la suppression de ce château ?',
+
+    // NOTIFICATIONS
+    'domain.create.success': 'Château crée avec succès',
+    'domain.create.error': 'Erreur durant la création du château',
+    'domain.update.success': 'Château mis à jour avec succès.',
+    'domain.update.error': 'Erreur durant la mise à jour du château',
+    'domain.delete.success': 'Château supprimé avec succès.',
+    'domain.delete.error': 'Erreur durant la suppression du château',
+    'cellar.in.success': 'Bouteille ajoutée à la cave',
+    'cellar.in.error': 'Erreur durant l\'ajout de la bouteille',
+    'cellar.out.success': 'Bouteille retirée de la cave',
+    'cellar.out.error': 'Erreur durant le retrait de la bouteille',
+
     // ORIGINS (REGION + AOC)
     'region': 'Région Viticole',
     'aoc': 'AOC',
