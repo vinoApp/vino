@@ -12,9 +12,6 @@ angular.module('vino.ui', ['ngRoute', 'vino.business', 'vino.services'])
             .when('/domains/:mode', {
                 templateUrl: 'views/Domain.html'
             })
-            .when('/domains/:id', {
-                templateUrl: 'views/Domain.html'
-            })
             .when('/domains/:id/:mode', {
                 templateUrl: 'views/Domain.html'
             })
