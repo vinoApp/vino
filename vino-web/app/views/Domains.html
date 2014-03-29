@@ -1,13 +1,20 @@
 <div id="vino-content" ng-controller="DomainsCtrl">
 
-    <h3>Domains</h3>
+    <h3>{{ 'domains' | i18n }}</h3>
 
-    <button class="btn btn-small btn-success" ng-click="create()"><i class="icon-white icon-plus"></i> Add</button>
+    <button class="btn btn-small btn-success" ng-click="create()">
+        <i class="icon-white icon-plus"></i> {{ 'action.create' | i18n }}
+    </button>
 
     <div style="padding-bottom: 20px"></div>
 
     <div class="panel panel-primary">
-        <div class="panel-heading">Selectionnez une AOC</div>
+        <div class="panel-heading">
+            {{ 'action.select.aoc' | i18n }}
+            <button class="btn btn-small btn-info" ng-click="displayAll()" style="margin-left: 10px">
+                <i class="icon-white icon-plus"></i> {{ 'action.displayAllDomains' | i18n }}
+            </button>
+        </div>
         <div class="panel-body">
             <origin-picker ng-model="selectedAOC"></origin-picker>
         </div>
@@ -15,7 +22,7 @@
 
     <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" ng-model="query">
+            <input type="text" class="form-control" placeholder="{{ 'action.search' | i18n }}" ng-model="query">
         </div>
     </form>
 
@@ -23,10 +30,10 @@
 
         <thead>
         <tr>
-            <th>Name</th>
-            <th>Region</th>
-            <th>AOC</th>
-            <th>Actions</th>
+            <th>{{ 'domain.name' | i18n }}</th>
+            <th>{{ 'region' | i18n }}</th>
+            <th>{{ 'aoc' | i18n }}</th>
+            <th>{{ 'actions' | i18n }}</th>
         </tr>
         </thead>
         <tbody>
@@ -35,9 +42,15 @@
             <td>{{ domain.origin.region.name }}</td>
             <td>{{ domain.origin.name }}</td>
             <td>
-                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + domain._id + '/view')"><i class="icon-white icon-eye-open"></i> View</button>
-                <button class="btn btn-small btn-warning" ng-click="redirect('/domains/' + domain._id + '/edit')"><i class="icon-white icon-edit"></i> Edit</button>
-                <button class="btn btn-small btn-danger" ng-click="remove(domain)"><i class="icon-white icon-remove"></i> Remove</button>
+                <button class="btn btn-small btn-info" ng-click="redirect('/domains/' + domain._id + '/view')">
+                    <i class="glyphicon glyphicon-eye-open"></i>
+                </button>
+                <button class="btn btn-small btn-warning" ng-click="redirect('/domains/' + domain._id + '/edit')">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </button>
+                <button class="btn btn-small btn-danger" ng-click="remove(domain)">
+                    <i class="glyphicon glyphicon-trash"></i>
+                </button>
             </td>
         </tr>
         </tbody>

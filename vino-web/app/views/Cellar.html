@@ -1,27 +1,28 @@
 <div id="vino-content" ng-controller="CellarCtrl">
 
-    <h3>Cellar</h3>
+    <h3>{{ 'cellar' | i18n }}</h3>
 
     <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
-            <input type="text" class="form-control" placeholder="Search" ng-model="query">
+            <input type="text" class="form-control" placeholder="{{ 'action.search' | i18n }}" ng-model="query">
         </div>
     </form>
 
     <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addRecordModal">
-        <i class="glyphicon glyphicon-plus"></i> Add
+        <i class="glyphicon glyphicon-plus"></i> {{ 'action.put' | i18n }}
     </button>
 
     <table class="table table-condensed" style="margin-top: 15px">
 
         <thead>
         <tr>
-            <th>BarCode</th>
-            <th>Domain</th>
-            <th>Origin</th>
-            <th>Vintage</th>
-            <th>Qty</th>
-            <th>Actions</th>
+            <th>{{ 'barcode' | i18n }}</th>
+            <th>{{ 'domain' | i18n }}</th>
+            <th>{{ 'region' | i18n }}</th>
+            <th>{{ 'aoc' | i18n }}</th>
+            <th>{{ 'bottle.vintage' | i18n }}</th>
+            <th>{{ 'qty' | i18n }}</th>
+            <th>{{ 'actions' | i18n }}</th>
         </tr>
         </thead>
         <tbody>
@@ -33,17 +34,22 @@
                 </button>
                 {{ record.domain.name }}
             </td>
-            <td>{{ record.domain.origin.region.name }} / {{ record.domain.origin.name }}</td>
+            <td>{{ record.domain.origin.region.name }}</td>
+            <td>{{ record.domain.origin.name }}</td>
             <td>{{ record.vintage }}</td>
             <td>{{ record.quantity }}</td>
             <td>
                 <button class="btn btn-sm btn-success" ng-click="in(record, 1)"><i class="glyphicon glyphicon-plus"></i></button>
                 <button class="btn btn-sm btn-danger" ng-click="out(record, 1)"><i class="glyphicon glyphicon-minus"></i></button>
+                <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#editRecordModal" ng-click="edit(record)">
+                    <i class="glyphicon glyphicon-edit"></i>
+                </button>
             </td>
         </tr>
         </tbody>
     </table>
 
     <record-manager modal-id="addRecordModal"></record-manager>
+    <record-manager modal-id="editRecordModal" managed-record="recordToEdit"></record-manager>
 
 </div>

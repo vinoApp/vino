@@ -7,6 +7,10 @@ angular.module('vino.ui').controller("DomainsCtrl", function ($scope, Domain, No
         $scope.domains = Domain.query({aoc: aoc._id});
     });
 
+    $scope.displayAll = function () {
+        $scope.domains = Domain.query();
+    };
+
     $scope.remove = function (domain) {
 
         Notification.dialog.confirm('Would you really want to remove this domain ?', null,

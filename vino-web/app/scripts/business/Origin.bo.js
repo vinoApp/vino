@@ -11,10 +11,10 @@ angular.module('vino.business').factory('Origin',
                     type: 'regions'
                 });
             },
-            getAllAOCS: function () {
+            getAllAOCS: function (handler) {
                 return Origin.query({
                     type: 'aocs'
-                });
+                }, handler);
             }
         };
     });

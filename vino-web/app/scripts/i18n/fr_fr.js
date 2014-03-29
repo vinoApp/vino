@@ -30,8 +30,9 @@ angular.module('vino.ui').constant('LocalDictionary', {
     'action.pull': 'Retirer',
     'action.ok': 'Valider',
     'action.cancel': 'Annuler',
-    'action.select.aoc': 'Selectionnez une AOC',
+    'action.select.aoc': 'Selectionnez une AOC ... ou ',
     'action.displayAllDomains': 'Afficher tous',
+    'action.add.bottle': 'Ajouter une bouteille dans la cave',
 
     // ORIGINS (REGION + AOC)
     'region': 'Région Viticole',

@@ -7,6 +7,15 @@ body {
     padding-top: 10px;
 }
 
+/**
+ * Header
+ */
+
+.navbar-header span {
+    color: #800000;
+    font-size: 18px;
+}
+
 
 /*
  * Global add-ons

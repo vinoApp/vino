@@ -2,119 +2,164 @@
 
     <div style="padding-bottom: 20px"></div>
 
-    <a class="btn btn-info" ng-if="domain.localization" href="{{domain.localization}}" target="_blank">
-        <i class="glyphicon glyphicon-globe"></i>
+    <a class="btn btn-info" ng-if="domain.localization && isViewing()" ng-href="{{ domain.localization }}" target="_blank">
+        <i class="glyphicon glyphicon-globe"></i> {{ 'localization' | i18n }}
     </a>
 
     <div style="padding-bottom: 20px"></div>
 
-    <div class="row">
+    <div class="row" style="margin-left:3px">
+
         <div class="col-md-8">
+
+            <div class="row">
+                <div class="panel panel-default">
+                    <div class="panel-heading"><b>{{ 'domain.identity' | i18n }}</b></div>
+                    <div class="panel-body">
+                        <form role="form-horizontal">
+                            <div class="form-group">
+                                <label for="_name">{{ 'domain.name' | i18n }} : </label>
+                                <input type="text" class="form-control" id="_name" ng-model="domain.name" ng-disabled="isViewing()">
+                            </div>
+                            <div class="form-group">
+                                <label for="_region">{{ 'region' | i18n }} : </label>
+                                <input type="text" class="form-control" id="_region" ng-model="domain.origin.region.name"
+                                       ng-disabled="true">
+                            </div>
+                            <div class="form-group">
+                                <label>{{ 'aoc' | i18n }} : </label>
+                                <origin-picker id="_aoc" ng-model="domain.origin" ng-disabled="isViewing()"></origin-picker>
+                            </div>
+                            <div class="form-group" ng-if="isEditing() || isCreating()">
+                                <label for="_localization">{{ 'localization' | i18n }} : </label>
+                                <input type="text" class="form-control" id="_localization" ng-model="domain.localization">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+
+            <div class="row">
+
+                <div class="panel panel-default">
+                    <div class="panel-heading"><b>{{ 'wine.tasting' | i18n }}</b></div>
+                    <div class="panel-body">
+                        <div class="form-group">
+                            <label for="_floor">{{ 'wine.floor' | i18n }} : </label>
+                            <input type="text" class="form-control" id="_floor" ng-model="domain.wineDescription.floor"
+                                   ng-disabled="isViewing()">
+                        </div>
+                        <div class="form-group">
+                            <label for="_grape">{{ 'wine.grapes' | i18n }} : </label>
+                            <input type="text" class="form-control" id="_grape" ng-model="domain.wineDescription.grape"
+                                   ng-disabled="isViewing()">
+                        </div>
+                        <div class="form-group">
+                            <label for="_medal">{{ 'wine.medals' | i18n }} : </label>
+                            <input type="text" class="form-control" id="_medal" ng-model="domain.wineDescription.medal"
+                                   ng-disabled="isViewing()">
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+        </div>
+
+        <div class="col-md-4">
             <div class="panel panel-default">
-                <div class="panel-heading"><b>Global</b></div>
+                <div class="panel-heading"><b>{{ 'domain.sticker' | i18n }}</b></div>
                 <div class="panel-body">
-                    <form role="form-horizontal">
-                        <div class="form-group">
-                            <label for="_name">Name : </label>
-                            <input type="text" class="form-control" id="_name" ng-model="domain.name" ng-disabled="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="_region">Region : </label>
-                            <input type="text" class="form-control" id="_region" ng-model="domain.origin.region.name" ng-disabled="true">
-                        </div>
-                        <div class="form-group">
-                            <label for="_aoc">AOC : </label>
-                            <input type="text" class="form-control" id="_aoc" ng-model="domain.origin.name" ng-disabled="true">
-                        </div>
-                    </form>
+                    <img alt='300x200' style='width:300px;' ng-if="domain.sticker" class="right"
+                         ng-src='data:image/jpeg;base64,{{ domain.sticker }}'>
+                    <div style="padding-top: 20px" ng-if="isEditing() || isCreating()">
+                        <file-picker ng-model="domain.sticker"></file-picker>
+                    </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-4">
-            <div class="panel-body">
-                <img alt='300x200' style='width:300px; float:right;' ng-if="domain.sticker" ng-src='data:image/jpeg;base64,{{ domain.sticker }}'>
-            </div>
-        </div>
+
     </div>
 
     <div class="row">
-        <div class="col-md-6">
+
+        <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading"><b>Wine</b></div>
+                <div class="panel-heading"><b>{{ 'wine' | i18n }}</b></div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="_comment">Comment : </label>
-                        <input type="text" class="form-control" id="_comment" ng-model="domain.tasting.comment"
-                               ng-disabled="true">
+                        <label for="_comment">{{ 'wine.comments' | i18n }} : </label>
+                        <textarea class="form-control" id="_comment" ng-model="domain.tasting.comment"
+                               ng-disabled="isViewing()"></textarea>
                     </div>
                     <div class="form-group">
-                        <label for="_garde">Garde : </label>
+                        <label for="_garde">{{ 'wine.garde' | i18n }} : </label>
                         <input type="text" class="form-control" id="_garde" ng-model="domain.tasting.garde"
-                               ng-disabled="true">
+                               ng-disabled="isViewing()">
                     </div>
                     <div class="form-group">
-                        <label for="_temperatures">Temperatures : </label>
+                        <label for="_temperatures">{{ 'wine.temperatures' | i18n }} : </label>
                         <input type="text" class="form-control" id="_temperatures" ng-model="domain.tasting.temperature"
-                               ng-disabled="true">
+                               ng-disabled="isViewing()">
                     </div>
                 </div>
             </div>
         </div>
-        <div class="col-md-6">
+
+    </div>
+
+    <div class="row">
+
+        <div class="col-md-12">
             <div class="panel panel-default">
-                <div class="panel-heading"><b>Tasting</b></div>
+                <div class="panel-heading"><b>{{ 'wine.history' | i18n }}</b></div>
                 <div class="panel-body">
                     <div class="form-group">
-                        <label for="_floor">Floor : </label>
-                        <input type="text" class="form-control" id="_floor" ng-model="domain.wineDescription.floor"
-                               ng-disabled="true">
-                    </div>
-                    <div class="form-group">
-                        <label for="_grape">Grape : </label>
-                        <input type="text" class="form-control" id="_grape" ng-model="domain.wineDescription.grape"
-                               ng-disabled="true">
-                    </div>
-                    <div class="form-group">
-                        <label for="_medal">Medals : </label>
-                        <input type="text" class="form-control" id="_medal" ng-model="domain.wineDescription.medal"
-                               ng-disabled="true">
+                        <label for="_description">{{ 'description' | i18n }} : </label>
+                        <textarea class="form-control" id="_description" ng-model="domain.history.description"
+                                  ng-disabled="isViewing()" style="height:250px"></textarea>
                     </div>
                 </div>
             </div>
         </div>
+
     </div>
 
-    <div class="panel panel-default">
-        <div class="panel-heading"><b>History</b></div>
-        <div class="panel-body">
-            <div class="form-group">
-                <label for="_description">Description : </label>
-                <textarea class="form-control" id="_description" ng-model="domain.history.description"
-                          ng-disabled="true" style="height:250px"></textarea>
+    <div class="row">
+
+        <div class="col-md-12">
+            <div class="panel panel-default" ng-if="records.length > 0">
+                <div class="panel-heading"><b>{{ 'inCellar.bottles' | i18n }}</b></div>
+                <div class="panel-body">
+                    <table class="table table-condensed">
+                        <thead>
+                        <tr>
+                            <th>{{ 'barcode' | i18n }}</th>
+                            <th>{{ 'bottle.vintage' | i18n }}</th>
+                            <th>{{ 'qty' | i18n }}</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr ng-repeat="record in records">
+                            <td><b>{{ record.code.value }}</b></td>
+                            <td><b>{{ record.vintage }}</b></td>
+                            <td><b>{{ record.quantity }}</b></td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
             </div>
         </div>
+
     </div>
 
-    <div class="panel panel-default" ng-if="records.length > 0">
-        <div class="panel-heading"><b>Known Bottles</b></div>
-        <div class="panel-body">
-            <table class="table table-condensed">
-                <thead>
-                <tr>
-                    <th>BarCode</th>
-                    <th>Vintage</th>
-                    <th>Quantity</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr ng-repeat="record in records">
-                    <td><b>{{ record.code.value }}</b></td>
-                    <td><b>{{ record.vintage }}</b></td>
-                    <td><b>{{ record.quantity }}</b></td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
+    <div ng-if="isEditing() || isCreating()">
+        <button class="btn btn-success" ng-click="save()">
+            <i class="glyphicon glyphicon-ok"></i> {{ 'action.ok' | i18n }}
+        </button>
+        <button class="btn btn-danger" ng-click="cancel()">
+            <i class="glyphicon glyphicon-remove"></i> {{ 'action.cancel' | i18n }}
+        </button>
     </div>
 
     <div style="padding-bottom: 200px"></div>
