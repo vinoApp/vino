@@ -1,4 +1,4 @@
-angular.module("vino.ui").directive("recordManager", function (Common, Cellar, Notification) {
+angular.module("vino.ui").directive("recordManager", function ($filter, Common, Cellar, Notification) {
 
     return {
         restrict: 'E',
@@ -38,13 +38,13 @@ angular.module("vino.ui").directive("recordManager", function (Common, Cellar, N
                     record.domain = record.domain._id;
                     Cellar.add(record, {
                         success: function () {
-                            Notification.notify.success('Save record : success');
+                            Notification.notify.success($filter('i18n')('cellar.record.update.success'));
                             $rootScope.$broadcast(Common.events.cellar.update);
                             $scope.close();
                             $scope.record = null;
                         },
                         error: function () {
-                            Notification.notify.error('Save record : error');
+                            Notification.notify.error($filter('i18n')('cellar.record.update.error'));
                         }
                     });
                 },

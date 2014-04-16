@@ -48,6 +48,8 @@ angular.module('vino.ui').constant('LocalDictionary', {
     'cellar.in.error': 'Erreur durant l\'ajout de la bouteille',
     'cellar.out.success': 'Bouteille retirée de la cave',
     'cellar.out.error': 'Erreur durant le retrait de la bouteille',
+    'cellar.record.update.success': 'Informations de la bouteille mises à jour avec succès',
+    'cellar.record.update.error': 'Erreur durant la mise à jour des informations',
 
     // ORIGINS (REGION + AOC)
     'region': 'Région Viticole',
