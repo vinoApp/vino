@@ -34,6 +34,7 @@ public class DBConsistencyTest {
     private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
 
     private static final List<WineDomain> DOMAINS = PERSISTOR.getAllDomains();
+    private static final JongoCollection KEYS = FACTORY.getComponent(Name.of(JongoCollection.class, "keys"));
 
     @Test
     public void domains_should_appears_in_keys() throws Exception {
@@ -42,7 +43,7 @@ public class DBConsistencyTest {
 
             Optional<EntityKey> domainKey = PERSISTOR.getEntityKey(domain.getKey());
             if (!domainKey.isPresent()) {
-
+                KEYS.get().insert(new EntityKey(domain.getKey(), "domains"));
             }
         }
     }

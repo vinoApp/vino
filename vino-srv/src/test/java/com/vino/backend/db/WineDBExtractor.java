@@ -33,18 +33,18 @@ public class WineDBExtractor {
     private static final ObjectMapper MAPPER = new ObjectMapper();
 
     private static final String[] AOCS = new String[]{
-//            "Pomerol",
-//            "Margaux",
-//            "Moulis",
-//            "Listrac-M%C3%A9doc",
-//            "Saint-Julien",
+            "Pomerol",
+            "Margaux",
+            "Moulis",
+            "Listrac-M%C3%A9doc",
+            "Saint-Julien",
             "Pauillac",
             "Saint-Est%C3%A8phe",
             "Fronsac",
             "Pomerol",
             "Lalande%20de%20Pomerol",
-//            "Saint-Emilion",
-//            "Saint-Emilion%20Grand%20Cru",
+            "Saint-Emilion",
+            "Saint-Emilion%20Grand%20Cru",
             "Montagne%20Saint%20Emilion",
             "Lussac%20Saint%20Emilion",
             "Puisseguin%20Saint%20Emilion",
@@ -54,9 +54,9 @@ public class WineDBExtractor {
             "C%C3%B4tes%20de%20Blaye",
             "Blaye%20C%C3%B4tes%20de%20Bordeaux%20rouge%20ou%20Premi%C3%A8res%20C%C3%B4tes%20de%20Blaye%20rouge",
             "C%C3%B4tes%20de%20Bourg%20rouge",
-            //            "Graves%20rouge",
-            //            "Pessac-L%C3%A9ognan%20rouge",
-            // C%C3%A9rons
+            "Graves%20rouge",
+            "Pessac-L%C3%A9ognan%20rouge",
+            "C%C3%A9rons"
     };
 
     public static void main(String[] args) throws IOException, InterruptedException {

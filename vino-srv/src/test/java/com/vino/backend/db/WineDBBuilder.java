@@ -81,6 +81,7 @@ public class WineDBBuilder {
     public static void main(String[] args) throws URISyntaxException, IOException {
 
 
+        FACTORY.getComponent(Name.of(JongoCollection.class, "keys")).get().remove("{ collection: # }", "domains");
         FACTORY.getComponent(Name.of(JongoCollection.class, "domains")).get().drop();
         FACTORY.getComponent(Name.of(JongoCollection.class, "cellar")).get().drop();
 
