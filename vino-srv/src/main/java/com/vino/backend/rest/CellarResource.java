@@ -45,6 +45,11 @@ public class CellarResource {
         return persistor.getAllRecords();
     }
 
+    @GET("/cellar/barcode")
+    public Optional<WineCellarRecord> getRecordByBarCode(String code) {
+        return persistor.getRecordByBarCode(code);
+    }
+
     @GET("/cellar/{key}")
     @Produces("application/json;view=com.vino.backend.persistence.mongo.Views$Details")
     public Optional<WineCellarRecord> getRecord(String key) {

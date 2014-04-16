@@ -119,6 +119,13 @@ public class MongoPersistor implements Persistor {
                 .as(WineCellarRecord.class));
     }
 
+    @Override
+    public Optional<WineCellarRecord> getRecordByBarCode(String barcode) {
+        return Optional.fromNullable(collections.get(MongoCollections.CELLAR)
+                .findOne("{ code.value : # }", barcode)
+                .as(WineCellarRecord.class));
+    }
+
     ///////////////////////////////////
     // DATA PERSISTENCE
     ///////////////////////////////////

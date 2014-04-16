@@ -52,6 +52,8 @@ public interface Persistor {
 
     Optional<WineCellarRecord> getRecord(Reference<WineDomain> domain, int vintage);
 
+    Optional<WineCellarRecord> getRecordByBarCode(String barcode);
+
     ///////////////////////////////////
     // DATA PERSISTENCE
     ///////////////////////////////////
