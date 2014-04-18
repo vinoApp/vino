@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vino.backend.db;
+package com.vino.backend.crawling;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -25,7 +25,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
  */
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class WineDBRecord {
+public class WineDomainCrawledRecord {
 
     private String id;
 
@@ -103,7 +103,7 @@ public class WineDBRecord {
         return html;
     }
 
-    public WineDBRecord setHtml(final String html) {
+    public WineDomainCrawledRecord setHtml(final String html) {
         this.html = html;
         return this;
     }

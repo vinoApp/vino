@@ -14,10 +14,12 @@
  * limitations under the License.
  */
 
-package com.vino.backend.db;
+package com.vino.backend.crawling;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.kevinsawicki.http.HttpRequest;
+import com.google.common.collect.ImmutableList;
 
 import java.io.IOException;
 import java.util.*;
@@ -28,9 +30,11 @@ import java.util.concurrent.CountDownLatch;
  * Date: 09/03/2014
  * Time: 10:47
  */
-public class WineDBExtractor {
+public class WineDomainsCIVBCrawler implements WineDomainsCrawler {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
+
+    private static final String WINE_COLOR = "rouge";
 
     private static final String[] AOCS = new String[]{
             "Pomerol",
@@ -49,20 +53,20 @@ public class WineDBExtractor {
             "Lussac%20Saint%20Emilion",
             "Puisseguin%20Saint%20Emilion",
             "Castillon-C%C3%B4tes%20de%20Bordeaux",
-            "Francs-C%C3%B4tes%20de%20Bordeaux%20rouge",
-            "Blaye%20rouge",
+            "Francs-C%C3%B4tes%20de%20Bordeaux%20" + WINE_COLOR,
+            "Blaye%20" + WINE_COLOR,
             "C%C3%B4tes%20de%20Blaye",
-            "Blaye%20C%C3%B4tes%20de%20Bordeaux%20rouge%20ou%20Premi%C3%A8res%20C%C3%B4tes%20de%20Blaye%20rouge",
-            "C%C3%B4tes%20de%20Bourg%20rouge",
-            "Graves%20rouge",
-            "Pessac-L%C3%A9ognan%20rouge",
+            "Blaye%20C%C3%B4tes%20de%20Bordeaux%20" + WINE_COLOR + "%20ou%20Premi%C3%A8res%20C%C3%B4tes%20de%20Blaye%20" + WINE_COLOR,
+            "C%C3%B4tes%20de%20Bourg%20" + WINE_COLOR,
+            "Graves%20" + WINE_COLOR,
+            "Pessac-L%C3%A9ognan%20" + WINE_COLOR,
             "C%C3%A9rons"
     };
 
-    public static void main(String[] args) throws IOException, InterruptedException {
+    public void extractRecords() throws JsonProcessingException, InterruptedException {
 
-        final List<Map<String, WineDBRecord>> maps =
-                Collections.synchronizedList(new ArrayList<Map<String, WineDBRecord>>());
+        final List<Map<String, WineDomainCrawledRecord>> maps =
+                Collections.synchronizedList(new ArrayList<Map<String, WineDomainCrawledRecord>>());
 
         final CountDownLatch latch = new CountDownLatch(AOCS.length);
 
@@ -70,13 +74,13 @@ public class WineDBExtractor {
             Thread thread = new Thread(new Runnable() {
                 @Override
                 public void run() {
-                    Map<String, WineDBRecord> records = new HashMap<>();
+                    Map<String, WineDomainCrawledRecord> records = new HashMap<>();
                     maps.add(records);
 
                     try {
 
                         for (int i = 0; i < 100; i++) {
-                            extractDomains(records, aoc);
+                            makeHttpRequest(records, aoc);
                             System.out.println(aoc + " : " + i + "%");
                         }
 
@@ -92,14 +96,14 @@ public class WineDBExtractor {
 
         latch.await();
 
-        for (Map<String, WineDBRecord> map : maps) {
+        for (Map<String, WineDomainCrawledRecord> map : maps) {
             System.out.println("=============================================");
             System.out.println(MAPPER.writeValueAsString(map.values()));
             System.out.println(map.size());
         }
     }
 
-    private static void extractDomains(Map<String, WineDBRecord> records, String aoc) throws IOException {
+    private void makeHttpRequest(Map<String, WineDomainCrawledRecord> records, String aoc) throws IOException {
 
         // Test - Pessac-Léognan
         HttpRequest post = HttpRequest.post("http://www.smart-bordeaux.fr/civb/search/advanced")
@@ -107,11 +111,16 @@ public class WineDBExtractor {
 
         String response = post.body();
 
-        List<WineDBRecord> rcvdRecords = MAPPER.readValue(response,
-                MAPPER.getTypeFactory().constructCollectionType(List.class, WineDBRecord.class));
+        List<WineDomainCrawledRecord> rcvdRecords = MAPPER.readValue(response,
+                MAPPER.getTypeFactory().constructCollectionType(List.class, WineDomainCrawledRecord.class));
 
-        for (WineDBRecord record : rcvdRecords) {
+        for (WineDomainCrawledRecord record : rcvdRecords) {
             records.put(record.getId(), record);
         }
+    }
+
+    public static void main(String[] args) throws IOException, InterruptedException {
+
+        new WineDomainsCIVBCrawler().extractRecords();
     }
 }

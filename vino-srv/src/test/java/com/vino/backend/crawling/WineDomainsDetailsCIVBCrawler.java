@@ -14,7 +14,7 @@
  * limitations under the License.
  */
 
-package com.vino.backend.db;
+package com.vino.backend.crawling;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.github.kevinsawicki.http.HttpRequest;
@@ -37,6 +37,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URISyntaxException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -44,12 +45,11 @@ import java.util.List;
  * Date: 09/03/2014
  * Time: 12:02
  */
-public class WineDBBuilder {
+public class WineDomainsDetailsCIVBCrawler implements WineDomainsDetailsCrawler {
 
     private static final ObjectMapper MAPPER = new ObjectMapper();
     public static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
-    private static final JongoCollection AOCS = FACTORY
-            .getComponent(Name.of(JongoCollection.class, "aocs"));
+    private static final JongoCollection AOCS = FACTORY.getComponent(Name.of(JongoCollection.class, "aocs"));
     private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
 
     static Logger logger = LoggerFactory.getLogger("DBBuilder");
@@ -78,8 +78,8 @@ public class WineDBBuilder {
             AocDB.of("saint_julien.json", "Saint-Julien")
     );
 
-    public static void main(String[] args) throws URISyntaxException, IOException {
-
+    @Override
+    public ImmutableList<WineDomain> extractWineDomainsDetails() {
 
         FACTORY.getComponent(Name.of(JongoCollection.class, "keys")).get().remove("{ collection: # }", "domains");
         FACTORY.getComponent(Name.of(JongoCollection.class, "domains")).get().drop();
@@ -101,9 +101,11 @@ public class WineDBBuilder {
                 logger.error("Error during building domain : ", e);
             }
         }
+
+        return null;
     }
 
-    private static void computeAOC(AocDB aocDB) throws URISyntaxException, IOException {
+    private static List<WineDomain> computeAOC(AocDB aocDB) throws URISyntaxException, IOException {
 
         WineAOC aoc = AOCS.get().findOne("{ name : # }", aocDB.name).as(WineAOC.class);
         if (aoc == null) {
@@ -113,12 +115,14 @@ public class WineDBBuilder {
         URL fromResource = Resources.getResource("domains/fromSrv/" + aocDB.file);
         File srcFile = new File(fromResource.toURI());
 
-        List<WineDBRecord> records = MAPPER.readValue(srcFile,
-                MAPPER.getTypeFactory().constructCollectionType(List.class, WineDBRecord.class));
+        List<WineDomainCrawledRecord> records = MAPPER.readValue(srcFile,
+                MAPPER.getTypeFactory().constructCollectionType(List.class, WineDomainCrawledRecord.class));
+
+        List<WineDomain> domains = new ArrayList<>();
 
         int j = 0;
 
-        for (WineDBRecord record : records) {
+        for (WineDomainCrawledRecord record : records) {
 
             WineDomain domain = new WineDomain();
             domain.setName(record.getName());
@@ -130,10 +134,14 @@ public class WineDBBuilder {
             PERSISTOR.persist(domain);
 
             System.out.println(String.format("Computed (%s) : %s (%d / %d)", aocDB.name, record.getId(), ++j, records.size()));
+
+            domains.add(domain);
         }
+
+        return domains;
     }
 
-    private static void computeSticker(WineDBRecord record, WineDomain domain) {
+    private static void computeSticker(WineDomainCrawledRecord record, WineDomain domain) {
 
         if (record.getUrlpicture() == null) {
             return;
@@ -143,12 +151,12 @@ public class WineDBBuilder {
         domain.setSticker(get.bytes());
     }
 
-    private static void populateWithDetails(WineDBRecord record, WineDomain domain) throws IOException {
+    private static void populateWithDetails(WineDomainCrawledRecord record, WineDomain domain) throws IOException {
 
         HttpRequest get = HttpRequest.post("http://www.smart-bordeaux.com/civb/wine/" + record.getId())
                 .send("lang=fr_FR&front=true");
 
-        WineDBRecord rcvdRecord = MAPPER.readValue(get.body(), WineDBRecord.class);
+        WineDomainCrawledRecord rcvdRecord = MAPPER.readValue(get.body(), WineDomainCrawledRecord.class);
         String html = rcvdRecord.getHtml();
         if (html == null) {
             return;
@@ -193,6 +201,10 @@ public class WineDBBuilder {
             return aocDB;
         }
 
+    }
+
+    public static void main(String[] args) throws URISyntaxException, IOException {
+        new WineDomainsDetailsCIVBCrawler().extractWineDomainsDetails();
     }
 
 }
