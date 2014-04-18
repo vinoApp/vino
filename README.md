@@ -1,7 +1,6 @@
-![alt tag](https://cdn1.iconfinder.com/data/icons/nuvola2/128x128/mimetypes/exec_wine.png) vino
-====
+# ![alt tag](https://cdn1.iconfinder.com/data/icons/nuvola2/128x128/mimetypes/exec_wine.png) vino
 
-h3. Abstract
+##. Abstract
 
 ### Current versions
 server-current-version = 1.0  
@@ -21,7 +20,7 @@ The solution is built on the following technical stack (excluding standard tools
 - Mobile : Android SDK
 - Server (Java) : [restx.io](http://restx.io/) that exposes a set of REST WebServices.
 
-h3. Bootstrap
+##. Bootstrap
 
 Vino is bundled with a Mongo dump containing a subset of French WineDomains (Bordeaux, ...), and a subset of Wine AOC & regions.
 This dump could be found in the folder vino-srv/db/dump and restored liked this :
