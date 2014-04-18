@@ -20,10 +20,14 @@ import com.google.common.base.Optional;
 import com.google.common.collect.HashMultimap;
 import com.google.common.collect.Multimap;
 import com.vino.backend.model.EntityKey;
+import com.vino.backend.model.WineAOC;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.persistence.Persistor;
 import com.vino.backend.persistence.mongo.MongoPersistor;
+import org.bson.types.ObjectId;
 import org.junit.Test;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import restx.factory.Factory;
 import restx.factory.Name;
 import restx.jongo.JongoCollection;
@@ -34,10 +38,14 @@ import java.util.Map;
 
 public class DBConsistencyTest {
 
+    private final Logger logger = LoggerFactory.getLogger(DomainAOCReferenceReplacementTest.class);
+
+
     private static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
     private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
 
     private static final List<WineDomain> DOMAINS = PERSISTOR.getAllDomains();
+    private static final List<WineAOC> AOCS = PERSISTOR.getAllAOCS();
     private static final JongoCollection KEYS = FACTORY.getComponent(Name.of(JongoCollection.class, "keys"));
 
     @Test
@@ -66,5 +74,16 @@ public class DBConsistencyTest {
             System.out.println(entry.getKey() + " : " + entry.getValue());
         }
 
+    }
+
+    @Test
+    public void check_aocs_consistency() {
+
+        for (WineAOC aoc : AOCS) {
+
+            if (KEYS.get().count("{_id: #}", new ObjectId(aoc.getKey())) <= 0) {
+                logger.error("AOC is missing into the keys collection : {} ({})", aoc.getName(), aoc.getKey());
+            }
+        }
     }
 }
