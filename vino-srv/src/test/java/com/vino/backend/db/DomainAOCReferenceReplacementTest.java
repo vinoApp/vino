@@ -35,7 +35,7 @@ import restx.jongo.JongoCollection;
 
 public class DomainAOCReferenceReplacementTest {
 
-    public static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
+    private static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
     private static final JongoCollection AOCS = FACTORY.getComponent(Name.of(JongoCollection.class, "aocs"));
     private static final JongoCollection DOMAINS = FACTORY.getComponent(Name.of(JongoCollection.class, "domains"));
 
