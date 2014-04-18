@@ -17,6 +17,8 @@
 package com.vino.backend.db;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.HashMultimap;
+import com.google.common.collect.Multimap;
 import com.vino.backend.model.EntityKey;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.persistence.Persistor;
@@ -26,7 +28,9 @@ import restx.factory.Factory;
 import restx.factory.Name;
 import restx.jongo.JongoCollection;
 
+import java.util.Collection;
 import java.util.List;
+import java.util.Map;
 
 public class DBConsistencyTest {
 
@@ -46,5 +50,21 @@ public class DBConsistencyTest {
                 KEYS.get().insert(new EntityKey(domain.getKey(), "domains"));
             }
         }
+    }
+
+    @Test
+    public void retrieve_right_aocs() throws Exception {
+
+        Multimap<String, String> domains = HashMultimap.create();
+        for (WineDomain domain : DOMAINS) {
+            String aocKey = domain.getOrigin().getKey();
+            if (domains.get(aocKey).size() <= 10) {
+                domains.put(aocKey, domain.getName());
+            }
+        }
+        for (Map.Entry<String, Collection<String>> entry : domains.asMap().entrySet()) {
+            System.out.println(entry.getKey() + " : " + entry.getValue());
+        }
+
     }
 }
