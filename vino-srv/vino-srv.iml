@@ -100,6 +100,8 @@
     <orderEntry type="library" name="Maven: org.jongo:jongo:1.0" level="project" />
     <orderEntry type="library" name="Maven: io.restx:restx-barbarywatch:0.32.alpha4" level="project" />
     <orderEntry type="library" name="Maven: net.java.dev.jna:jna:3.2.7" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-i18n:0.32.alpha4" level="project" />
+    <orderEntry type="library" name="Maven: io.restx:restx-i18n-admin:0.32.alpha4" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-classic:1.0.13" level="project" />
     <orderEntry type="library" name="Maven: ch.qos.logback:logback-core:1.0.13" level="project" />
   </component>
