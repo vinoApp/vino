@@ -21,13 +21,6 @@
 
     <dependencies>
 
-        <!-- Vino Components -->
-        <dependency>
-            <groupId>com.vino</groupId>
-            <artifactId>vino-common</artifactId>
-            <version>1.0-SNAPSHOT</version>
-        </dependency>
-
         <!-- Common -->
         <dependency>
             <groupId>junit</groupId>

@@ -25,6 +25,7 @@
     <option name="ignoredFiles">
       <set>
         <option value="$PROJECT_DIR$/pom.xml" />
+        <option value="$PROJECT_DIR$/vino-ui/pom.xml" />
       </set>
     </option>
   </component>

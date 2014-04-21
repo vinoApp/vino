@@ -14,9 +14,48 @@
     </properties>
 
     <modules>
-        <module>vino-common</module>
         <module>vino-srv</module>
+        <module>vino-ui</module>
         <module>vino-mobile</module>
     </modules>
+
+    <profiles>
+        <profile>
+            <activation>
+                <activeByDefault>true</activeByDefault>
+            </activation>
+            <id>all</id>
+            <modules>
+                <module>vino-srv</module>
+                <module>vino-ui</module>
+                <module>vino-mobile</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>server</id>
+            <modules>
+                <module>vino-srv</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>ui</id>
+            <modules>
+                <module>vino-ui</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>mobile</id>
+            <modules>
+                <module>vino-mobile</module>
+            </modules>
+        </profile>
+        <profile>
+            <id>client</id>
+            <modules>
+                <module>vino-ui</module>
+                <module>vino-mobile</module>
+            </modules>
+        </profile>
+    </profiles>
 
 </project>
