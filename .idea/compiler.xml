@@ -2,11 +2,6 @@
 <project version="4">
   <component name="CompilerConfiguration">
     <option name="DEFAULT_COMPILER" value="Javac" />
-    <excludeFromCompile>
-      <directory url="file://$PROJECT_DIR$/vino-mobile/gen" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/vino-mobile/target/generated-sources/r" includeSubdirectories="true" />
-      <directory url="file://$PROJECT_DIR$/vino-mobile/target/generated-sources/aidl" includeSubdirectories="true" />
-    </excludeFromCompile>
     <resourceExtensions />
     <wildcardResourcePatterns>
       <entry name="!?*.java" />
@@ -19,7 +14,7 @@
       <entry name="!?*.clj" />
     </wildcardResourcePatterns>
     <annotationProcessing>
-      <profile default="true" name="Default" enabled="true">
+      <profile default="true" name="Default" enabled="false">
         <processorPath useClasspath="true" />
       </profile>
       <profile default="false" name="Maven default annotation processors profile" enabled="true">
@@ -27,13 +22,11 @@
         <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
         <outputRelativeToContentRoot value="true" />
         <processorPath useClasspath="true" />
-        <module name="vino-mobile" />
         <module name="vino-srv" />
         <module name="vino-ui" />
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="vino-common" target="1.6" />
       <module name="vino-srv" target="1.7" />
     </bytecodeTargetLevel>
   </component>

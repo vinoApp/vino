@@ -2,7 +2,7 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/vino-mobile/vino-mobile.iml" filepath="$PROJECT_DIR$/vino-mobile/vino-mobile.iml" />
+      <module fileurl="file://$PROJECT_DIR$/vino-parent.iml" filepath="$PROJECT_DIR$/vino-parent.iml" />
       <module fileurl="file://$PROJECT_DIR$/vino-srv/vino-srv.iml" filepath="$PROJECT_DIR$/vino-srv/vino-srv.iml" />
       <module fileurl="file://$PROJECT_DIR$/vino-ui/vino-ui.iml" filepath="$PROJECT_DIR$/vino-ui/vino-ui.iml" />
     </modules>
