@@ -11,6 +11,7 @@ angular.module('vino.ui').constant('LocalDictionary', {
     'menu.home': 'Accueil',
     'menu.domains': 'Chateaux',
     'menu.cellar': 'Cave',
+    'menu.statistics': 'Statistiques',
 
     // COMMON
     'cellar': 'Cave',
