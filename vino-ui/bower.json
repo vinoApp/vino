@@ -13,7 +13,8 @@
     "lodash": "2.4.1",
     "angular-route": "1.2.11",
     "select2": "3.4.5",
-    "ngprogress": "1.0.4"
+    "ngprogress": "1.0.4",
+    "Chart.js": "*"
   },
   "devDependencies": {
     "angular-mocks": "~1.0.7",
