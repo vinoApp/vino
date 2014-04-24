@@ -29,14 +29,9 @@ import org.jongo.marshall.jackson.oid.ObjectId;
 @JsonTypeInfo(use = JsonTypeInfo.Id.CLASS, include = JsonTypeInfo.As.PROPERTY, property = "@class")
 public abstract class Entity {
 
-    // It seems to be an issue on Jongo... This field will be temporarly public...
     @ObjectId
     @Id
-    public String key;
-
-    public Entity() {
-
-    }
+    private String key;
 
     public Entity setKey(String key) {
         this.key = key;
