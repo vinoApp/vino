@@ -27,6 +27,7 @@
             <artifactId>junit</artifactId>
             <version>4.11</version>
         </dependency>
+
         <dependency>
             <groupId>com.github.kevinsawicki</groupId>
             <artifactId>http-request</artifactId>
@@ -119,6 +120,26 @@
             <version>${restx.version}</version>
         </dependency>
 
+        <!-- Jongo (Temp) -->
+        <dependency>
+            <groupId>org.jongo</groupId>
+            <artifactId>jongo</artifactId>
+            <version>1.1-early-20140221-1732</version>
+        </dependency>
+
     </dependencies>
+
+    <repositories>
+        <repository>
+            <id>cloudbees-jongo-early-release</id>
+            <url>http://repository-jongo.forge.cloudbees.com/release</url>
+            <releases>
+                <enabled>true</enabled>
+            </releases>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </repository>
+    </repositories>
 
 </project>
