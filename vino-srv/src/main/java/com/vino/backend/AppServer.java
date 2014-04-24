@@ -40,7 +40,7 @@ public class AppServer {
          * be careful with that setting, if you use this class to launch your server in production, make sure to launch
          * it with -Drestx.mode=prod or change the default here
          */
-        String mode = System.getProperty("restx.mode", "prod");
+        String mode = System.getProperty("restx.mode", "dev");
         System.setProperty("restx.mode", mode);
         System.setProperty("restx.app.package", "com.vino.backend");
 
