@@ -36,7 +36,7 @@ angular.module("vino.ui").directive("recordManager", function ($filter, Common, 
 
                 save: function (record) {
                     record.domain = record.domain._id;
-                    Cellar.add(record, {
+                    Cellar.in(record, record.quantity, {
                         success: function () {
                             Notification.notify.success($filter('i18n')('cellar.record.update.success'));
                             $rootScope.$broadcast(Common.events.cellar.update);

@@ -1,29 +1,34 @@
 angular.module('vino.business').factory("Cellar",
-    function ($resource, Notification) {
+    function ($resource) {
 
         // Backend
-        var Cellar = $resource("/api/cellar/:id/:qty", {id: '@id', qty: '@qty'}, {
-            _in: {method: 'PUT'},
-            _out: {method: 'DELETE'}
-        });
+        var Cellar = $resource("/api/cellar/:id", { id: '@id' });
+
+        var prepareToServer = function (type, record, qty) {
+            var cloned = _.cloneDeep(record);
+            return {
+                '@class': 'com.vino.backend.model.Movement',
+                type: type,
+                amount: qty,
+                record: {
+                    '@class': 'com.vino.backend.model.WineCellarRecord',
+                    _id: cloned._id,
+                    code: cloned.code,
+                    domain: _.isObject(cloned.domain) ? cloned.domain._id : cloned.domain,
+                    vintage: cloned.vintage,
+                    quantity: cloned.quantity
+                }
+            }
+        };
 
         // BO
         return angular.extend(Cellar, {
-            add: function (record, handlers) {
-                record['@class'] = 'com.vino.backend.model.WineCellarRecord';
-                Cellar.save(record, handlers.success, handlers.error);
-            },
             in: function (record, qty, handlers) {
-                Cellar._in({
-                    id: record._id,
-                    qty: qty
-                }, handlers.success, handlers.error);
+                Cellar.save(prepareToServer('IN', record, qty), handlers.success, handlers.error);
             },
             out: function (record, qty, handlers) {
-                Cellar._out({
-                    id: record._id,
-                    qty: qty
-                }, handlers.success, handlers.error);
+                Cellar.save(prepareToServer('OUT', record, qty), handlers.success, handlers.error);
             }
         });
-    });
+    })
+;

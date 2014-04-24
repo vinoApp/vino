@@ -4,7 +4,7 @@ angular.module('vino.business').factory("Domain",
         // Backend
         var Domain = $resource("/api/domains/:id/:action");
 
-        var updateObjectWithRefs = function (domain) {
+        var prepareToServer = function (domain) {
             var cloned = angular.extend(new Domain(), _.cloneDeep(domain));
             cloned.origin = cloned.origin._id;
             if (!cloned['@class']) {
@@ -23,7 +23,7 @@ angular.module('vino.business').factory("Domain",
                 };
             },
             createOrUpdate: function (domain, callbacks) {
-                var _domain = updateObjectWithRefs(domain);
+                var _domain = prepareToServer(domain);
                 _domain.$save(callbacks.success, callbacks.error);
             }
         });
