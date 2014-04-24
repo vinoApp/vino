@@ -42,12 +42,12 @@ public class OriginsResource {
     }
 
     @GET("/origins/aocs")
-    public List<WineAOC> getAllAOCS() {
+    public Iterable<WineAOC> getAllAOCS() {
         return persistor.getAllAOCS();
     }
 
     @GET("/origins/regions")
-    public List<WineRegion> getAllRegions() {
+    public Iterable<WineRegion> getAllRegions() {
         return persistor.getAllRegions();
     }
 

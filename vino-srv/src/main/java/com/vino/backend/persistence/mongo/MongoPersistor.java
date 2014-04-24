@@ -66,35 +66,33 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public ImmutableList<WineRegion> getAllRegions() {
+    public Iterable<WineRegion> getAllRegions() {
         logger.debug("Retrieving all regions");
-        return ImmutableList.copyOf(collections.get(MongoCollections.REGIONS).find().as(WineRegion.class));
+        return collections.get(MongoCollections.REGIONS).find().as(WineRegion.class);
     }
 
     @Override
-    public ImmutableList<WineAOC> getAllAOCS() {
+    public Iterable<WineAOC> getAllAOCS() {
         logger.debug("Retrieving all aocs");
-        return ImmutableList.copyOf(collections.get(MongoCollections.AOCS).find().as(WineAOC.class));
+        return collections.get(MongoCollections.AOCS).find().as(WineAOC.class);
     }
 
     @Override
-    public ImmutableList<WineDomain> getAllDomains() {
+    public Iterable<WineDomain> getAllDomains() {
         logger.debug("Retrieving all domains");
-        return ImmutableList.copyOf(collections.get(MongoCollections.DOMAINS).find().as(WineDomain.class));
+        return collections.get(MongoCollections.DOMAINS).find().as(WineDomain.class);
     }
 
     @Override
-    public ImmutableList<WineDomain> getDomainsByAOC(String aocKey) {
-        return ImmutableList.copyOf(
-                collections.get(MongoCollections.DOMAINS).find("{ origin: # }", aocKey).as(WineDomain.class)
-        );
+    public Iterable<WineDomain> getDomainsByAOC(String aocKey) {
+        return collections.get(MongoCollections.DOMAINS).find("{ origin: # }", aocKey).as(WineDomain.class);
     }
 
     @Override
-    public ImmutableList<WineCellarRecord> getAllRecords() {
-        return ImmutableList.copyOf(collections.get(MongoCollections.CELLAR)
+    public Iterable<WineCellarRecord> getAllRecords() {
+        return collections.get(MongoCollections.CELLAR)
                 .find()
-                .as(WineCellarRecord.class));
+                .as(WineCellarRecord.class);
     }
 
     @Override
@@ -130,35 +128,43 @@ public class MongoPersistor implements Persistor {
     // DATA PERSISTENCE
     ///////////////////////////////////
 
-    private void persistEntity(Entity entity, String collection) {
+    private void persistEntity(Entity entity, String collection, boolean addToKeys) {
 
         // Persist entity
         collections.get(collection).save(entity);
-        collections.get(MongoCollections.KEYS).save(new EntityKey(entity.getKey(), collection));
+        if (addToKeys) {
+            collections.get(MongoCollections.KEYS).save(new EntityKey(entity.getKey(), collection));
+        }
         logger.debug("{} '{}' persisted", entity.getClass().getSimpleName(), entity.getKey());
     }
 
     @Override
     public boolean persist(WineAOC aoc) {
-        persistEntity(aoc, MongoCollections.AOCS);
+        persistEntity(aoc, MongoCollections.AOCS, true);
         return true;
     }
 
     @Override
     public boolean persist(WineRegion region) {
-        persistEntity(region, MongoCollections.REGIONS);
+        persistEntity(region, MongoCollections.REGIONS, true);
         return true;
     }
 
     @Override
     public boolean persist(WineDomain domain) {
-        persistEntity(domain, MongoCollections.DOMAINS);
+        persistEntity(domain, MongoCollections.DOMAINS, true);
         return true;
     }
 
     @Override
     public boolean persist(WineCellarRecord record) {
-        persistEntity(record, MongoCollections.CELLAR);
+        persistEntity(record, MongoCollections.CELLAR, true);
+        return true;
+    }
+
+    @Override
+    public boolean persist(Movement movement) {
+        persistEntity(movement, MongoCollections.MOVEMENTS, false);
         return true;
     }
 

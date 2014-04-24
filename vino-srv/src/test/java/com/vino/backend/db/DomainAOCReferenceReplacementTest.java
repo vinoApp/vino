@@ -69,7 +69,7 @@ public class DomainAOCReferenceReplacementTest {
     public void should_replace_domain_old_origin_ref_with_brand_new_ones() throws Exception {
 
         // Load all aocs
-        ImmutableList<WineAOC> allAocs = ImmutableList.copyOf(AOCS.get().find().as(WineAOC.class));
+        Iterable<WineAOC> allAocs = AOCS.get().find().as(WineAOC.class);
 
         // Makes all domains pointing to right AOC in DB
         Iterable<WineDomain> dbDomains = DOMAINS.get().find().as(WineDomain.class);

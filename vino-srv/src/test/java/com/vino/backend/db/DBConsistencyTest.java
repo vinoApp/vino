@@ -44,8 +44,8 @@ public class DBConsistencyTest {
     private static final Factory FACTORY = Factory.builder().addFromServiceLoader().build();
     private static final Persistor PERSISTOR = FACTORY.getComponent(Name.of(MongoPersistor.class));
 
-    private static final List<WineDomain> DOMAINS = PERSISTOR.getAllDomains();
-    private static final List<WineAOC> AOCS = PERSISTOR.getAllAOCS();
+    private static final Iterable<WineDomain> DOMAINS = PERSISTOR.getAllDomains();
+    private static final Iterable<WineAOC> AOCS = PERSISTOR.getAllAOCS();
     private static final JongoCollection KEYS = FACTORY.getComponent(Name.of(JongoCollection.class, "keys"));
 
     @Test

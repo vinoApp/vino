@@ -36,6 +36,8 @@ public class Response {
 
     public enum BusinessStatus {
 
+        OK,
+        ERROR,
         NO_RECORD_FOUND,
         DOMAIN_NOT_FOUND
     }

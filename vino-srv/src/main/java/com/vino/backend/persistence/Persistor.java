@@ -36,15 +36,15 @@ public interface Persistor {
 
     <T extends Entity> Optional<T> getEntity(String key);
 
-    ImmutableList<WineAOC> getAllAOCS();
+    Iterable<WineAOC> getAllAOCS();
 
-    ImmutableList<WineRegion> getAllRegions();
+    Iterable<WineRegion> getAllRegions();
 
-    ImmutableList<WineDomain> getAllDomains();
+    Iterable<WineDomain> getAllDomains();
 
-    ImmutableList<WineDomain> getDomainsByAOC(String aocKey);
+    Iterable<WineDomain> getDomainsByAOC(String aocKey);
 
-    ImmutableList<WineCellarRecord> getAllRecords();
+    Iterable<WineCellarRecord> getAllRecords();
 
     ImmutableList<WineCellarRecord> getRecordsByDomain(String domainKey);
 
@@ -78,4 +78,5 @@ public interface Persistor {
 
     boolean delete(String key);
 
+    boolean persist(Movement movement);
 }

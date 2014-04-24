@@ -18,10 +18,14 @@ package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
 import com.google.common.collect.ImmutableList;
+import com.vino.backend.model.Movement;
 import com.vino.backend.model.Response;
 import com.vino.backend.model.WineCellarRecord;
 import com.vino.backend.persistence.Persistor;
-import restx.annotations.*;
+import restx.annotations.GET;
+import restx.annotations.POST;
+import restx.annotations.Produces;
+import restx.annotations.RestxResource;
 import restx.factory.Component;
 
 /**
@@ -32,7 +36,7 @@ import restx.factory.Component;
 
 @Component
 @RestxResource
-public class CellarResource {
+public class CellarResource extends AbstractResource {
 
     private Persistor persistor;
 
@@ -41,7 +45,7 @@ public class CellarResource {
     }
 
     @GET("/cellar")
-    public ImmutableList<WineCellarRecord> getRecords() {
+    public Iterable<WineCellarRecord> getRecords() {
         return persistor.getAllRecords();
     }
 
@@ -57,46 +61,35 @@ public class CellarResource {
     }
 
     @POST("/cellar")
-    public Response addInCellar(WineCellarRecord record) {
+    public Response onCellarMovements(Movement movement) {
 
-        boolean result = persistor.addInCellar(
-                record.getCode(),
-                record.getDomain(),
-                record.getVintage(),
-                record.getQuantity()
-        );
-        Optional<Response.TechnicalStatus> status = result
-                ? Optional.of(Response.TechnicalStatus.OK)
-                : Optional.of(Response.TechnicalStatus.DB_ERROR);
-        return Response
-                .withStatuses(status, Optional.<Response.BusinessStatus>absent())
-                .withMessage("Record added in cellar.")
-                .build();
+        if (movement.getRecord() == null) {
+            return technical(Response.TechnicalStatus.INVALID_PARAMS);
+        }
+
+        // Persist movement (history)
+        persistor.persist(movement);
+
+        // Persist cellar record
+        WineCellarRecord record = movement.getRecord();
+
+        boolean result = false;
+        if (movement.getType() == Movement.Type.IN) {
+            result = persistor.addInCellar(
+                    record.getCode(),
+                    record.getDomain(),
+                    record.getVintage(),
+                    movement.getAmount()
+            );
+        }
+
+        if (movement.getType() == Movement.Type.OUT) {
+            result = persistor.removeFromCellar(
+                    record.getKey(),
+                    movement.getAmount()
+            );
+        }
+        return business(result);
     }
 
-    @PUT("/cellar/{key}/{qty}")
-    public Response addInCellar(String key, String qty) {
-
-        boolean result = persistor.addInCellar(key, Integer.parseInt(qty));
-        Optional<Response.TechnicalStatus> status = result
-                ? Optional.of(Response.TechnicalStatus.OK)
-                : Optional.of(Response.TechnicalStatus.DB_ERROR);
-        return Response
-                .withStatuses(status, Optional.<Response.BusinessStatus>absent())
-                .withMessage("Record added in cellar.")
-                .build();
-    }
-
-    @DELETE("/cellar/{key}/{qty}")
-    public Response removeFromCellar(String key, String qty) {
-
-        boolean result = persistor.removeFromCellar(key, Integer.parseInt(qty));
-        Optional<Response.TechnicalStatus> status = result
-                ? Optional.of(Response.TechnicalStatus.OK)
-                : Optional.of(Response.TechnicalStatus.DB_ERROR);
-        return Response
-                .withStatuses(status, Optional.<Response.BusinessStatus>absent())
-                .withMessage("Record updated in cellar.")
-                .build();
-    }
 }

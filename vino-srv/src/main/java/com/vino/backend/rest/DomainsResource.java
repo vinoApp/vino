@@ -44,7 +44,7 @@ public class DomainsResource {
 
     @GET("/domains")
     @PermitAll
-    public ImmutableList<WineDomain> getAllDomains(Optional<String> aoc) {
+    public Iterable<WineDomain> getAllDomains(Optional<String> aoc) {
         if (aoc.isPresent()) {
             return persistor.getDomainsByAOC(aoc.get());
         }
