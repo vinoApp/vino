@@ -1,5 +1,7 @@
 package com.vino.backend.model;
 
+import org.joda.time.DateTime;
+
 public class Movement extends Entity {
 
     public enum Type {
@@ -11,6 +13,8 @@ public class Movement extends Entity {
     private WineCellarRecord record;
 
     private int amount;
+
+    private DateTime date;
 
     public Type getType() {
         return type;
@@ -39,12 +43,22 @@ public class Movement extends Entity {
         return this;
     }
 
+    public DateTime getDate() {
+        return date;
+    }
+
+    public Movement setDate(final DateTime date) {
+        this.date = date;
+        return this;
+    }
+
     @Override
     public String toString() {
         return "Movement{" +
                 "type=" + type +
                 ", record=" + record +
                 ", amount=" + amount +
+                ", date=" + date +
                 '}';
     }
 }

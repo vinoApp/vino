@@ -22,6 +22,7 @@ import com.vino.backend.model.Movement;
 import com.vino.backend.model.Response;
 import com.vino.backend.model.WineCellarRecord;
 import com.vino.backend.persistence.Persistor;
+import org.joda.time.DateTime;
 import restx.annotations.GET;
 import restx.annotations.POST;
 import restx.annotations.Produces;
@@ -66,6 +67,9 @@ public class CellarResource extends AbstractResource {
         if (movement.getRecord() == null) {
             return technical(Response.TechnicalStatus.INVALID_PARAMS);
         }
+
+        // Set the date associated to the movement
+        movement.setDate(DateTime.now());
 
         // Persist movement (history)
         persistor.persist(movement);
