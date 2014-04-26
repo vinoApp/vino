@@ -17,9 +17,9 @@
 package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
+import com.vino.backend.model.stats.CellarStatRecord;
 import com.vino.backend.model.stats.MovementStatRecord;
 import restx.annotations.GET;
-import restx.annotations.Produces;
 import restx.annotations.RestxResource;
 import restx.factory.Component;
 import restx.jongo.JongoCollection;
@@ -31,9 +31,12 @@ import javax.inject.Named;
 public class StatsResource {
 
     private final JongoCollection movements;
+    private final JongoCollection cellar;
 
-    public StatsResource(@Named("movements") JongoCollection movements) {
+    public StatsResource(@Named("movements") JongoCollection movements,
+                         @Named("cellar") JongoCollection cellar) {
         this.movements = movements;
+        this.cellar = cellar;
     }
 
     @GET("/stats/mostConsumedDomain")
@@ -48,6 +51,19 @@ public class StatsResource {
                 .and("{ $group : { _id: '$record.domain', count: { $sum : 1 } } }")
                 .and("{ $project : { domain: '$_id', count: 1 } }")
                 .as(MovementStatRecord.class);
+    }
+
+    @GET("/stats/cellarStockByVintage")
+    public Iterable<CellarStatRecord> getCellarStockByVintage(Optional<String> limit) {
+
+        if (!limit.isPresent()) {
+            limit = Optional.of("5");
+        }
+
+        return cellar.get()
+                .aggregate("{ $group : { _id: '$vintage', count: { $sum : 1 } } }")
+                .and("{ $project : { vintage: '$_id', count: 1 } }")
+                .as(CellarStatRecord.class);
     }
 
 }
