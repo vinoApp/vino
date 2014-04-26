@@ -49,7 +49,7 @@ public class ReferenceSerializer extends JsonSerializer<Reference> {
         }
         // If the reference is serialized to client
         else {
-            jsonGenerator.writeObject(reference.get(PERSISTOR));
+            serializerProvider.defaultSerializeValue(reference.get(PERSISTOR), jsonGenerator);
         }
     }
 }
