@@ -10,6 +10,11 @@ angular.module('vino.business').factory("Stats",
                 return Stats.query({
                     indicator: 'cellarStockByVintage'
                 }, handler);
+            },
+            getStockByDomain: function (handler) {
+                return Stats.query({
+                    indicator: 'cellarStockByDomain'
+                }, handler);
             }
         });
     });

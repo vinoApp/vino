@@ -17,7 +17,8 @@
 package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
-import com.vino.backend.model.stats.CellarStatRecord;
+import com.vino.backend.model.stats.CellarStatByDomainRecord;
+import com.vino.backend.model.stats.CellarStatByVintageRecord;
 import com.vino.backend.model.stats.MovementStatRecord;
 import restx.annotations.GET;
 import restx.annotations.RestxResource;
@@ -54,7 +55,7 @@ public class StatsResource {
     }
 
     @GET("/stats/cellarStockByVintage")
-    public Iterable<CellarStatRecord> getCellarStockByVintage(Optional<String> limit) {
+    public Iterable<CellarStatByVintageRecord> getCellarStockByVintage(Optional<String> limit) {
 
         if (!limit.isPresent()) {
             limit = Optional.of("5");
@@ -63,7 +64,20 @@ public class StatsResource {
         return cellar.get()
                 .aggregate("{ $group : { _id: '$vintage', count: { $sum : 1 } } }")
                 .and("{ $project : { vintage: '$_id', count: 1 } }")
-                .as(CellarStatRecord.class);
+                .as(CellarStatByVintageRecord.class);
+    }
+
+    @GET("/stats/cellarStockByDomain")
+    public Iterable<CellarStatByDomainRecord> getCellarStockByDomain(Optional<String> limit) {
+
+        if (!limit.isPresent()) {
+            limit = Optional.of("5");
+        }
+
+        return cellar.get()
+                .aggregate("{ $group : { _id: '$domain', count: { $sum : 1 } } }")
+                .and("{ $project : { domain: '$_id', count: 1 } }")
+                .as(CellarStatByDomainRecord.class);
     }
 
 }

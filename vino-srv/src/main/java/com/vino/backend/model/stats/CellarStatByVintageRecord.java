@@ -2,7 +2,7 @@ package com.vino.backend.model.stats;
 
 import java.math.BigDecimal;
 
-public class CellarStatRecord {
+public class CellarStatByVintageRecord {
 
     private int vintage;
 
@@ -16,12 +16,12 @@ public class CellarStatRecord {
         return count;
     }
 
-    public CellarStatRecord setVintage(final int vintage) {
+    public CellarStatByVintageRecord setVintage(final int vintage) {
         this.vintage = vintage;
         return this;
     }
 
-    public CellarStatRecord setCount(final BigDecimal count) {
+    public CellarStatByVintageRecord setCount(final BigDecimal count) {
         this.count = count;
         return this;
     }

@@ -1,14 +1,11 @@
 angular.module('vino.ui')
     .controller("MainCtrl", function ($scope, Stats) {
 
-        $scope.stockByVintageOpts = {
+        var basePieOpts = {
             chart: {
                 plotBackgroundColor: null,
                 plotBorderWidth: null,
                 plotShadow: false
-            },
-            title: {
-                text: 'Stock actuel / millésime'
             },
             tooltip: {
                 pointFormat: '{series.name}: <b>{point}%</b>'
@@ -22,6 +19,12 @@ angular.module('vino.ui')
                     },
                     showInLegend: true
                 }
+            }
+        };
+
+        $scope.stockByVintageOpts = angular.extend({
+            title: {
+                text: 'Stock actuel / millésime'
             },
             series: [
                 {
@@ -30,12 +33,33 @@ angular.module('vino.ui')
                     data: []
                 }
             ]
-        };
+        }, basePieOpts);
+
+        $scope.stockByDomainOpts = angular.extend({
+            title: {
+                text: 'Stock actuel / chateau'
+            },
+            series: [
+                {
+                    name: 'Stock actuel',
+                    type: 'pie',
+                    data: []
+                }
+            ]
+        }, basePieOpts);
 
         Stats.getStockByVintage(function (data) {
             $scope.stockByVintageOpts.series[0].data = $scope.stockByVintageOpts.series[0].data.concat(
                 _.map(data, function (item) {
                     return ['' + item.vintage, item.count];
+                })
+            );
+        });
+
+        Stats.getStockByDomain(function (data) {
+            $scope.stockByDomainOpts.series[0].data = $scope.stockByDomainOpts.series[0].data.concat(
+                _.map(data, function (item) {
+                    return [item.domain.name, item.count];
                 })
             );
         });
