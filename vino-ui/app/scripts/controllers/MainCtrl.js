@@ -22,6 +22,16 @@ angular.module('vino.ui')
             }
         };
 
+        Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
+            return {
+                radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
+                stops: [
+                    [0, color],
+                    [1, Highcharts.Color(color).brighten(-0.3).get('rgb')] // darken
+                ]
+            };
+        });
+
         $scope.stockByVintageOpts = angular.extend({
             title: {
                 text: 'Stock actuel / millésime'
@@ -48,6 +58,19 @@ angular.module('vino.ui')
             ]
         }, basePieOpts);
 
+        $scope.stockByAOCOpts = angular.extend({
+            title: {
+                text: 'Stock actuel / AOC'
+            },
+            series: [
+                {
+                    name: 'Stock actuel',
+                    type: 'pie',
+                    data: []
+                }
+            ]
+        }, basePieOpts);
+
         Stats.getStockByVintage(function (data) {
             $scope.stockByVintageOpts.series[0].data = $scope.stockByVintageOpts.series[0].data.concat(
                 _.map(data, function (item) {
@@ -60,6 +83,14 @@ angular.module('vino.ui')
             $scope.stockByDomainOpts.series[0].data = $scope.stockByDomainOpts.series[0].data.concat(
                 _.map(data, function (item) {
                     return [item.domain.name, item.count];
+                })
+            );
+        });
+
+        Stats.getStockByAOC(function (data) {
+            $scope.stockByAOCOpts.series[0].data = $scope.stockByAOCOpts.series[0].data.concat(
+                _.map(data, function (item) {
+                    return [item.aoc.name, item.count];
                 })
             );
         });

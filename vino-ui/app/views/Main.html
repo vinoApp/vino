@@ -1,13 +1,20 @@
 <div id="vino-content" ng-controller="MainCtrl">
 
 
-    <div class="col-lg-6">
-        <highchart config="stockByVintageOpts"></highchart>
+    <div class="row">
+        <div class="col-lg-6">
+            <highchart config="stockByVintageOpts"></highchart>
+        </div>
+
+        <div class="col-lg-6">
+            <highchart config="stockByDomainOpts"></highchart>
+        </div>
     </div>
 
-    <div class="col-lg-6">
-        <highchart config="stockByDomainOpts"></highchart>
+    <div class="row">
+        <div class="col-lg-6">
+            <highchart config="stockByAOCOpts"></highchart>
+        </div>
     </div>
-
 
 </div>

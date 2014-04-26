@@ -29,6 +29,11 @@ public class WineCellarRecord extends Entity {
 
     private Reference<WineDomain> domain;
 
+    // Aggregated data
+    private Reference<WineAOC> aoc;
+
+    private Reference<WineRegion> region;
+
     private int vintage;
 
     private int quantity;
@@ -66,6 +71,24 @@ public class WineCellarRecord extends Entity {
 
     public WineCellarRecord setVintage(final int vintage) {
         this.vintage = vintage;
+        return this;
+    }
+
+    public Reference<WineAOC> getAoc() {
+        return aoc;
+    }
+
+    public Reference<WineRegion> getRegion() {
+        return region;
+    }
+
+    public WineCellarRecord setRegion(final Reference<WineRegion> region) {
+        this.region = region;
+        return this;
+    }
+
+    public WineCellarRecord setAoc(final Reference<WineAOC> aoc) {
+        this.aoc = aoc;
         return this;
     }
 

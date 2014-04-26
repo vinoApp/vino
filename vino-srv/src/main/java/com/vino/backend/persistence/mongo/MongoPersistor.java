@@ -181,27 +181,19 @@ public class MongoPersistor implements Persistor {
                 collections.get(MongoCollections.CELLAR).save(foundRecord.get());
             }
         } else {
-            persist(new WineCellarRecord()
+            WineCellarRecord record = new WineCellarRecord()
                     .setCode(code)
                     .setDomain(domain)
                     .setVintage(vintage)
-                    .setQuantity(quantity));
+                    .setQuantity(quantity);
+            // Aggregate data
+            Reference<WineAOC> aoc = record.getDomain().get(this).get().getOrigin();
+            Reference<WineRegion> region = aoc.get(this).get().getRegion();
+            record.setAoc(aoc);
+            record.setRegion(region);
+            // Persist entity
+            persist(record);
         }
-
-        return true;
-    }
-
-    @Override
-    public boolean addInCellar(String id, int quantity) {
-
-        Optional<WineCellarRecord> foundRecord = getRecord(id);
-
-        if (!foundRecord.isPresent()) {
-            return false;
-        }
-
-        foundRecord.get().setQuantity(foundRecord.get().getQuantity() + quantity);
-        persist(foundRecord.get());
 
         return true;
     }

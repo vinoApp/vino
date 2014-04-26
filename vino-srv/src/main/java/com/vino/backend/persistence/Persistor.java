@@ -68,8 +68,6 @@ public interface Persistor {
 
     boolean addInCellar(Barcode code, Reference<WineDomain> domain, int vintage, int quantity);
 
-    boolean addInCellar(String id, int quantity);
-
     boolean removeFromCellar(String id, int quantity);
 
     ///////////////////////////////////

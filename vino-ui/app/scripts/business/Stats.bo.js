@@ -15,6 +15,11 @@ angular.module('vino.business').factory("Stats",
                 return Stats.query({
                     indicator: 'cellarStockByDomain'
                 }, handler);
+            },
+            getStockByAOC: function (handler) {
+                return Stats.query({
+                    indicator: 'cellarStockByAOC'
+                }, handler);
             }
         });
     });

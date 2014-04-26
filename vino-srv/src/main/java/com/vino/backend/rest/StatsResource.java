@@ -17,8 +17,7 @@
 package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
-import com.vino.backend.model.stats.CellarStatByDomainRecord;
-import com.vino.backend.model.stats.CellarStatByVintageRecord;
+import com.vino.backend.model.stats.CellarStatRecord;
 import com.vino.backend.model.stats.MovementStatRecord;
 import restx.annotations.GET;
 import restx.annotations.RestxResource;
@@ -55,7 +54,7 @@ public class StatsResource {
     }
 
     @GET("/stats/cellarStockByVintage")
-    public Iterable<CellarStatByVintageRecord> getCellarStockByVintage(Optional<String> limit) {
+    public Iterable<CellarStatRecord.CellarStatByVintageRecord> getCellarStockByVintage(Optional<String> limit) {
 
         if (!limit.isPresent()) {
             limit = Optional.of("5");
@@ -64,11 +63,11 @@ public class StatsResource {
         return cellar.get()
                 .aggregate("{ $group : { _id: '$vintage', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { vintage: '$_id', count: 1 } }")
-                .as(CellarStatByVintageRecord.class);
+                .as(CellarStatRecord.CellarStatByVintageRecord.class);
     }
 
     @GET("/stats/cellarStockByDomain")
-    public Iterable<CellarStatByDomainRecord> getCellarStockByDomain(Optional<String> limit) {
+    public Iterable<CellarStatRecord.CellarStatByDomainRecord> getCellarStockByDomain(Optional<String> limit) {
 
         if (!limit.isPresent()) {
             limit = Optional.of("5");
@@ -77,7 +76,20 @@ public class StatsResource {
         return cellar.get()
                 .aggregate("{ $group : { _id: '$domain', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { domain: '$_id', count: 1 } }")
-                .as(CellarStatByDomainRecord.class);
+                .as(CellarStatRecord.CellarStatByDomainRecord.class);
+    }
+
+    @GET("/stats/cellarStockByAOC")
+    public Iterable<CellarStatRecord.CellarStatByAOCRecord> getCellarStockByAOC(Optional<String> limit) {
+
+        if (!limit.isPresent()) {
+            limit = Optional.of("5");
+        }
+
+        return cellar.get()
+                .aggregate("{ $group : { _id: '$aoc', count: { $sum : '$quantity' } } }")
+                .and("{ $project : { aoc: '$_id', count: 1 } }")
+                .as(CellarStatRecord.CellarStatByAOCRecord.class);
     }
 
 }
