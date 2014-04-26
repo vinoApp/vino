@@ -62,7 +62,7 @@ public class StatsResource {
         }
 
         return cellar.get()
-                .aggregate("{ $group : { _id: '$vintage', count: { $sum : 1 } } }")
+                .aggregate("{ $group : { _id: '$vintage', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { vintage: '$_id', count: 1 } }")
                 .as(CellarStatByVintageRecord.class);
     }
@@ -75,7 +75,7 @@ public class StatsResource {
         }
 
         return cellar.get()
-                .aggregate("{ $group : { _id: '$domain', count: { $sum : 1 } } }")
+                .aggregate("{ $group : { _id: '$domain', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { domain: '$_id', count: 1 } }")
                 .as(CellarStatByDomainRecord.class);
     }
