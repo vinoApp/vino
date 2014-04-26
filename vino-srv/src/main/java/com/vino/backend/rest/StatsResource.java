@@ -16,14 +16,38 @@
 
 package com.vino.backend.rest;
 
+import com.google.common.base.Optional;
+import com.vino.backend.model.stats.MovementStatRecord;
+import restx.annotations.GET;
+import restx.annotations.Produces;
 import restx.annotations.RestxResource;
 import restx.factory.Component;
+import restx.jongo.JongoCollection;
+
+import javax.inject.Named;
 
 @Component
 @RestxResource
 public class StatsResource {
 
+    private final JongoCollection movements;
 
+    public StatsResource(@Named("movements") JongoCollection movements) {
+        this.movements = movements;
+    }
 
+    @GET("/stats/mostConsumedDomain")
+    public Iterable<MovementStatRecord> getMostConsumedWineDomain(Optional<String> limit) {
+
+        if (!limit.isPresent()) {
+            limit = Optional.of("5");
+        }
+
+        return movements.get()
+                .aggregate("{ $match : { type : # }}", "OUT")
+                .and("{ $group : { _id: '$record.domain', count: { $sum : 1 } } }")
+                .and("{ $project : { domain: '$_id', count: 1 } }")
+                .as(MovementStatRecord.class);
+    }
 
 }
