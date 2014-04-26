@@ -1,6 +1,6 @@
 'use strict';
 
-angular.module('vino.ui', ['ngRoute', 'ngProgress', 'vino.business', 'vino.services'])
+angular.module('vino.ui', ['ngRoute', 'ngProgress', 'highcharts-ng', 'vino.business', 'vino.services'])
     .config(function ($routeProvider) {
         $routeProvider
             .when('/', {
@@ -17,6 +17,9 @@ angular.module('vino.ui', ['ngRoute', 'ngProgress', 'vino.business', 'vino.servi
             })
             .when('/cellar', {
                 templateUrl: 'views/Cellar.html'
+            })
+            .when('/stats', {
+                templateUrl: 'views/Stats.html'
             })
             .otherwise({
                 redirectTo: '/'
