@@ -20,14 +20,4 @@ The solution is built on the following technical stack (excluding standard tools
 - Mobile : Android SDK
 - Server (Java) : [restx.io](http://restx.io/) that exposes a set of REST WebServices.
 
-## Bootstrap
-
-Vino is bundled with a Mongo dump containing a subset of French WineDomains (Bordeaux, ...), and a subset of Wine AOC & regions.
-This dump could be found in the folder vino-srv/db/dump and restored liked this :
-
-```
-mongorestore --db vino db/dump/vino
-```
-
-This command will populate your vino local database.
 
