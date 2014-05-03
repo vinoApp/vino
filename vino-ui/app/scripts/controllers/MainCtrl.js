@@ -45,19 +45,8 @@ angular.module('vino.ui')
             ]
         }, basePieOpts);
 
-        $scope.stockByDomainOpts = angular.extend({
-            title: {
-                text: 'Stock actuel / chateau'
-            },
-            series: [
-                {
-                    name: 'Stock actuel',
-                    type: 'pie',
-                    data: []
-                }
-            ]
-        }, basePieOpts);
-
+        // AOC + Drilldown on nested domains
+        var drillDownByDomainSeries = {};
         $scope.stockByAOCOpts = angular.extend({
             title: {
                 text: 'Stock actuel / AOC'
@@ -68,8 +57,12 @@ angular.module('vino.ui')
                     type: 'pie',
                     data: []
                 }
-            ]
+            ],
+            drilldown: {
+                series: [ drillDownByDomainSeries ]
+            }
         }, basePieOpts);
+
 
         Stats.getStockByVintage(function (data) {
             $scope.stockByVintageOpts.series[0].data = $scope.stockByVintageOpts.series[0].data.concat(
@@ -80,19 +73,30 @@ angular.module('vino.ui')
         });
 
         Stats.getStockByDomain(function (data) {
-            $scope.stockByDomainOpts.series[0].data = $scope.stockByDomainOpts.series[0].data.concat(
-                _.map(data, function (item) {
-                    return [item.domain.name, item.count];
-                })
-            );
-        });
+            _.each(data, function (item) {
 
-        Stats.getStockByAOC(function (data) {
-            $scope.stockByAOCOpts.series[0].data = $scope.stockByAOCOpts.series[0].data.concat(
-                _.map(data, function (item) {
-                    return [item.aoc.name, item.count];
-                })
-            );
-        });
+                var aocName = item.domain.origin.name;
+                var domainName = item.domain.name;
 
+                var record = _.find($scope.stockByAOCOpts.series[0].data, {name: aocName});
+                if (!record) {
+                    drillDownByDomainSeries[aocName] = {
+                        id: aocName,
+                        data: [domainName, item.count]
+                    };
+                    $scope.stockByAOCOpts.series[0].data.push({
+                        name: aocName,
+                        y: item.count,
+                        drilldown: aocName
+                    });
+                } else {
+                    record.y += item.count;
+                    drillDownByDomainSeries[aocName].data = drillDownByDomainSeries[aocName].data
+                        .concat([domainName, item.count]);
+                }
+            });
+
+            $("#stockByAocElt").highcharts($scope.stockByAOCOpts);
+
+        });
     });
