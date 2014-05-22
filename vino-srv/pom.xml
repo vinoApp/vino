@@ -120,13 +120,6 @@
             <version>${restx.version}</version>
         </dependency>
 
-        <!-- Jongo (Temp) -->
-        <dependency>
-            <groupId>org.jongo</groupId>
-            <artifactId>jongo</artifactId>
-            <version>1.1-early-20140221-1732</version>
-        </dependency>
-
     </dependencies>
 
     <repositories>

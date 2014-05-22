@@ -128,10 +128,17 @@ public class MongoPersistor implements Persistor {
     // DATA PERSISTENCE
     ///////////////////////////////////
 
+    private void save(Entity entity, String collection) {
+        if (entity.getKey() == null) {
+            entity.setKey(new ObjectId().toString());
+        }
+        collections.get(collection).save(entity);
+    }
+
     private void persistEntity(Entity entity, String collection, boolean addToKeys) {
 
         // Persist entity
-        collections.get(collection).save(entity);
+        save(entity, collection);
         if (addToKeys) {
             collections.get(MongoCollections.KEYS).save(new EntityKey(entity.getKey(), collection));
         }
@@ -178,7 +185,7 @@ public class MongoPersistor implements Persistor {
                 delete(foundRecord.get().getKey());
             } else {
                 foundRecord.get().setQuantity(foundRecord.get().getQuantity() + quantity);
-                collections.get(MongoCollections.CELLAR).save(foundRecord.get());
+                save(foundRecord.get(), MongoCollections.CELLAR);
             }
         } else {
             WineCellarRecord record = new WineCellarRecord()
@@ -207,13 +214,11 @@ public class MongoPersistor implements Persistor {
             return false;
         }
 
-        MongoCollection collection = collections.get(MongoCollections.CELLAR);
-
         if (record.get().getQuantity() - quantity <= 0) {
             delete(record.get().getKey());
         } else {
             record.get().setQuantity(record.get().getQuantity() - quantity);
-            collection.save(record.get());
+            save(record.get(), MongoCollections.CELLAR);
         }
 
         return true;
