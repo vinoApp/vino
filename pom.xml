@@ -10,7 +10,7 @@
     <version>1.0-SNAPSHOT</version>
 
     <properties>
-        <restx.version>0.32</restx.version>
+        <restx.version>0.33.1</restx.version>
     </properties>
 
     <modules>
