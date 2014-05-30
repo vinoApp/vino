@@ -122,17 +122,4 @@
 
     </dependencies>
 
-    <repositories>
-        <repository>
-            <id>cloudbees-jongo-early-release</id>
-            <url>http://repository-jongo.forge.cloudbees.com/release</url>
-            <releases>
-                <enabled>true</enabled>
-            </releases>
-            <snapshots>
-                <enabled>false</enabled>
-            </snapshots>
-        </repository>
-    </repositories>
-
 </project>
