@@ -22,6 +22,10 @@ angular.module('vino.ui')
             }
         };
 
+        var hasData = function () {
+            return this.series[0].data && this.series[0].data.length > 0;
+        };
+
         Highcharts.getOptions().colors = Highcharts.map(Highcharts.getOptions().colors, function (color) {
             return {
                 radialGradient: { cx: 0.5, cy: 0.3, r: 0.7 },
@@ -32,44 +36,50 @@ angular.module('vino.ui')
             };
         });
 
-        $scope.stockByVintageOpts = angular.extend({
-            title: {
-                text: 'Stock actuel / millésime'
-            },
-            series: [
-                {
-                    name: 'Stock actuel',
-                    type: 'pie',
-                    data: []
-                }
-            ]
-        }, basePieOpts);
+        angular.extend($scope, {
 
-        $scope.stockByDomainOpts = angular.extend({
-            title: {
-                text: 'Stock actuel / chateau'
-            },
-            series: [
-                {
-                    name: 'Stock actuel',
-                    type: 'pie',
-                    data: []
-                }
-            ]
-        }, basePieOpts);
+            stockByVintageOpts: angular.extend({
+                title: {
+                    text: 'Stock actuel / millésime'
+                },
+                series: [
+                    {
+                        name: 'Stock actuel',
+                        type: 'pie',
+                        data: []
+                    }
+                ],
+                hasData: hasData
+            }, basePieOpts),
 
-        $scope.stockByAOCOpts = angular.extend({
-            title: {
-                text: 'Stock actuel / AOC'
-            },
-            series: [
-                {
-                    name: 'Stock actuel',
-                    type: 'pie',
-                    data: []
-                }
-            ]
-        }, basePieOpts);
+            stockByDomainOpts: angular.extend({
+                title: {
+                    text: 'Stock actuel / chateau'
+                },
+                series: [
+                    {
+                        name: 'Stock actuel',
+                        type: 'pie',
+                        data: []
+                    }
+                ],
+                hasData: hasData
+            }, basePieOpts),
+
+            stockByAOCOpts: angular.extend({
+                title: {
+                    text: 'Stock actuel / AOC'
+                },
+                series: [
+                    {
+                        name: 'Stock actuel',
+                        type: 'pie',
+                        data: []
+                    }
+                ],
+                hasData: hasData
+            }, basePieOpts)
+        });
 
         Stats.getStockByVintage(function (data) {
             $scope.stockByVintageOpts.series[0].data = $scope.stockByVintageOpts.series[0].data.concat(
