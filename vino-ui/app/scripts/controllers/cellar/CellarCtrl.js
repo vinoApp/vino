@@ -47,11 +47,4 @@ angular.module('vino.ui')
             }
             loadCellarContent();
         });
-
-        // Load all cellars
-        Cellar.query(function (cellars) {
-            if (cellars && cellars.length > 0) {
-                $scope.cellar = cellars[0];
-            }
-        });
     });

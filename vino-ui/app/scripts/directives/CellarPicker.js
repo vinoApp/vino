@@ -67,7 +67,11 @@ angular.module("vino.ui").directive("cellarPicker", function (Cellar) {
             });
 
 
-            $scope.cellars = Cellar.query();
+            $scope.cellars = Cellar.query(function(cellars){
+                if(!$scope.ngModel && cellars && cellars.length > 0) {
+                    $scope.ngModel = cellars[0];
+                }
+            });
         }
     };
 

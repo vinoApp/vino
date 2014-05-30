@@ -30,12 +30,12 @@ import javax.inject.Named;
 public class StatsResource {
 
     private final JongoCollection movements;
-    private final JongoCollection cellar;
+    private final JongoCollection records;
 
     public StatsResource(@Named("movements") JongoCollection movements,
-                         @Named("cellar") JongoCollection cellar) {
+                         @Named("records") JongoCollection records) {
         this.movements = movements;
-        this.cellar = cellar;
+        this.records = records;
     }
 
     @GET("/stats/mostConsumedDomain")
@@ -48,29 +48,32 @@ public class StatsResource {
                 .as(MovementStatRecord.class);
     }
 
-    @GET("/stats/cellarStockByVintage")
-    public Iterable<CellarStatRecord.CellarStatByVintageRecord> getCellarStockByVintage() {
+    @GET("/stats/{cellarKey}/cellarStockByVintage")
+    public Iterable<CellarStatRecord.CellarStatByVintageRecord> getCellarStockByVintage(String cellarKey) {
 
-        return cellar.get()
-                .aggregate("{ $group : { _id: '$vintage', count: { $sum : '$quantity' } } }")
+        return records.get()
+                .aggregate("{ $match : { cellar : # }}", cellarKey)
+                .and("{ $group : { _id: '$vintage', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { vintage: '$_id', count: 1 } }")
                 .as(CellarStatRecord.CellarStatByVintageRecord.class);
     }
 
-    @GET("/stats/cellarStockByDomain")
-    public Iterable<CellarStatRecord.CellarStatByDomainRecord> getCellarStockByDomain() {
+    @GET("/stats/{cellarKey}/cellarStockByDomain")
+    public Iterable<CellarStatRecord.CellarStatByDomainRecord> getCellarStockByDomain(String cellarKey) {
 
-        return cellar.get()
-                .aggregate("{ $group : { _id: '$domain', count: { $sum : '$quantity' } } }")
+        return records.get()
+                .aggregate("{ $match : { cellar : # }}", cellarKey)
+                .and("{ $group : { _id: '$domain', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { domain: '$_id', count: 1 } }")
                 .as(CellarStatRecord.CellarStatByDomainRecord.class);
     }
 
-    @GET("/stats/cellarStockByAOC")
-    public Iterable<CellarStatRecord.CellarStatByAOCRecord> getCellarStockByAOC() {
+    @GET("/stats/{cellarKey}/cellarStockByAOC")
+    public Iterable<CellarStatRecord.CellarStatByAOCRecord> getCellarStockByAOC(String cellarKey) {
 
-        return cellar.get()
-                .aggregate("{ $group : { _id: '$aoc', count: { $sum : '$quantity' } } }")
+        return records.get()
+                .aggregate("{ $match : { cellar : # }}", cellarKey)
+                .and("{ $group : { _id: '$aoc', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { aoc: '$_id', count: 1 } }")
                 .as(CellarStatRecord.CellarStatByAOCRecord.class);
     }

@@ -1,5 +1,13 @@
 <div id="vino-content" ng-controller="MainCtrl">
 
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{ 'action.select.cellar' | i18n }}
+        </div>
+        <div class="panel-body">
+            <cellar-picker ng-model="cellar"></cellar-picker>
+        </div>
+    </div>
 
     <div class="row">
         <div class="col-lg-6" ng-if="stockByVintageOpts.hasData()">

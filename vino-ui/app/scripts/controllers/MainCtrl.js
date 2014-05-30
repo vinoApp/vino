@@ -84,28 +84,41 @@ angular.module('vino.ui')
             }, basePieOpts)
         });
 
-        Stats.getStockByVintage(function (data) {
-            $scope.stockByVintageOpts.series[0].data = $scope.stockByVintageOpts.series[0].data.concat(
-                _.map(data, function (item) {
-                    return ['' + item.vintage, item.count];
-                })
-            );
-        });
+        var loadStats = function () {
 
-        Stats.getStockByDomain(function (data) {
-            $scope.stockByDomainOpts.series[0].data = $scope.stockByDomainOpts.series[0].data.concat(
-                _.map(data, function (item) {
-                    return [item.domain.name, item.count];
-                })
-            );
-        });
+            var stats = Stats.forCellar($scope.cellar._id);
 
-        Stats.getStockByAOC(function (data) {
-            $scope.stockByAOCOpts.series[0].data = $scope.stockByAOCOpts.series[0].data.concat(
-                _.map(data, function (item) {
-                    return [item.aoc.name, item.count];
-                })
-            );
+            stats.getStockByVintage(function (data) {
+                $scope.stockByVintageOpts.series[0].data = $scope.stockByVintageOpts.series[0].data.concat(
+                    _.map(data, function (item) {
+                        return ['' + item.vintage, item.count];
+                    })
+                );
+            });
+
+            stats.getStockByDomain(function (data) {
+                $scope.stockByDomainOpts.series[0].data = $scope.stockByDomainOpts.series[0].data.concat(
+                    _.map(data, function (item) {
+                        return [item.domain.name, item.count];
+                    })
+                );
+            });
+
+            stats.getStockByAOC(function (data) {
+                $scope.stockByAOCOpts.series[0].data = $scope.stockByAOCOpts.series[0].data.concat(
+                    _.map(data, function (item) {
+                        return [item.aoc.name, item.count];
+                    })
+                );
+            });
+        };
+
+        // Watch selected cellar changes
+        $scope.$watch("cellar", function (cellar) {
+            if (!cellar) {
+                return;
+            }
+            loadStats();
         });
 
     });
