@@ -16,17 +16,10 @@
 
 package com.vino.backend.rest;
 
-import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
-import com.vino.backend.model.Movement;
 import com.vino.backend.model.Response;
-import com.vino.backend.model.WineCellarRecord;
+import com.vino.backend.model.WineCellar;
 import com.vino.backend.persistence.Persistor;
-import org.joda.time.DateTime;
-import restx.annotations.GET;
-import restx.annotations.POST;
-import restx.annotations.Produces;
-import restx.annotations.RestxResource;
+import restx.annotations.*;
 import restx.factory.Component;
 
 /**
@@ -39,61 +32,25 @@ import restx.factory.Component;
 @RestxResource
 public class CellarResource extends AbstractResource {
 
-    private Persistor persistor;
+    private final Persistor persistor;
 
     public CellarResource(Persistor persistor) {
         this.persistor = persistor;
     }
 
     @GET("/cellar")
-    public Iterable<WineCellarRecord> getRecords() {
-        return persistor.getAllRecords();
-    }
-
-    @GET("/cellar/barcode")
-    public Optional<WineCellarRecord> getRecordByBarCode(String code) {
-        return persistor.getRecordByBarCode(code);
-    }
-
-    @GET("/cellar/{key}")
-    @Produces("application/json;view=com.vino.backend.persistence.mongo.Views$Details")
-    public Optional<WineCellarRecord> getRecord(String key) {
-        return persistor.getRecord(key);
+    public Iterable<WineCellar> getCellars() {
+        return persistor.getAllCellars();
     }
 
     @POST("/cellar")
-    public Response onCellarMovements(Movement movement) {
-
-        if (movement.getRecord() == null) {
-            return technical(Response.TechnicalStatus.INVALID_PARAMS);
-        }
-
-        // Set the date associated to the movement
-        movement.setDate(DateTime.now());
-
-        // Persist movement (history)
-        persistor.persist(movement);
-
-        // Persist cellar record
-        WineCellarRecord record = movement.getRecord();
-
-        boolean result = false;
-        if (movement.getType() == Movement.Type.IN) {
-            result = persistor.addInCellar(
-                    record.getCode(),
-                    record.getDomain(),
-                    record.getVintage(),
-                    movement.getAmount()
-            );
-        }
-
-        if (movement.getType() == Movement.Type.OUT) {
-            result = persistor.removeFromCellar(
-                    record.getKey(),
-                    movement.getAmount()
-            );
-        }
-        return business(result);
+    @Consumes("application/json")
+    public Response addCellar(WineCellar cellar) {
+        return business(persistor.persist(cellar));
     }
 
+    @DELETE("/cellar/{cellarKey}")
+    public Response removeCellar(String cellarKey) {
+        return business(persistor.delete(cellarKey));
+    }
 }

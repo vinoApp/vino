@@ -17,24 +17,15 @@
 package com.vino.backend;
 
 import com.google.common.io.Resources;
-import com.vino.backend.model.Barcode;
-import com.vino.backend.model.WineAOC;
-import com.vino.backend.model.WineDomain;
-import com.vino.backend.model.WineRegion;
+import com.vino.backend.model.*;
 import com.vino.backend.persistence.Persistor;
-import com.vino.backend.persistence.mongo.MongoCollections;
 import com.vino.backend.persistence.mongo.MongoPersistor;
 import com.vino.backend.reference.Reference;
 import org.jongo.Jongo;
-import org.jongo.MongoCollection;
 import org.junit.BeforeClass;
-import org.junit.FixMethodOrder;
 import org.junit.Test;
-import org.junit.runners.MethodSorters;
-import org.slf4j.Logger;
 import restx.factory.Factory;
 import restx.factory.Name;
-import restx.jongo.JongoCollection;
 
 import java.io.IOException;
 import java.net.URISyntaxException;
@@ -59,6 +50,13 @@ public class InitDB {
         FACTORY.getComponent(Name.of(Jongo.class)).getDatabase().dropDatabase();
     }
 
+    private Reference<WineCellar> addCellar(String name) {
+        WineCellar cellar = new WineCellar()
+                .setName(name);
+        PERSISTOR.persist(cellar);
+        return Reference.of(cellar);
+    }
+
     private Reference<WineAOC> addAOC(String name, Reference<WineRegion> regionRef) {
         WineAOC aoc = new WineAOC()
                 .setName(name)
@@ -76,12 +74,19 @@ public class InitDB {
         return Reference.of(domain);
     }
 
-    private void addCellarRecord(Reference<WineDomain> domain, int vintage, int qty) {
-        PERSISTOR.addInCellar(Barcode.ean13("0000000" + (++nextBarCode)), domain, vintage, qty);
+    private void addCellarRecord(Reference<WineCellar> cellar, Reference<WineDomain> domain, int vintage, int qty) {
+        WineCellarRecord record = new WineCellarRecord()
+                .setCode(Barcode.ean13("0000000" + (++nextBarCode)))
+                .setDomain(domain)
+                .setVintage(vintage);
+        PERSISTOR.addInCellar(cellar, record, qty);
     }
 
     @Test
     public void populate() {
+
+        // Cellar
+        Reference<WineCellar> cellar = addCellar("Principale");
 
         // Regions
         WineRegion medoc = new WineRegion().setName("Médoc");
@@ -137,20 +142,20 @@ public class InitDB {
         Reference<WineDomain> petrusRef = addDomain("Chateau Pétrus", pomerolRef, sticker);
 
         // Cellar records
-        addCellarRecord(hbRef, 2008, 10);
-        addCellarRecord(hbRef, 2008, 10);
+        addCellarRecord(cellar, hbRef, 2008, 10);
+        addCellarRecord(cellar, hbRef, 2008, 10);
 
-        addCellarRecord(beychevellRef, 2001, 10);
-        addCellarRecord(beychevellRef, 2011, 5);
+        addCellarRecord(cellar, beychevellRef, 2001, 10);
+        addCellarRecord(cellar, beychevellRef, 2011, 5);
 
-        addCellarRecord(petrusRef, 2005, 10);
-        addCellarRecord(petrusRef, 2005, 10);
+        addCellarRecord(cellar, petrusRef, 2005, 10);
+        addCellarRecord(cellar, petrusRef, 2005, 10);
 
-        addCellarRecord(cbRef, 2005, 10);
-        addCellarRecord(cbRef, 2009, 25);
+        addCellarRecord(cellar, cbRef, 2005, 10);
+        addCellarRecord(cellar, cbRef, 2009, 25);
 
-        addCellarRecord(mrgRef, 2008, 5);
-        addCellarRecord(mrgRef, 2011, 10);
+        addCellarRecord(cellar, mrgRef, 2008, 5);
+        addCellarRecord(cellar, mrgRef, 2011, 10);
     }
 
     private byte[] sampleImg() {

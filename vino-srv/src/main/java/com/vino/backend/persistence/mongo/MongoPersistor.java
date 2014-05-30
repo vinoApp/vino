@@ -17,13 +17,11 @@
 package com.vino.backend.persistence.mongo;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
 import com.vino.backend.logging.Loggers;
 import com.vino.backend.model.*;
 import com.vino.backend.persistence.Persistor;
 import com.vino.backend.reference.Reference;
 import org.bson.types.ObjectId;
-import org.jongo.MongoCollection;
 import org.slf4j.Logger;
 import restx.factory.Component;
 
@@ -89,38 +87,35 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public Iterable<WineCellarRecord> getAllRecords() {
-        return collections.get(MongoCollections.CELLAR)
-                .find()
+    public Iterable<WineCellar> getAllCellars() {
+        return collections.get(MongoCollections.CELLARS).find().as(WineCellar.class);
+    }
+
+    @Override
+    public Iterable<WineCellarRecord> getAllRecords(Reference<WineCellar> cellar) {
+        return collections.get(MongoCollections.RECORDS)
+                .find("{ cellar: # }", cellar.getKey())
                 .as(WineCellarRecord.class);
     }
 
     @Override
-    public ImmutableList<WineCellarRecord> getRecordsByDomain(String domainKey) {
-        Iterable<WineCellarRecord> records = collections.get(MongoCollections.CELLAR)
-                .find("{ domain : # }", domainKey)
+    public Iterable<WineCellarRecord> getRecordsByDomain(Reference<WineDomain> domain) {
+        return collections.get(MongoCollections.RECORDS)
+                .find("{ domain : # }", domain.getKey())
                 .as(WineCellarRecord.class);
-        return ImmutableList.copyOf(records);
     }
 
     @Override
-    public Optional<WineCellarRecord> getRecord(String key) {
-        return Optional.fromNullable(collections.get(MongoCollections.CELLAR)
-                .findOne(new ObjectId(key))
+    public Optional<WineCellarRecord> getRecord(Reference<WineCellar> cellar, Reference<WineDomain> domain, int vintage) {
+        return Optional.fromNullable(collections.get(MongoCollections.RECORDS)
+                .findOne("{ cellar: #, domain: #, vintage: # }", cellar.getKey(), domain.getKey(), vintage)
                 .as(WineCellarRecord.class));
     }
 
     @Override
-    public Optional<WineCellarRecord> getRecord(Reference<WineDomain> domain, int vintage) {
-        return Optional.fromNullable(collections.get(MongoCollections.CELLAR)
-                .findOne("{ domain: #, vintage: # }", domain.getKey(), vintage)
-                .as(WineCellarRecord.class));
-    }
-
-    @Override
-    public Optional<WineCellarRecord> getRecordByBarCode(String barcode) {
-        return Optional.fromNullable(collections.get(MongoCollections.CELLAR)
-                .findOne("{ code.value : # }", barcode)
+    public Optional<WineCellarRecord> getRecordByBarCode(Reference<WineCellar> cellar, String barcode) {
+        return Optional.fromNullable(collections.get(MongoCollections.RECORDS)
+                .findOne("{ cellar: #, code.value : # }", cellar.getKey(), barcode)
                 .as(WineCellarRecord.class));
     }
 
@@ -128,20 +123,21 @@ public class MongoPersistor implements Persistor {
     // DATA PERSISTENCE
     ///////////////////////////////////
 
-    private void save(Entity entity, String collection) {
+    private void persistEntity(Entity entity, String collection, boolean addToKeys) {
+
+        // Set entity key
         if (entity.getKey() == null) {
             entity.setKey(new ObjectId().toString());
         }
-        collections.get(collection).save(entity);
-    }
 
-    private void persistEntity(Entity entity, String collection, boolean addToKeys) {
-
-        // Persist entity
-        save(entity, collection);
+        // Persist associated key
         if (addToKeys) {
             collections.get(MongoCollections.KEYS).save(new EntityKey(entity.getKey(), collection));
         }
+
+        // Persist entity
+        collections.get(collection).save(entity);
+
         logger.debug("{} '{}' persisted", entity.getClass().getSimpleName(), entity.getKey());
     }
 
@@ -164,8 +160,14 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
+    public boolean persist(WineCellar cellar) {
+        persistEntity(cellar, MongoCollections.CELLARS, true);
+        return true;
+    }
+
+    @Override
     public boolean persist(WineCellarRecord record) {
-        persistEntity(record, MongoCollections.CELLAR, true);
+        persistEntity(record, MongoCollections.RECORDS, true);
         return true;
     }
 
@@ -176,29 +178,33 @@ public class MongoPersistor implements Persistor {
     }
 
     @Override
-    public boolean addInCellar(Barcode code, Reference<WineDomain> domain, int vintage, int quantity) {
+    public boolean addInCellar(Reference<WineCellar> cellar, WineCellarRecord record, int quantity) {
 
-        Optional<WineCellarRecord> foundRecord = getRecord(domain, vintage);
+        if (cellar == null
+                || record.getCode() == null
+                || record.getDomain() == null
+                || record.getVintage() == 0) {
+            throw new IllegalArgumentException("Missing cellar | code | domain | vintage on the provided record");
+        }
+
+        Optional<WineCellarRecord> foundRecord = getRecord(cellar, record.getDomain(), record.getVintage());
 
         if (foundRecord.isPresent()) {
             if (foundRecord.get().getQuantity() + quantity <= 0) {
                 delete(foundRecord.get().getKey());
             } else {
                 foundRecord.get().setQuantity(foundRecord.get().getQuantity() + quantity);
-                save(foundRecord.get(), MongoCollections.CELLAR);
+                persistEntity(foundRecord.get(), MongoCollections.RECORDS, false);
             }
         } else {
-            WineCellarRecord record = new WineCellarRecord()
-                    .setCode(code)
-                    .setDomain(domain)
-                    .setVintage(vintage)
-                    .setQuantity(quantity);
             // Aggregate data
             Reference<WineAOC> aoc = record.getDomain().get(this).get().getOrigin();
             Reference<WineRegion> region = aoc.get(this).get().getRegion();
             record.setAoc(aoc);
             record.setRegion(region);
             // Persist entity
+            record.setCellar(cellar);
+            record.setQuantity(quantity);
             persist(record);
         }
 
@@ -218,7 +224,7 @@ public class MongoPersistor implements Persistor {
             delete(record.get().getKey());
         } else {
             record.get().setQuantity(record.get().getQuantity() - quantity);
-            save(record.get(), MongoCollections.CELLAR);
+            persistEntity(record.get(), MongoCollections.RECORDS, false);
         }
 
         return true;

@@ -35,27 +35,31 @@ public class MongoCollections {
     public static final String AOCS = "aocs";
     public static final String REGIONS = "regions";
     public static final String DOMAINS = "domains";
-    public static final String CELLAR = "cellar";
+    public static final String CELLARS = "cellars";
+    public static final String RECORDS = "records";
     public static final String MOVEMENTS = "movements";
 
     private final JongoCollection keys;
     private final JongoCollection aocs;
     private final JongoCollection regions;
     private final JongoCollection domains;
-    private final JongoCollection cellar;
+    private final JongoCollection cellars;
+    private final JongoCollection records;
     private final JongoCollection movements;
 
     public MongoCollections(@Named(KEYS) JongoCollection keys,
                             @Named(AOCS) JongoCollection aocs,
                             @Named(REGIONS) JongoCollection regions,
                             @Named(DOMAINS) JongoCollection domains,
-                            @Named(CELLAR) JongoCollection cellar,
+                            @Named(CELLARS) JongoCollection cellar,
+                            @Named(RECORDS) JongoCollection records,
                             @Named(MOVEMENTS) JongoCollection movements) {
         this.keys = keys;
         this.aocs = aocs;
         this.regions = regions;
         this.domains = domains;
-        this.cellar = cellar;
+        this.cellars = cellar;
+        this.records = records;
         this.movements = movements;
     }
 
@@ -69,8 +73,10 @@ public class MongoCollections {
                 return regions.get();
             case DOMAINS:
                 return domains.get();
-            case CELLAR:
-                return cellar.get();
+            case CELLARS:
+                return cellars.get();
+            case RECORDS:
+                return records.get();
             case MOVEMENTS:
                 return movements.get();
         }

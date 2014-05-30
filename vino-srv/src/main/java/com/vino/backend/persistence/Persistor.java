@@ -36,6 +36,8 @@ public interface Persistor {
 
     <T extends Entity> Optional<T> getEntity(String key);
 
+    // Origins
+
     Iterable<WineAOC> getAllAOCS();
 
     Iterable<WineRegion> getAllRegions();
@@ -44,15 +46,19 @@ public interface Persistor {
 
     Iterable<WineDomain> getDomainsByAOC(String aocKey);
 
-    Iterable<WineCellarRecord> getAllRecords();
+    // Cellars
 
-    ImmutableList<WineCellarRecord> getRecordsByDomain(String domainKey);
+    Iterable<WineCellar> getAllCellars();
 
-    Optional<WineCellarRecord> getRecord(String key);
+    // Cellar content
 
-    Optional<WineCellarRecord> getRecord(Reference<WineDomain> domain, int vintage);
+    Iterable<WineCellarRecord> getAllRecords(Reference<WineCellar> cellar);
 
-    Optional<WineCellarRecord> getRecordByBarCode(String barcode);
+    Iterable<WineCellarRecord> getRecordsByDomain(Reference<WineDomain> domain);
+
+    Optional<WineCellarRecord> getRecord(Reference<WineCellar> cellar, Reference<WineDomain> domain, int vintage);
+
+    Optional<WineCellarRecord> getRecordByBarCode(Reference<WineCellar> cellar, String barcode);
 
     ///////////////////////////////////
     // DATA PERSISTENCE
@@ -64,9 +70,13 @@ public interface Persistor {
 
     boolean persist(WineDomain domain);
 
+    boolean persist(WineCellar cellar);
+
     boolean persist(WineCellarRecord record);
 
-    boolean addInCellar(Barcode code, Reference<WineDomain> domain, int vintage, int quantity);
+    boolean persist(Movement movement);
+
+    boolean addInCellar(Reference<WineCellar> cellar, WineCellarRecord record, int quantity);
 
     boolean removeFromCellar(String id, int quantity);
 
@@ -75,6 +85,4 @@ public interface Persistor {
     ///////////////////////////////////
 
     boolean delete(String key);
-
-    boolean persist(Movement movement);
 }

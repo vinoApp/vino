@@ -1,44 +1,57 @@
-angular.module('vino.ui').controller("CellarCtrl", function ($scope, $routeParams, $filter, Common, Cellar, Notification) {
+angular.module('vino.ui')
+    .controller('CellarCtrl', function ($scope, $routeParams, $filter, Common, Cellar, CellarContent, Notification) {
 
-    var loadData = function () {
-        $scope.records = Cellar.query();
-    };
+        var loadCellarContent = function () {
+            $scope.records = CellarContent.query({id: $scope.cellar._id});
+        };
 
-    $scope.$on(Common.events.cellar.update, function () {
-        loadData();
+        $scope.$on(Common.events.cellar.update, function () {
+            loadCellarContent();
+        });
+
+        angular.extend($scope, {
+
+            edit: function (record) {
+                $scope.recordToEdit = record;
+            },
+
+            in: function (record, qty) {
+                CellarContent.in($scope.cellar._id, record, qty, {
+                    success: function () {
+                        Notification.notify.success($filter('i18n')('cellar.in.success'));
+                        loadCellarContent();
+                    },
+                    error: function () {
+                        Notification.notify.error($filter('i18n')('cellar.in.error'));
+                    }
+                });
+            },
+
+            out: function (record, qty) {
+                CellarContent.out($scope.cellar._id, record, qty, {
+                    success: function () {
+                        Notification.notify.success($filter('i18n')('cellar.out.success'));
+                        loadCellarContent();
+                    },
+                    error: function () {
+                        Notification.notify.error($filter('i18n')('cellar.out.error'));
+                    }
+                });
+            }
+        });
+
+        // Watch selected cellar changes
+        $scope.$watch("cellar", function (cellar) {
+            if (!cellar) {
+                return;
+            }
+            loadCellarContent();
+        });
+
+        // Load all cellars
+        Cellar.query(function (cellars) {
+            if (cellars && cellars.length > 0) {
+                $scope.cellar = cellars[0];
+            }
+        });
     });
-
-    angular.extend($scope, {
-
-        edit: function (record) {
-            $scope.recordToEdit = record;
-        },
-
-        in: function (record, qty) {
-            Cellar.in(record, qty, {
-                success: function () {
-                    Notification.notify.success($filter('i18n')('cellar.in.success'));
-                    loadData();
-                },
-                error: function () {
-                    Notification.notify.error($filter('i18n')('cellar.in.error'));
-                }
-            });
-        },
-
-        out: function (record, qty) {
-            Cellar.out(record, qty, {
-                success: function () {
-                    Notification.notify.success($filter('i18n')('cellar.out.success'));
-                    loadData();
-                },
-                error: function () {
-                    Notification.notify.error($filter('i18n')('cellar.out.error'));
-                }
-            });
-        }
-    });
-
-    loadData();
-
-});

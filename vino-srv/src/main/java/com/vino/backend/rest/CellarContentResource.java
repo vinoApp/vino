@@ -1,0 +1,88 @@
+/*
+ *
+ *  * Copyright 2013 - Elian ORIOU
+ *  *
+ *  * Licensed under the Apache License, Version 2.0 (the "License");
+ *  * you may not use this file except in compliance with the License.
+ *  * You may obtain a copy of the License at
+ *  *
+ *  *    http://www.apache.org/licenses/LICENSE-2.
+ *  *
+ *  * Unless required by applicable law or agreed to in writing, software
+ *  * distributed under the License is distributed on an "AS IS" BASIS,
+ *  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ *  * See the License for the specific language governing permissions and
+ *  * limitations under the License.
+ *
+ */
+
+package com.vino.backend.rest;
+
+import com.google.common.base.Optional;
+import com.vino.backend.model.Movement;
+import com.vino.backend.model.Response;
+import com.vino.backend.model.WineCellar;
+import com.vino.backend.model.WineCellarRecord;
+import com.vino.backend.persistence.mongo.MongoPersistor;
+import com.vino.backend.reference.Reference;
+import org.joda.time.DateTime;
+import restx.annotations.*;
+import restx.factory.Component;
+
+@Component
+@RestxResource
+public class CellarContentResource extends AbstractResource {
+
+    private final MongoPersistor persistor;
+
+    public CellarContentResource(final MongoPersistor persistor) {
+        this.persistor = persistor;
+    }
+
+    @GET("/cellar/{cellarKey}/content")
+    @Produces("application/json;view=com.vino.backend.persistence.mongo.Views$Details")
+    public Iterable<WineCellarRecord> getRecords(String cellarKey) {
+        return persistor.getAllRecords(Reference.<WineCellar>of(cellarKey));
+    }
+
+    @GET("/cellar/{cellarKey}/content/{barcode}")
+    @Produces("application/json;view=com.vino.backend.persistence.mongo.Views$Details")
+    public Optional<WineCellarRecord> getRecord(String cellarKey, String barcode) {
+        return persistor.getRecordByBarCode(Reference.<WineCellar>of(cellarKey), barcode);
+    }
+
+    @POST("/cellar/{cellarKey}/content")
+    public Response onCellarMovements(@Param(kind = Param.Kind.PATH) String cellarKey, Movement movement) {
+
+        if (movement.getRecord() == null) {
+            return technical(Response.TechnicalStatus.INVALID_PARAMS);
+        }
+
+        // Set the date associated to the movement
+        movement.setDate(DateTime.now());
+
+        // Persist movement (history)
+        persistor.persist(movement);
+
+        // Persist cellar record
+        WineCellarRecord record = movement.getRecord();
+
+        boolean result = false;
+        if (movement.getType() == Movement.Type.IN) {
+            result = persistor.addInCellar(
+                    Reference.<WineCellar>of(cellarKey),
+                    record,
+                    movement.getAmount()
+            );
+        }
+
+        if (movement.getType() == Movement.Type.OUT) {
+            result = persistor.removeFromCellar(
+                    record.getKey(),
+                    movement.getAmount()
+            );
+        }
+        return business(result);
+    }
+
+}

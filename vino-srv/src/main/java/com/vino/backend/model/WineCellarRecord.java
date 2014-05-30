@@ -27,9 +27,10 @@ public class WineCellarRecord extends Entity {
 
     private Barcode code;
 
+    private Reference<WineCellar> cellar;
+
     private Reference<WineDomain> domain;
 
-    // Aggregated data
     private Reference<WineAOC> aoc;
 
     private Reference<WineRegion> region;
@@ -44,6 +45,15 @@ public class WineCellarRecord extends Entity {
 
     public WineCellarRecord setCode(final Barcode code) {
         this.code = code;
+        return this;
+    }
+
+    public Reference<WineCellar> getCellar() {
+        return cellar;
+    }
+
+    public WineCellarRecord setCellar(final Reference<WineCellar> cellar) {
+        this.cellar = cellar;
         return this;
     }
 
@@ -96,7 +106,10 @@ public class WineCellarRecord extends Entity {
     public String toString() {
         return "WineCellarRecord{" +
                 "code=" + code +
+                ", cellar=" + cellar +
                 ", domain=" + domain +
+                ", aoc=" + aoc +
+                ", region=" + region +
                 ", vintage=" + vintage +
                 ", quantity=" + quantity +
                 '}';

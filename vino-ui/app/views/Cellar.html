@@ -2,6 +2,15 @@
 
     <h3>{{ 'cellar' | i18n }}</h3>
 
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            {{ 'action.select.cellar' | i18n }}
+        </div>
+        <div class="panel-body">
+            <cellar-picker ng-model="cellar"></cellar-picker>
+        </div>
+    </div>
+
     <form class="navbar-form navbar-right" role="search">
         <div class="form-group">
             <input type="text" class="form-control" placeholder="{{ 'action.search' | i18n }}" ng-model="query">

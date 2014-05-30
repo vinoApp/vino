@@ -17,11 +17,11 @@
 package com.vino.backend.rest;
 
 import com.google.common.base.Optional;
-import com.google.common.collect.ImmutableList;
 import com.vino.backend.model.Response;
 import com.vino.backend.model.WineCellarRecord;
 import com.vino.backend.model.WineDomain;
 import com.vino.backend.persistence.Persistor;
+import com.vino.backend.reference.Reference;
 import restx.annotations.*;
 import restx.factory.Component;
 import restx.security.PermitAll;
@@ -58,8 +58,8 @@ public class DomainsResource {
     }
 
     @GET("/domains/{key}/records")
-    public ImmutableList<WineCellarRecord> getRecordsLinkedToDomain(String key) {
-        return persistor.getRecordsByDomain(key);
+    public Iterable<WineCellarRecord> getRecordsLinkedToDomain(String key) {
+        return persistor.getRecordsByDomain(Reference.<WineDomain>of(key));
     }
 
     @POST("/domains")
