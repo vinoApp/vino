@@ -1,4 +1,4 @@
-angular.module("vino.ui").directive("recordManager", function ($filter, Common, Cellar, Notification) {
+angular.module("vino.ui").directive("recordManager", function ($filter, Common, CellarContent, Notification) {
 
     return {
         restrict: 'E',
@@ -14,29 +14,25 @@ angular.module("vino.ui").directive("recordManager", function ($filter, Common, 
         },
         controller: function ($scope, $rootScope) {
 
-            var mode;
 
-            $scope.$watch('managedRecord', function (managedRecord) {
-                if (!managedRecord) {
-                    mode = 'new';
-                    $scope.record = {
-                        code: {
-                            value: ''
-                        }
-                    };
-                } else {
-                    mode = 'edit';
-                    $scope.selectedAOC = _.cloneDeep(managedRecord.domain.origin);
-                    $scope.record = _.cloneDeep(managedRecord);
-                    $scope.record.quantity = 0;
+            $scope.$watch("managedRecord", function (managedRecord) {
+
+                if (!$scope.managedRecord) {
+                    return
                 }
+                if ($scope.managedRecord.domain) {
+                    $scope.selectedAOC = _.cloneDeep(managedRecord.domain.origin);
+                }
+                $scope.record = _.cloneDeep($scope.managedRecord);
+                $scope.record.quantity = 0;
+
             });
 
             angular.extend($scope, {
 
                 save: function (record) {
                     record.domain = record.domain._id;
-                    Cellar.in(record, record.quantity, {
+                    CellarContent.in(record.cellar._id, record, record.quantity, {
                         success: function () {
                             Notification.notify.success($filter('i18n')('cellar.record.update.success'));
                             $rootScope.$broadcast(Common.events.cellar.update);
@@ -50,11 +46,11 @@ angular.module("vino.ui").directive("recordManager", function ($filter, Common, 
                 },
 
                 isEditing: function () {
-                    return mode === 'edit';
+                    return $scope.record && $scope.record._id;
                 },
 
                 isCreating: function () {
-                    return mode === 'new';
+                    return !$scope.record || !$scope.record._id;
                 }
 
             });

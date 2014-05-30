@@ -17,7 +17,7 @@
         </div>
     </form>
 
-    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#addRecordModal">
+    <button class="btn btn-success btn-sm" data-toggle="modal" data-target="#editRecordModal" ng-click="add()">
         <i class="glyphicon glyphicon-plus"></i> {{ 'action.put' | i18n }}
     </button>
 
@@ -58,7 +58,6 @@
         </tbody>
     </table>
 
-    <record-manager modal-id="addRecordModal"></record-manager>
     <record-manager modal-id="editRecordModal" managed-record="recordToEdit"></record-manager>
 
 </div>

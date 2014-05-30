@@ -11,6 +11,10 @@ angular.module('vino.ui')
 
         angular.extend($scope, {
 
+            add: function () {
+                $scope.recordToEdit = { cellar: $scope.cellar };
+            },
+
             edit: function (record) {
                 $scope.recordToEdit = record;
             },
