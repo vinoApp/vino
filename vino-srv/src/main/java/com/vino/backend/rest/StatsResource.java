@@ -16,7 +16,6 @@
 
 package com.vino.backend.rest;
 
-import com.google.common.base.Optional;
 import com.vino.backend.model.stats.CellarStatRecord;
 import com.vino.backend.model.stats.MovementStatRecord;
 import restx.annotations.GET;
@@ -40,11 +39,7 @@ public class StatsResource {
     }
 
     @GET("/stats/mostConsumedDomain")
-    public Iterable<MovementStatRecord> getMostConsumedWineDomain(Optional<String> limit) {
-
-        if (!limit.isPresent()) {
-            limit = Optional.of("5");
-        }
+    public Iterable<MovementStatRecord> getMostConsumedWineDomain() {
 
         return movements.get()
                 .aggregate("{ $match : { type : # }}", "OUT")
@@ -54,11 +49,7 @@ public class StatsResource {
     }
 
     @GET("/stats/cellarStockByVintage")
-    public Iterable<CellarStatRecord.CellarStatByVintageRecord> getCellarStockByVintage(Optional<String> limit) {
-
-        if (!limit.isPresent()) {
-            limit = Optional.of("5");
-        }
+    public Iterable<CellarStatRecord.CellarStatByVintageRecord> getCellarStockByVintage() {
 
         return cellar.get()
                 .aggregate("{ $group : { _id: '$vintage', count: { $sum : '$quantity' } } }")
@@ -67,11 +58,7 @@ public class StatsResource {
     }
 
     @GET("/stats/cellarStockByDomain")
-    public Iterable<CellarStatRecord.CellarStatByDomainRecord> getCellarStockByDomain(Optional<String> limit) {
-
-        if (!limit.isPresent()) {
-            limit = Optional.of("5");
-        }
+    public Iterable<CellarStatRecord.CellarStatByDomainRecord> getCellarStockByDomain() {
 
         return cellar.get()
                 .aggregate("{ $group : { _id: '$domain', count: { $sum : '$quantity' } } }")
@@ -80,11 +67,7 @@ public class StatsResource {
     }
 
     @GET("/stats/cellarStockByAOC")
-    public Iterable<CellarStatRecord.CellarStatByAOCRecord> getCellarStockByAOC(Optional<String> limit) {
-
-        if (!limit.isPresent()) {
-            limit = Optional.of("5");
-        }
+    public Iterable<CellarStatRecord.CellarStatByAOCRecord> getCellarStockByAOC() {
 
         return cellar.get()
                 .aggregate("{ $group : { _id: '$aoc', count: { $sum : '$quantity' } } }")
