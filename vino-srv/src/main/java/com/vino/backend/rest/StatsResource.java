@@ -51,10 +51,6 @@ public class StatsResource {
     @GET("/stats/{cellarKey}/cellarStockByVintage")
     public Iterable<CellarStatRecord.CellarStatByVintageRecord> getCellarStockByVintage(String cellarKey) {
 
-        if (true) {
-            throw new RuntimeException("TRUC");
-        }
-
         return records.get()
                 .aggregate("{ $match : { cellar : # }}", cellarKey)
                 .and("{ $group : { _id: '$vintage', count: { $sum : '$quantity' } } }")
