@@ -16,14 +16,12 @@
 
 package com.vino.backend.rest;
 
-import com.vino.backend.persistence.Persistor;
 import com.vino.backend.model.WineAOC;
 import com.vino.backend.model.WineRegion;
+import com.vino.backend.persistence.Persistor;
 import restx.annotations.GET;
 import restx.annotations.RestxResource;
 import restx.factory.Component;
-
-import java.util.List;
 
 /**
  * User: walien
@@ -33,7 +31,7 @@ import java.util.List;
 
 @Component
 @RestxResource
-public class OriginsResource {
+public class OriginsResource extends AbstractResource {
 
     private Persistor persistor;
 

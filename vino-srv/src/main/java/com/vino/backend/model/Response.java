@@ -32,6 +32,7 @@ public class Response {
         DB_REMOVE_OK,
         DB_ERROR,
         INVALID_PARAMS,
+        TECHNICAL_ERROR
     }
 
     public enum BusinessStatus {

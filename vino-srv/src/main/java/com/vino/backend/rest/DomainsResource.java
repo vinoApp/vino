@@ -34,7 +34,7 @@ import restx.security.PermitAll;
 
 @Component
 @RestxResource
-public class DomainsResource {
+public class DomainsResource extends AbstractResource {
 
     private Persistor persistor;
 
@@ -65,21 +65,11 @@ public class DomainsResource {
     @POST("/domains")
     @Consumes("application/json;view=com.vino.backend.persistence.mongo.Views$Edit")
     public Response addOrUpdateDomain(WineDomain domain) {
-        boolean result = persistor.persist(domain);
-        Response.TechnicalStatus technical = result ? Response.TechnicalStatus.DB_INSERT_OK : Response.TechnicalStatus.DB_ERROR;
-        return Response
-                .withStatuses(Optional.of(technical), Optional.<Response.BusinessStatus>absent())
-                .withMessage("The domain '%s' was properly persisted.", domain.getName())
-                .build();
+        return business(persistor.persist(domain));
     }
 
     @DELETE("/domains/{key}")
     public Response deleteDomain(String key) {
-        boolean result = persistor.delete(key);
-        Response.TechnicalStatus technical = result ? Response.TechnicalStatus.DB_REMOVE_OK : Response.TechnicalStatus.DB_ERROR;
-        return Response
-                .withStatuses(Optional.of(technical), Optional.<Response.BusinessStatus>absent())
-                .withMessage("The domain '%s' was properly deleted.", key)
-                .build();
+        return business(persistor.delete(key));
     }
 }
