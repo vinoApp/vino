@@ -14,9 +14,9 @@
     </properties>
 
     <modules>
-        <module>vino-srv</module>
         <module>vino-ui</module>
         <module>vino-mobile</module>
+        <module>vino-srv</module>
     </modules>
 
     <profiles>
