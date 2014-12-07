@@ -1,13 +1,5 @@
 <div id="vino-content" ng-controller="DomainsCtrl">
 
-    <h3>{{ 'domains' | i18n }}</h3>
-
-    <button class="btn btn-small btn-success" ng-click="create()">
-        <i class="icon-white icon-plus"></i> {{ 'action.create' | i18n }}
-    </button>
-
-    <div style="padding-bottom: 20px"></div>
-
     <div class="panel panel-primary">
         <div class="panel-heading">
             {{ 'action.select.aoc' | i18n }}
@@ -25,6 +17,12 @@
             <input type="text" class="form-control" placeholder="{{ 'action.search' | i18n }}" ng-model="query">
         </div>
     </form>
+
+    <button class="btn btn-small btn-success" ng-click="create()">
+        <i class="icon-white icon-plus"></i> {{ 'action.create' | i18n }}
+    </button>
+
+    <div style="padding-bottom: 20px"></div>
 
     <table class="table table-condensed" style="margin-top: 15px">
 

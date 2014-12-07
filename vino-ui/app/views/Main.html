@@ -2,29 +2,4 @@
 
     <h3>{{ 'menu.home' | i18n }}</h3>
 
-    <div class="panel panel-primary">
-        <div class="panel-heading">
-            {{ 'action.select.cellar' | i18n }}
-        </div>
-        <div class="panel-body">
-            <cellar-picker ng-model="cellar"></cellar-picker>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-6" ng-if="stockByVintageOpts.hasData()">
-            <highchart config="stockByVintageOpts"></highchart>
-        </div>
-
-        <div class="col-lg-6" ng-if="stockByDomainOpts.hasData()">
-            <highchart config="stockByDomainOpts"></highchart>
-        </div>
-    </div>
-
-    <div class="row">
-        <div class="col-lg-6" ng-if="stockByAOCOpts.hasData()">
-            <highchart config="stockByAOCOpts"></highchart>
-        </div>
-    </div>
-
 </div>
