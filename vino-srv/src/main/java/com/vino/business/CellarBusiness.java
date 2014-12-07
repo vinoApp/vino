@@ -25,6 +25,8 @@ import com.vino.repositories.CellarRepository;
 import org.joda.time.DateTime;
 import restx.factory.Component;
 
+import java.util.Arrays;
+
 @Component
 public class CellarBusiness {
 
@@ -65,6 +67,8 @@ public class CellarBusiness {
             addInCellar(Reference.<WineCellar>of(cellarKey), record, movement.getAmount());
         } else if (movement.getMovementType() == Movement.Type.OUT) {
             removeFromCellar(record.getKey(), movement.getAmount());
+        } else {
+            throw new IllegalArgumentException("Supported movement types " + Arrays.asList(Movement.Type.values()));
         }
 
         return movement;
