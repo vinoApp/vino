@@ -14,11 +14,11 @@ angular.module('vino.business')
             var cloned = _.cloneDeep(record);
 
             return angular.extend(new CellarContent(), {
-                '@class': 'com.vino.backend.model.Movement',
-                type: type,
+                '@class': 'com.vino.domain.Movement',
+                movementType: type,
                 amount: qty,
                 record: {
-                    '@class': 'com.vino.backend.model.WineCellarRecord',
+                    '@class': 'com.vino.domain.WineCellarRecord',
                     _id: cloned._id,
                     code: cloned.code,
                     domain: _.isObject(cloned.domain) ? cloned.domain._id : cloned.domain,
