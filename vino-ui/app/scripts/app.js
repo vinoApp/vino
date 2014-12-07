@@ -15,8 +15,11 @@ angular.module('vino.ui', ['ngRoute', 'ngProgress', 'highcharts-ng', 'vino.busin
             .when('/domains/:id/:mode', {
                 templateUrl: 'views/Domain.html'
             })
-            .when('/cellar', {
-                templateUrl: 'views/Cellar.html'
+            .when('/cellarContent', {
+                templateUrl: 'views/CellarContent.html'
+            })
+            .when('/cellars', {
+                templateUrl: 'views/Cellars.html'
             })
             .when('/stats', {
                 templateUrl: 'views/Stats.html'

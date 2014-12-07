@@ -41,20 +41,20 @@ public class CellarContentResource {
         this.business = business;
     }
 
-    @GET("/cellar/{cellarKey}/content")
+    @GET("/cellar/{key}/content")
     @Produces("application/json;view=com.vino.persistence.mongo.Views$Details")
-    public Iterable<WineCellarRecord> getRecords(String cellarKey) {
-        return repository.getAllRecords(Reference.<WineCellar>of(cellarKey));
+    public Iterable<WineCellarRecord> getRecords(String key) {
+        return repository.getAllRecords(Reference.<WineCellar>of(key));
     }
 
-    @GET("/cellar/{cellarKey}/content/{barcode}")
+    @GET("/cellar/{key}/content/{barcode}")
     @Produces("application/json;view=com.vino.persistence.mongo.Views$Details")
-    public Optional<WineCellarRecord> getRecord(String cellarKey, String barcode) {
-        return repository.getRecordByBarCode(Reference.<WineCellar>of(cellarKey), barcode);
+    public Optional<WineCellarRecord> getRecord(String key, String barcode) {
+        return repository.getRecordByBarCode(Reference.<WineCellar>of(key), barcode);
     }
 
-    @POST("/cellar/{cellarKey}/content")
-    public Movement onCellarMovements(@Param(kind = Param.Kind.PATH) String cellarKey, Movement movement) {
-        return business.onCellarMovement(cellarKey, movement);
+    @POST("/cellar/{key}/content")
+    public Movement onCellarMovements(@Param(kind = Param.Kind.PATH) String key, Movement movement) {
+        return business.onCellarMovement(key, movement);
     }
 }

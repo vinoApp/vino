@@ -1,0 +1,39 @@
+<div ng-controller="CellarsCtrl">
+
+    <table class="table table-condensed" style="margin-top: 15px">
+
+        <thead>
+        <tr>
+            <th>{{ 'cellar.name' | i18n }}</th>
+            <th>{{ 'cellar.description' | i18n }}</th>
+            <th>{{ 'cellar.localization' | i18n }}</th>
+            <th>{{ 'actions' | i18n }}</th>
+        </tr>
+        </thead>
+        <tbody>
+
+        <button class="btn btn-small btn-success" ng-click="create()">
+            <i class="icon-white icon-plus"></i> {{ 'action.create' | i18n }}
+        </button>
+
+        <div style="padding-bottom: 20px"></div>
+
+        <tr ng-repeat="cellar in cellars | filter:query">
+            <td><input type="text" ng-model="cellar.name" class="form-control"/></td>
+            <td><input type="text" ng-model="cellar.description" class="form-control"/></td>
+            <td><input type="text" ng-model="cellar.localization" class="form-control"/></td>
+            <td>
+                <button class="btn btn-sm btn-success" ng-click="edit(cellar)">
+                    <i ng-if="cellar._id" class="glyphicon glyphicon-edit"></i>
+                    <i ng-if="!cellar._id" class="glyphicon glyphicon-plus"></i>
+                </button>
+                <button class="btn btn-sm btn-danger" ng-click="remove(cellar)" ng-if="cellar._id">
+                    <i class="glyphicon glyphicon-remove"></i>
+                </button>
+            </td>
+        </tr>
+        </tbody>
+
+    </table>
+
+</div>

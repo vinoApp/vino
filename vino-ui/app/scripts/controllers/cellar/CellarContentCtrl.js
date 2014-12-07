@@ -1,5 +1,5 @@
 angular.module('vino.ui')
-    .controller('CellarCtrl', function ($scope, $routeParams, $filter, Common, Cellar, CellarContent, Notification) {
+    .controller('CellarContentCtrl', function ($scope, $routeParams, $filter, Common, Cellar, CellarContent, Notification) {
 
         var loadCellarContent = function () {
             $scope.records = CellarContent.query({id: $scope.cellar._id});
@@ -25,8 +25,8 @@ angular.module('vino.ui')
                         Notification.notify.success($filter('i18n')('cellar.in.success'));
                         loadCellarContent();
                     },
-                    error: function () {
-                        Notification.notify.error($filter('i18n')('cellar.in.error'));
+                    error: function (response) {
+                        Utils.displayError(response, 'cellar.in.error');
                     }
                 });
             },
@@ -37,8 +37,8 @@ angular.module('vino.ui')
                         Notification.notify.success($filter('i18n')('cellar.out.success'));
                         loadCellarContent();
                     },
-                    error: function () {
-                        Notification.notify.error($filter('i18n')('cellar.out.error'));
+                    error: function (response) {
+                        Utils.displayError(response, 'cellar.out.error');
                     }
                 });
             }

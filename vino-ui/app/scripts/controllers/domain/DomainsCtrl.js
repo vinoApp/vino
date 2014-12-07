@@ -39,8 +39,8 @@ angular.module('vino.ui').controller("DomainsCtrl", function ($scope, $filter, D
                     Domain.remove({id: domain._id}, function () {
                         Notification.notify.success($filter('i18n')('domain.delete.success'));
                         loadData();
-                    }, function () {
-                        Notification.notify.error($filter('i18n')('domain.update.error'));
+                    }, function (response) {
+                        Utils.displayError(response, 'domain.update.error');
                     });
                 }
             });

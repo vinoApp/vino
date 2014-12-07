@@ -52,8 +52,8 @@ public class CellarResource {
         return business.createCellar(cellar);
     }
 
-    @DELETE("/cellar/{cellarKey}")
-    public WineCellar removeCellar(String cellarKey) {
-        return business.removeCellar(cellarKey);
+    @DELETE("/cellar/{key}")
+    public WineCellar removeCellar(String key) {
+        return business.removeCellar(key);
     }
 }

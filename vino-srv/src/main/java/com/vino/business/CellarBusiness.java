@@ -19,13 +19,12 @@
 package com.vino.business;
 
 import com.google.common.base.Optional;
+import com.google.common.collect.Iterables;
 import com.vino.domain.*;
 import com.vino.persistence.Persistor;
 import com.vino.repositories.CellarRepository;
 import org.joda.time.DateTime;
 import restx.factory.Component;
-
-import java.util.Arrays;
 
 @Component
 public class CellarBusiness {
@@ -44,6 +43,10 @@ public class CellarBusiness {
     }
 
     public WineCellar removeCellar(String cellarKey) {
+        Iterable<WineCellarRecord> allRecords = repository.getAllRecords(Reference.<WineCellar>of(cellarKey));
+        if (!Iterables.isEmpty(allRecords)) {
+            throw new IllegalStateException("CELLAR_NOT_EMPTY");
+        }
         persistor.delete(cellarKey);
         return (WineCellar) new WineCellar().setKey(cellarKey);
     }
@@ -51,7 +54,7 @@ public class CellarBusiness {
     public Movement onCellarMovement(String cellarKey, Movement movement) {
 
         if (movement.getRecord() == null) {
-            throw new IllegalStateException("Attached record not found !");
+            throw new IllegalStateException("RECORD_NOT_FOUND");
         }
 
         // Set the date associated to the movement
@@ -68,7 +71,7 @@ public class CellarBusiness {
         } else if (movement.getMovementType() == Movement.Type.OUT) {
             removeFromCellar(record.getKey(), movement.getAmount());
         } else {
-            throw new IllegalArgumentException("Supported movement types " + Arrays.asList(Movement.Type.values()));
+            throw new IllegalArgumentException("UNSUPPORTED_MOVEMENT_TYPE");
         }
 
         return movement;

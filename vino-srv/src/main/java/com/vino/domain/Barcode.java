@@ -51,7 +51,7 @@ public class Barcode {
 
     public static Barcode ean13(String value) {
         if (value.length() != 13) {
-            throw new IllegalArgumentException("Invalid ean13 barcode : " + value);
+            throw new IllegalArgumentException("INVALID_EAN_CODE");
         }
         return new Barcode(Type.EAN_13, value);
     }

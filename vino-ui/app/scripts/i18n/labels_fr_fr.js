@@ -10,7 +10,8 @@ angular.module('vino.ui').constant('LocalDictionary', {
     // MENUS ITEMS
     'menu.home': 'Accueil',
     'menu.domains': 'Chateaux',
-    'menu.cellar': 'Cave',
+    'menu.cellars': 'Caves',
+    'menu.cellar': 'Contenu Cave',
     'menu.statistics': 'Statistiques',
 
     // COMMON
@@ -38,6 +39,7 @@ angular.module('vino.ui').constant('LocalDictionary', {
 
     // DIALOG
     'action.delete.domain.confirm': 'Confirmez-vous la suppression de ce château ?',
+    'action.delete.cellar.confirm': 'Confirmez-vous la suppression de cette cave?',
 
     // NOTIFICATIONS
     'domain.create.success': 'Château crée avec succès',
@@ -46,12 +48,29 @@ angular.module('vino.ui').constant('LocalDictionary', {
     'domain.update.error': 'Erreur durant la mise à jour du château',
     'domain.delete.success': 'Château supprimé avec succès.',
     'domain.delete.error': 'Erreur durant la suppression du château',
+    'cellar.create.success': 'Cave ajoutée avec succès',
+    'cellar.create.error': 'Erreur durant la création de la cave',
+    'cellar.edit.success': 'Cave modifiée avec succès',
+    'cellar.edit.error': 'Erreur durant la modification de la cave',
+    'cellar.delete.success': 'Cave supprimée avec succès',
+    'cellar.delete.error': 'Erreur durant la suppresion de la cave',
     'cellar.in.success': 'Bouteille ajoutée à la cave',
     'cellar.in.error': 'Erreur durant l\'ajout de la bouteille',
     'cellar.out.success': 'Bouteille retirée de la cave',
     'cellar.out.error': 'Erreur durant le retrait de la bouteille',
     'cellar.record.update.success': 'Informations de la bouteille mises à jour avec succès',
     'cellar.record.update.error': 'Erreur durant la mise à jour des informations',
+
+    'notification.GENERIC_ERROR': 'Une erreur est survenue...',
+    'notification.CELLAR_NOT_EMPTY': 'La cave n\'est pas vide, la suppression n\'est pas possible.',
+    'notification.UNSUPPORTED_MOVEMENT_TYPE': 'Le type du mouvement n\'est pas supporté',
+    'notification.RECORD_NOT_FOUND': 'L\'entrée de cave n\'a pas été trouvée',
+    'notification.INVALID_EAN_CODE': 'Le code bar n\'est pas valide',
+
+    // CELLAR
+    'cellar.name': 'Nom',
+    'cellar.description': 'Description',
+    'cellar.localization': 'Localisation',
 
     // ORIGINS (REGION + AOC)
     'region': 'Région Viticole',
