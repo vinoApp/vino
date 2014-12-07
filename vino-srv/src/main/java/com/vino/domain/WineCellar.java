@@ -24,6 +24,8 @@ public class WineCellar extends Entity {
 
     private String description;
 
+    private String localization;
+
     public String getName() {
         return name;
     }
@@ -42,16 +44,27 @@ public class WineCellar extends Entity {
         return this;
     }
 
+    public String getLocalization() {
+        return localization;
+    }
+
+    public WineCellar setLocalization(final String localization) {
+        this.localization = localization;
+        return this;
+    }
+
+    @Override
+    public String toString() {
+        return "WineCellar{" +
+                "name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", localization='" + localization + '\'' +
+                '}';
+    }
+
     @Override
     public EntityType getType() {
         return EntityType.CELLAR;
     }
 
-    @Override
-    public String toString() {
-        return "Cellar{" +
-                "name='" + name + '\'' +
-                ", description='" + description + '\'' +
-                '}';
-    }
 }
