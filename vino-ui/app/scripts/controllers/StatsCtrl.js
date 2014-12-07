@@ -89,7 +89,7 @@ angular.module('vino.ui')
             var stats = Stats.forCellar($scope.cellar._id);
 
             stats.getStockByVintage(function (data) {
-                $scope.stockByVintageOpts.series[0].data = $scope.stockByVintageOpts.series[0].data.concat(
+                $scope.stockByVintageOpts.series[0].data = [].concat(
                     _.map(data, function (item) {
                         return ['' + item.vintage, item.count];
                     })
@@ -97,7 +97,7 @@ angular.module('vino.ui')
             });
 
             stats.getStockByDomain(function (data) {
-                $scope.stockByDomainOpts.series[0].data = $scope.stockByDomainOpts.series[0].data.concat(
+                $scope.stockByDomainOpts.series[0].data = [].concat(
                     _.map(data, function (item) {
                         return [item.domain.name, item.count];
                     })
@@ -105,7 +105,7 @@ angular.module('vino.ui')
             });
 
             stats.getStockByAOC(function (data) {
-                $scope.stockByAOCOpts.series[0].data = $scope.stockByAOCOpts.series[0].data.concat(
+                $scope.stockByAOCOpts.series[0].data = [].concat(
                     _.map(data, function (item) {
                         return [item.aoc.name, item.count];
                     })
