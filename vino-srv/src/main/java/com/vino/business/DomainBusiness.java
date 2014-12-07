@@ -20,19 +20,15 @@ package com.vino.business;
 
 import com.vino.domain.WineDomain;
 import com.vino.persistence.Persistor;
-import com.vino.repositories.CellarRepository;
 import restx.factory.Component;
 
 @Component
 public class DomainBusiness {
 
     private final Persistor persistor;
-    private final CellarRepository repository;
 
-    public DomainBusiness(Persistor persistor,
-                          CellarRepository repository) {
+    public DomainBusiness(Persistor persistor) {
         this.persistor = persistor;
-        this.repository = repository;
     }
 
     public WineDomain createDomain(WineDomain domain) {
