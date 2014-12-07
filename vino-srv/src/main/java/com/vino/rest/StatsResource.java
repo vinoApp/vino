@@ -16,7 +16,9 @@
 
 package com.vino.rest;
 
-import com.vino.domain.stats.CellarStatRecord;
+import com.vino.domain.stats.CellarStatByAOCRecord;
+import com.vino.domain.stats.CellarStatByDomainRecord;
+import com.vino.domain.stats.CellarStatByVintageRecord;
 import com.vino.domain.stats.MovementStatRecord;
 import restx.annotations.GET;
 import restx.annotations.RestxResource;
@@ -49,33 +51,33 @@ public class StatsResource {
     }
 
     @GET("/stats/{cellarKey}/cellarStockByVintage")
-    public Iterable<CellarStatRecord.CellarStatByVintageRecord> getCellarStockByVintage(String cellarKey) {
+    public Iterable<CellarStatByVintageRecord> getCellarStockByVintage(String cellarKey) {
 
         return records.get()
                 .aggregate("{ $match : { cellar : # }}", cellarKey)
                 .and("{ $group : { _id: '$vintage', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { vintage: '$_id', count: 1 } }")
-                .as(CellarStatRecord.CellarStatByVintageRecord.class);
+                .as(CellarStatByVintageRecord.class);
     }
 
     @GET("/stats/{cellarKey}/cellarStockByDomain")
-    public Iterable<CellarStatRecord.CellarStatByDomainRecord> getCellarStockByDomain(String cellarKey) {
+    public Iterable<CellarStatByDomainRecord> getCellarStockByDomain(String cellarKey) {
 
         return records.get()
                 .aggregate("{ $match : { cellar : # }}", cellarKey)
                 .and("{ $group : { _id: '$domain', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { domain: '$_id', count: 1 } }")
-                .as(CellarStatRecord.CellarStatByDomainRecord.class);
+                .as(CellarStatByDomainRecord.class);
     }
 
     @GET("/stats/{cellarKey}/cellarStockByAOC")
-    public Iterable<CellarStatRecord.CellarStatByAOCRecord> getCellarStockByAOC(String cellarKey) {
+    public Iterable<CellarStatByAOCRecord> getCellarStockByAOC(String cellarKey) {
 
         return records.get()
                 .aggregate("{ $match : { cellar : # }}", cellarKey)
                 .and("{ $group : { _id: '$aoc', count: { $sum : '$quantity' } } }")
                 .and("{ $project : { aoc: '$_id', count: 1 } }")
-                .as(CellarStatRecord.CellarStatByAOCRecord.class);
+                .as(CellarStatByAOCRecord.class);
     }
 
 }
