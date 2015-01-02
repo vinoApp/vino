@@ -17,14 +17,21 @@
 package com.vino;
 
 import com.google.common.base.Charsets;
+import com.google.common.base.Optional;
+import com.google.common.base.Predicates;
+import com.google.common.collect.ImmutableList;
+import com.mongodb.MongoClient;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import restx.RestxRequest;
+import restx.factory.AutoStartable;
 import restx.factory.Module;
 import restx.factory.Provides;
-import restx.security.Permission;
-import restx.security.SignatureKey;
-import restx.security.StdRestxSecurityManager;
+import restx.mongo.MongoModule;
+import restx.security.*;
 
 import javax.inject.Named;
+import java.util.regex.Pattern;
 
 /**
  * User: walien
@@ -34,6 +41,8 @@ import javax.inject.Named;
 
 @Module(priority = -100)
 public class AppModule {
+
+    private static final Logger logger = LoggerFactory.getLogger(AppModule.class);
 
     @Provides
     public SignatureKey signatureKey() {
@@ -70,4 +79,26 @@ public class AppModule {
             }
         };
     }
+
+    @Provides
+    public AutoStartable mongoConnectionLogger(final @Named("restx.server.id") Optional<String> serverId,
+                                               final @Named("mongo.db") String dbName,
+                                               final @Named(MongoModule.MONGO_CLIENT_NAME) MongoClient client) {
+        return new AutoStartable() {
+            @Override
+            public void start() {
+                logger.info("{} - connected to Mongo db '{}' @ {}", serverId.or("-"), dbName, client.getAllAddress());
+            }
+        };
+    }
+
+    @Provides
+    public CORSAuthorizer getCorsAuthorizer() {
+        return new StdCORSAuthorizer.Builder()
+                .setPathMatcher(Predicates.<CharSequence>alwaysTrue())
+                .setPathMatcher(Predicates.contains(Pattern.compile(".*")))
+                .setAllowedMethods(ImmutableList.of("GET", "POST"))
+                .build();
+    }
+
 }
