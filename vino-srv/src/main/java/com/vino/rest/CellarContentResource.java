@@ -41,19 +41,19 @@ public class CellarContentResource {
         this.business = business;
     }
 
-    @GET("/cellar/{key}/content")
+    @GET("/cellars/{key}/content")
     @Produces("application/json;view=com.vino.persistence.mongo.Views$Details")
     public Iterable<WineCellarRecord> getRecords(String key) {
         return repository.getAllRecords(Reference.<WineCellar>of(key));
     }
 
-    @GET("/cellar/{key}/content/{barcode}")
+    @GET("/cellars/{key}/content/{barcode}")
     @Produces("application/json;view=com.vino.persistence.mongo.Views$Details")
     public Optional<WineCellarRecord> getRecord(String key, String barcode) {
         return repository.getRecordByBarCode(Reference.<WineCellar>of(key), barcode);
     }
 
-    @POST("/cellar/{key}/content")
+    @POST("/cellars/{key}/content")
     public Movement onCellarMovements(@Param(kind = Param.Kind.PATH) String key, Movement movement) {
         return business.onCellarMovement(key, movement);
     }

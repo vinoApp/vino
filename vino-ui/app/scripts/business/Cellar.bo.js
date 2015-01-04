@@ -1,13 +1,13 @@
 angular.module('vino.business')
     .factory('Cellar',function ($resource) {
 
-        var Cellar = $resource('/api/cellar/:id');
+        var Cellar = $resource('/api/cellars/:id');
 
         return angular.extend(Cellar, {});
 
     }).factory('CellarContent', function ($resource) {
 
-        var CellarContent = $resource('/api/cellar/:id/content');
+        var CellarContent = $resource('/api/cellars/:id/content');
 
         var prepareToServer = function (type, record, qty) {
 

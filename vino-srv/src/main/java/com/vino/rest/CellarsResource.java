@@ -30,29 +30,29 @@ import restx.factory.Component;
 
 @Component
 @RestxResource
-public class CellarResource {
+public class CellarsResource {
 
     private final CellarRepository repository;
     private final CellarBusiness business;
 
-    public CellarResource(CellarRepository repository,
-                          CellarBusiness business) {
+    public CellarsResource(CellarRepository repository,
+                           CellarBusiness business) {
         this.repository = repository;
         this.business = business;
     }
 
-    @GET("/cellar")
+    @GET("/cellars")
     public Iterable<WineCellar> getCellars() {
         return repository.getAllCellars();
     }
 
-    @POST("/cellar")
+    @POST("/cellars")
     @Consumes("application/json")
     public WineCellar createCellar(WineCellar cellar) {
         return business.createCellar(cellar);
     }
 
-    @DELETE("/cellar/{key}")
+    @DELETE("/cellars/{key}")
     public WineCellar removeCellar(String key) {
         return business.removeCellar(key);
     }
