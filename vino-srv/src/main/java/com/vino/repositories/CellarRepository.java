@@ -21,6 +21,7 @@ package com.vino.repositories;
 import com.google.common.base.Optional;
 import com.vino.domain.*;
 import com.vino.persistence.mongo.MongoCollections;
+import org.bson.types.ObjectId;
 import restx.factory.Component;
 
 @Component
@@ -35,6 +36,10 @@ public class CellarRepository {
 
     public Iterable<WineCellar> getAllCellars() {
         return collections.from(EntityType.CELLAR).find().as(WineCellar.class);
+    }
+
+    public Optional<WineCellar> getCellarByKey(String key) {
+        return Optional.fromNullable(collections.from(EntityType.CELLAR).findOne(new ObjectId(key)).as(WineCellar.class));
     }
 
     public Iterable<WineCellarRecord> getAllRecords(Reference<WineCellar> cellar) {

@@ -16,6 +16,7 @@
 
 package com.vino.rest;
 
+import com.google.common.base.Optional;
 import com.vino.business.CellarBusiness;
 import com.vino.domain.WineCellar;
 import com.vino.repositories.CellarRepository;
@@ -44,6 +45,11 @@ public class CellarsResource {
     @GET("/cellars")
     public Iterable<WineCellar> getCellars() {
         return repository.getAllCellars();
+    }
+
+    @GET("/cellars/{key}")
+    public Optional<WineCellar> getCellar(String key) {
+        return repository.getCellarByKey(key);
     }
 
     @POST("/cellars")
