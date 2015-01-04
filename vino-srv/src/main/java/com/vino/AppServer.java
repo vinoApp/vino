@@ -31,8 +31,8 @@ public class AppServer {
 
     private static final Logger logger = LoggerFactory.getLogger(AppServer.class);
 
-    public static final String WEB_INF_LOCATION = "src/main/webapp/WEB-INF/web.xml";
-    public static final String WEB_APP_LOCATION = "../vino-ui/app";
+    public static final String WEB_INF_LOCATION = "vino-srv/src/main/webapp/WEB-INF/web.xml";
+    public static final String WEB_APP_LOCATION = "vino-ui/app";
 
     public static void main(String[] args) throws Exception {
         /*
